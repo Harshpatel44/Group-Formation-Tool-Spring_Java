@@ -1,10 +1,10 @@
-package com.csci5308.group9;
+package CSCI5308.GroupFormationTool;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class Group9ApplicationTests {
+class GroupFormationToolApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,0 +1,13 @@
+.button {
+	background-color: blue;
+	
+}
+
+.reset {
+	background-color:red;
+}
+
+.container {
+	text-align: center;
+	padding: 10px;
+}
