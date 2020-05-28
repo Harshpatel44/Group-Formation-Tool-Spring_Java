@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Registration Page</title>
+<link rel="stylesheet" type="text/css" href="/css/signup.css" />
+</head>
+<body>
+	<div class="container">
+
+		<div>Welcome to the Group Formation Tool. Please register to
+			access the services.</div>
+		<br>
+
+		<form action="#" th:action="@{/register}" method="post"
+			th:object="${user}">
+			<div>
+				<label>First Name</label> <br /> <input type="text"
+					th:field="*{firstName}" required />
+			</div>
+			<br />
+			<div th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First
+				Name Error</div>
+			<br>
+			<div>
+				<label>Last Name </label> <br /> <input type="text"
+					th:field="*{lastName}" required />
+			</div>
+			<br />
+			<div th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last
+				Name Error</div>
+			<br />
+			<div>
+				<label>Banner Id </label> <br> <input type="text"
+					th:field="*{bannerId}" required />
+			</div>
+			<br />
+			<div th:if="${#fields.hasErrors('bannerId')}" th:errors="*{bannerId}">Banner
+				Id Error</div>
+			<br />
+			<div>
+				<label>Email id </label> <br> <input type="text"
+					th:field="*{emailId}" required />
+			</div>
+			<br />
+			<div th:if="${#fields.hasErrors('emailId')}" th:errors="*{emailId}">Email
+				Id Error</div>
+			<br />
+			<div>
+				<label>Password </label> <br> <input type="password"
+					th:field="*{password}" required/>
+			</div>
+			<br />
+			<div th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password
+				Error</div>
+
+			<div>
+				<label>Confirm Password </label> <br> <input type="password"
+					th:field="*{confirmPassword}" required />
+			</div>
+			<br />
+			<div th:if="${#fields.hasErrors('confirmPassword')}"
+				th:errors="*{confirmPassword}">Password Confirmation Error</div>
+							
+			<br />
+			  <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></p>	
+
+			<div>
+				<input type="submit" class="button" value=" Submit" /> <input
+					type="reset" class="reset" value="Reset" />
+			</div>
+
+			<div>
+				<a th:href="@{/login}">Are you an existing user? Click here to
+					log in!</a>
+			</div>
+		</form>
+	</div>
+</body>
+</html>
