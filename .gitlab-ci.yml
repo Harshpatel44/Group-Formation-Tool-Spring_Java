@@ -42,7 +42,7 @@ deploy_master:
     only:
     - master
     
- deploy_develop:
+deploy_develop:
     stage: deploy
     
     tags:
