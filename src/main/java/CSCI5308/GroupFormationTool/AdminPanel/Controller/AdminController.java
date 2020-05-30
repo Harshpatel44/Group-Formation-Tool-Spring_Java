@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Controller;
 
 import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminController;
+import CSCI5308.GroupFormationTool.AdminPanel.Model.CreateCourse;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -14,8 +15,9 @@ public class AdminController implements IAdminController {
     //  Author: Harsh Patel
     @GetMapping("/admin")
     @Override
-    public ModelAndView adminPage() {
+    public ModelAndView adminPage(CreateCourse createCourse) {
         ModelAndView mv = new ModelAndView();
+        mv.addObject(createCourse);
         mv.setViewName("admin");
         return mv;
     }
@@ -24,7 +26,10 @@ public class AdminController implements IAdminController {
     //  Author: Harsh Patel
     @PostMapping("/createCourse")
     @Override
-    public ModelAndView createCourse(@RequestParam("courseId") String courseId, @RequestParam("courseName") String courseName) {
-        return null;
+    public ModelAndView createCourse(CreateCourse createCourse) {
+        ModelAndView mv = new ModelAndView();
+        mv.setViewName("admin");
+        return mv;
     }
+
 }
