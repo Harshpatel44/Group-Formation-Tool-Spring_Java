@@ -24,6 +24,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 		registry.addViewController("/login").setViewName("login");
 	}
 
+
 	@PostMapping("/register")
 	public String createUser(@Valid User user, BindingResult bindingResult ) {
 		userService = Injector.instance().getUserService();

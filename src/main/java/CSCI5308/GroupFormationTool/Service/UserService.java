@@ -8,8 +8,9 @@ import CSCI5308.GroupFormationTool.AccessControl.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.AccessControl.IUserService;
 import CSCI5308.GroupFormationTool.Model.User;
+import org.springframework.stereotype.Service;
 
-
+@Service
 public class UserService implements IUserService {
 
 

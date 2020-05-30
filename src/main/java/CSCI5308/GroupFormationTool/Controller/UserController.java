@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Controller;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUserController;
 import CSCI5308.GroupFormationTool.AccessControl.IUserService;
+import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Model.User;
 import CSCI5308.GroupFormationTool.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
