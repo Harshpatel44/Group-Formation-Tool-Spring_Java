@@ -1,3 +1,16 @@
+
+/******************************
+** File: sql_script
+** Desc: SQL script for initial database
+** Auth: Harsh Patel
+** Date: 27-5-20
+**************************
+** Change History
+**************************
+** PR   Date        Author  Description
+** --   --------   -------   ------------------------------------
+*******************************/
+
 use CSCI5308_9_DEVINT;
 
 CREATE TABLE users(

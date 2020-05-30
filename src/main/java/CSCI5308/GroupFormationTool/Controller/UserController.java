@@ -1,14 +1,11 @@
 package CSCI5308.GroupFormationTool.Controller;
 
 import CSCI5308.GroupFormationTool.AccessControl.IUserController;
-import CSCI5308.GroupFormationTool.AccessControl.IUserService;
-import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Model.User;
 import CSCI5308.GroupFormationTool.Service.UserService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -24,7 +21,8 @@ public class UserController implements IUserController {
         user.setFirstName("padmesh");
         return true;
     }
-    
+
+//  Author: Harsh Patel
     @GetMapping("/admin")
     @Override
     public ModelAndView adminPage() {
@@ -32,4 +30,12 @@ public class UserController implements IUserController {
     mv.setViewName("admin");
     return mv;
     }
+
+//  Author: Harsh Patel
+    @PostMapping("/createCourse")
+    @Override
+    public ModelAndView createCourse(@RequestParam("courseId") String courseId, @RequestParam("courseName") String courseName) {
+        return null;
+    }
 }
+
