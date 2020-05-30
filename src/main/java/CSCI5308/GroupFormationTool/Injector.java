@@ -1,13 +1,13 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.AccessControl.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.AccessControl.IUserRepository;
-import CSCI5308.GroupFormationTool.AccessControl.IUserService;
+import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
+import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
-import CSCI5308.GroupFormationTool.Repository.UserRepository;
-import CSCI5308.GroupFormationTool.Security.BCryptEncryption;
-import CSCI5308.GroupFormationTool.Service.UserService;
+import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
+import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
 
 public class Injector {
 
