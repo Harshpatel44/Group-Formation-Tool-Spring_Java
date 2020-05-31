@@ -27,6 +27,7 @@ public class AdminController implements IAdminController {
     @PostMapping("/createCourse")
     @Override
     public ModelAndView createCourse(CreateCourse createCourse) {
+
         ModelAndView mv = new ModelAndView();
         mv.setViewName("admin");
         return mv;

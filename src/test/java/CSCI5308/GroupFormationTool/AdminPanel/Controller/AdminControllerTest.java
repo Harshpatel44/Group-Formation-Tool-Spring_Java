@@ -33,15 +33,13 @@ public class AdminControllerTest {
 
     @Test
     void adminPage() {
-        CreateCourse createCourse = new CreateCourse();
-        assertEquals(new ModelAndView(), iAdminController.adminPage(createCourse));
+        assertEquals(new ModelAndView(), iAdminController.adminPage(new CreateCourse()));
     }
 
     @Test
     void createCourse() throws Exception {
-        CreateCourse createCourse = new CreateCourse();
         mockMvc.perform(post("/createCourse")
-                .sessionAttr("createCourse",createCourse))
+                .sessionAttr("createCourse",new CreateCourse()))
                 .andExpect(status().isOk());
     }
 }
