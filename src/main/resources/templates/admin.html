@@ -1,0 +1,71 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Harsh Patel">
+    <title>Group Formation Tool</title>
+    <style>
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+</head>
+<body>
+
+<div id="heading-box">
+    ADMIN PAGE
+</div>
+<ul class="functionalities-list">
+
+    <li>
+        <div class="function-heading">Create course</div>
+        <form action="" th:object="${createCourse}" th:action="@{/createCourse}" method="post">
+            <div class="entity">
+                <label >Course name:</label>
+                <input type="text" th:field="*{courseName}">
+            </div>
+            <div class="entity">
+                <label>Course id:</label>
+                <input type="text" th:field="*{courseId}">
+            </div>
+            <input class="submit-button" type="submit" value="Create course">
+            <span class="message" th:text="*{courseCreateMessage}">status here</span>
+        </form>
+    </li>
+
+    <li>
+        <div class="function-heading">Delete course</div>
+        <form action="">
+            <div class="entity">
+                <label>Select course:</label>
+                <select name="">
+                    <option>Course1</option>
+                    <option>Course2</option>
+                    <option>Course3</option>
+                </select>
+            </div>
+            <input class="submit-button" type="submit" value="Delete course">
+            <span class="message">status here</span>
+        </form>
+    </li>
+
+    <li>
+        <div class="function-heading">Create course</div>
+        <form action="">
+            <div class="entity">
+                <label class="labels">Course name:</label>
+                <input type="text">
+            </div>
+            <div class="entity">
+                <label>Course id:</label>
+                <input type="text">
+            </div>
+            <input class="submit-button" type="submit" value="Create course">
+            <span class="message">status here</span>
+        </form>
+    </li>
+
+</ul>
+
+</body>
+</html>

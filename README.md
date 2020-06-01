@@ -15,4 +15,10 @@
 <p>2. Commit should be as : "Filename"-ClassName"-"methodName"-"status"</p>
 <p>3. When the method is completed and functional, commit with message: "Filename"-"ClassName"-"methodName"-"complete 1.0"</p>
 <p>4. If any change occurs after the method is complete, upgrade the "version1.*" in commit message. "Filename"-"ClassName"-"methodName"-"complete 1.1"-"the changes made"</p>
-
+<br>
+<h3>Working on branches </h3>
+<p>1. Create a new branch as 'feature_name'.</p>
+<p>2. fetch it and work on it.</p> 
+<p>3. After completion of the feature, assigned person will merge the code to 'develop' branch.</p>
+<p>4. Delete the branch after merging.</p>
+<br>
