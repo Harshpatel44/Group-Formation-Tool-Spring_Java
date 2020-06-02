@@ -6,7 +6,24 @@
 </head>
 <body>
 	<div>
-		<h3>You are here!!!</h3>
+		<h1>Login Form</h1>
+
+		<form th:action ="@{/login}" th:object = "${loginUser}" method="post">
+			<div>
+				<label for="bannerId">Banner Id</label>
+				<input type="text" id="bannerId" name="bannerId" autofocus="autofocus" required>
+			</div>
+			</br>
+
+			<div>
+				<label for="password">Password</label>
+				<input type="text" id="password" name="password" autofocus="autofocus">
+			</div>
+
+			<input type="submit" value="LOGIN"/>
+			<p th:text="${Error}"></p>
+
+		</form>
 		<br />
 	</div>
 </body>
