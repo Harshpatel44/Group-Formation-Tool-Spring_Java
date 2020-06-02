@@ -59,11 +59,11 @@
 					th:field="*{confirmPassword}" required />
 			</div>
 			<br />
-			<div th:if="${#fields.hasErrors('confirmPassword')}"
-				th:errors="*{confirmPassword}">Password Confirmation Error</div>
+<!-- 			<div th:if="${#fields.hasErrors('confirmPassword')}" -->
+<!-- 				th:errors="*{confirmPassword}">Password Confirmation Error</div> -->
 							
 			<br />
-			  <p th:if="${#fields.hasGlobalErrors()}" th:errors="*{global}"></p>	
+			  <p th:if="${#fields.hasErrors('confirmPassword')}" th:errors="*{confirmPassword}"></p>	
 
 			<div>
 				<input type="submit" class="button" value=" Submit" /> <input

@@ -5,6 +5,7 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 import org.springframework.stereotype.Repository;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 @Repository
@@ -13,14 +14,28 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public boolean createUser(User user) {
 
-		
+		StoredProcedure storedProcedure = null; 
 		try {
-			StoredProcedure storedProcedure = new StoredProcedure("sp_select_user");
+			storedProcedure= new StoredProcedure("spCreateUser(?, ?, ?, ?, ?,?)");
+			storedProcedure.setParameter(1, user.getBannerId());
+			storedProcedure.setParameter(2, user.getPassword());
+			storedProcedure.setParameter(3, user.getFirstName());
+			storedProcedure.setParameter(4, user.getLastName());
+			storedProcedure.setParameter(5, user.getEmailId());
+			storedProcedure.setParameter(6, 944789);
+			storedProcedure.execute();
 			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		finally
+		{
+			if (null != storedProcedure)
+			{
+				storedProcedure.cleanup();
+			}
 		}
 		return true;
 	}
@@ -28,11 +43,35 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public boolean getUserByEmailId(User user) {
 		// TODO Auto-generated method stub
+		StoredProcedure storedProcedure = null; 
+		try {
+			storedProcedure = new StoredProcedure("userByEmailID(?)");
+			storedProcedure.setParameter(1, user.getEmailId());
+			ResultSet results = storedProcedure.executeWithResults();
+			if (results!= null)
+			{
+				if(results.next())
+				{
+				 
+					return true;
+				}
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		finally
+		{
+			if (null != storedProcedure)
+			{
+				storedProcedure.cleanup();
+			}
+		}
+		return false;
 
-		if("arjunstar14@gmail.com".equals(user.getEmailId()))
-			return false;
-		else
-			return true;
 	}
 
 	@Override
