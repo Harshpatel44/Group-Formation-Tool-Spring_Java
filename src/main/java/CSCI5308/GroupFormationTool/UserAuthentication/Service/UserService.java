@@ -37,15 +37,15 @@ public class UserService implements IUserService {
 
 		user.setPassword(encryptor.encoder(user.getPassword()));
 
-		boolean emailIdExists = userRepository.getUserByEmailId(user);
+		boolean bannerIdExists = userRepository.getUserByBannerId(user);
 		
 
-		if (!emailIdExists) {
+		if (!bannerIdExists) {
 		 success = userRepository.createUser(user);
 		}
 		else {
 			Map<String,String> errors = new HashMap<String,String>();
-			errors.put("emailId", "Email ID already exists");
+			errors.put("bannerId", "Banner ID already exists");
 			throw new ServiceLayerException(){{setMapErrors(errors);}};
 		}
 

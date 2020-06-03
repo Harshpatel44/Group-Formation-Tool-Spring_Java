@@ -21,6 +21,8 @@ public class User {
 
 
 	private String confirmPassword;
+	
+	private Integer contactNumber;
 
 	private char roleType;
 
@@ -86,6 +88,14 @@ public class User {
 
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
+	}
+
+	public Integer getContactNumber() {
+		return contactNumber;
+	}
+
+	public void setContactNumber(Integer contactNumber) {
+		this.contactNumber = contactNumber;
 	}
 
 
