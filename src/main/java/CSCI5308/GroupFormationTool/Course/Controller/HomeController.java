@@ -9,6 +9,7 @@ import CSCI5308.GroupFormationTool.Course.Model.UserId;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 //Dhruvesh Patel
 @Controller
@@ -20,9 +21,9 @@ public class HomeController implements IHomeController{
 	UserId user = new UserId();
 
 	@RequestMapping("/home")
-	public ModelAndView home(){
+	public ModelAndView home(@RequestParam(name="userId") String userId){
 		user = new UserId();
-		user.setUserId("B00123456");
+		user.setUserId(userId);
 		homeService = Injector.instance().getHomeService();
 		ModelAndView model=new ModelAndView();
 		model.addObject("userId",user.getUserId());
