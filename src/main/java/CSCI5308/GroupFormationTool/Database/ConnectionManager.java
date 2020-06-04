@@ -36,7 +36,6 @@ public class ConnectionManager
 
 	public Connection getDBConnection() throws SQLException
 	{
-		System.out.println("In connectionManager");
 		return DriverManager.getConnection(url, userName, password);
 	}
 }

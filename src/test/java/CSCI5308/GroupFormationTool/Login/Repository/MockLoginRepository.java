@@ -1,0 +1,63 @@
+package CSCI5308.GroupFormationTool.Login.Repository;
+
+import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
+
+public class MockLoginRepository implements ILoginRepository {
+
+    @Override
+    public boolean checkLogin(String bannerid, String password)
+    {
+        if(bannerid.equals("B00123456") && password.equals("12345"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public boolean isUser(String bannerid) {
+        if(bannerid.equals("B00123456"))
+        {
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public String getEmailByBannerid(String bannerid) {
+        String email = new String();
+        if(bannerid.equals("B00123456"))
+        {
+            email = "rutikapatel09@gmail.com";
+        }
+        return email;
+    }
+
+    @Override
+    public boolean insertToForgetPassword(String bannerid, String passKey) {
+       if(bannerid.equals("B00123456") && passKey.equals("e3Twq6Hyip"))
+       {
+           return true;
+       }
+       return false;
+    }
+
+    @Override
+    public String getBannerIdByPassKey(String passKey) {
+        String bannerid = new String();
+        if(passKey.equals("e3Twq6Hyip"))
+        {
+            bannerid =  "B00123456";
+        }
+        return bannerid;
+    }
+
+    @Override
+    public boolean updatePassword(String bannerid, String newPassword) {
+        if(bannerid.equals("B00123456") && newPassword.equals("12345"))
+        {
+            return true;
+        }
+        return false;
+    }
+}

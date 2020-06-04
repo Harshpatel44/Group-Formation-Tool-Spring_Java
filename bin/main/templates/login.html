@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-<meta charset="UTF-8">
-<title>Login</title>
+	<meta charset="UTF-8">
+	<title>Login</title>
+
+	<link rel="stylesheet" type="text/css" href="../css/login.css" />
 </head>
 <body>
-	<div>
-		<h3>You are here!!!</h3>
-		<br />
-	</div>
+<div class="container" align="center">
+
+	<h1>Login Form</h1>
+	<h3>Welcome to Group Formation Tool at Dalhousie University </h3>
+
+	<h3>
+		<p th:text="${Error}" id="errorMsg"></p>
+	</h3>
+
+	<form th:action ="@{/login}" th:object = "${loginUser}" method="post">
+		<div>
+			<label for="bannerId">Banner Id </label><br>
+			<input type="text" id="bannerId" name="bannerId" autofocus="autofocus" required>
+		</div>
+		</br>
+
+		<div>
+			<label for="password">Password </label><br>
+			<input type="password" id="password" name="password" autofocus="autofocus" required>
+		</div>
+		</br>
+
+		<input type="submit" class="button" value="Login"/>
+		<a th:href="home" > <input type="button"  value="Cancel"/></a>
+
+		<div>
+			<br>
+			<a th:href="resetPassword">Forget Password?</a>
+		</div>
+		<br>
+		<div>
+			<a th:href="register">Not a User? Register Here</a>
+		</div>
+
+
+
+	</form>
+	<br />
+</div>
 </body>
 </html>
