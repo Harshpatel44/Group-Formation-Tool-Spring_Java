@@ -42,14 +42,14 @@ public class UserRegistrationController implements WebMvcConfigurer {
 		}
 		catch (ServiceLayerException e) {
 			ErrorHelper.rejectErrors(bindingResult, e.getMapErrors());
-			return "new_signup";
+			return "signup";
 		}
-		return "new_signup";
+		return "signup";
 	}
 
 	@GetMapping("/register")
 	public String register(User user) {
-		return "new_signup";
+		return "signup";
 	}
 
 }

@@ -22,7 +22,8 @@ public class UserService implements IUserService {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor encryptor;
 	private Matcher matcher;
-	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@" + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
 
 	@Override
 	public boolean createUser(User user) throws ServiceLayerException {
@@ -30,63 +31,72 @@ public class UserService implements IUserService {
 		userRepository = Injector.instance().getUserRepository();
 		encryptor = Injector.instance().getPasswordEncryptor();
 
-		Map<String,String> validationErrors = checkAllValidaations(user);
+		Map<String, String> validationErrors = checkAllValidaations(user);
 		if (validationErrors.size() > 0) {
-			throw new ServiceLayerException(){{setMapErrors(validationErrors);}};
+			throw new ServiceLayerException() {
+				{
+					setMapErrors(validationErrors);
+				}
+			};
 		}
 
 		user.setPassword(encryptor.encoder(user.getPassword()));
 
 		boolean bannerIdExists = userRepository.getUserByBannerId(user);
-		
 
 		if (!bannerIdExists) {
-		 success = userRepository.createUser(user);
-		}
-		else {
-			Map<String,String> errors = new HashMap<String,String>();
+			success = userRepository.createUser(user);
+		} else {
+			Map<String, String> errors = new HashMap<String, String>();
 			errors.put("bannerId", "Banner ID already exists");
-			throw new ServiceLayerException(){{setMapErrors(errors);}};
+			throw new ServiceLayerException() {
+				{
+					setMapErrors(errors);
+				}
+			};
 		}
 
 		return success;
 	}
 
-	private Map<String,String> checkAllValidaations(User user) {
+	private Map<String, String> checkAllValidaations(User user) {
 
-		Map<String,String> errors = new HashMap<String,String>();
-
+		Map<String, String> errors = new HashMap<String, String>();
 
 		if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
-			errors.put("firstName","first name cannot be  null or empty");
+			errors.put("firstName", "first name cannot be  null or empty");
 		}
 		if (user.getLastName() == null || user.getLastName().isEmpty()) {
-			errors.put("lastName","last name cannot be null or empty");
+			errors.put("lastName", "last name cannot be null or empty");
 		}
-		if (!user.getBannerId().isEmpty() && user.getBannerId().length() != 9) {
-			errors.put("bannerId","BannerId length is should be equal to 9");
-		}
-		
-		if (user.getEmailId() == null || user.getEmailId().isEmpty()) {
-			errors.put("emailId","Email cannot be  null or empty");
-		}
-		else
-			if (!validateEmail(user.getEmailId())){
-				errors.put("emailId","Enter valid Email");
+		if (user.getLastName() != null) {
+			if (!user.getBannerId().isEmpty() && user.getBannerId().length() != 9) {
+				errors.put("bannerId", "BannerId length is should be equal to 9");
 			}
+		} else {
+			errors.put("bannerId", "BannerId cant be null or empty");
+		}
+
+		if (user.getEmailId() == null || user.getEmailId().isEmpty()) {
+			errors.put("emailId", "Email cannot be  null or empty");
+		} else if (!validateEmail(user.getEmailId())) {
+			errors.put("emailId", "Enter valid Email");
+		}
 		if (user.getPassword() == null || user.getPassword().isEmpty()) {
-			errors.put("password","Password cannot be null or empty");
+			errors.put("password", "Password cannot be null or empty");
 		}
 		if (user.getConfirmPassword() == null || user.getConfirmPassword().isEmpty()) {
-			errors.put("confirmPassword","Confirm Password cannot be  null or empty");
+			errors.put("confirmPassword", "Confirm Password cannot be  null or empty");
 		}
-		if(!user.getPassword().equals(user.getConfirmPassword()))
-		{
-			errors.put("confirmPassword","Passwords and confirm password Doesnt match");
+		if (user.getPassword() != null) {
+			if (!user.getPassword().equals(user.getConfirmPassword())) {
+				errors.put("confirmPassword", "Passwords and confirm password Doesnt match");
+			}
 		}
 
 		return errors;
 	}
+
 	private boolean validateEmail(final String email) {
 
 		pattern = Pattern.compile(EMAIL_PATTERN);

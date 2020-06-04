@@ -24,15 +24,7 @@ public class User {
 	
 	private Integer contactNumber;
 
-	private char roleType;
 
-	public char getRoleType() {
-		return roleType;
-	}
-
-	public void setRoleType(char roleType) {
-		this.roleType = roleType;
-	}
 
 	public long getId() {
 		return id;
@@ -96,6 +88,12 @@ public class User {
 
 	public void setContactNumber(Integer contactNumber) {
 		this.contactNumber = contactNumber;
+	}
+	
+	public User setDefaults() {
+		User u = new User() {{setFirstName("Arjun");setLastName("Suresh");setEmailId("arjun14@gmaill.com");setContactNumber(978780);setBannerId("B00854475");setPassword("qwerty12345");}};
+		return u;
+		
 	}
 
 

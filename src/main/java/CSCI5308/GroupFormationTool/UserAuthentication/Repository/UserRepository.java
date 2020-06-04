@@ -26,7 +26,7 @@ public class UserRepository implements IUserRepository {
 			storedProcedure.execute();
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
@@ -53,7 +53,7 @@ public class UserRepository implements IUserRepository {
 			}
 
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
