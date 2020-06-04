@@ -24,6 +24,7 @@ public class LoginController {
 	public String displaylogin() {
 		return "login";
 	}
+	
 
 	@GetMapping("/")
 	public String getLoginUser(Model model) {
