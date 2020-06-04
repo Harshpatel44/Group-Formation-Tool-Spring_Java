@@ -56,7 +56,6 @@ class CreateCourseTest {
     @Test
     void setCourseName() {
         CreateCourse createCourse = new CreateCourse();
-
         createCourse.setCourseName("Advanced Software Developement Concepts");
         assertEquals("Advanced Software Developement Concepts",createCourse.getCourseName());
     }

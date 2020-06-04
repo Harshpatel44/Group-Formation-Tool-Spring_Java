@@ -21,7 +21,6 @@ public class UserServiceTest {
 	public void createUserWithExceptions() throws ServiceLayerException {
 		User user = new User();
 		userService = Injector.instance().getUserService();
-
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -123,4 +122,5 @@ public class UserServiceTest {
 		assertEquals(true, userService.createUser(user));
 
 	}
+
 }

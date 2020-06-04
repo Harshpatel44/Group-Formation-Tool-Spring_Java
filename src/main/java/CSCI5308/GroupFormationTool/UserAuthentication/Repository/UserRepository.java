@@ -30,13 +30,13 @@ public class UserRepository implements IUserRepository {
 			storedProcedure.execute();
 
 			success = true;
-
+			storedProcedure.cleanup();
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
-				storedProcedure.cleanup();
+				
 			}
 		}
 		return success;
@@ -57,13 +57,14 @@ public class UserRepository implements IUserRepository {
 				}
 
 			}
+			storedProcedure.cleanup();
 
 		} catch (SQLException e) {
 
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
-				storedProcedure.cleanup();
+				
 			}
 		}
 		return false;
@@ -86,14 +87,14 @@ public class UserRepository implements IUserRepository {
 				}
 
 			}
-
+			storedProcedure.cleanup();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
 
-				storedProcedure.cleanup();
+				
 			}
 
 		}
@@ -113,13 +114,13 @@ public class UserRepository implements IUserRepository {
 					bannerIds.add(results.getString(1));
 				}
 			}
-
+			storedProcedure.cleanup();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
-				storedProcedure.cleanup();
+				
 			}
 		}
 		return bannerIds;
@@ -142,6 +143,7 @@ public class UserRepository implements IUserRepository {
 				}
 
 			}
+			storedProcedure.cleanup();
 
 
 		} catch (SQLException e) {
@@ -153,7 +155,7 @@ public class UserRepository implements IUserRepository {
 			if (null != storedProcedure)
 			{
 
-				storedProcedure.cleanup();
+				
 			}
 		}
 		return false;
@@ -173,7 +175,7 @@ public class UserRepository implements IUserRepository {
 			storedProcedure.setParameter(2, courseId);
 			storedProcedure.execute();
 			success= true;
-
+			storedProcedure.cleanup();
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
@@ -182,7 +184,7 @@ public class UserRepository implements IUserRepository {
 		{
 			if (null != storedProcedure)
 			{
-				storedProcedure.cleanup();
+				
 			}
 		}
 		return success;

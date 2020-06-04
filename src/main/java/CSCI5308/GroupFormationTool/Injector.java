@@ -1,6 +1,8 @@
 package CSCI5308.GroupFormationTool;
 
+
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
+
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
@@ -26,6 +28,7 @@ public class Injector {
 	private ICsvImporter csvImporter;
 	private IEmailConfiguration emailConfiguration;
 	private IUserNotification userNotification;
+
 	
 	private Injector() {
 
@@ -37,6 +40,7 @@ public class Injector {
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
 		
+
 	}
 
 	public static Injector instance() {

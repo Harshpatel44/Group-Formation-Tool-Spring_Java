@@ -1,52 +1,72 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Controller;
 
-import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminController;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.CreateCourse;
-import org.junit.jupiter.api.BeforeAll;
+import CSCI5308.GroupFormationTool.AdminPanel.Service.AdminService;
+import org.apache.catalina.filters.CorsFilter;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
+
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
-import org.springframework.web.servlet.ModelAndView;
-
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import static org.junit.jupiter.api.Assertions.*;
+import org.springframework.util.MimeTypeUtils;
+import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@TestInstance(Lifecycle.PER_CLASS)
+
+//  Author: Harsh Patel
+
 @SpringBootTest
 public class AdminControllerTest {
 
-    private MockMvc mockMvc;
     @Autowired
-    private IAdminController iAdminController;
+    private WebApplicationContext webApplicationContext;
+    private MockMvc mockMvc;
 
-    @BeforeAll
-    void setUp(){
-        this.mockMvc = MockMvcBuilders.standaloneSetup(iAdminController).build();
+    @Mock
+    private AdminService adminService;
+
+    @InjectMocks
+    private AdminController adminController;
+
+
+    @BeforeEach
+    public void init() {
+        MockitoAnnotations.initMocks(this);
+        mockMvc = MockMvcBuilders
+                .standaloneSetup(adminController)
+                .addFilters(new CorsFilter())
+                .build();
     }
 
-//    @Test
-//    void adminPage() {
-//    	CreateCourse course =new CreateCourse();
-//    	ModelAndView mv = new ModelAndView();
-//        mv.addObject(course);
-//        mv.setViewName("admin");
-//        assertEquals(mv,iAdminController.adminPage(course));
-//    }
+
+    @Test
+    void adminPage() throws Exception {
+        mockMvc.perform(
+                get("/admin")
+                        .header("Origin","*")
+                        .accept(MimeTypeUtils.APPLICATION_JSON_VALUE));
+    }
+
+
 
     @Test
     void createCourse() throws Exception {
-        CreateCourse createCourse = new CreateCourse();
-        mockMvc.perform(post("/createCourse")
-                .sessionAttr("createCourse",createCourse))
-                .andExpect(status().isOk());
+        
+    }
+
+
+    @Test
+    void deleteCourse() throws Exception{
+
+    }
+
+    @Test
+    void assignInstructor() throws Exception{
+
     }
 }

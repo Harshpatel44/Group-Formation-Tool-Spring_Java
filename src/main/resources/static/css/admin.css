@@ -1,16 +1,19 @@
 body{
-    font-family: calibri;
+    font-family: Verdana;
+    background-color: #f2fcfe;
+    /*background: linear-gradient(to bottom, #1c92d2 0%, #f2fcfe 20%);*/
 }
 #heading-box{
     width:100%;
-    height:80px;
-    border:2px solid black;
+    height:50px;
+    border:2px solid #05386b;
+
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 40px;
-    background-color: black;
-    color:white;
+    background-color: #05386b;
+    color:#EDF5E1;
     margin-bottom: 20px;
 
 }
@@ -24,7 +27,8 @@ body{
 }
 
 li{
-    border:2px solid black;
+    border:2px solid #05386b;
+    border-radius: 10px;
     width: auto;
     height: fit-content;
 
@@ -33,10 +37,10 @@ li{
 }
 .function-heading{
     font-size: 20px;
-    border-bottom:1px solid black;
+    border-bottom:1px solid #05386b;
     text-align: center;
-    background-color: black;
-    color: white;
+    background-color: #05386b;
+    color: #EDF5E1;
 
 }
 form{
@@ -50,15 +54,22 @@ form{
     margin-bottom:4px;
 }
 label{
+    border-radius: 5px;
     float: left;
     display: block;
     width: 150px;
 }
 input{
+    /*background-color: #EDF5E1;*/
     line-height: 1.5;
     font-size: 18px;
 }
 .submit-button{
+
+    background-color: #05386b;
+    color: white;
+    border:1px solid #EDF5E1;
+    border-radius: 5px;
     display: block;
     margin: 10px auto 0px;
 }
