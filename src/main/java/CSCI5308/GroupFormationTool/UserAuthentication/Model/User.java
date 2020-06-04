@@ -5,7 +5,6 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Model;
 
 public class User {
 
-	private long id;
 
 	private String firstName;
 
@@ -21,18 +20,10 @@ public class User {
 
 
 	private String confirmPassword;
-	
+
 	private Integer contactNumber;
 
 
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
-	}
 
 	public String getFirstName() {
 		return firstName;
@@ -89,11 +80,17 @@ public class User {
 	public void setContactNumber(Integer contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-	
-	public User setDefaults() {
-		User u = new User() {{setFirstName("Arjun");setLastName("Suresh");setEmailId("arjun14@gmaill.com");setContactNumber(978780);setBannerId("B00854475");setPassword("qwerty12345");}};
-		return u;
 		
+
+	public User() {}
+	public User(String bannerId,String firstName,String lastName,String emailId,String password,Integer contactNumber)
+	{
+		this.bannerId = bannerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.password = password;
+		this.contactNumber = contactNumber;
 	}
 
 
