@@ -11,7 +11,7 @@
 <div class="entity">
     <button type="submit" th:href="@{/logout}" value="Logout" name="Logout"></button>
 </div>
-<h3>Hello, <span th:text="${userId}"/></h3>
+<h3>Hello, <span th:text="${userId}"></span></h3>
 
 <form th:action="@{/courseadmin}" method="post">
     <input type="hidden"  th:value="${course_name}" name="courseName"/>

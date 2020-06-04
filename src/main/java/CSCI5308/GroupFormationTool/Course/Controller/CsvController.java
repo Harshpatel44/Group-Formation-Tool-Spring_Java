@@ -22,7 +22,7 @@ public class CsvController {
 	private ICsvImporter csvImporter; 
 	
 	@RequestMapping(value = "/course/uploadcsv", consumes = {"multipart/form-data"})
-    public String upload(@RequestParam(name = "file") MultipartFile file, @RequestParam(name = "id") String courseID, Model model) throws ServiceLayerException
+    public String upload(@RequestParam(name = "file") MultipartFile file,@RequestParam(name="courseName") String courseName,@RequestParam(name="userId") String userId, @RequestParam(name = "id") String courseID, Model model) throws ServiceLayerException
     {
 //		ModelAndView mav;
 		System.out.println("Inside Csv Controller");
@@ -34,7 +34,9 @@ public class CsvController {
 //		mav.addObject("displayresults", true);
 		model.addAttribute("success", results.get(1));
 		model.addAttribute("failure", results.get(2));
-		
+		model.addAttribute("userId",userId);
+		model.addAttribute("courseName",courseName);
+		model.addAttribute("courseId",courseID);
 		return "courseadmin";
     }
 	
