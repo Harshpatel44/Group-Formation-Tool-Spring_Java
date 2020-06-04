@@ -2,17 +2,22 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
     <title> Course Page </title>
-    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
+<div id="heading-box" th:text="${course_name}">
+    Course Page
+</div>
+<div class="entity">
+    <button type="submit" th:href="@{/logout}" value="Logout" name="Logout"></button>
+</div>
 <h3>Hello, <span th:text="${userId}"/></h3>
-<h2 th:text="${course_name}" style="text-align:center;font-family:verdana;font-size:300%;color:blue"></h2>
 
-<form th:action="@{/courseadmin}" method="post" >
+<form th:action="@{/courseadmin}" method="post">
     <input type="hidden"  th:value="${course_name}" name="courseName"/>
     <input  type="hidden" th:value="${courseId}" name="courseId" />
-    <input  type="hidden" th:value="${userId}" name="userId" />
-    <button type="submit" name="save" th:if="${checkRole}" > GOTO Course Admin</button>
+    <input  type="hidden" th:value="${userId}" name="userId" style="float: none" />
+    <button type="submit" class="submit-button" name="save" th:if="${checkRole}" > GOTO Course Admin</button>
 </form>
 </body>
 </html>

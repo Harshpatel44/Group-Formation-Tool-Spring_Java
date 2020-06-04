@@ -3,72 +3,77 @@
 	xmlns:th="http://www.thymeleaf.org">
 <head>
 <title>Course Admin</title>
-<link rel="stylesheet" th:href="@{/css/styles.css}" />
-<style>
-table {
-	font-family: arial, sans-serif;
-	border-collapse: collapse;
-	width: 100%;
-}
+<link rel="stylesheet" type="text/css" href="/css/admin.css" />
 
-td, th {
-	border: 1px solid #dddddd;
-	text-align: left;
-	padding: 8px;
-}
-
-tr:nth-child(even) {
-	background-color: #dddddd;
-}
-</style>
 </head>
 <body>
+	<div id="heading-box" th:text="${courseName}">
+	    Course Admin panel
+	</div>
 	<h3>
 		Hello, <span th:text="${userId}" />
 	</h3>
-	<h2 th:text="${courseName}"
-		style="text-align: center; font-family: verdana; font-size: 300%; color: blue"></h2>
+	<div class="entity">
+		<button type="submit" th:href="@{/logout}" value="Logout" name="Logout"></button>
+	</div>
+<ul class="functionalities-list">
+	<li>
+		<div class="function-heading">Add students to course</div>
+		<form th:action="@{/course/uploadcsv}" method="post"
+			enctype="multipart/form-data">
+			
+			<input type="hidden" th:value="${courseName}" name="courseName" />
+			<input type="hidden" th:value="${userId}" name="userId" />
+			<input type="hidden" th:value="${courseId}" name="id"/>
 
-	<form th:action="@{/course/uploadcsv}" method="post"
-		enctype="multipart/form-data">
-		<!--     <input  type="hidden" th:with="courseId=${'CSCI1'}" th:value="${courseId}" name="courseId" /> -->
-		<input type="hidden" th:value="${courseId}" name="id"/>
-		<label for="myfile">Select files:</label> <input type="file"
-			name="file"><br> <br> <input type="submit"
-			value="Add Students">
-	</form>
-	<br />
-	<br />
-	<form th:action="@{/addta}" method="post">
-		<input type="hidden" th:value="${courseName}" name="courseName" /> <input
-			type="hidden" th:value="${userId}" name="userId" /> <input
-			type="text" th:value="${taId}" name="taId" /> <input type="hidden"
-			th:value="${courseId}" name="courseId" />
-		<button type="submit" name="save">Add TA</button>
-	</form>
+			</div>
+			<div class="entity">
+				<label>Select files</label>
+				<div id="uploadfile-block">
+					<input type="file"
+						name="file" style="display: inline-block;">
+				</div>
+			</div>
+			<div class="entity">
+				<input type="submit"
+					value="Add Students" class="submit-button">
+			</div>
+			
 
-	<div>
+		</form>
+	</li>
+	<li>
+		<div class="function-heading">Assign teaching assistant</div>
+		<form th:action="@{/addta}" method="post">
+			<input type="hidden" th:value="${courseName}" name="courseName" />
+			<input type="hidden" th:value="${userId}" name="userId" />
+			<input type="hidden" th:value="${courseId}" name="courseId" />
+			<div class="entity" style="margin-top: 10px">
+				<label>User id:</label>
+				<input type="text" th:value="${taId}" name="taId" />
+			</div>
+			<button type="submit" name="save" class="submit-button">Add TA</button>
+		</form>
+	</li>
+	<li style="text-align: center;">
 
 		<table>
 			<tr>
-				<th>Successful results</th>
+				<div class="function-heading">Successful results</div>
 			</tr>
 			<tr th:each="user_success: ${success}">
 				<td th:text="*{user_success}"></td>
 		</table>
 
-	</div>
-	<div>
 
 		<table>
 			<tr>
-				<th>Failure results</th>
+				<div class="function-heading">Failure results</div>
 			</tr>
 			<tr th:each="user_failure: ${failure}">
 				<td th:text="*{user_failure}"></td>
 		</table>
-
-	</div>
+	</li>
 	<span th:text="${result}" />
 </body>
 </html>
