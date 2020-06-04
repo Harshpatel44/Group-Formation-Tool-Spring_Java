@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.Login.Controller;
 
+import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
 import CSCI5308.GroupFormationTool.Login.Service.LoginService;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
@@ -16,32 +18,25 @@ import javax.mail.MessagingException;
 @Controller
 public class LoginController {
 
+	private ILoginService service;
+
 	@GetMapping("/login")
 	public String displaylogin() {
 		return "login";
 	}
 
 	@GetMapping("/")
-	public String getLoginUser(
-			Model model) {
-
+	public String getLoginUser(Model model) {
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-
-
-		if(authentication.getPrincipal().toString().equals("admin"))
-		{
-			return "redirect:/admin?userId="+authentication.getPrincipal().toString();
-		}
-		else if(!(authentication instanceof AnonymousAuthenticationToken)){
+		if (authentication.getPrincipal().toString().equals("admin")) {
+			return "redirect:/admin?userId=" + authentication.getPrincipal().toString();
+		} else if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			return "redirect:/home?userId=" + authentication.getPrincipal().toString();
-		}
-		else
-		{
+		} else {
 			return "login";
 		}
-
 
 	}
 
@@ -57,7 +52,7 @@ public class LoginController {
 		boolean matchPassword;
 		boolean update;
 		String bannerid;
-		LoginService service = new LoginService();
+		service = Injector.instance().getLoginService();
 
 		matchPassword = service.comparePassword(newPassword, confirmPassword);
 		if (!matchPassword) {
@@ -87,7 +82,7 @@ public class LoginController {
 		boolean addUser;
 		boolean mailSend;
 		String email;
-		LoginService service = new LoginService();
+		service = Injector.instance().getLoginService();
 		isUser = service.isUser(bannerid);
 		if (!isUser) {
 			model.addAttribute("Error", "Not a valid user");

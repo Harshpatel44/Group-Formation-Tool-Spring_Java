@@ -31,7 +31,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 		try {
 			if(bindingResult.hasErrors()) {
 
-				return "new_signup";
+				return "signup";
 			}
 
 
