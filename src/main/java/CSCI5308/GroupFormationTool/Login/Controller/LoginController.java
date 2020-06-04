@@ -25,13 +25,17 @@ public class LoginController{
         boolean isValid = false;
         LoginService service = new LoginService();
         isValid = service.checkLogin(bannerid, password);
-        if(isValid)
-        {
-            return "redirect:/home?userId="+bannerid;
+        if (isValid) {
+            if(bannerid.equals("admin"))
+            {
+                return "redirect:/admin?userId="+bannerid;
+            }
+            else{
+                return "redirect:/home?userId=" + bannerid;
+            }
         }
-        else
-        {
-            model.addAttribute("Error","Invalid username or password");
+        else {
+            model.addAttribute("Error", "Invalid username or password");
             return "login";
         }
     }
