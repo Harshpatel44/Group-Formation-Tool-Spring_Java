@@ -19,6 +19,10 @@ import CSCI5308.GroupFormationTool.Course.AccessControl.ICsvImporter;
 import CSCI5308.GroupFormationTool.Course.Service.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
+import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
+import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
+import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
+import CSCI5308.GroupFormationTool.Login.Service.LoginService;
 import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 import CSCI5308.GroupFormationTool.UserAuthentication.Service.EmailConfiguration;
@@ -42,6 +46,8 @@ public class Injector {
 	private IHomeService homeService;
 	private ICourseService courseService;
 	private ICourseRepository courseRepository;
+	private ILoginService loginService;
+	private ILoginRepository loginRepository;
 
 	private Injector() {
 
@@ -53,11 +59,12 @@ public class Injector {
 		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
-
+		loginService = new LoginService();
 		homeRepository = new HomeRepository();
 		homeService = new HomeService();
 		courseService = new CourseService();
 		courseRepository = new CourseRepository();
+		loginRepository = new LoginRepository();
 
 	}
 
@@ -111,6 +118,14 @@ public class Injector {
 
 	public IUserNotification getUserNotification() {
 		return userNotification;
+	}
+
+	public ILoginService getLoginService() {
+		return loginService;
+	}
+
+	public ILoginRepository getLoginRepository() {
+		return loginRepository;
 	}
 
 }

@@ -36,7 +36,7 @@ public class UserRepository implements IUserRepository {
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
-				
+
 			}
 		}
 		return success;
@@ -64,7 +64,7 @@ public class UserRepository implements IUserRepository {
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
-				
+
 			}
 		}
 		return false;
@@ -94,7 +94,6 @@ public class UserRepository implements IUserRepository {
 		} finally {
 			if (null != storedProcedure) {
 
-				
 			}
 
 		}
@@ -120,24 +119,22 @@ public class UserRepository implements IUserRepository {
 			e.printStackTrace();
 		} finally {
 			if (null != storedProcedure) {
-				
+
 			}
 		}
 		return bannerIds;
 	}
 
 	@Override
-	public boolean getUserDetailsOnCourse(User user,String courseId) {
-		StoredProcedure storedProcedure = null; 
+	public boolean getUserDetailsOnCourse(User user, String courseId) {
+		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByCourse(?,?)");
 			storedProcedure.setParameter(1, user.getBannerId());
 			storedProcedure.setParameter(2, courseId);
 			ResultSet results = storedProcedure.executeWithResults();
-			if (results!= null)
-			{
-				if(results.next())
-				{
+			if (results != null) {
+				if (results.next()) {
 
 					return true;
 				}
@@ -145,50 +142,84 @@ public class UserRepository implements IUserRepository {
 			}
 			storedProcedure.cleanup();
 
-
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		finally
-		{
-			if (null != storedProcedure)
-			{
+		} finally {
+			if (null != storedProcedure) {
 
-				
 			}
 		}
 		return false;
 
 	}
-
-
+	
 
 	@Override
 	public boolean enrollStudentForCourse(User user, String courseId) {
 
 		Boolean success = false;
-		StoredProcedure storedProcedure = null; 
+		StoredProcedure storedProcedure = null;
 		try {
-			storedProcedure= new StoredProcedure("spEnrollStudentForCourse(?, ?)");
+			storedProcedure = new StoredProcedure("spEnrollStudentForCourse(?, ?)");
 			storedProcedure.setParameter(1, user.getBannerId());
 			storedProcedure.setParameter(2, courseId);
 			storedProcedure.execute();
-			success= true;
+			success = true;
 			storedProcedure.cleanup();
 		} catch (SQLException e) {
-			
+
 			e.printStackTrace();
-		}
-		finally
-		{
-			if (null != storedProcedure)
-			{
-				
+		} finally {
+			if (null != storedProcedure) {
+
 			}
 		}
 		return success;
 	}
 
+	@Override
+	public User loadUserByID(String BannerId) {
+
+		StoredProcedure proc = null;
+		User user = null;
+		try {
+			proc = new StoredProcedure("spLoadUser(?)");
+			proc.setParameter(1, BannerId);
+			ResultSet results = proc.executeWithResults();
+			if (null != results) {
+				while (results.next()) {
+
+					String bannerID = results.getString(1);
+					String password = results.getString(2);
+					String firstName = results.getString(3);
+					String lastName = results.getString(4);
+					String email = results.getString(5);
+					Integer contactNo = results.getInt(6);
+					user = new User() {
+						{
+							setFirstName(firstName);
+							setLastName(lastName);
+							setEmailId(email);
+							setContactNumber(contactNo);
+							setBannerId(bannerID);
+							setPassword(password);
+							
+						}
+					};
+
+				}
+			proc.cleanup();
+			}
+		} catch (SQLException e) {
+
+		} finally {
+			if (null != proc) {
+				
+			}
+
+		}
+		return user;
+	}
 
 }

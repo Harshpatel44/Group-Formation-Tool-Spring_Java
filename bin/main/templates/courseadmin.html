@@ -29,9 +29,10 @@ tr:nth-child(even) {
 	<h2 th:text="${courseName}"
 		style="text-align: center; font-family: verdana; font-size: 300%; color: blue"></h2>
 
-	<form th:action="@{/course/uploadcsv(id=CSCI2)}" method="post"
+	<form th:action="@{/course/uploadcsv}" method="post"
 		enctype="multipart/form-data">
 		<!--     <input  type="hidden" th:with="courseId=${'CSCI1'}" th:value="${courseId}" name="courseId" /> -->
+		<input type="hidden" th:value="${courseId}" name="id"/>
 		<label for="myfile">Select files:</label> <input type="file"
 			name="file"><br> <br> <input type="submit"
 			value="Add Students">
