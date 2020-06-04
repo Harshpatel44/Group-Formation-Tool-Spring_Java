@@ -31,7 +31,8 @@ tr:nth-child(even) {
 
 	<form th:action="@{/course/uploadcsv}" method="post"
 		enctype="multipart/form-data">
-		<!--     <input  type="hidden" th:with="courseId=${'CSCI1'}" th:value="${courseId}" name="courseId" /> -->
+		<input type="hidden" th:value="${courseName}" name="courseName" />
+		<input type="hidden" th:value="${userId}" name="userId" />
 		<input type="hidden" th:value="${courseId}" name="id"/>
 		<label for="myfile">Select files:</label> <input type="file"
 			name="file"><br> <br> <input type="submit"
@@ -40,10 +41,10 @@ tr:nth-child(even) {
 	<br />
 	<br />
 	<form th:action="@{/addta}" method="post">
-		<input type="hidden" th:value="${courseName}" name="courseName" /> <input
-			type="hidden" th:value="${userId}" name="userId" /> <input
-			type="text" th:value="${taId}" name="taId" /> <input type="hidden"
-			th:value="${courseId}" name="courseId" />
+		<input type="hidden" th:value="${courseName}" name="courseName" />
+		<input type="hidden" th:value="${userId}" name="userId" />
+		<input type="text" th:value="${taId}" name="taId" />
+		<input type="hidden" th:value="${courseId}" name="courseId" />
 		<button type="submit" name="save">Add TA</button>
 	</form>
 

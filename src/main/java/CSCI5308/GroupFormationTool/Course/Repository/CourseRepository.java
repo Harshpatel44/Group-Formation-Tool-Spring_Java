@@ -7,7 +7,7 @@ import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 //Dhruvesh Patel
 public class CourseRepository implements ICourseRepository {
-
+    String role;
 	@Override
 	public String checkRole(String userId, String courseId) {
 		String role = "Guest";
@@ -106,7 +106,7 @@ public class CourseRepository implements ICourseRepository {
 		if(checkIfUserPresent(taId))
 		{
             if(checkIfAlreadyTa(taId,courseId)){
-				result = "Already user is TA of courseId:"+courseId+".";
+				result = "Already user has different role for courseId:"+courseId+".";
 			}
             else{
 
@@ -119,8 +119,6 @@ public class CourseRepository implements ICourseRepository {
 						addTa.cleanup();
 					} catch (SQLException throwables) {
 						throwables.printStackTrace();
-					}finally{
-						
 					}
 			}
 		}
