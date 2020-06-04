@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class LoginServiceTest {
 
     MockLoginRepository mock = new MockLoginRepository();
-    LoginService service = new LoginService();
 
     @Test
     void checkLoginTest() {
@@ -25,7 +24,6 @@ class LoginServiceTest {
     @Test
     void getEmailByBanneridTest() {
         assertEquals("rutikapatel09@gmail.com",mock.getEmailByBannerid("B00123456"));
-        assertEquals(service.getEmailByBannerid("B00123456"),mock.getEmailByBannerid("B00123456"));
     }
 
 
