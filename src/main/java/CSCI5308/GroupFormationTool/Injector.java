@@ -1,7 +1,15 @@
 package CSCI5308.GroupFormationTool;
 
-
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
+
+import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
+import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseService;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeRepository;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeService;
+import CSCI5308.GroupFormationTool.Course.Repository.CourseRepository;
+import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
+import CSCI5308.GroupFormationTool.Course.Service.CourseService;
+import CSCI5308.GroupFormationTool.Course.Service.HomeService;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
@@ -25,27 +33,37 @@ public class Injector {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
 	private IUserService userService;
+
 	private ICsvImporter csvImporter;
 	private IEmailConfiguration emailConfiguration;
 	private IUserNotification userNotification;
 
-	
+	private IHomeRepository homeRepository;
+	private IHomeService homeService;
+	private ICourseService courseService;
+	private ICourseRepository courseRepository;
+
 	private Injector() {
 
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
 		passwordEncryptor = new BCryptEncryption();
 		userService = new UserService();
-		csvImporter =new CsvImporterService();
+
+		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
-		
+
+		homeRepository = new HomeRepository();
+		homeService = new HomeService();
+		courseService = new CourseService();
+		courseRepository = new CourseRepository();
 
 	}
 
 	public static Injector instance() {
 
-		if(instance==null) {
+		if (instance == null) {
 			instance = new Injector();
 		}
 		return instance;
@@ -67,6 +85,22 @@ public class Injector {
 		return userService;
 	}
 
+	public IHomeRepository getHomeRepository() {
+		return homeRepository;
+	}
+
+	public IHomeService getHomeService() {
+		return homeService;
+	}
+
+	public ICourseRepository getCourseRepository() {
+		return courseRepository;
+	}
+
+	public ICourseService getCourseService() {
+		return courseService;
+	}
+
 	public ICsvImporter getCsvImporter() {
 		return csvImporter;
 	}
@@ -78,7 +112,5 @@ public class Injector {
 	public IUserNotification getUserNotification() {
 		return userNotification;
 	}
-
-
 
 }
