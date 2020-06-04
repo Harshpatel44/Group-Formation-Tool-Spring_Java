@@ -5,9 +5,9 @@ import org.springframework.stereotype.Component;
 //  Author: Harsh Patel
 @Component
 public class CreateCourse {
-    public String courseId;
-    public String courseName;
-    public String courseCreateMessage = "status here";
+    private String courseId;
+    private String courseName;
+    private String courseCreateMessage = "status here";
 
     public String getCourseCreateMessage() {
         return courseCreateMessage;

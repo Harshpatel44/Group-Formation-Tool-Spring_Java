@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserService;
@@ -17,6 +18,7 @@ public class Injector {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
 	private IUserService userService;
+
 	
 	private Injector() {
 
@@ -24,7 +26,7 @@ public class Injector {
 		userRepository = new UserRepository();
 		passwordEncryptor = new BCryptEncryption();
 		userService = new UserService();
-		
+
 	}
 
 	public static Injector instance() {

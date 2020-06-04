@@ -14,8 +14,8 @@ public class UserRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
-    @Test
-    void createUser() {
-        assertEquals(false,userRepository.createUser(new User()));
-    }
+//    @Test
+//    void createUser() {
+//        assertEquals(false,userRepository.createUser(new User()));
+//    }
 }
