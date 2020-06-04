@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Course Admin </title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<h3>Hello, <span th:text="${userId}"/></h3>
+<h2 th:text="${courseName}" style="text-align:center;font-family:verdana;font-size:300%;color:blue"></h2>
+
+<form th:action="@{/}" method="post">
+    <input  type="hidden" th:value="${courseId}" name="courseId" />
+    <button type="submit" name="save" > Add Student</button>
+</form>
+<br/>
+<br/>
+<form th:action="@{/addta}"  method="post" >
+    <input  type="hidden" th:value="${courseName}" name="courseName" />
+    <input  type="hidden" th:value="${userId}" name="userId"/>
+    <input type="text" th:value= "${taId}" name="taId"/>
+    <input  type="hidden" th:value="${courseId}" name="courseId" />
+    <button type="submit" name="save" > Add TA </button>
+</form>
+<span th:text="${result}" />
+</body>
+</html>
