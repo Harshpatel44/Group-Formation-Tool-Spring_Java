@@ -1,17 +1,18 @@
-body{
+ body{
     font-family: Verdana;
     background-color: #f2fcfe;
+    margin: 0px;
+    padding: 0px;
     /*background: linear-gradient(to bottom, #1c92d2 0%, #f2fcfe 20%);*/
 }
+
 #heading-box{
     width:100%;
     height:50px;
-    border:2px solid #05386b;
-
     display: flex;
     justify-content: center;
     align-items: center;
-    font-size: 40px;
+    font-size: 30px;
     background-color: #05386b;
     color:#EDF5E1;
     margin-bottom: 20px;
@@ -52,12 +53,13 @@ form{
 }
 .entity{
     margin-bottom:4px;
+    text-align: center;
 }
 label{
     border-radius: 5px;
     float: left;
-    display: block;
     width: 150px;
+    display: block;
 }
 input{
     /*background-color: #EDF5E1;*/
@@ -65,13 +67,14 @@ input{
     font-size: 18px;
 }
 .submit-button{
-
     background-color: #05386b;
     color: white;
     border:1px solid #EDF5E1;
     border-radius: 5px;
     display: block;
+    padding:2px 15px;
     margin: 10px auto 0px;
+    font-size: 20px;
 }
 .message{
 
@@ -81,4 +84,80 @@ input{
 }
 select{
     font-size: 18px;
+}
+
+footer{
+    background: #05386b;
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    text-align: center;
+    color: white;
+}
+
+#forget_password_div{
+    margin-top: 20px;
+}
+
+#register_div{
+    margin-top: 15px;
+}
+
+#status_message{
+    margin-top: 15px;
+}
+
+.submit-button2{
+background-color: #05386b;
+    color: white;
+    border:1px solid #EDF5E1;
+    border-radius: 5px;
+    display: inline-block;
+    padding:2px 15px;
+    margin: 10px auto 0px; 
+    font-size: 20px;
+}
+.login-cancel-box{
+    width: 100%;
+    margin: auto;
+     text-align: center;
+}
+
+.homepage_table{
+    align-items: center;
+    width: 100%;
+    
+    border: none;
+    text-align: center;
+    border-collapse:collapse;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+
+}
+
+#home_li{
+    padding: 10px;
+}
+
+
+
+th{
+ border: 1px solid black;   
+}
+
+#no_border{
+    border: none;
+}
+.clearfix{
+    text-align: center;
+}
+
+
+#courses-box{
+
+}
+
+#uploadfile-block{
+    display: flex;
 }
