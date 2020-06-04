@@ -12,5 +12,6 @@ public interface IUserRepository {
     public boolean getUserDetailsOnCourse(User user,String courseId);
     public boolean enrollStudentForCourse(User user,String courseId);
     public List<String> getAllBannerIds();
+    public User loadUserByID(String bannerId);
 
 }

@@ -13,13 +13,13 @@
 	<h3>Welcome to Group Formation Tool at Dalhousie University </h3>
 
 	<h3>
-		<p th:text="${Error}" id="errorMsg"></p>
+		<p th:if="${param.error}" id="errorMsg"> Invalid Username or Password</p>
 	</h3>
 
 	<form th:action ="@{/login}" th:object = "${loginUser}" method="post">
 		<div>
 			<label for="bannerId">Banner Id </label><br>
-			<input type="text" id="bannerId" name="bannerId" autofocus="autofocus" required>
+			<input type="text" id="bannerId" name="username" autofocus="autofocus" required>
 		</div>
 		</br>
 
