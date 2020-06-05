@@ -58,7 +58,7 @@ public class LoginService implements ILoginService {
             MimeMessage msg = emailConfiguration.getMessageCredentials();
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             msg.setSubject("Password Reset Link");
-            resetLink ="https://group9-production.herokuapp.com/updateNewPassword?passKey="+passKey;
+            resetLink ="https://group9-develop.herokuapp.com/updateNewPassword?passKey="+passKey;
             msg.setContent(resetLink, "text/html");
             Transport.send(msg);
         }
