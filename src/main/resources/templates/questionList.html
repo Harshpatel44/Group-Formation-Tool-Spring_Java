@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Question List </title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+</head>
+<body>
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div>
+                Group Formation Tool
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, <span th:text="${userId}" />
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<ul class="functionalities-list">
+    <li id="home_li"class="list">
+        <table  class="homepage_table" style="">
+
+            <thead>
+            <tr>
+                <th>Question Topic</th>
+                <th>Question Description</th>
+                <th>Date</th>
+                <th id="no_border">     </th>
+            </tr>
+            </thead>
+
+
+            <tr>
+            <tr th:each="question: ${questions}">
+                <td th:text="${question.questionTopic}" />
+                <td th:text="${question.questionDescription}" />
+                <td th:text="${question.date}" />
+                <td>
+                    <form th:action="@{/questionList}" method="post" >
+                        <input type="hidden"  th:value="${question.questionTopic}" name="questionTopic"/>
+                        <input  type="hidden" th:value="${question.questionDescription}" name="questionDescription" />
+                        <input  type="hidden" th:value="${question.date}" name="date" />
+                        <input  type="hidden" th:value="${userId}" name="userId" />
+                        <button type="submit" class="submit-button" name="save" th:if="${checkRole}" > GOTO Course</button>
+                    </form>
+                </td>
+            </tr>
+            </tr>
+        </table>
+    </li>
+</ul>
+</body>
+</html>
