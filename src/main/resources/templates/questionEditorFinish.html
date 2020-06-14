@@ -43,6 +43,8 @@
                 </form>
                 <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
                     <div class="entity">
+                        <input type="hidden" th:value="${userId}" name="userId" />
+                        <input type="hidden" th:value="${courseId}" name="courseId" />
                         <button type="submit" name="questionManager" class="submit-button">Question Manager</button>
                     </div>
                 </form>
@@ -57,11 +59,7 @@
         <div class="entity">
             Question Submitted
         </div>
-        <form th:action="@{/courseadmin}" method="post">
-            <input type="hidden" th:value="${userId}" name="userId" />
-            <input type="hidden" th:value="${courseId}" name="courseId" />
-            <button type="submit" name="Course Admin" class="submit-button">Course Admin</button>
-        </form>
+
     </li>
 </ul>
 
