@@ -8,51 +8,51 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 //Dhruvesh Patel
 public class CourseRepository implements ICourseRepository {
     String role;
-	@Override
-	public String checkRole(String userId, String courseId) {
-		String role = "Guest";
-		System.out.println(userId);
-		System.out.println(courseId);
-
-		try {
-			StoredProcedure rolecheck;
-			rolecheck = new StoredProcedure("StudentRole(?,?)");
-			rolecheck.setParameter(1, userId);
-			rolecheck.setParameter(2,courseId);
-			ResultSet rs = rolecheck.executeWithResults();
-			if(rs.next()) {
-
-						role = "Student";
-			}
-			rolecheck.cleanup();
-
-			rolecheck = new StoredProcedure("TaRole(?,?)");
-			rolecheck.setParameter(1, userId);
-			rolecheck.setParameter(2,courseId);
-			ResultSet rs1 = rolecheck.executeWithResults();
-			if(rs1.next()) {
-
-						role = "TA";
-			}
-			rolecheck.cleanup();
-
-			rolecheck = new StoredProcedure("InstructorRole(?,?)");
-			rolecheck.setParameter(1, userId);
-			rolecheck.setParameter(2,courseId);
-			ResultSet rs2 = rolecheck.executeWithResults();
-			if(rs2.next()){
-
-						role = "Instructor";
-			}
-			rolecheck.cleanup();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(role);
-
-		return role;
-	}
+//	@Override
+//	public String checkRole(String userId, String courseId) {
+//		String role = "Guest";
+//		System.out.println(userId);
+//		System.out.println(courseId);
+//
+//		try {
+//			StoredProcedure rolecheck;
+//			rolecheck = new StoredProcedure("StudentRole(?,?)");
+//			rolecheck.setParameter(1, userId);
+//			rolecheck.setParameter(2,courseId);
+//			ResultSet rs = rolecheck.executeWithResults();
+//			if(rs.next()) {
+//
+//						role = "Student";
+//			}
+//			rolecheck.cleanup();
+//
+//			rolecheck = new StoredProcedure("TaRole(?,?)");
+//			rolecheck.setParameter(1, userId);
+//			rolecheck.setParameter(2,courseId);
+//			ResultSet rs1 = rolecheck.executeWithResults();
+//			if(rs1.next()) {
+//
+//						role = "TA";
+//			}
+//			rolecheck.cleanup();
+//
+//			rolecheck = new StoredProcedure("InstructorRole(?,?)");
+//			rolecheck.setParameter(1, userId);
+//			rolecheck.setParameter(2,courseId);
+//			ResultSet rs2 = rolecheck.executeWithResults();
+//			if(rs2.next()){
+//
+//						role = "Instructor";
+//			}
+//			rolecheck.cleanup();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		System.out.println(role);
+//
+//		return role;
+//	}
 
 	public boolean checkIfUserPresent(String taId){
 		StoredProcedure checkPresence = null;
