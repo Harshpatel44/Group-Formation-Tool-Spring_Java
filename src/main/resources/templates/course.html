@@ -16,8 +16,9 @@
 <h3>Hello, <span th:text="${userId}"></span></h3>
 
 <form th:action="@{/courseadmin}" method="post">
-    <input type="hidden"  th:value="${course_name}" name="courseName"/>
+    <input type="hidden"  th:value="${courseName}" name="courseName"/>
     <input  type="hidden" th:value="${courseId}" name="courseId" />
+    <input  type="hidden" th:value="${userType}" name="userType" />
     <input  type="hidden" th:value="${userId}" name="userId" style="float: none" />
     <button type="submit" class="submit-button" name="save" th:if="${checkRole}" > GOTO Course Admin</button>
 </form>

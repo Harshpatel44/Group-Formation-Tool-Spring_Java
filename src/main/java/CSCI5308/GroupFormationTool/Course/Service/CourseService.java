@@ -19,6 +19,16 @@ public class CourseService implements ICourseService {
 		return roleCheck;
 	}
 
+	@Override
+	public boolean checkUserType(String userType) {
+		boolean user = false;
+		if(userType.equals("instructor"))
+		{
+			user = true;
+		}
+		return user;
+	}
+
 
 	@Override
 	public String addTa(String taId, String courseId) {
