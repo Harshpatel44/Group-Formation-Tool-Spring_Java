@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Course Admin</title>
-<link rel="stylesheet" type="text/css" href="/css/admin.css" />
+	<title>Course Admin</title>
+	<link rel="stylesheet" type="text/css" href="/css/admin.css" />
 
 </head>
 <body>
-	<div id="heading-box" th:text="${courseName}">
-	    Course Admin panel
+<div id="heading-box" th:text="${courseName}">
+	Course Admin panel
+</div>
+<h3>
+	Hello, <span th:text="${userId}" />
+</h3>
+<form th:action="@{/logout}"  method="post">
+	<div class="entity">
+		<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
 	</div>
-	<h3>
-		Hello, <span th:text="${userId}" />
-	</h3>
-	<form th:action="@{/logout}"  method="post">
-		<div class="entity">
-			<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-		</div>
-	</form>
+</form>
 <ul class="functionalities-list">
 	<li>
 		<div class="function-heading">Add students to course</div>
 		<form th:action="@{/course/uploadcsv}" method="post"
-			enctype="multipart/form-data">
-			
+			  enctype="multipart/form-data">
+
 			<input type="hidden" th:value="${courseName}" name="courseName" />
 			<input type="hidden" th:value="${userId}" name="userId" />
 			<input type="hidden" th:value="${courseId}" name="id"/>
 
-			</div>
 			<div class="entity">
 				<label>Select files</label>
 				<div id="uploadfile-block">
 					<input type="file"
-						name="file" style="display: inline-block;">
+						   name="file" style="display: inline-block;">
 				</div>
 			</div>
 			<div class="entity">
 				<input type="submit"
-					value="Add Students" class="submit-button">
+					   value="Add Students" class="submit-button">
 			</div>
-			
+
+
 
 		</form>
 	</li>
@@ -76,6 +76,12 @@
 				<td th:text="*{user_failure}"></td>
 		</table>
 	</li>
+</ul>
 	<span th:text="${result}" />
+	<form th:action="@{/questionManager}" method="post">
+		<input type="hidden" th:value="${userId}" name="userId" />
+		<input type="hidden" th:value="${courseId}" name="courseId" />
+		<button type="submit" name="save" class="submit-button"  th:if="${userType}">Go to Question Manager</button>
+	</form>
 </body>
 </html>

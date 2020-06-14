@@ -27,27 +27,29 @@
     </form>
     <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
         <div class="entity">
-            <button type="submit" name="courseAdmin" class="submit-button">Course Admin</button>
+            <button type="submit" name="couseAdmin" class="submit-button">Course Admin</button>
+        </div>
+    </form>
+    <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
+        <div class="entity">
+            <button type="submit" name="questionManager" class="submit-button">Question Manager</button>
         </div>
     </form>
 </div>
 
 <ul class="functionalities-list">
-
     <li>
-        <div class="function-heading">Assign teaching assistant</div>
-        <form th:action="@{/questionList}" method="post">
+        <div class="function-heading">Preview</div>
+        <div class="entity">
+            Here you preview the created question
+        </div>
+        <form th:action="@{/questionEditorFinish}" method="post">
             <input type="hidden" th:value="${userId}" name="userId" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
-            <button type="submit" name="save" class="submit-button">Question list</button>
+            <button type="submit" name="Finish" class="submit-button">Next</button>
         </form>
-        <form th:action="@{/addQuestion}" method="post">
-            <input type="hidden" th:value="${userId}" name="userId" />
-            <input type="hidden" th:value="${courseId}" name="courseId" />
-            <button type="submit" name="save" class="submit-button">Add Question</button>
-        </form>
-
     </li>
+</ul>
 
 </body>
 </html>

@@ -160,3 +160,15 @@ th{
 #uploadfile-block{
     display: flex;
 }
+
+.nav-bar{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom:10px;
+    border-bottom: 0.01em;
+}
+
+.nav-bar-element{
+    float: left;
+}
