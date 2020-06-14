@@ -7,19 +7,37 @@
 
 </head>
 <body>
-<div id="heading-box" th:text="${courseName}">
-	Course Admin panel
+<div>
+	<ul id="heading-box">
+		<li style="margin:auto;">
+			<div th:text="${courseId}">
+				Course Admin Page
+			</div>
+		</li>
+	</ul>
 </div>
-<h3>
-	Hello, <span th:text="${userId}" />
-</h3>
-<form th:action="@{/logout}"  method="post">
-	<div class="entity">
-		<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-	</div>
-</form>
+
+<div>
+	<ul id="heading-box2">
+		<li>
+			<div>
+				Hello, <span th:text="${userId}" />
+			</div>
+		</li>
+		<li>
+			<div class="nav-bar">
+				<form class="nav-bar-element" th:action="@{/logout}" method="post">
+					<div class="entity">
+						<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+					</div>
+				</form>
+			</div>
+		</li>
+	</ul>
+</div>
+
 <ul class="functionalities-list">
-	<li>
+	<li class="list">
 		<div class="function-heading">Add students to course</div>
 		<form th:action="@{/course/uploadcsv}" method="post"
 			  enctype="multipart/form-data">
@@ -44,7 +62,7 @@
 
 		</form>
 	</li>
-	<li>
+	<li class="list">
 		<div class="function-heading">Assign teaching assistant</div>
 		<form th:action="@{/addta}" method="post">
 			<input type="hidden" th:value="${courseName}" name="courseName" />
@@ -57,7 +75,7 @@
 			<button type="submit" name="save" class="submit-button">Add TA</button>
 		</form>
 	</li>
-	<li style="text-align: center;">
+	<li class="list" style="text-align: center;">
 
 		<table>
 			<tr>

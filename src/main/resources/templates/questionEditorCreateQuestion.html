@@ -7,38 +7,52 @@
 
 </head>
 <body>
-<div id="heading-box" th:text="${courseId}">
-    Course Admin panel
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div th:text="${courseId}">
+                Course Admin panel
+            </div>
+        </li>
+    </ul>
 </div>
-<h3>
-    Hello, <span th:text="${userId}" />
-</h3>
 
-<div class="nav-bar">
-    <form class="nav-bar-element" th:action="@{/logout}" method="post">
-        <div class="entity">
-            <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-        </div>
-    </form>
-    <form class="nav-bar-element" th:action="@{/course}" method="post">
-        <div class="entity">
-            <button type="submit" name="CourseHome" class="submit-button">Course Home</button>
-        </div>
-    </form>
-    <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
-        <div class="entity">
-            <button type="submit" name="couseAdmin" class="submit-button">Course Admin</button>
-        </div>
-    </form>
-    <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
-        <div class="entity">
-            <button type="submit" name="questionManager" class="submit-button">Question Manager</button>
-        </div>
-    </form>
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, <span th:text="${userId}" />
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/course}" method="post">
+                    <div class="entity">
+                        <button type="submit" name="CourseHome" class="submit-button">Course Home</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
+                    <div class="entity">
+                        <button type="submit" name="courseAdmin" class="submit-button">Course Admin</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
+                    <div class="entity">
+                        <button type="submit" name="questionManager" class="submit-button">Question Manager</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
 </div>
 
 <ul class="functionalities-list">
-    <li>
+    <li class="list">
         <div class="function-heading">Create Question</div>
         <div class="entity">
             Here you create questions
