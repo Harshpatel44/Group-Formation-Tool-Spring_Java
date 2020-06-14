@@ -9,6 +9,7 @@
     GROUP FORMATION TOOL
 	</div>
 	    <h2>Hello,<span th:text="${userId}"/></h2>
+
 	<form th:action="@{/logout}"  method="post">
 		<div class="entity">
 			<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
@@ -49,6 +50,5 @@
 	      </table>  
 	    </li>
 	   </ul>
-	   <div><form th:action="@{/logout}" method="post"> <button type ="submit" class="submit-button">Logout</button></form></div>
 	</body>
 </html> 

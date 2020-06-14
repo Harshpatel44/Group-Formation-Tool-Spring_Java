@@ -13,8 +13,7 @@
 	<ul class="functionalities-list">
 	<li>
 		<div class="function-heading">Sign Up</div>
-		<form action="#" th:action="@{/register}" method="post"
-				th:object="${user}">
+		<form action="#" th:action="@{/register}" method="post" th:object="${user}">
 					
 					<p>Please fill in this form to create an account.</p>
 
@@ -43,15 +42,17 @@
 						Id Error</div>
 					</div>
 					<div class="entity">
-					<label for="contact"><b>Contact Number</b></label> <input type="number"
-						placeholder="Enter Contact Number" th:field="*{contactNumber}" required> 	
+
+							<label for="contact"><b>Contact Number</b></label> <input type="number"
+							placeholder="Enter Contact Number" th:field="*{contactNumber}" required>
+
 					</div>
 					<br>
-
 					<div class="entity">
-						<label
-							for="psw"><b>Password</b></label> <input type="password"
-								placeholder="Enter Password" th:field="*{password}" required> 
+						<div>
+						<label for="psw"><b>Password</b></label> <input type="password"
+								placeholder="Enter Password" th:field="*{password}" required>
+						</div>
 					</div>
 
 					<div class="entity">

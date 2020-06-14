@@ -28,6 +28,7 @@
 			<input type="hidden" th:value="${userId}" name="userId" />
 			<input type="hidden" th:value="${courseId}" name="id"/>
 
+			</div>
 			<div class="entity">
 				<label>Select files</label>
 				<div id="uploadfile-block">
@@ -40,7 +41,6 @@
 					value="Add Students" class="submit-button">
 			</div>
 			
-
 
 		</form>
 	</li>
@@ -77,10 +77,5 @@
 		</table>
 	</li>
 	<span th:text="${result}" />
-	<form th:action="@{/questionManager}" method="post">
-		<input type="hidden" th:value="${userId}" name="userId" />
-		<input type="hidden" th:value="${courseId}" name="courseId" />
-		<button type="submit" name="save" class="submit-button"  th:if="${userType}">Go to Question Manager</button>
-	</form>
 </body>
 </html>

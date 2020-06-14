@@ -90,7 +90,6 @@ footer{
     background: #05386b;
     position: absolute;
     bottom: 0px;
-    font-size: 20px;
     width: 100%;
     text-align: center;
     color: white;
@@ -131,7 +130,6 @@ background-color: #05386b;
     border: none;
     text-align: center;
     border-collapse:collapse;
-    display: flex;
     align-content: center;
     justify-content: center;
 
