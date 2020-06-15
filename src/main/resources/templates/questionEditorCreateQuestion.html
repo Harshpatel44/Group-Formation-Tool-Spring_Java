@@ -56,10 +56,28 @@
 <ul class="functionalities-list">
     <li class="list">
         <div class="function-heading">Create Question</div>
-        <div class="entity">
-            Here you create questions
-        </div>
-        <form th:action="@{/createOption}" method="post">
+
+        <form th:action="@{/createOption}" method="post" th:object="${questionModel}">
+            <div class="entity">
+                <label >Question title:</label>
+                <input type="text" th:field="*{questionTitle}">
+            </div>
+            <div class="entity">
+                <label>Question text:</label>
+                <input type="text" th:field="*{questionText}">
+            </div>
+            <div class="entity">
+                <label>Select question type:</label>
+            </div>
+            <div class="entity">
+                <select name="" th:field="*{selectedQuestionType}">
+                    <option th:each="selectValue: ${questionModel.questionTypeList}"
+                            th:value="${selectValue.value}"
+                            th:text="${selectValue.key}"
+                    ></option>
+                </select>
+            </div>
+
             <input type="hidden" th:value="${userId}" name="userId" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
             <button type="submit" name="Next" class="submit-button">Next</button>
