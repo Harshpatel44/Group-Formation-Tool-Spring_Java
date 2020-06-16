@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Model;
 
 import java.util.Dictionary;
-import java.util.HashMap;
 import java.util.Hashtable;
 
 public class QuestionModel {
@@ -9,12 +8,22 @@ public class QuestionModel {
     private String questionText;
     private Dictionary questionTypeList = new Hashtable();
     private String selectedQuestionType;
+    private String questionSubmitMessage="Question did not submit successfully...";
+
 
     public QuestionModel(){
-        this.questionTypeList.put("Numeric","numeric");
-        this.questionTypeList.put("Multiple Choice, Choose One","mcqs");
-        this.questionTypeList.put("Multiple Choise, Choose Multiple","mcqm");
-        this.questionTypeList.put("Text","text");
+        this.questionTypeList.put("Numeric","Numeric");
+        this.questionTypeList.put("Multiple Choice, Choose One","Multiple Choice, Choose One");
+        this.questionTypeList.put("Multiple Choice, Choose Multiple","Multiple Choice, Choose Multiple");
+        this.questionTypeList.put("Text","Text");
+    }
+
+    public String getQuestionSubmitMessage() {
+        return questionSubmitMessage;
+    }
+
+    public void setQuestionSubmitMessage(String questionSubmitMessage) {
+        this.questionSubmitMessage = questionSubmitMessage;
     }
 
     public Dictionary getQuestionTypeList() {

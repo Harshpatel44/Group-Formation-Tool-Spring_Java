@@ -53,17 +53,39 @@
     </ul>
 </div>
 
-<ul class="functionalities-list">
+<ul class="functionalities-list" style="width: auto;">
     <li class="list">
-        <div class="function-heading">Preview</div>
-        <div class="entity">
-            Here you preview the created question
-        </div>
-        <form th:action="@{/questionEditorFinish}" method="post">
+        <div class="function-heading">Displaying <span th:text="${questionModel.getSelectedQuestionType()}" id="preview-heading"></span> questions looks like this</div>
+        <form th:action="@{/questionEditorFinish}" method="post" th:object="${questionModel}">
+            <div class="entity">
+                <label class="question" th:text="*{questionText}"></label>
+
+                <div th:if="*{selectedQuestionType == 'Numeric'}" style="display: inline">
+                     <input type="number">
+                </div>
+                <div th:if="*{selectedQuestionType == 'Text'}" style="display: inline">
+                    <input type="text">
+                </div>
+                <div th:if="*{selectedQuestionType == 'Multiple Choice, Choose Multiple'}" style="display: inline">
+
+                    <div th:each="eachOption : ${optionListPreview}">
+                        <input type="checkbox" th:value="${eachOption}"  style="width: 20px;height: 20px;"/>
+                        <label th:text="${eachOption}" style="width: 600px;"></label>
+                    </div>
+
+                </div>
+
+            </div>
             <input type="hidden" th:value="${userId}" name="userId" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
+            <input type="hidden" th:value="${ranks}" name="ranks"/>
+            <input type="hidden" th:value="${options}" name="options"/>
+            <input type="hidden" th:value="${questionText}" name="questionText" />
+            <input type="hidden" th:value="${questionTitle}" name="questionTitle" />
+            <input type="hidden" th:value="${selectedQuestionType}" name="selectedQuestionType" />
             <button type="submit" name="Finish" class="submit-button">Next</button>
         </form>
+
     </li>
 </ul>
 

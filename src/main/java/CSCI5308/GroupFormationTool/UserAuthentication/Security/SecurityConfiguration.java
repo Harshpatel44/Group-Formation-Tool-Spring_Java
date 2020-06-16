@@ -37,7 +37,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter
 				.loginPage("/login")
 				.permitAll()
 			.and().logout()
-				.permitAll();
+				.permitAll()
+		;
 	}
 	
 	@Override

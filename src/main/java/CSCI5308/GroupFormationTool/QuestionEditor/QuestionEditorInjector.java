@@ -11,6 +11,7 @@ import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorC
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorRepository;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorService;
 import CSCI5308.GroupFormationTool.QuestionEditor.Controller.QuestionEditorController;
+import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.Repository.QuestionEditorRepository;
 import CSCI5308.GroupFormationTool.QuestionEditor.Service.QuestionEditorService;
 
@@ -19,11 +20,13 @@ public class QuestionEditorInjector {
     private IQuestionEditorController questionEditorController;
     private IQuestionEditorService questionEditorService;
     private IQuestionEditorRepository questionEditorRepository;
+    private QuestionModel questionModel;
 
     private QuestionEditorInjector() throws Exception {
         questionEditorController = new QuestionEditorController();
         questionEditorService = new QuestionEditorService();
         questionEditorRepository = new QuestionEditorRepository();
+        questionModel = new QuestionModel();
     }
 
     public static QuestionEditorInjector instance() throws Exception {
@@ -35,6 +38,14 @@ public class QuestionEditorInjector {
 
     public IQuestionEditorController getQuestionEditorController() {
         return questionEditorController;
+    }
+
+    public QuestionModel getQuestionModel() {
+        return questionModel;
+    }
+
+    public void setQuestionModel(QuestionModel questionModel) {
+        this.questionModel = questionModel;
     }
 
     public void setQuestionEditorController(IQuestionEditorController questionEditorController) {

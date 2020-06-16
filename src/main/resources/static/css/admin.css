@@ -197,3 +197,18 @@ th{
     display: flow-root;
     background: #999999;
 }
+
+.question{
+    width:fit-content;
+    display: contents;
+    padding-right:10px;
+    padding-top: 5px;
+}
+
+#preview-heading{
+    display: inline;
+}
+
+.options-ul{
+    margin-top: 10px;
+}

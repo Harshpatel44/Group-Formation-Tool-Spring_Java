@@ -5,8 +5,14 @@
     <title>Course Admin</title>
     <link rel="stylesheet" type="text/css" href="/css/admin.css" />
 
+
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
 </head>
 <body>
+
 <div>
     <ul id="heading-box">
         <li style="margin:auto;">
@@ -53,19 +59,44 @@
     </ul>
 </div>
 
-<ul class="functionalities-list">
+<ul class="functionalities-list" style="width: auto;">
     <li class="list">
         <div class="function-heading">Create Options</div>
-        <div class="entity">
-            Here you create options
-        </div>
-        <form th:action="@{/questionPreview}" method="post">
+        <form th:action="@{/questionPreview}" method="post" name="addOptionForm">
+            <ul class="options-ul" id="options-ul-id">
+
+            </ul>
+            <button onclick="addOption()" class="submit-button">Add Option</button>
+
             <input type="hidden" th:value="${userId}" name="userId" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
+
+            <input type="hidden" th:value="${questionText}" name="questionText" />
+            <input type="hidden" th:value="${questionTitle}" name="questionTitle" />
+            <input type="hidden" th:value="${selectedQuestionType}" name="selectedQuestionType" />
             <button type="submit" name="Next" class="submit-button">Next</button>
         </form>
     </li>
 </ul>
 
+<script type="text/javascript">
+    var i = 1;
+
+    function addOption(){
+        var text=`
+                <li>
+                    <div class="entity">
+                        <label style="display: inline; float: none;">Option `+i+`:</label>
+                        <input type="text"  class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="optionText">
+                        <label style="display: inline; float: none;">Rank:</label>
+                        <input type="text"  class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="rankText">
+                    </div>
+                </li>
+            `;
+
+        document.getElementById("options-ul-id").innerHTML+=text;
+        i++;
+    }
+</script>
 </body>
 </html>

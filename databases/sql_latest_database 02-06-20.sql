@@ -38,16 +38,19 @@ CREATE TABLE userCourse(
     PRIMARY KEY(courseId,userId,roleId)
 );
 
+drop table questionManager;
 CREATE TABLE questionManager(
 	userId varchar(10),
     questionId int AUTO_INCREMENT,
     questionTopic varchar(500),
     questionDesc varchar(1000),
+    questionType varchar(100),
     dateStamp date,
     FOREIGN KEY (userId) REFERENCES users(userId),
     PRIMARY KEY(questionId)
 );
 
+drop table optionManager;
 CREATE TABLE optionManager(
 	questionId int,
     optionRank int,
@@ -87,10 +90,10 @@ values
 ("CSCI1","B00345612",3)
 ;
 
-insert into questionManager(userId,questionTopic,questionDesc,dateStamp) 
+insert into questionManager(userId,questionTopic,questionDesc,questionType,dateStamp) 
 values
-	('B00100100','question1Topic','question1Description','2020-06-14'),
-    ('B00123456','question2Topic','question2Description','2020-06-14')
+	('B00100100','question1Topic','question1Description','mcqs','2020-06-14'),
+    ('B00123456','question2Topic','question2Description','mcqs','2020-06-14')
     ;
 
 insert into optionManager 
@@ -103,3 +106,10 @@ values
 	(3,1,'answer1Question3')
 ;
 
+
+insert into optionManager values(15,1,"Delhi");
+select * from questionManager;
+select * from optionManager;
+
+select * from questionManager;
+select questionId from questionManager where userId="B00100100" and questionTopic="zzz";
