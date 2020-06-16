@@ -6,7 +6,11 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
+import static java.util.Map.Entry.comparingByKey;
+import static java.util.stream.Collectors.toMap;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -80,6 +84,15 @@ class QuestionEditorServiceTest {
         for(int i=0;i<optionList.length;i++){
             map.put(Integer.valueOf(rankList[i]),optionList[i]);
         }
+
+        Map<Integer, String> sorted = map
+                .entrySet()
+                .stream()
+                .sorted(comparingByKey())
+                .collect(
+                        toMap(e -> e.getKey(), e -> e.getValue(),
+                                (e1, e2) -> e2, LinkedHashMap::new));
+        
         assertEquals(map,questionEditorService.arrangeOptionsBasedOnRank(optionText,rankText));
     }
 }

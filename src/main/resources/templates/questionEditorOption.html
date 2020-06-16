@@ -66,7 +66,7 @@
             <ul class="options-ul" id="options-ul-id">
 
             </ul>
-            <button onclick="addOption()" class="submit-button" id="but">Add Option</button>
+            <button onclick="addOption()" class="submit-button">Add Option</button>
 
             <input type="hidden" th:value="${userId}" name="userId" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
@@ -82,27 +82,18 @@
 <script type="text/javascript">
     var i = 1;
 
-    document.getElementById("but").addEventListener("click", addOption);
 
     function addOption(){
         var text=`
                 <li>
                     <div class="entity">
                         <label style="display: inline; float: none;">Option `+i+`:</label>
-                        <input type="text"  id="`1`" class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="optionText">
+                        <input type="text" class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="optionText">
                         <label style="display: inline; float: none;">Rank:</label>
                         <input type="number"  class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="rankText">
                     </div>
                 </li>
             `;
-
-        var a = document.getElementById("options-ul-id");
-        var child= document.createElement("li");
-
-        child.append(document.createTextNode("HI"));
-
-        a.append(child);
-
 
         document.getElementById("options-ul-id").innerHTML+=text;
         i++;

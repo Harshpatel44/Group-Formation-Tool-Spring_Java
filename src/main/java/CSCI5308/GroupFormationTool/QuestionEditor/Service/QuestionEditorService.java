@@ -62,6 +62,7 @@ public class QuestionEditorService implements IQuestionEditorService {
                 .collect(
                         toMap(e -> e.getKey(), e -> e.getValue(),
                                 (e1, e2) -> e2, LinkedHashMap::new));
+    System.out.println(map);
     return map;
     }
 
