@@ -119,7 +119,6 @@ public class QuestionEditorController implements IQuestionEditorController {
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("message",returnMessage);
-//        mv.addObject("questionModel", questionModel);
         return mv;
     }
 
