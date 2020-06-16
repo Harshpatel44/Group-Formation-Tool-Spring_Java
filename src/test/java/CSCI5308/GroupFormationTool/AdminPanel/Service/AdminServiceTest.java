@@ -25,6 +25,7 @@ class AdminServiceTest {
 
     public AdminRepository adminRepository;
     public AdminService adminService;
+
     @BeforeEach
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);

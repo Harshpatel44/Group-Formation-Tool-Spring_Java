@@ -8,6 +8,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.util.Collection;
+import java.util.HashMap;
+
 @Controller
 public class QuestionEditorController implements IQuestionEditorController {
 
@@ -60,7 +63,6 @@ public class QuestionEditorController implements IQuestionEditorController {
         mv.addObject("questionModel",questionModel);
         mv.addObject("questionText",questionModel.getQuestionText());
         mv.addObject("questionTitle",questionModel.getQuestionTitle());
-
         mv.addObject("selectedQuestionType",questionModel.getSelectedQuestionType());
         return mv;
     }
@@ -76,7 +78,7 @@ public class QuestionEditorController implements IQuestionEditorController {
                                         @RequestParam(name="courseId") String courseId,
                                         @RequestParam(name="userId") String userId) throws Exception
     {
-
+        HashMap<Integer, String> map=QuestionEditorInjector.instance().getQuestionEditorService().arrangeOptionsBasedOnRank(optionText,rankText);
         String[] optionList = optionText.split(",");
         String[] rankList = rankText.split(",");
         ModelAndView mv = new ModelAndView("questionEditorPreview");
@@ -85,7 +87,7 @@ public class QuestionEditorController implements IQuestionEditorController {
         mv.addObject("questionModel",questionModel);
         mv.addObject("questionText",questionText);
         mv.addObject("questionTitle",questionTitle);
-        mv.addObject("optionListPreview",optionList);
+        mv.addObject("optionListPreview",map.values());
         mv.addObject("options",optionText);
         mv.addObject("ranks",rankText);
         mv.addObject("selectedQuestionType",selectedQuestionType);
