@@ -5,6 +5,7 @@ import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorInjector;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -68,7 +69,7 @@ public class QuestionEditorController implements IQuestionEditorController {
     }
 
     @Override
-    @RequestMapping("/questionPreview")
+    @RequestMapping(value = "/questionPreview")
     public ModelAndView questionPreview(QuestionModel questionModel,
                                         @RequestParam(name="optionText") String optionText,
                                         @RequestParam(name="rankText") String rankText,
