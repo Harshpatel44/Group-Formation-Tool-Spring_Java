@@ -112,8 +112,8 @@ public class QuestionEditorController implements IQuestionEditorController {
         if(selectedQuestionType.equals("Text") || selectedQuestionType.equals("Numeric")){
             returnMessage=QuestionEditorInjector.instance().getQuestionEditorService().SaveQuestionServiceForTextAndNumeric(questionText,questionTitle,selectedQuestionType,userId);
         }
-        if(selectedQuestionType.equals("Multiple Choice, Choose Multiple")){
-            returnMessage=QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceMultiple(questionText,questionTitle,selectedQuestionType,options,ranks,userId);
+        if(selectedQuestionType.equals("Multiple Choice, Choose Multiple") || selectedQuestionType.equals("Multiple Choice, Choose One")){
+            returnMessage=QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId);
         }
         ModelAndView mv = new ModelAndView("questionEditorFinish");
         mv.addObject("courseId",courseId);

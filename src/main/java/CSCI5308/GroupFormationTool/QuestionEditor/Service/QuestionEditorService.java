@@ -26,8 +26,8 @@ public class QuestionEditorService implements IQuestionEditorService {
     }
 
     @Override
-    public String saveQuestionForMultipleChoiceMultiple(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId) throws Exception {
-        if(QuestionEditorInjector.instance().getQuestionEditorRepository().SaveMcqMultipleTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,userId)){
+    public String saveQuestionForMultipleChoiceService(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId) throws Exception {
+        if(QuestionEditorInjector.instance().getQuestionEditorRepository().SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,userId)){
             return "Question submitted successfully";
         }
         else{

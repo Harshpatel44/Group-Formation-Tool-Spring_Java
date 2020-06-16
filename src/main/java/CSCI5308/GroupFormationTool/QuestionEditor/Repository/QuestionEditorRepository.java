@@ -13,8 +13,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         String questionType = changeQuestionTypeName(selectedQuestionType);
         try {
             LocalDate date = LocalDate.now();
-            System.out.println(date);
-            System.out.println(date.toString());
             StoredProcedure storedProcedure = new StoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
             storedProcedure.setParameter("uId",userId);
             storedProcedure.setParameter("qTopic", questionText);
@@ -48,7 +46,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     }
 
     @Override
-    public boolean SaveMcqMultipleTypeQuestionRepo(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId){
+    public boolean SaveMcqTypeQuestionRepo(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId){
         String[] optionList = options.split(",");
         String[] rankList = ranks.split(",");
         Integer qId=0;

@@ -61,7 +61,7 @@
                 <label class="question" th:text="*{questionText}"></label>
 
                 <div th:if="*{selectedQuestionType == 'Numeric'}" style="display: inline">
-                     <input type="number">
+                    <input type="number">
                 </div>
                 <div th:if="*{selectedQuestionType == 'Text'}" style="display: inline">
                     <input type="text">
@@ -74,7 +74,14 @@
                     </div>
 
                 </div>
+                <div th:if="*{selectedQuestionType == 'Multiple Choice, Choose One'}" style="display: inline">
 
+                    <div th:each="eachOption : ${optionListPreview}">
+                        <input type="radio" th:value="${eachOption}"  name="selectecOption" style="width: 20px;height: 20px;"/>
+                        <label th:for="${eachOption}" th:text="${eachOption}" style="width: 600px;"></label>
+                    </div>
+
+                </div>
             </div>
             <input type="hidden" th:value="${userId}" name="userId" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
