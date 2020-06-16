@@ -1,10 +1,13 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Model;
+
+import java.sql.Date;
+
 //Dhruvesh Patel
 public class Question {
     private String questionTopic;
-    private String questionId;
+    private Integer questionId;
     private String questionDescription;
-    private String date;
+    private Date date;
 
     public String getQuestionDescription() {
         return questionDescription;
@@ -22,19 +25,19 @@ public class Question {
         this.questionTopic = questionTopic;
     }
 
-    public String getQuestionId() {
+    public Integer getQuestionId() {
         return questionId;
     }
 
-    public void setQuestionId(String questionId) {
+    public void setQuestionId(int questionId) {
         this.questionId = questionId;
     }
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 }

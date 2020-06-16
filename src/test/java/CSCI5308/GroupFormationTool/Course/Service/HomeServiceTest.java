@@ -1,25 +1,35 @@
 package CSCI5308.GroupFormationTool.Course.Service;
 
 
+
 import CSCI5308.GroupFormationTool.Course.Model.Course;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
+import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
 import CSCI5308.GroupFormationTool.Course.Repository.HomeRepositoryMock;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class HomeServiceTest {
+  public HomeRepository homeRepository;
+  public HomeService homeService;
 
-
-    @Mock
-    private HomeRepositoryMock homeRepositoryMock;
+    @BeforeEach
+    public void init(){
+        MockitoAnnotations.initMocks(this);
+        homeRepository = mock(HomeRepository.class);
+        homeService = new HomeService(homeRepository);
+    }
 
     @Test
     public void getCoursesTest(){
@@ -31,8 +41,8 @@ public class HomeServiceTest {
         course.setRole("Student");
         courseList.add(course);
         user.setUserId("B00123456");
-        when(homeRepositoryMock.getcourseTest(user)).thenReturn(courseList);
-        List<Course> returnedList = homeRepositoryMock.getcourseTest(user);
+        when(homeRepository.getcourse(user)).thenReturn(courseList);
+        List<Course> returnedList = homeService.getCourses(user);
         assertEquals(returnedList,courseList);
     }
 
@@ -41,8 +51,8 @@ public class HomeServiceTest {
     public void checkRoleTestGuest() {
         UserId user = new UserId();
         user.setUserId("B00103456");//guest
-        when(homeRepositoryMock.checkRoleTest(user)).thenReturn(true);
-        assertEquals(true,homeRepositoryMock.checkRoleTest(user));
+        when(homeRepository.checkRole(user)).thenReturn(true);
+        assertFalse(homeService.checkRole(user));
     }
 
 
@@ -50,8 +60,8 @@ public class HomeServiceTest {
     public void checkRoleTestNotGuest() {
         UserId user = new UserId();
         user.setUserId("B00123456");
-        when(homeRepositoryMock.checkRoleTest(user)).thenReturn(false);
-        assertEquals(false,homeRepositoryMock.checkRoleTest(user));
+        when(homeRepository.checkRole(user)).thenReturn(false);
+        assertTrue(homeService.checkRole(user));
     }
 
 

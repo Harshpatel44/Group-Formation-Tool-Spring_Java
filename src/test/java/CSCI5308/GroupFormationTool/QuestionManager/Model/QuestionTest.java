@@ -3,6 +3,8 @@ package CSCI5308.GroupFormationTool.QuestionManager.Model;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.sql.Date;
+
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @SpringBootTest
@@ -25,8 +27,15 @@ public class QuestionTest {
     @Test
     public void setDateTest(){
         Question question=new Question();
-        question.setDate("2020-12-30");
-        assertTrue(question.getDate()=="2020-12-30");
+        question.setDate(Date.valueOf("2020-12-30"));
+        assertTrue(question.getDate().equals(Date.valueOf("2020-12-30")));
+    }
+
+    @Test
+    public void setQuestionId(){
+        Question question=new Question();
+        question.setQuestionId(2);
+        assertTrue(question.getQuestionId()==2);
     }
 
 

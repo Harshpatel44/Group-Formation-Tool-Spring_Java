@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.Course.Service;
 
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
 import org.springframework.stereotype.Service;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeService;
@@ -14,17 +15,20 @@ import CSCI5308.GroupFormationTool.Course.Model.UserRole;
 //Dhruvesh Patel
 @Service
 public class HomeService implements IHomeService {
-
 	public UserRole user;
 	private IHomeRepository homeRepository;
+	public HomeService() {}
+    public HomeService(HomeRepository homeRepository) {
+     Injector.instance().setHomeRepository(homeRepository);
+	}
+
+
 
 
 	public List<Course> getCourses(UserId user) {
 		homeRepository = Injector.instance().getHomeRepository();
 		return homeRepository.getcourse(user);
 	}
-
-
 
 	@Override
 	public boolean checkRole(UserId user) {
@@ -41,35 +45,7 @@ public class HomeService implements IHomeService {
 
 	}
 
-//	public boolean checkRole(String courseId, String userId)
-//	    {
-//	    	String role = homeRepository.getRole(courseId, userId);
-//
-//	    	if(role.equals("Student") || role.equals("TA") || role.equals("Instructor"))
-//			{
-//				return true;
-//			}
-//             else{
-//             	return false;
-//			}
 
-//	    	for(UserRole temp : role) {
-//	    		String user = temp.getUserId();
-//	    		String course = temp.getCourseId();
-//	    		String role1 = temp.getRole();
-//
-//	            if(courseId.equals(course) && userId.equals(user))
-//				{
-//
-//	            		if(role1 != "Guest")
-//		            	{
-//		            		return true;
-//		            	}
-//				}
-//
-//	        }
-//			return false;
-//      }
 }
 	
 	

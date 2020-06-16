@@ -1,5 +1,10 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionController;
+import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
+import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
+import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
+import CSCI5308.GroupFormationTool.QuestionManager.Service.QuestionManagerService;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
@@ -48,8 +53,10 @@ public class Injector {
 	private ICourseRepository courseRepository;
 	private ILoginService loginService;
 	private ILoginRepository loginRepository;
+	private IQuestionManagerService questionManagerService;
+	private IQuestionManagerRepository questionManagerRepository;
 
-	private Injector() {
+	private Injector()  {
 
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
@@ -65,6 +72,8 @@ public class Injector {
 		courseService = new CourseService();
 		courseRepository = new CourseRepository();
 		loginRepository = new LoginRepository();
+		questionManagerRepository = new QuestionManagerRepository();
+		questionManagerService = new QuestionManagerService();
 
 	}
 
@@ -128,4 +137,13 @@ public class Injector {
 		return loginRepository;
 	}
 
+	public IQuestionManagerService getQuestionManagerService(){return questionManagerService;}
+
+	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
+
+    public void setHomeRepository(IHomeRepository homeRepository){this.homeRepository = homeRepository;}
+
+    public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
+
+    public void setCourseRepository(ICourseRepository courseRepository){this.courseRepository = courseRepository;}
 }

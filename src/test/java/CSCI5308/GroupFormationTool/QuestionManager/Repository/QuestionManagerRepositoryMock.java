@@ -4,6 +4,7 @@ package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,13 +14,16 @@ public class QuestionManagerRepositoryMock {
         if(user.getUserId().equals("B00123456"))
         {
             Question question = new Question();
-            question.setQuestionId("1");
+            question.setQuestionId(1);
             question.setQuestionDescription("QuestionDescription");
             question.setQuestionTopic("QuestionTopic");
-            question.setDate("2020-12-30");
+            question.setDate(Date.valueOf("2020-12-30"));
             questionList.add(question);
 
         }
         return questionList;
     }
+//
+//    public void deleteQuestion(Integer questionId,)
 }
+
