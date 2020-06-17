@@ -6,6 +6,7 @@ import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
 import CSCI5308.GroupFormationTool.Login.Service.LoginService;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContext;
@@ -59,6 +60,7 @@ public class LoginController implements ILoginController {
 		boolean matchPassword;
 		boolean update;
 		String bannerid;
+		UserService userService = (UserService) Injector.instance().getUserService();
 		List<String> oldPasswords;
 		service = Injector.instance().getLoginService();
 		BCryptEncryption encryption = new BCryptEncryption();
@@ -72,6 +74,8 @@ public class LoginController implements ILoginController {
 		bannerid = service.getBannerIdByPassKey(passKey);
 		oldPasswords = service.getPasswordByBannerId(bannerid);
 
+
+
 		for(String password : oldPasswords)
 		{
 			if(encryption.passwordMatch(newPassword,password))
@@ -80,6 +84,7 @@ public class LoginController implements ILoginController {
 				return "newPassword";
 			}
 		}
+
 
 		update = service.updatePassword(bannerid, newPassword);
 

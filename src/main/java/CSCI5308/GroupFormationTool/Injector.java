@@ -32,7 +32,6 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
 public class Injector {
 
 	private static Injector instance = null;
-
 	private IDBConfiguration dbConfiguration;
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
@@ -74,6 +73,62 @@ public class Injector {
 			instance = new Injector();
 		}
 		return instance;
+	}
+
+	public static void setInstance(Injector instance) {
+		Injector.instance = instance;
+	}
+
+	public void setDbConfiguration(IDBConfiguration dbConfiguration) {
+		this.dbConfiguration = dbConfiguration;
+	}
+
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	public void setPasswordEncryptor(IPasswordEncryptor passwordEncryptor) {
+		this.passwordEncryptor = passwordEncryptor;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public void setCsvImporter(ICsvImporter csvImporter) {
+		this.csvImporter = csvImporter;
+	}
+
+	public void setEmailConfiguration(IEmailConfiguration emailConfiguration) {
+		this.emailConfiguration = emailConfiguration;
+	}
+
+	public void setUserNotification(IUserNotification userNotification) {
+		this.userNotification = userNotification;
+	}
+
+	public void setHomeRepository(IHomeRepository homeRepository) {
+		this.homeRepository = homeRepository;
+	}
+
+	public void setHomeService(IHomeService homeService) {
+		this.homeService = homeService;
+	}
+
+	public void setCourseService(ICourseService courseService) {
+		this.courseService = courseService;
+	}
+
+	public void setCourseRepository(ICourseRepository courseRepository) {
+		this.courseRepository = courseRepository;
+	}
+
+	public void setLoginService(ILoginService loginService) {
+		this.loginService = loginService;
+	}
+
+	public void setLoginRepository(ILoginRepository loginRepository) {
+		this.loginRepository = loginRepository;
 	}
 
 	public IUserRepository getUserRepository() {
@@ -126,14 +181,6 @@ public class Injector {
 
 	public ILoginRepository getLoginRepository() {
 		return loginRepository;
-	}
-
-	public void setLoginRepository(ILoginRepository loginRepository) {
-		this.loginRepository = loginRepository;
-	}
-
-	public void setLoginService(ILoginService loginService) {
-		this.loginService = loginService;
 	}
 
 }

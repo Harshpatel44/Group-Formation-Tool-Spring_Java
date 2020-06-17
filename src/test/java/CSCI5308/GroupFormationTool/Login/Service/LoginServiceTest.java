@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Login.Service;
 
 import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
 import CSCI5308.GroupFormationTool.Login.Repository.MockLoginRepository;
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -69,7 +70,8 @@ class LoginServiceTest {
     @Test
     void getPasswordByBannerId() {
         List<String> password = new ArrayList<>();
-        password.add("password");
+        password.add("passwordValue");
+        password.add("passwordValue2");
         when(loginRepository.getPasswordByBannerId("B00835088")).thenReturn(password);
         assertEquals(password,loginService.getPasswordByBannerId("B00835088"));
     }

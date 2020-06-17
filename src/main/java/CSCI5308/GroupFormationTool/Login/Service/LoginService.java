@@ -6,6 +6,7 @@ import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
 import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
+import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
 
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
@@ -83,12 +84,10 @@ public class LoginService implements ILoginService {
 
     @Override
     public boolean comparePassword(@NotNull String newPassword, String confirmPassword) {
-        if(newPassword.equals(confirmPassword))
-        {
+        if(newPassword.equals(confirmPassword)) {
             return true;
         }
-        else
-        {
+        else {
             return false;
         }
     }

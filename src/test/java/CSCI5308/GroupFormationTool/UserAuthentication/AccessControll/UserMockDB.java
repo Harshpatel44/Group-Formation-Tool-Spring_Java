@@ -10,12 +10,14 @@ public class UserMockDB {
 				setFirstName("Arjun");
 				setLastName("Suresh");
 				setEmailId("arjun14@gmaill.com");
-				setContactNumber(978780);
+				setContactNumber("9787809082");
 				setBannerId("B00854475");
-				setPassword("qwerty12345");
-				setConfirmPassword("qwerty12345");
+				setPassword("Qwerty12345!");
+				setConfirmPassword("Qwerty12345!");
 			}
 		};
 		return u;
 	}
+	
+	
 }

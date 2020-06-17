@@ -5,6 +5,7 @@ import java.sql.SQLException;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 //Dhruvesh Patel
 public class CourseRepository implements ICourseRepository {
     String role;
@@ -127,6 +128,49 @@ public class CourseRepository implements ICourseRepository {
 			result = "No user exist with Id:"+taId+" present in system.";
 		}
 		return result;
+	}
+	@Override
+	public boolean getUserDetailsOnCourse(User user, String courseId) {
+		StoredProcedure storedProcedure = null;
+		try {
+			storedProcedure = new StoredProcedure("userByCourse(?,?)");
+			storedProcedure.setParameter(1, user.getBannerId());
+			storedProcedure.setParameter(2, courseId);
+			ResultSet results = storedProcedure.executeWithResults();
+			if (results != null) {
+				if (results.next()) {
+
+					return true;
+				}
+
+			}
+			storedProcedure.cleanup();
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return false;
+
+	}
+
+	@Override
+	public boolean enrollStudentForCourse(User user, String courseId) {
+
+		Boolean success = false;
+		StoredProcedure storedProcedure = null;
+		try {
+			storedProcedure = new StoredProcedure("spEnrollStudentForCourse(?, ?)");
+			storedProcedure.setParameter(1, user.getBannerId());
+			storedProcedure.setParameter(2, courseId);
+			storedProcedure.execute();
+			success = true;
+			storedProcedure.cleanup();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} 
+		return success;
 	}
 
 
