@@ -8,9 +8,11 @@
 <div id="heading-box" th:text="${course_name}">
     Course Page
 </div>
-<div class="entity">
-    <button type="submit" th:href="@{/logout}" value="Logout" name="Logout"></button>
-</div>
+<form th:action="@{/logout}"  method="post">
+    <div class="entity">
+        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+    </div>
+</form>
 <h3>Hello, <span th:text="${userId}"></span></h3>
 
 <form th:action="@{/courseadmin}" method="post">
