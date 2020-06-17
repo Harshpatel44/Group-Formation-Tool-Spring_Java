@@ -196,9 +196,9 @@ public class Injector {
 
 	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
 
-    public void setHomeRepository(IHomeRepository homeRepository){this.homeRepository = homeRepository;}
+    
 
     public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
 
-    public void setCourseRepository(ICourseRepository courseRepository){this.courseRepository = courseRepository;}
+    
 }

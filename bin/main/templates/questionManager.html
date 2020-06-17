@@ -48,10 +48,10 @@
 
 <ul class="functionalities-list">
     <li class="list">
-        <div class="function-heading">Assign teaching assistant</div>
+        <div class="function-heading">Question Manager</div>
         <form th:action="@{/questionList}" method="post">
             <input type="hidden" th:value="${userId}" name="userId" />
-            <input type="hidden" th:value="${courseId}" name="courseId" />
+<!--             <input type="hidden" th:value="${courseId}" name="courseId" /> -->
             <button type="submit" name="save" class="submit-button">Question list</button>
         </form>
         <form th:action="@{/addQuestion}" method="post">
