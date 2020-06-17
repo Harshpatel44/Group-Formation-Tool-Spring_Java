@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Home Page </title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+</head>
+<body>
+	<div id="heading-box">
+    GROUP FORMATION TOOL
+	</div>
+	    <h2>Hello,<span th:text="${userId}"/></h2>
+	<form th:action="@{/logout}"  method="post">
+		<div class="entity">
+			<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+		</div>
+	</form>
+	<ul class="functionalities-list">
+
+    <li id="home_li">
+	      <table  class="homepage_table" style="">
+	       
+		       <thead>
+	                    <tr>
+	                        <th>Course Id </th>
+	                        <th>Course Name</th>
+	                        <th>Role </th>
+	                        <th id="no_border">     </th>
+	                    </tr>
+	           </thead>
+	        
+	        
+		    	<tr>
+		    	     <tr th:each="course: ${courses}">
+	                        <td th:text="${course.courseId}" />
+	                        <td th:text="${course.courseName}" />
+	                        <td th:text="${course.role}" />
+	                        <td>
+	                            <form th:action="@{/course}" method="post" >
+	                                <input type="hidden"  th:value="${course.courseName}" name="courseName"/>
+	                                <input  type="hidden" th:value="${course.courseId}" name="courseId" />
+	                                <input  type="hidden" th:value="${course.role}" name="userType" />
+	                                <input  type="hidden" th:value="${userId}" name="userId" />
+	                                <button type="submit" class="submit-button" name="save" th:if="${checkRole}" > GOTO Course</button>
+	                            </form>
+	                        </td>
+	                   </tr> 
+		    		</tr>
+		    	
+	      </table>  
+	    </li>
+	   </ul>
+	   <div><form th:action="@{/logout}" method="post"> <button type ="submit" class="submit-button">Logout</button></form></div>
+	</body>
+</html> 

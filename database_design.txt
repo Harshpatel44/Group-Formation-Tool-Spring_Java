@@ -1,0 +1,20 @@
+Users
+bannerId, Password
+
+existing_info
+Id, name, email, position
+
+Course
+banner_id, subject _id,position
+
+Subject
+subject_id, subject name
+
+
+instructor having rights to change the course table
+Ful name instead of first name, last name
+how to detect the Id for instructors
+
+Existing tables:
+
+Instructors

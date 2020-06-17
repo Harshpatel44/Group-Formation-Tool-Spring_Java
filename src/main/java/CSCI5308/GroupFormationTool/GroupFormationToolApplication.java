@@ -9,7 +9,8 @@ public class GroupFormationToolApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(GroupFormationToolApplication.class, args);
-		System.out.print("HELLO!!!!");
+		System.out.print("Group Formation Tool started...");
+
 	}
 
 }

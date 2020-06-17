@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>Course Admin</title>
+<link rel="stylesheet" type="text/css" href="/css/admin.css" />
+
+</head>
+<body>
+	<div id="heading-box" th:text="${courseName}">
+	    Course Admin panel
+	</div>
+	<h3>
+		Hello, <span th:text="${userId}" />
+	</h3>
+	<div class="entity">
+		<button type="submit" th:href="@{/logout}" value="Logout" name="Logout"></button>
+	</div>
+<ul class="functionalities-list">
+	<li>
+		<div class="function-heading">Add students to course</div>
+		<form th:action="@{/course/uploadcsv}" method="post"
+			enctype="multipart/form-data">
+			
+			<input type="hidden" th:value="${courseName}" name="courseName" />
+			<input type="hidden" th:value="${userId}" name="userId" />
+			<input type="hidden" th:value="${courseId}" name="id"/>
+
+			<div class="entity">
+				<label>Select files</label>
+				<div id="uploadfile-block">
+					<input type="file"
+						name="file" style="display: inline-block;">
+				</div>
+			</div>
+			<div class="entity">
+				<input type="submit"
+					value="Add Students" class="submit-button">
+			</div>
+			
+
+
+		</form>
+	</li>
+	<li>
+		<div class="function-heading">Assign teaching assistant</div>
+		<form th:action="@{/addta}" method="post">
+			<input type="hidden" th:value="${courseName}" name="courseName" />
+			<input type="hidden" th:value="${userId}" name="userId" />
+			<input type="hidden" th:value="${courseId}" name="courseId" />
+			<div class="entity" style="margin-top: 10px">
+				<label>User id:</label>
+				<input type="text" th:value="${taId}" name="taId" />
+			</div>
+			<button type="submit" name="save" class="submit-button">Add TA</button>
+		</form>
+	</li>
+	<li style="text-align: center;">
+
+		<table>
+			<tr>
+				<div class="function-heading">Successful results</div>
+			</tr>
+			<tr th:each="user_success: ${success}">
+				<td th:text="*{user_success}"></td>
+		</table>
+
+
+		<table>
+			<tr>
+				<div class="function-heading">Failure results</div>
+			</tr>
+			<tr th:each="user_failure: ${failure}">
+				<td th:text="*{user_failure}"></td>
+		</table>
+	</li>
+	<span th:text="${result}" />
+</body>
+</html>

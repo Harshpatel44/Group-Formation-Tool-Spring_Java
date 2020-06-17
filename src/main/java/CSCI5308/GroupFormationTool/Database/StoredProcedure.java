@@ -20,6 +20,9 @@ public class StoredProcedure
 		createStatement();
 	}
 
+	public StoredProcedure(){
+
+	}
 	private void createStatement() throws SQLException
 	{
 		statement = connection.prepareCall("{call " + storedProcedureName + "}");
@@ -31,8 +34,9 @@ public class StoredProcedure
 		System.out.println(connection);
 	}
 
-	public void cleanup()
-	{
+	public void cleanup() throws SQLException {
+		connection.close();
+		System.out.println("Connection closed");
 		try
 		{
 			if (null != statement)
@@ -43,6 +47,7 @@ public class StoredProcedure
 			{
 				if (!connection.isClosed())
 				{
+					System.out.println("Connection closed");
 					connection.close();
 				}
 			}
@@ -56,8 +61,14 @@ public class StoredProcedure
 	public void setParameter(int paramIndex, String value) throws SQLException
 	{
 		statement.setString(paramIndex, value);
+
 	}
 
+	public void setParameter(String paramIndex, String value) throws SQLException
+	{
+		statement.setString(paramIndex, value);
+
+	}
 	public void registerOutputParameterString(int paramIndex) throws SQLException
 	{
 		statement.registerOutParameter(paramIndex, java.sql.Types.VARCHAR);
@@ -77,6 +88,7 @@ public class StoredProcedure
 	{
 		if (statement.execute())
 		{
+
 			return statement.getResultSet();
 		}
 		return null;
