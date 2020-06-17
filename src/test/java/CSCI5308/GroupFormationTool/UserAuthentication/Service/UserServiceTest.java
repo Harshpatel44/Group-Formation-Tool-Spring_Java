@@ -31,9 +31,11 @@ public class UserServiceTest {
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         userRepository = mock(UserRepository.class);
+        
 //        userService=mock(UserService.class);
 //        Injector.instance().setUserService(userService);
         Injector.instance().setUserRepository(userRepository);
+        
         UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
         
     }

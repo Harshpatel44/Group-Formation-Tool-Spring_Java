@@ -87,27 +87,7 @@ public class UserRepositoryTest {
 		assertEquals(false, userRepository.getUserByEmailId(user));
 	}
 
-	@Test
-	public void getEnrollCourse() {
-		User user = UserMockDB.setDefault();
-
-		userRepository = mock(UserRepository.class);
-
-		when(userRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(true);
-
-		assertEquals(true, userRepository.enrollStudentForCourse(user, "CSCI10"));
-	}
-
-	@Test
-	public void getEnrollCourseFails() {
-		User user = UserMockDB.setDefault();
-
-		userRepository = mock(UserRepository.class);
-
-		when(userRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(false);
-
-		assertEquals(false, userRepository.enrollStudentForCourse(user, "CSCI10"));
-	}
+	
 
 	@Test
 	public void getBannerIDs() {
@@ -130,16 +110,7 @@ public class UserRepositoryTest {
 		}, userRepository.getAllBannerIds());
 	}
 
-	@Test
-	public void getUserDetailsOnCourse() {
-		User user = UserMockDB.setDefault();
-
-		userRepository = mock(UserRepository.class);
-
-		when(userRepository.getUserDetailsOnCourse(user, "CSCI10")).thenReturn(false);
-
-		assertEquals(false, userRepository.getUserDetailsOnCourse(user, "CSCI10"));
-	}
+	
 	@Test
 	public void getUserPasswordPolicy() {
 		User user = UserMockDB.setDefault();

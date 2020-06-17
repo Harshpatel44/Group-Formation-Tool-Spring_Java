@@ -71,7 +71,7 @@ public class UserService implements IUserService {
 		if (user.getLastName() == null || user.getLastName().isEmpty()) {
 			errors.put("lastName", "last name cannot be null or empty");
 		}
-		if (user.getLastName() != null) {
+		if (user.getBannerId() != null) {
 			if (!user.getBannerId().isEmpty() && user.getBannerId().length() != 9) {
 				errors.put("bannerId", "BannerId length is should be equal to 9");
 			}

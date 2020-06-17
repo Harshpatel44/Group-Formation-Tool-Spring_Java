@@ -127,57 +127,6 @@ public class UserRepository implements IUserRepository {
 		return bannerIds;
 	}
 
-	@Override
-	public boolean getUserDetailsOnCourse(User user, String courseId) {
-		StoredProcedure storedProcedure = null;
-		try {
-			storedProcedure = new StoredProcedure("userByCourse(?,?)");
-			storedProcedure.setParameter(1, user.getBannerId());
-			storedProcedure.setParameter(2, courseId);
-			ResultSet results = storedProcedure.executeWithResults();
-			if (results != null) {
-				if (results.next()) {
-
-					return true;
-				}
-
-			}
-			storedProcedure.cleanup();
-
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} finally {
-			if (null != storedProcedure) {
-
-			}
-		}
-		return false;
-
-	}
-
-	@Override
-	public boolean enrollStudentForCourse(User user, String courseId) {
-
-		Boolean success = false;
-		StoredProcedure storedProcedure = null;
-		try {
-			storedProcedure = new StoredProcedure("spEnrollStudentForCourse(?, ?)");
-			storedProcedure.setParameter(1, user.getBannerId());
-			storedProcedure.setParameter(2, courseId);
-			storedProcedure.execute();
-			success = true;
-			storedProcedure.cleanup();
-		} catch (SQLException e) {
-
-			e.printStackTrace();
-		} finally {
-			if (null != storedProcedure) {
-
-			}
-		}
-		return success;
-	}
 
 	@Override
 	public User loadUserByID(String BannerId) {

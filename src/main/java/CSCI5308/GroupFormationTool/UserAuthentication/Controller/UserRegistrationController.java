@@ -16,8 +16,6 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-
-
 @Controller
 public class UserRegistrationController implements WebMvcConfigurer {
 
@@ -29,36 +27,35 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	}
 
 	@PostMapping("/register")
-	public ModelAndView createUser(User user,BindingResult bindingResult) {
+	public ModelAndView createUser(User user, BindingResult bindingResult) {
 		userService = Injector.instance().getUserService();
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("passwordPolicy",UserPasswordPolicy.getInstance());
+		mv.addObject("passwordPolicy", UserPasswordPolicy.getInstance());
 		try {
-			if(bindingResult.hasErrors()) {
-				
+			if (bindingResult.hasErrors()) {
+
 				mv.setViewName("signup");
 				return mv;
 			}
 
-
-			if(userService.createUser(user)) {
+			if (userService.createUser(user)) {
 				mv.setViewName("redirect:/login");
 				return mv;
 			}
 
-		}
-		catch (ServiceLayerException e) {
-			
-			if(e.getMapErrors().get("confirmPassword").split(";;").length >0)
-			{
-				String errorPassowrd = e.getMapErrors().get("confirmPassword");
-				mv.addObject("unfollowedPolicy",errorPassowrd.split(";;"));
-				System.out.print(errorPassowrd);
-				
+		} catch (ServiceLayerException e) {
+			if (e.getMapErrors().containsKey("confirmPassword")) {
+				if (e.getMapErrors().get("confirmPassword").split(";;").length > 0) {
+					String errorPassowrd = e.getMapErrors().get("confirmPassword");
+					mv.addObject("unfollowedPolicy", errorPassowrd.split(";;"));
+					System.out.print(errorPassowrd);
+
+				}
 			}
 			ErrorHelper.rejectErrors(bindingResult, e.getMapErrors());
 			mv.setViewName("signup");
 			return mv;
+
 		}
 		mv.setViewName("signup");
 		return mv;

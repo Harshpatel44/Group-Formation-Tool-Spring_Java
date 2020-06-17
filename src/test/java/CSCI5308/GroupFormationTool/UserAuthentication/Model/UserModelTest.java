@@ -42,7 +42,7 @@ public class UserModelTest {
 	@Test
 	void getUserPassword() {
 		User user = UserMockDB.setDefault();
-		assertEquals("qwerty12345", user.getPassword());
+		assertEquals("Qwerty12345!", user.getPassword());
 		
 	}
 	
@@ -50,7 +50,7 @@ public class UserModelTest {
 	void getContactNumber() {
 		User user = UserMockDB.setDefault();
 
-		assertEquals("978780", user.getContactNumber());
+		assertEquals("9787809082", user.getContactNumber());
 	}
 	
 	@Test
