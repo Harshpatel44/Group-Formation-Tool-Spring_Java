@@ -212,3 +212,7 @@ th{
 .options-ul{
     margin-top: 10px;
 }
+
+.create-question-inputs{
+    width:600px;
+}
