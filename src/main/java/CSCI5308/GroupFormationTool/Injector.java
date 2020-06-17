@@ -128,4 +128,12 @@ public class Injector {
 		return loginRepository;
 	}
 
+	public void setLoginRepository(ILoginRepository loginRepository) {
+		this.loginRepository = loginRepository;
+	}
+
+	public void setLoginService(ILoginService loginService) {
+		this.loginService = loginService;
+	}
+
 }

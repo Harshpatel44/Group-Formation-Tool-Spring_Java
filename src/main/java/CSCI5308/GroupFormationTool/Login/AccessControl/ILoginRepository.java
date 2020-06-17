@@ -7,5 +7,6 @@ public interface ILoginRepository {
     public boolean insertToForgetPassword(String bannerid, String passKey);
     public String getBannerIdByPassKey(String passKey);
     public boolean updatePassword(String bannerid,String newPassword);
+    public String getPasswordByBannerId(String bannerid);
 
 }

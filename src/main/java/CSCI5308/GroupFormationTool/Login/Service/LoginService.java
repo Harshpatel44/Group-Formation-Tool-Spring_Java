@@ -10,29 +10,32 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.validation.constraints.NotNull;
 import java.util.Properties;
 
 public class LoginService implements ILoginService {
-	
-	private ILoginRepository repo;
-	private IEmailConfiguration emailConfiguration;
-    public boolean checkLogin(String bannerid, String password)
-    {
-    	
-    	repo = Injector.instance().getLoginRepository();
-        return repo.checkLogin(bannerid,password);
+
+    public LoginService(){}
+
+    public LoginService(LoginRepository loginRepository) throws Exception{
+        Injector.instance().setLoginRepository(loginRepository);
+    }
+
+    private IEmailConfiguration emailConfiguration;
+
+    public boolean checkLogin(String bannerid, String password) {
+        return Injector.instance().getLoginRepository().checkLogin(bannerid,password);
     }
 
     @Override
     public boolean isUser(String bannerid) {
-        repo = Injector.instance().getLoginRepository();
-        return repo.isUser(bannerid);
+        return Injector.instance().getLoginRepository().isUser(bannerid);
     }
 
     @Override
     public String getEmailByBannerid(String bannerid) {
-        repo = Injector.instance().getLoginRepository();
-        return repo.getEmailByBannerid(bannerid);
+        return Injector.instance().getLoginRepository().getEmailByBannerid(bannerid);
+
     }
 
     @Override
@@ -58,12 +61,13 @@ public class LoginService implements ILoginService {
             MimeMessage msg = emailConfiguration.getMessageCredentials();
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             msg.setSubject("Password Reset Link");
-            resetLink ="https://group9-develop.herokuapp.com/updateNewPassword?passKey="+passKey;
+            resetLink ="http://localhost:8080/updateNewPassword?passKey="+passKey;
+
+//            resetLink ="https://group9-develop.herokuapp.com/updateNewPassword?passKey="+passKey;
             msg.setContent(resetLink, "text/html");
             Transport.send(msg);
         }
-        catch (MessagingException e)
-        {
+        catch (MessagingException e) {
             e.printStackTrace();
         }
         return true;
@@ -72,12 +76,12 @@ public class LoginService implements ILoginService {
     @Override
     public boolean insertToForgetPassword(String bannerid, String passKey)
     {
-        repo = Injector.instance().getLoginRepository();
-        return repo.insertToForgetPassword(bannerid,passKey);
+        return Injector.instance().getLoginRepository().insertToForgetPassword(bannerid,passKey);
+
     }
 
     @Override
-    public boolean comparePassword(String newPassword, String confirmPassword) {
+    public boolean comparePassword(@NotNull String newPassword, String confirmPassword) {
         if(newPassword.equals(confirmPassword))
         {
             return true;
@@ -90,14 +94,17 @@ public class LoginService implements ILoginService {
 
     @Override
     public String getBannerIdByPassKey(String passKey) {
-        repo = Injector.instance().getLoginRepository();
-        return repo.getBannerIdByPassKey(passKey);
+        return Injector.instance().getLoginRepository().getBannerIdByPassKey(passKey);
     }
 
     @Override
     public boolean updatePassword(String bannerid, String newPassword) {
-        repo = Injector.instance().getLoginRepository();
         BCryptEncryption encryption = new BCryptEncryption();
-        return repo.updatePassword(bannerid,encryption.encoder(newPassword));
+        return Injector.instance().getLoginRepository().updatePassword(bannerid,encryption.encoder(newPassword));
+    }
+
+    @Override
+    public String getPasswordByBannerId(String bannerid) {
+        return Injector.instance().getLoginRepository().getPasswordByBannerId(bannerid);
     }
 }

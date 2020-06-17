@@ -12,4 +12,5 @@ public interface ILoginService {
     public boolean comparePassword(String newPassword,String confirmPassword);
     public String getBannerIdByPassKey(String passKey);
     public boolean updatePassword(String bannerid, String password);
+    public String getPasswordByBannerId(String bannerid);
 }
