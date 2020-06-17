@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class LoginController implements ILoginController {
@@ -57,7 +59,7 @@ public class LoginController implements ILoginController {
 		boolean matchPassword;
 		boolean update;
 		String bannerid;
-		String oldPassword;
+		List<String> oldPasswords;
 		service = Injector.instance().getLoginService();
 		BCryptEncryption encryption = new BCryptEncryption();
 
@@ -68,12 +70,15 @@ public class LoginController implements ILoginController {
 			return "newPassword";
 		}
 		bannerid = service.getBannerIdByPassKey(passKey);
-		oldPassword = service.getPasswordByBannerId(bannerid);
+		oldPasswords = service.getPasswordByBannerId(bannerid);
 
-		if(encryption.passwordMatch(newPassword,oldPassword))
+		for(String password : oldPasswords)
 		{
-			model.addAttribute("Error","New password cannot be same as the old password");
-			return "newPassword";
+			if(encryption.passwordMatch(newPassword,password))
+			{
+				model.addAttribute("Error","New password cannot be same as the old password");
+				return "newPassword";
+			}
 		}
 
 		update = service.updatePassword(bannerid, newPassword);

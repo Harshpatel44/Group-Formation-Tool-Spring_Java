@@ -2,6 +2,9 @@ package CSCI5308.GroupFormationTool.Login.Repository;
 
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MockLoginRepository implements ILoginRepository {
 
 
@@ -63,9 +66,11 @@ public class MockLoginRepository implements ILoginRepository {
     }
 
     @Override
-    public String getPasswordByBannerId(String bannerid) {
+    public List<String> getPasswordByBannerId(String bannerid) {
+        List<String> password = new ArrayList<>();
+        password.add("password");
         if(bannerid.equals("B00835088")){
-            return "password";
+            return password;
         }
         return null;
     }

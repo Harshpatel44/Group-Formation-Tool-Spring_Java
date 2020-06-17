@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.Login.Repository;
 
 import CSCI5308.GroupFormationTool.Database.ConnectionManager;
-import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
@@ -9,6 +8,8 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginRepository implements ILoginRepository {
 
@@ -114,15 +115,17 @@ public class LoginRepository implements ILoginRepository {
     }
 
     @Override
-    public String getPasswordByBannerId(String bannerid) {
-        String password = new String();
+    public List<String> getPasswordByBannerId(String bannerid) {
+        List<String> passwords = new ArrayList<String>();
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
             CallableStatement st = connection.prepareCall("{CALL GetPasswordByBannerID(?)}");
             st.setString(1,bannerid);
             ResultSet result = st.executeQuery();
-            result.next();
-            password = result.getString(1);
+            while (result.next())
+            {
+                passwords.add(result.getString(1));
+            }
             st.close();
             connection.close();
         }
@@ -131,7 +134,7 @@ public class LoginRepository implements ILoginRepository {
             e.printStackTrace();
             return null;
         }
-        return password;
+        return passwords;
     }
 
     @Override

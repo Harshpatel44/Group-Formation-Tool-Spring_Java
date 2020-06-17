@@ -11,6 +11,7 @@ import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.Properties;
 
 public class LoginService implements ILoginService {
@@ -104,7 +105,7 @@ public class LoginService implements ILoginService {
     }
 
     @Override
-    public String getPasswordByBannerId(String bannerid) {
+    public List<String> getPasswordByBannerId(String bannerid) {
         return Injector.instance().getLoginRepository().getPasswordByBannerId(bannerid);
     }
 }

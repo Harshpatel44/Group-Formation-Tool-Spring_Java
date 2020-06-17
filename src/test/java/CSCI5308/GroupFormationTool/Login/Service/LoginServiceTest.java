@@ -6,6 +6,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -64,25 +68,27 @@ class LoginServiceTest {
 
     @Test
     void getPasswordByBannerId() {
-        when(loginRepository.getPasswordByBannerId("B00835088")).thenReturn("password");
-        assertEquals("password",loginService.getPasswordByBannerId("B00835088"));
+        List<String> password = new ArrayList<>();
+        password.add("password");
+        when(loginRepository.getPasswordByBannerId("B00835088")).thenReturn(password);
+        assertEquals(password,loginService.getPasswordByBannerId("B00835088"));
     }
 
 
     @Test
     void comparePassword() {
         String newPassword="abc";
-        String consfirmPassword="abc";
-        assertTrue(loginService.comparePassword(newPassword,consfirmPassword));
+        String confirmPassword="abc";
+        assertTrue(loginService.comparePassword(newPassword,confirmPassword));
 
         String newPassword2="abc";
-        String consfirmPassword2="def";
-        assertFalse(loginService.comparePassword(newPassword2,consfirmPassword2));
+        String confirmPassword2="def";
+        assertFalse(loginService.comparePassword(newPassword2,confirmPassword2));
     }
 
     @Test
     void sendMail() {
-        assertTrue(loginService.sendMail("rutikapatel09@dal.com","passkey"));
+        assertTrue(loginService.sendMail("rutikapatel09@dal.ca","passkey"));
     }
 
     @Test
