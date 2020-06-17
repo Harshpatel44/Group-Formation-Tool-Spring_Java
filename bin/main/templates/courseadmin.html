@@ -13,9 +13,11 @@
 	<h3>
 		Hello, <span th:text="${userId}" />
 	</h3>
-	<div class="entity">
-		<button type="submit" th:href="@{/logout}" value="Logout" name="Logout"></button>
-	</div>
+	<form th:action="@{/logout}"  method="post">
+		<div class="entity">
+			<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+		</div>
+	</form>
 <ul class="functionalities-list">
 	<li>
 		<div class="function-heading">Add students to course</div>
