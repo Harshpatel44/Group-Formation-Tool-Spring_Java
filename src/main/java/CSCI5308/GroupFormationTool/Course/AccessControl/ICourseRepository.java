@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.Course.AccessControl;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 
 public interface ICourseRepository {
-	String checkRole(String userId, String courseId);
 
     String addTa(String taId, String courseId);
     public boolean getUserDetailsOnCourse(User user, String courseId);

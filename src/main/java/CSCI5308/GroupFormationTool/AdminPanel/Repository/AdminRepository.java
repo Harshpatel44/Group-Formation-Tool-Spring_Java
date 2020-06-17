@@ -17,6 +17,7 @@ public class AdminRepository implements IAdminRepository {
 
     @Override
     public boolean createCourseRepo(CreateCourse createCourse) throws SQLException {
+        System.out.println("inside");
         try {
             StoredProcedure storedProcedure = new StoredProcedure("CreateCourse(?,?)");
             System.out.println(storedProcedure);

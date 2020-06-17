@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Admin</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+
+</head>
+<body>
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div th:text="${courseId}">
+                Course Admin panel
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, <span th:text="${userId}" />
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/course}" method="post">
+                    <div class="entity">
+                        <button type="submit" name="CourseHome" class="submit-button">Course Home</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
+                    <div class="entity">
+                        <button type="submit" name="courseAdmin" class="submit-button">Course Admin</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<ul class="functionalities-list">
+    <li class="list">
+        <div class="function-heading">Assign teaching assistant</div>
+        <form th:action="@{/questionList}" method="post">
+            <input type="hidden" th:value="${userId}" name="userId" />
+            <input type="hidden" th:value="${courseId}" name="courseId" />
+            <button type="submit" name="save" class="submit-button">Question list</button>
+        </form>
+        <form th:action="@{/addQuestion}" method="post">
+            <input type="hidden" th:value="${userId}" name="userId" />
+            <input type="hidden" th:value="${courseId}" name="courseId" />
+            <button type="submit" name="save" class="submit-button">Add Question</button>
+        </form>
+
+    </li>
+
+</body>
+</html>

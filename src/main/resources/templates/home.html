@@ -5,18 +5,37 @@
     <link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
-	<div id="heading-box">
-    GROUP FORMATION TOOL
-	</div>
-	    <h2>Hello,<span th:text="${userId}"/></h2>
-	<form th:action="@{/logout}"  method="post">
-		<div class="entity">
-			<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-		</div>
-	</form>
-	<ul class="functionalities-list">
+<div>
+	<ul id="heading-box">
+		<li style="margin:auto;">
+			<div>
+				Group Formation Tool
+			</div>
+		</li>
+	</ul>
+</div>
 
-    <li id="home_li">
+<div>
+	<ul id="heading-box2">
+		<li>
+			<div>
+				Hello, <span th:text="${userId}" />
+			</div>
+		</li>
+		<li>
+			<div class="nav-bar">
+				<form class="nav-bar-element" th:action="@{/logout}" method="post">
+					<div class="entity">
+						<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+					</div>
+				</form>
+			</div>
+		</li>
+	</ul>
+</div>
+
+<ul class="functionalities-list">
+    <li id="home_li"class="list">
 	      <table  class="homepage_table" style="">
 	       
 		       <thead>
@@ -45,10 +64,8 @@
 	                        </td>
 	                   </tr> 
 		    		</tr>
-		    	
 	      </table>  
 	    </li>
 	   </ul>
-	   <div><form th:action="@{/logout}" method="post"> <button type ="submit" class="submit-button">Logout</button></form></div>
 	</body>
 </html> 

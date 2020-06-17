@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-	<meta charset="UTF-8">
-	<title>Login</title>
-	 <link rel="stylesheet" type="text/css" href="/css/admin.css" /> 
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
-<div id="heading-box">
-    Group formation tool 
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div>
+                Group Formation Tool
+            </div>
+        </li>
+    </ul>
 </div>
+
 <ul class="functionalities-list">
-	   <li>
+    <li class="list">
         <div class="function-heading">Login</div>
         <form th:action ="@{/login}" th:object = "${loginUser}" method="post">
             <div class="entity">
@@ -22,23 +29,20 @@
                 <input type="password" id="password" name="password" autofocus="autofocus" required>
             </div>
             <div class="login-cancel-box">
-	            <input class="submit-button2" type="submit" value="Login"/>
-	            <a th:href="home"><input type="button" class="submit-button2" value="Cancel"/></a>
-	        </div>
+                <input class="submit-button2" type="submit" value="Login"/>
+                <a th:href="home"><input type="button" class="submit-button2" value="Cancel"/></a>
+            </div>
             <div class="entity" id="forget_password_div">
-				<a th:href="resetPassword">Forget Password?</a>
-			</div>
-			<div class="entity" id="register_div">
-				<a th:href="register">Not a User? Register Here</a>
-			</div>
-			<!-- <div class="entity" id="status_message">
-				<span class="message" th:text="${Error}" id="errorMsg"></span>
-			</div> -->
+                <a th:href="resetPassword">Forget Password?</a>
+            </div>
+            <div class="entity" id="register_div">
+                <a th:href="register">Not a User? Register Here</a>
+            </div>
         </form>
     </li>
     <h3>
-		<p th:if="${param.error}" id="errorMsg"> Invalid Username or Password</p>
-	</h3>
+        <p th:if="${param.error}" id="errorMsg"> Invalid Username or Password</p>
+    </h3>
 </ul>
 </div>
 <footer>Dalhousie University</footer>

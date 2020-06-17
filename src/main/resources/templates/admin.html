@@ -10,17 +10,38 @@
 </head>
 <body>
 
-<div id="heading-box">
-    Admin Panel
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div>
+                Course Admin panel
+            </div>
+        </li>
+    </ul>
 </div>
-<form th:action="@{/logout}"  method="post">
-    <div class="entity">
-        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-    </div>
-</form>
+
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, Administrator
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
 <ul class="functionalities-list">
 
-    <li>
+    <li class="list">
         <div class="function-heading">Create course</div>
         <form action="" th:object="${createCourse}" th:action="@{/createCourse}" method="post">
             <div class="entity">
@@ -36,7 +57,7 @@
         </form>
     </li>
 
-    <li>
+    <li class="list">
         <div class="function-heading">Delete course</div>
         <form action="" th:object="${deleteCourse}" th:action="@{/deleteCourse}" method="post">
             <div class="entity">
@@ -55,7 +76,7 @@
         </form>
     </li>
 
-    <li>
+    <li class="list">
         <div class="function-heading">Assign instructor</div>
         <form action="" th:object="${assignInstructor}" th:action="@{/assignInstructor}" method="post">
             <div class="entity">
@@ -77,6 +98,6 @@
     </li>
 
 </ul>
-<div><form th:action="@{/logout}" method="post"> <button type ="submit" class="submit-button">Logout</button></form></div>
+
 </body>
 </html>

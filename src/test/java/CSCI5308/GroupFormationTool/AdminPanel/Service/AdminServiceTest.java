@@ -23,14 +23,9 @@ import static org.mockito.Mockito.when;
 
 class AdminServiceTest {
 
-//    @Mock
-//    AdminRepository adminRepository;
-//
-//    @InjectMocks
-//    AdminService adminService = new AdminService();
-
     public AdminRepository adminRepository;
     public AdminService adminService;
+
     @BeforeEach
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
