@@ -50,7 +50,7 @@ public class UserModelTest {
 	void getContactNumber() {
 		User user = UserMockDB.setDefault();
 
-		assertEquals(978780, user.getContactNumber());
+		assertEquals("978780", user.getContactNumber());
 	}
 	
 	@Test
@@ -108,7 +108,7 @@ public class UserModelTest {
 		User user = new User();
 		assertNull(user.getContactNumber());
 
-		user.setContactNumber(1234567890);
-		assertEquals(1234567890, user.getContactNumber());
+		user.setContactNumber("1234567890");
+		assertEquals("1234567890", user.getContactNumber());
 	}
 }

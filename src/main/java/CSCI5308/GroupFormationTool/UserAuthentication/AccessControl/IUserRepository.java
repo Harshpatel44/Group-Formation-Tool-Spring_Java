@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.UserAuthentication.AccessControl;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
 
 public interface IUserRepository {
 
@@ -13,5 +14,6 @@ public interface IUserRepository {
     public boolean enrollStudentForCourse(User user,String courseId);
     public List<String> getAllBannerIds();
     public User loadUserByID(String bannerId);
+    public UserPasswordPolicy getUserPasswordPolicy();
 
 }

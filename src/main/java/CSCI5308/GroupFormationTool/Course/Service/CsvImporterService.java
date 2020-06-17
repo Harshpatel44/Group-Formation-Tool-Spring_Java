@@ -67,7 +67,7 @@ public class CsvImporterService implements ICsvImporter{
 		List<User> successfullUsers = new ArrayList<User>(); 
 		encryptor = Injector.instance().getPasswordEncryptor();
 		userNotification = Injector.instance().getUserNotification();
-		User user = new User(record[0],record[1],record[2],record[3],encryptor.encoder(record[0]),Integer.parseInt(record[4]));
+		User user = new User(record[0],record[1],record[2],record[3],encryptor.encoder(record[0]),record[4]);
 		if(!bannerIds.contains(user.getBannerId())){
 			
 			boolean success = userRepository.createUser(user);

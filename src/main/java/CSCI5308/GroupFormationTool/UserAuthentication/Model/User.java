@@ -21,7 +21,7 @@ public class User {
 
 	private String confirmPassword;
 
-	private Integer contactNumber;
+	private String contactNumber;
 
 
 
@@ -73,17 +73,17 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public Integer getContactNumber() {
+	public String getContactNumber() {
 		return contactNumber;
 	}
 
-	public void setContactNumber(Integer contactNumber) {
+	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
 		
 
 	public User() {}
-	public User(String bannerId,String firstName,String lastName,String emailId,String password,Integer contactNumber)
+	public User(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber)
 	{
 		this.bannerId = bannerId;
 		this.firstName = firstName;

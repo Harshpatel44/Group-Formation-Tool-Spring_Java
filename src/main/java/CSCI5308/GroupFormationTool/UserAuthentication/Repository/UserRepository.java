@@ -3,6 +3,8 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Repository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
+
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -153,7 +155,6 @@ public class UserRepository implements IUserRepository {
 		return false;
 
 	}
-	
 
 	@Override
 	public boolean enrollStudentForCourse(User user, String courseId) {
@@ -195,7 +196,7 @@ public class UserRepository implements IUserRepository {
 					String firstName = results.getString(3);
 					String lastName = results.getString(4);
 					String email = results.getString(5);
-					Integer contactNo = results.getInt(6);
+					String contactNo = results.getString(6);
 					user = new User() {
 						{
 							setFirstName(firstName);
@@ -204,22 +205,49 @@ public class UserRepository implements IUserRepository {
 							setContactNumber(contactNo);
 							setBannerId(bannerID);
 							setPassword(password);
-							
+
 						}
 					};
 
 				}
-			proc.cleanup();
+				proc.cleanup();
 			}
 		} catch (SQLException e) {
 
 		} finally {
 			if (null != proc) {
-				
+
 			}
 
 		}
 		return user;
+	}
+
+	@Override
+	public UserPasswordPolicy getUserPasswordPolicy() {
+		StoredProcedure proc = null;
+		UserPasswordPolicy passwordPolicy = null;
+		try {
+			proc = new StoredProcedure("spGetPasswordPolicy()");
+			ResultSet results = proc.executeWithResults();
+			if (null != results) {
+				while (results.next()) {
+
+					Integer minLength = results.getInt(1);
+					Integer maxLength = results.getInt(2);
+					Integer minUpperCaseLetter = results.getInt(3);
+					Integer minLowerCaseLetter = results.getInt(4);
+					Integer minNoOfSymbols = results.getInt(5);
+					String notAllowedCharacters = results.getString(6);
+					
+					passwordPolicy = UserPasswordPolicy.setInstance(minLength, maxLength, minUpperCaseLetter, minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
+					proc.cleanup();
+				}
+			}
+		} catch (SQLException e) {
+
+		};
+		return passwordPolicy;
 	}
 
 }
