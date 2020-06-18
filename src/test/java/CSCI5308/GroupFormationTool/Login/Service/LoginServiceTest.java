@@ -1,13 +1,11 @@
 package CSCI5308.GroupFormationTool.Login.Service;
 
 import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
-import CSCI5308.GroupFormationTool.Login.Repository.MockLoginRepository;
-import org.assertj.core.api.Assert;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
