@@ -21,9 +21,9 @@ import java.util.Dictionary;
 import java.util.Hashtable;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
+
 //Dhruvesh Patel
 @SpringBootTest
 public class CourseServiceTest {
