@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Service;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserService;
+import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
@@ -24,8 +25,7 @@ public class UserService implements IUserService {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor encryptor;
 	private Matcher matcher;
-	private static final String EMAIL_PATTERN = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	@Override
 	public boolean createUser(User user) throws ServiceLayerException {

@@ -6,6 +6,7 @@ import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
+import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
 
 public class EmailConfiguration implements IEmailConfiguration {
@@ -23,7 +24,7 @@ public class EmailConfiguration implements IEmailConfiguration {
 		
 		session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
-				return new PasswordAuthentication("sdcmaster09@gmail.com","sdc.master"); 
+				return new PasswordAuthentication(ApplicationConstants.emailSender,ApplicationConstants.emailSenderPassword); 
 			}
 		});
 		

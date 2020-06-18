@@ -1,13 +1,14 @@
 package CSCI5308.GroupFormationTool.Database;
 
+import CSCI5308.GroupFormationTool.ApplicationConstants;
+
 public class DBConfiguration implements IDBConfiguration {
 
-	private static final String URL = "jdbc:mysql://db-5308.cs.dal.ca:3306/CSCI5308_9_DEVINT?useSSL=false&serverTimezone=UTC";
+	private static final String URL = ApplicationConstants.applicationUrl;
 
-	private static final String USER = "CSCI5308_9_DEVINT_USER";
-//	private static final String USER = "root";
-	private static final String PASSWORD = "CSCI5308_9_DEVINT_9017";
-//	private static final String PASSWORD = "H@rsh7797sql";
+	private static final String USER = ApplicationConstants.dbUser;
+
+	private static final String PASSWORD = ApplicationConstants.dbPassword;
 
 	@Override
 	public String getDBUserName() {

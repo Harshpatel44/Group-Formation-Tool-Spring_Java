@@ -7,6 +7,7 @@ import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
@@ -36,7 +37,7 @@ public class UserNotification implements IUserNotification {
             MimeMessage msg = Injector.instance().getEmailConfiguration().getMessageCredentials();
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
             msg.setSubject("Password Reset Link");
-            resetLink ="https://group9-develop.herokuapp.com/updateNewPassword?passKey="+passKey;
+            resetLink = ApplicationConstants.restLink + ApplicationConstants.updatePasswordLink +passKey;
             msg.setContent(resetLink, "text/html");
             Transport.send(msg);
         }

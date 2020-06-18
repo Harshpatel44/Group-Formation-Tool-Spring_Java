@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Login.Service;
 
+import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
@@ -36,7 +37,7 @@ public class LoginService implements ILoginService {
 	@Override
 	public String generatePassKey() {
 		// Code taken from geeksforgeeks
-		String AlphaNumericString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
+		String AlphaNumericString = ApplicationConstants.randomKeyForLink;
 
 		StringBuilder sb = new StringBuilder(10);
 		for (int i = 0; i < 10; i++) {
