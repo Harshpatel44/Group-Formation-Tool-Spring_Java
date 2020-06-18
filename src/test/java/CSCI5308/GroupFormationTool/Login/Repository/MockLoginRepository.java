@@ -57,6 +57,11 @@ public class MockLoginRepository implements ILoginRepository {
     }
 
     @Override
+    public int getPasswordPolicyNumber() {
+        return 3;
+    }
+
+    @Override
     public boolean updatePassword(String bannerid, String newPassword) {
         if(bannerid.equals("B00123456") && newPassword.equals("12345"))
         {
@@ -66,7 +71,7 @@ public class MockLoginRepository implements ILoginRepository {
     }
 
     @Override
-    public List<String> getPasswordByBannerId(String bannerid) {
+    public List<String> getPasswordByBannerId(String bannerid, int passNumber) {
         List<String> password = new ArrayList<>();
         password.add("password");
         if(bannerid.equals("B00835088")){
@@ -74,4 +79,5 @@ public class MockLoginRepository implements ILoginRepository {
         }
         return null;
     }
+
 }

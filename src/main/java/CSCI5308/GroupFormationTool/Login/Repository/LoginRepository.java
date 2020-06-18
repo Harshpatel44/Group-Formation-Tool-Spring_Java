@@ -115,12 +115,33 @@ public class LoginRepository implements ILoginRepository {
     }
 
     @Override
-    public List<String> getPasswordByBannerId(String bannerid) {
+    public int getPasswordPolicyNumber() {
+        int passNumber=0;
+        try {
+            Connection connection = ConnectionManager.instance().getDBConnection();
+            CallableStatement st = connection.prepareCall("{CALL GetPasswordPolicyNumber()}");
+            ResultSet result = st.executeQuery();
+            result.next();
+            passNumber =result.getInt(1);
+            st.close();
+            connection.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return 0;
+        }
+        return passNumber;
+    }
+
+    @Override
+    public List<String> getPasswordByBannerId(String bannerid, int passNumber) {
         List<String> passwords = new ArrayList<String>();
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
-            CallableStatement st = connection.prepareCall("{CALL GetPasswordByBannerID(?)}");
+            CallableStatement st = connection.prepareCall("{CALL GetPasswordByBannerID(?,?)}");
             st.setString(1,bannerid);
+            st.setString(2, String.valueOf(passNumber));
             ResultSet result = st.executeQuery();
             while (result.next())
             {

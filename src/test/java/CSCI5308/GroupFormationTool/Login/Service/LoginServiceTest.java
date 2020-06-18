@@ -70,8 +70,8 @@ class LoginServiceTest {
         List<String> password = new ArrayList<>();
         password.add("passwordValue");
         password.add("passwordValue2");
-        when(loginRepository.getPasswordByBannerId("B00835088")).thenReturn(password);
-        assertEquals(password,loginService.getPasswordByBannerId("B00835088"));
+        when(loginRepository.getPasswordByBannerId("B00835088",3)).thenReturn(password);
+        assertEquals(password,loginService.getPasswordByBannerId("B00835088",3));
     }
 
 
@@ -91,5 +91,11 @@ class LoginServiceTest {
     @Test
     void updatePassword() {
         assertFalse(loginService.updatePassword("B00835088","123456"));
+    }
+
+    @Test
+    void getPasswordPolicyNumber() {
+        when(loginRepository.getPasswordPolicyNumber()).thenReturn(3);
+        assertEquals(3,loginService.getPasswordPolicyNumber());
     }
 }
