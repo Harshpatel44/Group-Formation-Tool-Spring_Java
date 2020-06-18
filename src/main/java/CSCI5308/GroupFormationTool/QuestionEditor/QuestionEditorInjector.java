@@ -10,23 +10,33 @@ import CSCI5308.GroupFormationTool.AdminPanel.Service.AdminService;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorController;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorRepository;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorService;
+import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IRankFunctionsService;
 import CSCI5308.GroupFormationTool.QuestionEditor.Controller.QuestionEditorController;
 import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.Repository.QuestionEditorRepository;
 import CSCI5308.GroupFormationTool.QuestionEditor.Service.QuestionEditorService;
+import CSCI5308.GroupFormationTool.QuestionEditor.Service.RankFunctionsService;
 
 public class QuestionEditorInjector {
     private static QuestionEditorInjector instance = null;
     private IQuestionEditorController questionEditorController;
     private IQuestionEditorService questionEditorService;
     private IQuestionEditorRepository questionEditorRepository;
-    private QuestionModel questionModel;
+    private IRankFunctionsService rankFunctionsService;
+
+    public IRankFunctionsService getRankFunctionsService() {
+        return rankFunctionsService;
+    }
+
+    public void setRankFunctionsService(IRankFunctionsService rankFunctionsService) {
+        this.rankFunctionsService = rankFunctionsService;
+    }
 
     private QuestionEditorInjector() throws Exception {
         questionEditorController = new QuestionEditorController();
         questionEditorService = new QuestionEditorService();
         questionEditorRepository = new QuestionEditorRepository();
-        questionModel = new QuestionModel();
+        rankFunctionsService = new RankFunctionsService();
     }
 
     public static QuestionEditorInjector instance() throws Exception {
@@ -40,13 +50,6 @@ public class QuestionEditorInjector {
         return questionEditorController;
     }
 
-    public QuestionModel getQuestionModel() {
-        return questionModel;
-    }
-
-    public void setQuestionModel(QuestionModel questionModel) {
-        this.questionModel = questionModel;
-    }
 
     public void setQuestionEditorController(IQuestionEditorController questionEditorController) {
         this.questionEditorController = questionEditorController;
