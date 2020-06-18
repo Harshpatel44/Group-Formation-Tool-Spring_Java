@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.Login.Repository;
 
 import CSCI5308.GroupFormationTool.Database.ConnectionManager;
-import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
@@ -9,12 +8,15 @@ import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class LoginRepository implements ILoginRepository {
 
     @Override
     public boolean checkLogin(String bannerid, String password)
     {
+        System.out.println("inside");
         boolean isValid = false;
         String encryptedPassword = "";
         try
@@ -41,6 +43,7 @@ public class LoginRepository implements ILoginRepository {
                 isValid = false;
             }
             connection.close();
+
         }
         catch (SQLException e)
         {
@@ -51,6 +54,7 @@ public class LoginRepository implements ILoginRepository {
 
     @Override
     public boolean isUser(String bannerid) {
+        System.out.println("inside");
         boolean isUser = false;
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
@@ -94,6 +98,7 @@ public class LoginRepository implements ILoginRepository {
 
     @Override
     public boolean updatePassword(String bannerid, String newPassword) {
+        System.out.print("inside update password");
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
             CallableStatement st = connection.prepareCall("{CALL updatePassword(?,?)}");
@@ -107,6 +112,29 @@ public class LoginRepository implements ILoginRepository {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public List<String> getPasswordByBannerId(String bannerid) {
+        List<String> passwords = new ArrayList<String>();
+        try {
+            Connection connection = ConnectionManager.instance().getDBConnection();
+            CallableStatement st = connection.prepareCall("{CALL GetPasswordByBannerID(?)}");
+            st.setString(1,bannerid);
+            ResultSet result = st.executeQuery();
+            while (result.next())
+            {
+                passwords.add(result.getString(1));
+            }
+            st.close();
+            connection.close();
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        return passwords;
     }
 
     @Override

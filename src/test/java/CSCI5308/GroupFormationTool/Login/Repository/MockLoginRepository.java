@@ -2,7 +2,11 @@ package CSCI5308.GroupFormationTool.Login.Repository;
 
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MockLoginRepository implements ILoginRepository {
+
 
     @Override
     public boolean checkLogin(String bannerid, String password)
@@ -35,11 +39,11 @@ public class MockLoginRepository implements ILoginRepository {
 
     @Override
     public boolean insertToForgetPassword(String bannerid, String passKey) {
-       if(bannerid.equals("B00123456") && passKey.equals("e3Twq6Hyip"))
-       {
-           return true;
-       }
-       return false;
+        if(bannerid.equals("B00123456") && passKey.equals("e3Twq6Hyip"))
+        {
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -59,5 +63,15 @@ public class MockLoginRepository implements ILoginRepository {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<String> getPasswordByBannerId(String bannerid) {
+        List<String> password = new ArrayList<>();
+        password.add("password");
+        if(bannerid.equals("B00835088")){
+            return password;
+        }
+        return null;
     }
 }

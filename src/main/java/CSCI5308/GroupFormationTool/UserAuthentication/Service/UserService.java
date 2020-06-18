@@ -111,7 +111,7 @@ public class UserService implements IUserService {
 		return errors;
 	}
 
-	private void checkPasswordValidation(String password, Map<String, String> errors) {
+	public List<String> checkPasswordValidation(String password, Map<String, String> errors) {
 		List<String> policyErrors = new ArrayList<String>();
 		UserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
 		if (password.length() < passwordPolicy.getMinLength()) {
@@ -143,6 +143,7 @@ public class UserService implements IUserService {
 		if (policyErrors.size() > 0) {
 			errors.put("confirmPassword", String.join(";;", policyErrors));
 		}
+		return policyErrors;
 	}
 
 	private boolean validateEmail(final String email) {

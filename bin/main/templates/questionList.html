@@ -29,29 +29,42 @@
                         <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
                     </div>
                 </form>
+                <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input type="hidden" th:value="${userId}" name="userId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input type="hidden" th:value="${courseId}" name="courseId" />
+                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userType}">Question Manager</button>
+                </form>
             </div>
         </li>
     </ul>
 </div>
 <div style="text-align:center">
 <form style="display:inline-block" th:action="@{/sortQuestionByDate}" method="post" >
-    <input  type="hidden" th:value="${userId}" name="userId" />
-    <button type="submit" class="submit-button" name="save" > sort by Date</button>
+    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+    <input type="hidden" th:value="${userId}" name="userId" />
+    <input  type="hidden" th:value="${userType}" name="userType" />
+    <input type="hidden" th:value="${courseId}" name="courseId" />
+    <button type="submit" class="submit-button" name="save" > sort by date</button>
 </form>
 <form style="display:inline-block" th:action="@{/sortQuestionByTopic}" method="post" >
-    <input  type="hidden" th:value="${userId}" name="userId" />
-    <button type="submit" class="submit-button" name="save" > sort by Topic</button>
+    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+    <input type="hidden" th:value="${userId}" name="userId" />
+    <input  type="hidden" th:value="${userType}" name="userType" />
+    <input type="hidden" th:value="${courseId}" name="courseId" />
+    <button type="submit" class="submit-button" name="save" > sort by topic</button>
 </form>
 </div>
-<ul class="functionalities-list">
+<ul class="functionalities-list" style="width: auto">
     <li id="home_li"class="list">
-        <table  class="homepage_table" style="">
+        <table class="homepage_table" style="">
 
-            <thead>
+            <thead class="function-heading">
             <tr>
                 <th>Question Topic</th>
                 <th>Question Description</th>
-                <th>Date</th>
+                <th style="width: 120px;">Date</th>
                 <th id="no_border">     </th>
             </tr>
             </thead>
@@ -63,10 +76,13 @@
                 <td th:text="${question.questionDescription}" />
                 <td th:text="${question.date}" />
                 <td>
-                    <form th:action="@{/deleteQuestion}" method="post" >
+                    <form th:action="@{/deleteQuestion}" method="post" id="delete-question-form">
                         <input  type="hidden" th:value="${question.questionId}" name="questionId" />
-                        <input  type="hidden" th:value="${userId}" name="userId" />
-                        <button type="submit" class="submit-button" name="save" > Delete</button>
+                        <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                        <input type="hidden" th:value="${userId}" name="userId" />
+                        <input  type="hidden" th:value="${userType}" name="userType" />
+                        <input type="hidden" th:value="${courseId}" name="courseId" />
+                        <button type="submit" onclick="alertFunction()" class="submit-button" name="save" > Delete</button>
                     </form>
                 </td>
             </tr>
@@ -74,5 +90,14 @@
         </table>
     </li>
 </ul>
+<script type="text/javascript">
+    function alertFunction(){
+        if (confirm("The question you selected contain user responses. Are you sure you want to delete this question?")) {
+            document.getElementById("delete-question-form").submit();
+        } else {
+
+        }
+    }
+</script>
 </body>
 </html>

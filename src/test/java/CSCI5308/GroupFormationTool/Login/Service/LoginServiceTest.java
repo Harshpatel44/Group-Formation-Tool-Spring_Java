@@ -1,36 +1,58 @@
 package CSCI5308.GroupFormationTool.Login.Service;
 
+import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
 import CSCI5308.GroupFormationTool.Login.Repository.MockLoginRepository;
+import org.assertj.core.api.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
+
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 class LoginServiceTest {
 
-    MockLoginRepository mock = new MockLoginRepository();
+
+    public LoginRepository loginRepository;
+    public LoginService loginService;
+
+    @BeforeEach
+    public void init() throws Exception {
+        MockitoAnnotations.initMocks(this);
+        loginRepository = mock(LoginRepository.class);
+        loginService = new LoginService(loginRepository);
+    }
+
 
     @Test
-    void checkLoginTest() {
-        assertTrue(mock.checkLogin("B00123456","12345"));
-        assertFalse(mock.checkLogin("B0089746","123458"));
+    void checkLoginTest() throws Exception{
+
+        when(loginRepository.checkLogin("B00835088","123")).thenReturn(true);
+        assertTrue(loginService.checkLogin("B00835088","123"));
     }
 
     @Test
-    void isUserTest() {
-        assertTrue(mock.isUser("B00123456"));
-        assertFalse(mock.isUser("B00937464"));
+    void isUser(){
+        when(loginRepository.isUser("B00835088")).thenReturn(true);
+        assertTrue(loginService.isUser("B00835088"));
+        assertFalse(loginService.isUser("B11221344"));
     }
 
     @Test
     void getEmailByBanneridTest() {
-        assertEquals("rutikapatel09@gmail.com",mock.getEmailByBannerid("B00123456"));
+        when(loginRepository.getEmailByBannerid("B00835088")).thenReturn("rutikapatel09@gmail.com");
+        assertEquals("rutikapatel09@gmail.com",loginService.getEmailByBannerid("B00835088"));
     }
-
 
     @Test
     void insertToForgetPasswordTest() {
-        assertTrue(mock.insertToForgetPassword("B00123456","e3Twq6Hyip"));
-        assertFalse(mock.insertToForgetPassword("B00123456","fhrshr34h"));
+        when(loginRepository.insertToForgetPassword("B00123456","e3Twq6Hyip")).thenReturn(true);
+        assertTrue(loginService.insertToForgetPassword("B00123456","e3Twq6Hyip"));
     }
 
     @Test
@@ -41,13 +63,38 @@ class LoginServiceTest {
 
     @Test
     void getBannerIdByPassKeyTest() {
-        assertEquals("B00123456",mock.getBannerIdByPassKey("e3Twq6Hyip"));
-        assertNotEquals("B00156789",mock.getBannerIdByPassKey("e3Twq6Hyip"));
+        when(loginRepository.getBannerIdByPassKey("randomstring")).thenReturn("B00100100");
+        assertEquals("B00100100",loginService.getBannerIdByPassKey("randomstring"));
     }
 
     @Test
-    void updatePasswordTest() {
-        assertTrue(mock.updatePassword("B00123456","12345"));
-        assertFalse(mock.updatePassword("B00765432","12345"));
+    void getPasswordByBannerId() {
+        List<String> password = new ArrayList<>();
+        password.add("passwordValue");
+        password.add("passwordValue2");
+        when(loginRepository.getPasswordByBannerId("B00835088")).thenReturn(password);
+        assertEquals(password,loginService.getPasswordByBannerId("B00835088"));
+    }
+
+
+    @Test
+    void comparePassword() {
+        String newPassword="abc";
+        String confirmPassword="abc";
+        assertTrue(loginService.comparePassword(newPassword,confirmPassword));
+
+        String newPassword2="abc";
+        String confirmPassword2="def";
+        assertFalse(loginService.comparePassword(newPassword2,confirmPassword2));
+    }
+
+    @Test
+    void sendMail() {
+        assertTrue(loginService.sendMail("rutikapatel09@dal.ca","passkey"));
+    }
+
+    @Test
+    void updatePassword() {
+        assertFalse(loginService.updatePassword("B00835088","123456"));
     }
 }

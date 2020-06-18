@@ -31,6 +31,13 @@
 						<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
 					</div>
 				</form>
+				<form class="nav-bar-element" th:action="@{/course}" method="post" >
+					<input type="hidden"  th:value="${courseName}" name="courseName"/>
+					<input  type="hidden" th:value="${courseId}" name="courseId" />
+					<input  type="hidden" th:value="${checkRole}" name="userType" />
+					<input  type="hidden" th:value="${userId}" name="userId" />
+					<button type="submit" class="submit-button" name="save" th:if="${checkRole}" >Course Home</button>
+				</form>
 			</div>
 		</li>
 	</ul>
@@ -96,12 +103,6 @@
 	</li>
 </ul>
 	<span th:text="${result}" />
-	<form th:action="@{/questionManager}" method="post">
-		<input type="hidden"  th:value="${courseName}" name="courseName"/>
-		<input type="hidden" th:value="${userId}" name="userId" />
-		<input  type="hidden" th:value="${userType}" name="userType" />
-		<input type="hidden" th:value="${courseId}" name="courseId" />
-		<button type="submit" name="save" class="submit-button"  th:if="${userType}">Go to Question Manager</button>
-	</form>
+
 </body>
 </html>

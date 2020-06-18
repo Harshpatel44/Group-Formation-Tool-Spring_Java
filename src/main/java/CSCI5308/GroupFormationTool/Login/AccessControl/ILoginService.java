@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Login.AccessControl;
 
 import javax.mail.MessagingException;
+import java.util.List;
 
 public interface ILoginService {
     public boolean checkLogin(String bannerid, String password);
@@ -12,4 +13,5 @@ public interface ILoginService {
     public boolean comparePassword(String newPassword,String confirmPassword);
     public String getBannerIdByPassKey(String passKey);
     public boolean updatePassword(String bannerid, String password);
+    public List<String> getPasswordByBannerId(String bannerid);
 }

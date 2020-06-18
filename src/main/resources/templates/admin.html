@@ -2,102 +2,100 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <meta name="author" content="Harsh Patel">
-    <title>Group Formation Tool</title>
+<meta charset="UTF-8">
+<meta name="author" content="Harsh Patel">
+<title>Group Formation Tool</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+<link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
 
-<div>
-    <ul id="heading-box">
-        <li style="margin:auto;">
-            <div>
-                Course Admin panel
-            </div>
-        </li>
-    </ul>
-</div>
+	<div>
+		<ul id="heading-box">
+			<li style="margin: auto;">
+				<div>Course Admin panel</div>
+			</li>
+		</ul>
+	</div>
 
-<div>
-    <ul id="heading-box2">
-        <li>
-            <div>
-                Hello, Administrator
-            </div>
-        </li>
-        <li>
-            <div class="nav-bar">
-                <form class="nav-bar-element" th:action="@{/logout}" method="post">
-                    <div class="entity">
-                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-                    </div>
-                </form>
-            </div>
-        </li>
-    </ul>
-</div>
+	<div>
+		<ul id="heading-box2">
+			<li>
+				<div>Hello, Administrator</div>
+			</li>
+			<li>
+				<div class="nav-bar">
+					<form class="nav-bar-element" th:action="@{/logout}" method="post">
+						<div class="entity">
+							<button type="submit" class="submit-button" value="Logout"
+								name="Logout">Logout</button>
+						</div>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
 
-<ul class="functionalities-list">
+	<ul class="functionalities-list">
 
-    <li class="list">
-        <div class="function-heading">Create course</div>
-        <form action="" th:object="${createCourse}" th:action="@{/createCourse}" method="post">
-            <div class="entity">
-                <label >Course name:</label>
-                <input type="text" th:field="*{courseName}">
-            </div>
-            <div class="entity">
-                <label>Course id:</label>
-                <input type="text" th:field="*{courseId}">
-            </div>
-            <input class="submit-button" type="submit" value="Create course">
-            <span class="message" th:text="*{courseCreateMessage}">status here</span>
-        </form>
-    </li>
+		<li class="list">
+			<div class="function-heading">Create course</div>
+			<form action="" th:object="${createCourse}"
+				th:action="@{/createCourse}" method="post">
+				<div class="entity">
+					<label>Course name:</label> <input type="text"
+						th:field="*{courseName}">
+				</div>
+				<div class="entity">
+					<label>Course id:</label> <input type="text" th:field="*{courseId}">
+				</div>
+				<input class="submit-button" type="submit" value="Create course">
+				<span class="message" th:text="*{courseCreateMessage}">status
+					here</span>
+			</form>
+		</li>
 
-    <li class="list">
-        <div class="function-heading">Delete course</div>
-        <form action="" th:object="${deleteCourse}" th:action="@{/deleteCourse}" method="post">
-            <div class="entity">
-                <label>Select course:</label>
-            </div>
-            <div class="entity">
-                <select name="" th:field="*{selectedCourseId}">
-                    <option th:each="selectValue: ${deleteCourse.allCoursesList}"
-                            th:value="${selectValue.value}"
-                            th:text="${selectValue.key}"
-                    ></option>setAllCourseNames
-                </select>
-            </div>
-            <input class="submit-button" type="submit" value="Delete course">
-            <span class="message" th:text="*{courseDeleteMessage}">status here</span>
-        </form>
-    </li>
+		<li class="list">
+			<div class="function-heading">Delete course</div>
+			<form action="" th:object="${deleteCourse}"
+				th:action="@{/deleteCourse}" method="post">
+				<div class="entity">
+					<label>Select course:</label>
+				</div>
+				<div class="entity">
+					<select name="" th:field="*{selectedCourseId}">
+						<option th:each="selectValue: ${deleteCourse.allCoursesList}"
+							th:value="${selectValue.value}" th:text="${selectValue.key}"></option>setAllCourseNames
+					</select>
+				</div>
+				<input class="submit-button" type="submit" value="Delete course">
+				<span class="message" th:text="*{courseDeleteMessage}">status
+					here</span>
+			</form>
+		</li>
 
-    <li class="list">
-        <div class="function-heading">Assign instructor</div>
-        <form action="" th:object="${assignInstructor}" th:action="@{/assignInstructor}" method="post">
-            <div class="entity">
-                <label class="labels">User id:</label>
-                <input type="text" th:field="*{InstructorId}">
-            </div>
-            <div class="entity">
-                <label>Select course:</label>
-                <select name="" th:field="*{selectedInstructorCourseId}">
-                    <option th:each="selectValue: ${assignInstructor.allCoursesList}"
-                            th:value="${selectValue.value}"
-                            th:text="${selectValue.key}"
-                    ></option>
-                </select>
-            </div>
-            <input class="submit-button" type="submit" value="Assign instructor">
-            <span class="message" th:text="*{instructorAssignMessage}">status here</span>
-        </form>
-    </li>
+		<li class="list">
+			<div class="function-heading">Assign instructor</div>
+			<form action="" th:object="${assignInstructor}"
+				th:action="@{/assignInstructor}" method="post">
+				<div class="entity">
+					<label class="labels">User id:</label> <input type="text"
+						th:field="*{InstructorId}">
+				</div>
+				<div class="entity">
+					<label>Select course:</label> <select name=""
+						th:field="*{selectedInstructorCourseId}">
+						<option th:each="selectValue: ${assignInstructor.allCoursesList}"
+							th:value="${selectValue.value}" th:text="${selectValue.key}"></option>
+					</select>
+				</div>
+				<input class="submit-button" type="submit" value="Assign instructor">
+				<span class="message" th:text="*{instructorAssignMessage}">status
+					here</span>
+			</form>
+		</li>
 
-</ul>
+	</ul>
 
 </body>
 </html>
