@@ -4,6 +4,8 @@ import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginController;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
 import CSCI5308.GroupFormationTool.Login.Service.LoginService;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class LoginController implements ILoginController {
@@ -60,6 +64,8 @@ public class LoginController implements ILoginController {
 		boolean matchPassword;
 		boolean update;
 		String bannerid;
+		Map<String, String> errors = new HashMap<>();
+		UserPasswordPolicy userPasswordPolicy = Injector.instance().getUserRepository().getUserPasswordPolicy();
 		UserService userService = (UserService) Injector.instance().getUserService();
 		List<String> oldPasswords;
 		service = Injector.instance().getLoginService();
@@ -71,6 +77,17 @@ public class LoginController implements ILoginController {
 			model.addAttribute("Error", "Passwords do not match");
 			return "newPassword";
 		}
+
+		List<String> validationErrors = userService.checkPasswordValidation(newPassword,errors);
+
+		if(validationErrors.size()>0){
+			UserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
+			model.addAttribute("isError",true);
+			model.addAttribute("AllErrors",validationErrors);
+
+			return "newPassword";
+		}
+
 		bannerid = service.getBannerIdByPassKey(passKey);
 		oldPasswords = service.getPasswordByBannerId(bannerid);
 
@@ -84,6 +101,7 @@ public class LoginController implements ILoginController {
 				return "newPassword";
 			}
 		}
+
 
 
 		update = service.updatePassword(bannerid, newPassword);
