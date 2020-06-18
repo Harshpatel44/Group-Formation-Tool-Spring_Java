@@ -3,22 +3,20 @@ package CSCI5308.GroupFormationTool.Login.Controller;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginController;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
-import CSCI5308.GroupFormationTool.Login.Service.LoginService;
+import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
+
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,8 +25,8 @@ import java.util.Map;
 public class LoginController implements ILoginController {
 
 	private ILoginService service;
-	LoginService  loginService= (LoginService) Injector.instance().getLoginService();
-
+	private IUserNotification userNotification;
+	
 
 	@Override
 	@GetMapping("/login")
@@ -61,31 +59,32 @@ public class LoginController implements ILoginController {
 	@Override
 	@RequestMapping(value = "/updateNewPassword", method = RequestMethod.POST)
 	public String newPassword(@RequestParam("newPassword") String newPassword,
-							  @RequestParam("confirmPassword") String confirmPassword, @RequestParam("passKey") String passKey,
-							  Model model) {
+			@RequestParam("confirmPassword") String confirmPassword, @RequestParam("passKey") String passKey,
+			Model model) {
 		boolean matchPassword;
 		boolean update;
 		String bannerid;
 		Map<String, String> errors = new HashMap<>();
+		
 		UserPasswordPolicy userPasswordPolicy = Injector.instance().getUserRepository().getUserPasswordPolicy();
 		UserService userService = (UserService) Injector.instance().getUserService();
 		List<String> oldPasswords;
 		service = Injector.instance().getLoginService();
 		BCryptEncryption encryption = new BCryptEncryption();
 
-		matchPassword = loginService.comparePassword(newPassword, confirmPassword);
+		matchPassword = service.comparePassword(newPassword, confirmPassword);
 		if (!matchPassword) {
 			model.addAttribute("passKey", passKey);
 			model.addAttribute("Error", "Passwords do not match");
 			return "newPassword";
 		}
 
-		List<String> validationErrors = userService.checkPasswordValidation(newPassword,errors);
+		List<String> validationErrors = userService.checkPasswordValidation(newPassword, errors);
 
-		if(validationErrors.size()>0){
+		if (validationErrors.size() > 0) {
 			UserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
-			model.addAttribute("isError",true);
-			model.addAttribute("AllErrors",validationErrors);
+			model.addAttribute("isError", true);
+			model.addAttribute("AllErrors", validationErrors);
 
 			return "newPassword";
 		}
@@ -93,15 +92,12 @@ public class LoginController implements ILoginController {
 		bannerid = service.getBannerIdByPassKey(passKey);
 		oldPasswords = service.getPasswordByBannerId(bannerid);
 
-		for(String password : oldPasswords) {
-			if(encryption.passwordMatch(newPassword,password))
-			{
-				model.addAttribute("Error","New password cannot be same as the old password");
+		for (String password : oldPasswords) {
+			if (encryption.passwordMatch(newPassword, password)) {
+				model.addAttribute("Error", "New password cannot be same as the old password");
 				return "newPassword";
 			}
 		}
-
-
 
 		update = service.updatePassword(bannerid, newPassword);
 
@@ -113,13 +109,11 @@ public class LoginController implements ILoginController {
 		return "login";
 	}
 
-
 	@Override
 	@GetMapping("/resetPassword")
 	public String displayResetPassword() {
 		return "forgetPassword";
 	}
-
 
 	@Override
 	@PostMapping("/resetPassword")
@@ -129,14 +123,14 @@ public class LoginController implements ILoginController {
 		boolean mailSend;
 		String email;
 		service = Injector.instance().getLoginService();
-
+		userNotification = Injector.instance().getUserNotification();
 		isUser = service.isUser(bannerid);
 		if (!isUser) {
 			model.addAttribute("Error", "Not a valid user");
 			return "forgetPassword";
 		}
 
-		String passKey = loginService.generatePassKey();
+		String passKey = service.generatePassKey();
 
 		addUser = service.insertToForgetPassword(bannerid, passKey);
 		if (!addUser) {
@@ -145,7 +139,7 @@ public class LoginController implements ILoginController {
 		}
 
 		email = service.getEmailByBannerid(bannerid);
-		mailSend = loginService.sendMail(email, passKey);
+		mailSend = userNotification.sendUserForgetPasswordLink(email, passKey);
 		if (!mailSend) {
 			model.addAttribute("Error", "Error sending the mail");
 			return "forgetPassword";

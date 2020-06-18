@@ -86,10 +86,7 @@ class LoginServiceTest {
         assertFalse(loginService.comparePassword(newPassword2,confirmPassword2));
     }
 
-    @Test
-    void sendMail() {
-        assertTrue(loginService.sendMail("rutikapatel09@dal.ca","passkey"));
-    }
+
 
     @Test
     void updatePassword() {

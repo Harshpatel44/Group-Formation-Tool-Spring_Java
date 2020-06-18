@@ -7,4 +7,5 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 
 public interface IUserNotification {
 	public Boolean sendUserCredentials(User user) throws AddressException, MessagingException;
+	public Boolean sendUserForgetPasswordLink(String email, String passKey);
 }

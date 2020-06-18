@@ -28,5 +28,21 @@ public class UserNotification implements IUserNotification {
 		System.out.println("Mail Sent");
 		return true;
 	}
-
+	
+	public Boolean sendUserForgetPasswordLink(String email, String passKey) {
+        String resetLink="";
+        try {
+            
+            MimeMessage msg = Injector.instance().getEmailConfiguration().getMessageCredentials();
+            msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
+            msg.setSubject("Password Reset Link");
+            resetLink ="https://group9-develop.herokuapp.com/updateNewPassword?passKey="+passKey;
+            msg.setContent(resetLink, "text/html");
+            Transport.send(msg);
+        }
+        catch (MessagingException e) {
+            e.printStackTrace();
+        }
+        return true;
+    }
 }
