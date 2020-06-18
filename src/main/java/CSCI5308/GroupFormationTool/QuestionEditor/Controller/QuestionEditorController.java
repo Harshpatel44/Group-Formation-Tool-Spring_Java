@@ -3,6 +3,9 @@ package CSCI5308.GroupFormationTool.QuestionEditor.Controller;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorController;
 import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorInjector;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -20,6 +23,11 @@ public class QuestionEditorController implements IQuestionEditorController {
                                     @RequestParam(name="courseName") String courseName
     ){
         ModelAndView mv = new ModelAndView("questionEditorHome");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if ((authentication instanceof AnonymousAuthenticationToken)) {
+            mv.setViewName("redirect:/login");
+            return mv;
+        }
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);
