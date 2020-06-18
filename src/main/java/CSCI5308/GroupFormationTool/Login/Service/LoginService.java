@@ -40,7 +40,7 @@ public class LoginService implements ILoginService {
 
     }
 
-    @Override
+
     public String generatePassKey()
     {
         // Code taken from geeksforgeeks
@@ -55,7 +55,6 @@ public class LoginService implements ILoginService {
         return sb.toString();
     }
 
-    @Override
     public boolean sendMail(String email, String passKey) {
         String resetLink="";
         try {
@@ -80,7 +79,6 @@ public class LoginService implements ILoginService {
 
     }
 
-    @Override
     public boolean comparePassword(@NotNull String newPassword, String confirmPassword) {
         if(newPassword.equals(confirmPassword)) {
             return true;

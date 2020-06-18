@@ -27,6 +27,8 @@ import java.util.Map;
 public class LoginController implements ILoginController {
 
 	private ILoginService service;
+	LoginService  loginService= (LoginService) Injector.instance().getLoginService();
+
 
 	@Override
 	@GetMapping("/login")
@@ -71,7 +73,7 @@ public class LoginController implements ILoginController {
 		service = Injector.instance().getLoginService();
 		BCryptEncryption encryption = new BCryptEncryption();
 
-		matchPassword = service.comparePassword(newPassword, confirmPassword);
+		matchPassword = loginService.comparePassword(newPassword, confirmPassword);
 		if (!matchPassword) {
 			model.addAttribute("passKey", passKey);
 			model.addAttribute("Error", "Passwords do not match");
@@ -91,10 +93,7 @@ public class LoginController implements ILoginController {
 		bannerid = service.getBannerIdByPassKey(passKey);
 		oldPasswords = service.getPasswordByBannerId(bannerid);
 
-
-
-		for(String password : oldPasswords)
-		{
+		for(String password : oldPasswords) {
 			if(encryption.passwordMatch(newPassword,password))
 			{
 				model.addAttribute("Error","New password cannot be same as the old password");
@@ -130,13 +129,14 @@ public class LoginController implements ILoginController {
 		boolean mailSend;
 		String email;
 		service = Injector.instance().getLoginService();
+
 		isUser = service.isUser(bannerid);
 		if (!isUser) {
 			model.addAttribute("Error", "Not a valid user");
 			return "forgetPassword";
 		}
 
-		String passKey = service.generatePassKey();
+		String passKey = loginService.generatePassKey();
 
 		addUser = service.insertToForgetPassword(bannerid, passKey);
 		if (!addUser) {
@@ -145,7 +145,7 @@ public class LoginController implements ILoginController {
 		}
 
 		email = service.getEmailByBannerid(bannerid);
-		mailSend = service.sendMail(email, passKey);
+		mailSend = loginService.sendMail(email, passKey);
 		if (!mailSend) {
 			model.addAttribute("Error", "Error sending the mail");
 			return "forgetPassword";
