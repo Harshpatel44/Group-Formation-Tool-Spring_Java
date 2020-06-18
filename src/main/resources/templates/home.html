@@ -34,11 +34,10 @@
 	</ul>
 </div>
 
-<ul class="functionalities-list">
+<ul class="functionalities-list" style="width: auto">
     <li id="home_li"class="list">
 	      <table  class="homepage_table" style="">
-	       
-		       <thead>
+		       <thead class="function-heading">
 	                    <tr>
 	                        <th>Course Id </th>
 	                        <th>Course Name</th>
@@ -46,7 +45,7 @@
 	                        <th id="no_border">     </th>
 	                    </tr>
 	           </thead>
-	        
+			  </div>
 	        
 		    	<tr>
 		    	     <tr th:each="course: ${courses}">
@@ -59,7 +58,7 @@
 	                                <input  type="hidden" th:value="${course.courseId}" name="courseId" />
 	                                <input  type="hidden" th:value="${course.role}" name="userType" />
 	                                <input  type="hidden" th:value="${userId}" name="userId" />
-	                                <button type="submit" class="submit-button" name="save" th:if="${checkRole}" > GOTO Course</button>
+	                                <button type="submit" class="submit-button" name="save" th:if="${checkRole}" >Course Home</button>
 	                            </form>
 	                        </td>
 	                   </tr> 

@@ -50,13 +50,21 @@ CREATE TABLE questionManager(
     PRIMARY KEY(questionId)
 );
 
-drop table optionManager;
 CREATE TABLE optionManager(
 	questionId int,
     optionRank int,
     optionsDesc varchar(1000),
     FOREIGN KEY (questionId) REFERENCES questionManager(questionId)
 );
+
+CREATE TABLE questionResponses(
+	userId varchar(10),
+    questionId int,
+    responses varchar(1000),
+    FOREIGN KEY (questionId) REFERENCES questionManager(questionId),
+    FOREIGN KEY (userId) REFERENCES users(userId)
+);
+
 
 insert into roles(roleId,roleType)
 values
@@ -90,6 +98,7 @@ values
 ("CSCI1","B00345612",3)
 ;
 
+
 insert into questionManager(userId,questionTopic,questionDesc,questionType,dateStamp) 
 values
 	('B00100100','question1Topic','question1Description','mcqs','2020-06-14'),
@@ -106,10 +115,8 @@ values
 	(3,1,'answer1Question3')
 ;
 
-
-insert into optionManager values(15,1,"Delhi");
-select * from questionManager;
-select * from optionManager;
-
-select * from questionManager;
-select questionId from questionManager where userId="B00100100" and questionTopic="zzz";
+insert into questionResponses 
+values
+("B00100100",1,"Response1"),
+("B00100100",1,"Response2"),
+("B00100100",2,"Response3");

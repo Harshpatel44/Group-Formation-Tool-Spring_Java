@@ -216,3 +216,7 @@ th{
 .create-question-inputs{
     width:600px;
 }
+
+.homepage_table td{
+    border-right:1px solid #05386b;
+}

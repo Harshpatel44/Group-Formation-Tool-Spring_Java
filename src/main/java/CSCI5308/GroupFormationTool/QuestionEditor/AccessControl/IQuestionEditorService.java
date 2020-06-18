@@ -9,5 +9,4 @@ public interface IQuestionEditorService {
 
     String saveQuestionForMultipleChoiceService(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId) throws Exception;
 
-    HashMap<Integer, String> arrangeOptionsBasedOnRank(String optionText, String rankText);
 }

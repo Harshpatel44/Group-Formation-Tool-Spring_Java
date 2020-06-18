@@ -2,10 +2,14 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Repository;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
+import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserPasswordPolicyDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -83,27 +87,7 @@ public class UserRepositoryTest {
 		assertEquals(false, userRepository.getUserByEmailId(user));
 	}
 
-	@Test
-	public void getEnrollCourse() {
-		User user = UserMockDB.setDefault();
-
-		userRepository = mock(UserRepository.class);
-
-		when(userRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(true);
-
-		assertEquals(true, userRepository.enrollStudentForCourse(user, "CSCI10"));
-	}
-
-	@Test
-	public void getEnrollCourseFails() {
-		User user = UserMockDB.setDefault();
-
-		userRepository = mock(UserRepository.class);
-
-		when(userRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(false);
-
-		assertEquals(false, userRepository.enrollStudentForCourse(user, "CSCI10"));
-	}
+	
 
 	@Test
 	public void getBannerIDs() {
@@ -126,15 +110,16 @@ public class UserRepositoryTest {
 		}, userRepository.getAllBannerIds());
 	}
 
+	
 	@Test
-	public void getUserDetailsOnCourse() {
+	public void getUserPasswordPolicy() {
 		User user = UserMockDB.setDefault();
 
 		userRepository = mock(UserRepository.class);
 
-		when(userRepository.getUserDetailsOnCourse(user, "CSCI10")).thenReturn(false);
-
-		assertEquals(false, userRepository.getUserDetailsOnCourse(user, "CSCI10"));
+		when(userRepository.getUserPasswordPolicy()).thenReturn(UserPasswordPolicyDB.getDefault());
+		assertThat(userRepository.getUserPasswordPolicy()).isEqualToComparingFieldByField(UserPasswordPolicyDB.getDefault());
 	}
+	
 
 }

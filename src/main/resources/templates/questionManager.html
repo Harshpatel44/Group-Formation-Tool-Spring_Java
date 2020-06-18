@@ -33,12 +33,11 @@
                 </form>
                 <form class="nav-bar-element" th:action="@{/course}" method="post">
                     <div class="entity">
-                        <button type="submit" name="CourseHome" class="submit-button">Course Home</button>
-                    </div>
-                </form>
-                <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
-                    <div class="entity">
-                        <button type="submit" name="courseAdmin" class="submit-button">Course Admin</button>
+                        <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                        <input  type="hidden" th:value="${courseId}" name="courseId" />
+                        <input  type="hidden" th:value="${userType}" name="userType" />
+                        <input  type="hidden" th:value="${userId}" name="userId" />
+                        <button type="submit" class="submit-button" name="save">Course Home</button>
                     </div>
                 </form>
             </div>
@@ -48,15 +47,19 @@
 
 <ul class="functionalities-list">
     <li class="list">
-        <div class="function-heading">Assign teaching assistant</div>
+        <div class="function-heading">Question Manager</div>
         <form th:action="@{/questionList}" method="post">
-            <input type="hidden" th:value="${userId}" name="userId" />
-            <input type="hidden" th:value="${courseId}" name="courseId" />
+            <input type="hidden"  th:value="${courseName}" name="courseName"/>
+            <input  type="hidden" th:value="${courseId}" name="courseId" />
+            <input  type="hidden" th:value="${userType}" name="userType" />
+            <input  type="hidden" th:value="${userId}" name="userId" />
             <button type="submit" name="save" class="submit-button">Question list</button>
         </form>
         <form th:action="@{/addQuestion}" method="post">
-            <input type="hidden" th:value="${userId}" name="userId" />
-            <input type="hidden" th:value="${courseId}" name="courseId" />
+            <input type="hidden"  th:value="${courseName}" name="courseName"/>
+            <input  type="hidden" th:value="${courseId}" name="courseId" />
+            <input  type="hidden" th:value="${userType}" name="userType" />
+            <input  type="hidden" th:value="${userId}" name="userId" />
             <button type="submit" name="save" class="submit-button">Add Question</button>
         </form>
 

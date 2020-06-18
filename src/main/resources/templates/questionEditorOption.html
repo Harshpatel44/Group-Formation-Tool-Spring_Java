@@ -37,22 +37,19 @@
                         <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
                     </div>
                 </form>
-                <form class="nav-bar-element" th:action="@{/course}" method="post">
-                    <div class="entity">
-                        <button type="submit" name="CourseHome" class="submit-button">Course Home</button>
-                    </div>
-                </form>
-                <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
-                    <div class="entity">
-                        <button type="submit" name="courseAdmin" class="submit-button">Course Admin</button>
-                    </div>
+                <form class="nav-bar-element" th:action="@{/course}" method="post" >
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input  type="hidden" th:value="${courseId}" name="courseId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userId}" name="userId" />
+                    <button type="submit" class="submit-button" name="save">Course Home</button>
                 </form>
                 <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
-                    <div class="entity">
-                        <input type="hidden" th:value="${userId}" name="userId" />
-                        <input type="hidden" th:value="${courseId}" name="courseId" />
-                        <button type="submit" name="questionManager" class="submit-button">Question Manager</button>
-                    </div>
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input type="hidden" th:value="${userId}" name="userId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input type="hidden" th:value="${courseId}" name="courseId" />
+                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userType}">Question Manager</button>
                 </form>
             </div>
         </li>
@@ -68,7 +65,9 @@
             </ul>
             <button onclick="addOption()" class="submit-button">Add Option</button>
 
+            <input type="hidden"  th:value="${courseName}" name="courseName"/>
             <input type="hidden" th:value="${userId}" name="userId" />
+            <input  type="hidden" th:value="${userType}" name="userType" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
 
             <input type="hidden" th:value="${questionText}" name="questionText" />
@@ -81,21 +80,16 @@
 
 <script type="text/javascript">
     var i = 1;
-
-
     function addOption(){
-        var text=`
-                <li>
+        var list = document.createElement("li");
+        list.innerHTML=`
                     <div class="entity">
                         <label style="display: inline; float: none;">Option `+i+`:</label>
-                        <input type="text" class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="optionText">
+                        <input type="text" class="create-question-inputs" style="display: inline;width:auto" th:field="*{questionText}" required name="optionText">
                         <label style="display: inline; float: none;">Rank:</label>
-                        <input type="number"  class="create-question-inputs" style="display: inline" th:field="*{questionText}" required name="rankText">
-                    </div>
-                </li>
-            `;
-
-        document.getElementById("options-ul-id").innerHTML+=text;
+                        <input type="number"  class="create-question-inputs" style="display: inline;width:auto" th:field="*{questionText}" required name="rankText">
+                    </div>`;
+        document.getElementById("options-ul-id").appendChild(list);
         i++;
     }
 </script>

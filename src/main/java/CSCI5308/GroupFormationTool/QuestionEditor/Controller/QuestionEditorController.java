@@ -18,12 +18,16 @@ public class QuestionEditorController implements IQuestionEditorController {
     @Override
     @RequestMapping("/addQuestion")
     public ModelAndView addQuestion(@RequestParam(name="courseId") String courseId,
-                                    @RequestParam(name="userId") String userId){
+                                    @RequestParam(name="userId") String userId,
+                                    @RequestParam(name="userType") String userType,
+                                    @RequestParam(name="courseName") String courseName
+    ){
         ModelAndView mv = new ModelAndView("questionEditorHome");
 
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
-
+        mv.addObject("userType",userType);
+        mv.addObject("courseName",courseName);
         return mv;
     }
 
@@ -31,12 +35,16 @@ public class QuestionEditorController implements IQuestionEditorController {
     @RequestMapping("/createQuestion")
     public ModelAndView createQuestion(
                                         @RequestParam(name="courseId") String courseId,
-                                        @RequestParam(name="userId") String userId)
+                                        @RequestParam(name="userId") String userId,
+                                        @RequestParam(name="userType") String userType,
+                                        @RequestParam(name="courseName") String courseName)
     {
         QuestionModel questionModel = new QuestionModel();
         ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
+        mv.addObject("userType",userType);
+        mv.addObject("courseName",courseName);
         mv.addObject("questionModel", questionModel);
         return mv;
     }
@@ -45,7 +53,9 @@ public class QuestionEditorController implements IQuestionEditorController {
     @RequestMapping("/createOption")
     public ModelAndView createOption(QuestionModel questionModel,
                                      @RequestParam(name="courseId") String courseId,
-                                     @RequestParam(name="userId") String userId)
+                                     @RequestParam(name="userId") String userId,
+                                     @RequestParam(name="userType") String userType,
+                                     @RequestParam(name="courseName") String courseName)
 {
 
         ModelAndView mv = new ModelAndView();
@@ -61,6 +71,8 @@ public class QuestionEditorController implements IQuestionEditorController {
 
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
+        mv.addObject("userType",userType);
+        mv.addObject("courseName",courseName);
         mv.addObject("questionModel",questionModel);
         mv.addObject("questionText",questionModel.getQuestionText());
         mv.addObject("questionTitle",questionModel.getQuestionTitle());
@@ -77,14 +89,18 @@ public class QuestionEditorController implements IQuestionEditorController {
                                         @RequestParam(name="questionTitle") String questionTitle,
                                         @RequestParam(name="selectedQuestionType") String selectedQuestionType,
                                         @RequestParam(name="courseId") String courseId,
-                                        @RequestParam(name="userId") String userId) throws Exception
+                                        @RequestParam(name="userId") String userId,
+                                        @RequestParam(name="userType") String userType,
+                                        @RequestParam(name="courseName") String courseName) throws Exception
     {
-        HashMap<Integer, String> map=QuestionEditorInjector.instance().getQuestionEditorService().arrangeOptionsBasedOnRank(optionText,rankText);
+        HashMap<Integer, String> map=QuestionEditorInjector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText,rankText);
         String[] optionList = optionText.split(",");
         String[] rankList = rankText.split(",");
         ModelAndView mv = new ModelAndView("questionEditorPreview");
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
+        mv.addObject("userType",userType);
+        mv.addObject("courseName",courseName);
         mv.addObject("questionModel",questionModel);
         mv.addObject("questionText",questionText);
         mv.addObject("questionTitle",questionTitle);
@@ -93,11 +109,6 @@ public class QuestionEditorController implements IQuestionEditorController {
         mv.addObject("ranks",rankText);
         mv.addObject("selectedQuestionType",selectedQuestionType);
         return mv;
-    }
-
-    @RequestMapping("/sample")
-    public void sample(@RequestParam(name="selectedOptions") String selectedOptions){
-        System.out.println(selectedOptions);
     }
 
 
@@ -110,7 +121,9 @@ public class QuestionEditorController implements IQuestionEditorController {
                                        @RequestParam(name="questionTitle") String questionTitle,
                                        @RequestParam(name="selectedQuestionType") String selectedQuestionType,
                                        @RequestParam(name="courseId") String courseId,
-                                       @RequestParam(name="userId") String userId) throws Exception {
+                                       @RequestParam(name="userId") String userId,
+                                       @RequestParam(name="userType") String userType,
+                                       @RequestParam(name="courseName") String courseName) throws Exception {
         String returnMessage = null;
         if(selectedQuestionType.equals("Text") || selectedQuestionType.equals("Numeric")){
             returnMessage=QuestionEditorInjector.instance().getQuestionEditorService().SaveQuestionServiceForTextAndNumeric(questionText,questionTitle,selectedQuestionType,userId);
@@ -121,6 +134,8 @@ public class QuestionEditorController implements IQuestionEditorController {
         ModelAndView mv = new ModelAndView("questionEditorFinish");
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
+        mv.addObject("userType",userType);
+        mv.addObject("courseName",courseName);
         mv.addObject("message",returnMessage);
         return mv;
     }

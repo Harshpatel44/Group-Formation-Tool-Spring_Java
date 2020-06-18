@@ -71,28 +71,4 @@ class QuestionEditorServiceTest {
         assertEquals("Question did not submit successfully",questionEditorService.saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId));
     }
 
-    @Test
-    void arrangeOptionsBasedOnRank() {
-        String optionText="Delhi,Kolkata,Ahmedabad,Vadodara";
-        String rankText = "2,1,4,3";
-
-        String[] optionList = optionText.split(",");
-        String[] rankList = rankText.split(",");
-
-        HashMap<Integer, String> map = new HashMap<Integer, String>();
-
-        for(int i=0;i<optionList.length;i++){
-            map.put(Integer.valueOf(rankList[i]),optionList[i]);
-        }
-
-        Map<Integer, String> sorted = map
-                .entrySet()
-                .stream()
-                .sorted(comparingByKey())
-                .collect(
-                        toMap(e -> e.getKey(), e -> e.getValue(),
-                                (e1, e2) -> e2, LinkedHashMap::new));
-        
-        assertEquals(map,questionEditorService.arrangeOptionsBasedOnRank(optionText,rankText));
-    }
 }

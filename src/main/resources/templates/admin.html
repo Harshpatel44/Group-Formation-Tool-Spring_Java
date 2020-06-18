@@ -86,7 +86,7 @@
             <div class="entity">
                 <label>Select course:</label>
                 <select name="" th:field="*{selectedInstructorCourseId}">
-                    <option th:each="selectValue: ${assignInstructor.allCoursesList}"
+                    <option th:each="selectValue: ${deleteCourse.allCoursesList}"
                             th:value="${selectValue.value}"
                             th:text="${selectValue.key}"
                     ></option>

@@ -2,9 +2,13 @@ package CSCI5308.GroupFormationTool.Course.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
+import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
+import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 //Dhruvesh Patel
 public class CourseRepository implements ICourseRepository {
     String role;
@@ -128,7 +132,105 @@ public class CourseRepository implements ICourseRepository {
 		}
 		return result;
 	}
+	@Override
+	public boolean getUserDetailsOnCourse(User user, String courseId) {
+		StoredProcedure storedProcedure = null;
+		try {
+			storedProcedure = new StoredProcedure("userByCourse(?,?)");
+			storedProcedure.setParameter(1, user.getBannerId());
+			storedProcedure.setParameter(2, courseId);
+			ResultSet results = storedProcedure.executeWithResults();
+			if (results != null) {
+				if (results.next()) {
 
+					return true;
+				}
+
+			}
+			storedProcedure.cleanup();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} 
+		return false;
+
+	}
+
+	@Override
+	public boolean enrollStudentForCourse(User user, String courseId) {
+
+		Boolean success = false;
+		StoredProcedure storedProcedure = null;
+		try {
+			storedProcedure = new StoredProcedure("spEnrollStudentForCourse(?, ?)");
+			storedProcedure.setParameter(1, user.getBannerId());
+			storedProcedure.setParameter(2, courseId);
+			storedProcedure.execute();
+			success = true;
+			storedProcedure.cleanup();
+		} catch (SQLException e) {
+
+			e.printStackTrace();
+		} 
+		return success;
+	}
+
+	@Override
+	public ArrayList<ArrayList<String>> getAllCourses() throws SQLException{
+		ArrayList<String> courseNamesList = new ArrayList<>();
+		ArrayList<String> courseIdsList = new ArrayList<>();
+		ArrayList<ArrayList<String>> courseNamesWithIdsList = new ArrayList<>();
+
+		StoredProcedure storedProcedure = new StoredProcedure("AllCourses");
+		ResultSet result = storedProcedure.executeWithResults();
+
+		while(result.next()){
+			courseNamesList.add(result.getString("courseName"));
+			courseIdsList.add(result.getString("courseId"));
+		}
+		storedProcedure.cleanup();
+
+		courseNamesWithIdsList.add(courseIdsList);
+		courseNamesWithIdsList.add(courseNamesList);
+
+		return courseNamesWithIdsList;
+	}
+
+
+	@Override
+	public boolean createCourseRepo(CreateCourse createCourse) throws SQLException {
+		System.out.println("inside");
+		try {
+			StoredProcedure storedProcedure = new StoredProcedure("CreateCourse(?,?)");
+			System.out.println(storedProcedure);
+			storedProcedure.setParameter("cId", createCourse.getCourseId());
+			storedProcedure.setParameter("cName", createCourse.getCourseName());
+			System.out.println(storedProcedure);
+			storedProcedure.execute();
+			storedProcedure.cleanup();
+			return true;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
+
+	@Override
+	public boolean deleteCourseRepo(DeleteCourse deleteCourse) {
+		try {
+			System.out.println(deleteCourse.getSelectedCourseId());
+			StoredProcedure storedProcedure = new StoredProcedure("DeleteCourse(?)");
+			storedProcedure.setParameter("cId", deleteCourse.getSelectedCourseId());
+			storedProcedure.execute();
+			storedProcedure.cleanup();
+			return true;
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+	}
 
 
 

@@ -1,5 +1,10 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.*;
+import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
+import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionResponsesRepo;
+import CSCI5308.GroupFormationTool.QuestionManager.Service.QuestionManagerService;
+import CSCI5308.GroupFormationTool.QuestionManager.Service.QuestionResponsesService;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
@@ -32,7 +37,6 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
 public class Injector {
 
 	private static Injector instance = null;
-
 	private IDBConfiguration dbConfiguration;
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
@@ -48,8 +52,12 @@ public class Injector {
 	private ICourseRepository courseRepository;
 	private ILoginService loginService;
 	private ILoginRepository loginRepository;
+	private IQuestionManagerService questionManagerService;
+	private IQuestionManagerRepository questionManagerRepository;
+	private IQuestionResponsesService questionResponsesService;
+	private IQuestionResponsesRepo questionResponsesRepo;
 
-	private Injector() {
+	private Injector()  {
 
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
@@ -65,7 +73,27 @@ public class Injector {
 		courseService = new CourseService();
 		courseRepository = new CourseRepository();
 		loginRepository = new LoginRepository();
+		questionManagerRepository = new QuestionManagerRepository();
+		questionManagerService = new QuestionManagerService();
+		questionResponsesRepo = new QuestionResponsesRepo();
+		questionResponsesService = new QuestionResponsesService();
 
+	}
+
+	public IQuestionResponsesService getQuestionResponsesService() {
+		return questionResponsesService;
+	}
+
+	public void setQuestionResponsesService(IQuestionResponsesService questionResponsesService) {
+		this.questionResponsesService = questionResponsesService;
+	}
+
+	public IQuestionResponsesRepo getQuestionResponsesRepo() {
+		return questionResponsesRepo;
+	}
+
+	public void setQuestionResponsesRepo(IQuestionResponsesRepo questionResponsesRepo) {
+		this.questionResponsesRepo = questionResponsesRepo;
 	}
 
 	public static Injector instance() {
@@ -74,6 +102,62 @@ public class Injector {
 			instance = new Injector();
 		}
 		return instance;
+	}
+
+	public static void setInstance(Injector instance) {
+		Injector.instance = instance;
+	}
+
+	public void setDbConfiguration(IDBConfiguration dbConfiguration) {
+		this.dbConfiguration = dbConfiguration;
+	}
+
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+
+	public void setPasswordEncryptor(IPasswordEncryptor passwordEncryptor) {
+		this.passwordEncryptor = passwordEncryptor;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public void setCsvImporter(ICsvImporter csvImporter) {
+		this.csvImporter = csvImporter;
+	}
+
+	public void setEmailConfiguration(IEmailConfiguration emailConfiguration) {
+		this.emailConfiguration = emailConfiguration;
+	}
+
+	public void setUserNotification(IUserNotification userNotification) {
+		this.userNotification = userNotification;
+	}
+
+	public void setHomeRepository(IHomeRepository homeRepository) {
+		this.homeRepository = homeRepository;
+	}
+
+	public void setHomeService(IHomeService homeService) {
+		this.homeService = homeService;
+	}
+
+	public void setCourseService(ICourseService courseService) {
+		this.courseService = courseService;
+	}
+
+	public void setCourseRepository(ICourseRepository courseRepository) {
+		this.courseRepository = courseRepository;
+	}
+
+	public void setLoginService(ILoginService loginService) {
+		this.loginService = loginService;
+	}
+
+	public void setLoginRepository(ILoginRepository loginRepository) {
+		this.loginRepository = loginRepository;
 	}
 
 	public IUserRepository getUserRepository() {
@@ -128,4 +212,13 @@ public class Injector {
 		return loginRepository;
 	}
 
+	public IQuestionManagerService getQuestionManagerService(){return questionManagerService;}
+
+	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
+
+    
+
+    public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
+
+    
 }
