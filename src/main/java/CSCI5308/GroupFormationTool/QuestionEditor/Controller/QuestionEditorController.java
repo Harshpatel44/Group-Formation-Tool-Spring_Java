@@ -23,11 +23,6 @@ public class QuestionEditorController implements IQuestionEditorController {
                                     @RequestParam(name="courseName") String courseName
     ){
         ModelAndView mv = new ModelAndView("questionEditorHome");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if ((authentication instanceof AnonymousAuthenticationToken)) {
-            mv.setViewName("redirect:/login");
-            return mv;
-        }
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);
@@ -45,11 +40,6 @@ public class QuestionEditorController implements IQuestionEditorController {
     {
         QuestionModel questionModel = new QuestionModel();
         ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if ((authentication instanceof AnonymousAuthenticationToken)) {
-            mv.setViewName("redirect:/login");
-            return mv;
-        }
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);
@@ -67,11 +57,6 @@ public class QuestionEditorController implements IQuestionEditorController {
                                      @RequestParam(name="courseName") String courseName)
 {
         ModelAndView mv = new ModelAndView();
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if ((authentication instanceof AnonymousAuthenticationToken)) {
-            mv.setViewName("redirect:/login");
-            return mv;
-        }
         if(questionModel.getSelectedQuestionType().equals("Text") || questionModel.getSelectedQuestionType().equals("Numeric")){
             mv.setViewName("questionEditorPreview");
             mv.addObject("options",null);
@@ -108,11 +93,6 @@ public class QuestionEditorController implements IQuestionEditorController {
         String[] optionList = optionText.split(",");
         String[] rankList = rankText.split(",");
         ModelAndView mv = new ModelAndView("questionEditorPreview");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if ((authentication instanceof AnonymousAuthenticationToken)) {
-            mv.setViewName("redirect:/login");
-            return mv;
-        }
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);
@@ -147,11 +127,6 @@ public class QuestionEditorController implements IQuestionEditorController {
             returnMessage=QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId);
         }
         ModelAndView mv = new ModelAndView("questionEditorFinish");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if ((authentication instanceof AnonymousAuthenticationToken)) {
-            mv.setViewName("redirect:/login");
-            return mv;
-        }
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);

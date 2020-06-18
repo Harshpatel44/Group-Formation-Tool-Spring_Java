@@ -25,11 +25,6 @@ public class QuestionController {
                                         @RequestParam(name="courseName") String courseName
     ){
         ModelAndView model=new ModelAndView("questionManager");
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if ((authentication instanceof AnonymousAuthenticationToken)) {
-            model.setViewName("redirect:/login");
-            return model;
-        }
         model.addObject("courseId",courseId);
         model.addObject("userId",userId);
         model.addObject("userType",userType);
