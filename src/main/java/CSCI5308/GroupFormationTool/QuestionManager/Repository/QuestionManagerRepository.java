@@ -4,7 +4,6 @@ import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -90,5 +89,4 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
         }
         return questionList;
     }
-
 }

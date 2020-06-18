@@ -13,12 +13,10 @@ public class Instructor {
     private String selectedInstructorCourseId;
     private String InstructorAssignMessage="status here";
 
-
     public Instructor() throws Exception {
     }
 
     public Instructor(String s){}
-
 
     public String getInstructorAssignMessage() {
         return InstructorAssignMessage;
@@ -43,5 +41,4 @@ public class Instructor {
     public void setSelectedInstructorCourseId(String selectedInstructorCourseId) {
         this.selectedInstructorCourseId = selectedInstructorCourseId;
     }
-
 }

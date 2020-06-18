@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionResponsesRepo;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

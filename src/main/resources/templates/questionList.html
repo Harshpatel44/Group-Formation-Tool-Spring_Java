@@ -58,14 +58,14 @@
 </div>
 <ul class="functionalities-list">
     <li class="list">
-        <div th:if="${prompt==true}">
+        <div th:if="${prompt}">
             <div class="function-heading">Confirm to delete</div>
            <div class="entity">
                The question you selected contain user responses. Are you sure you want to delete this question?
            </div>
             <div style="display: flex">
                 <form th:action="@{/deleteQuestion}" method="post">
-                    <input  type="hidden" th:value="${selectedQuestionId}" name="selectedquestionId" />
+                    <input  type="hidden" th:value="${selectedQuestionId}" name="selectedQuestionId" />
                     <input type="hidden"  th:value="${courseName}" name="courseName"/>
                     <input type="hidden" th:value="${userId}" name="userId" />
                     <input  type="hidden" th:value="${userType}" name="userType" />

@@ -20,7 +20,6 @@ public class HomeRepository implements IHomeRepository{
 		try {
 			role = new StoredProcedure("CheckGuest(?)");
 			role.setParameter(1,user.getUserId());
-			System.out.println(user.getUserId());
 			ResultSet rs = role.executeWithResults();
 			if(rs.next())//if data present, then not guest
 			{
@@ -29,9 +28,6 @@ public class HomeRepository implements IHomeRepository{
 			role.cleanup();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
-		}
-		finally {
-//			role.cleanup();
 		}
 		return result;
 	}
@@ -47,7 +43,6 @@ public class HomeRepository implements IHomeRepository{
 				storedProcedure = new StoredProcedure("AllCourses");
 				ResultSet rs = storedProcedure.executeWithResults();
 				while(rs.next()) {
-
 					Course temp = new Course();
 					temp.setCourseId(rs.getString("courseId"));
 					temp.setCourseName(rs.getString("courseName"));
@@ -56,7 +51,6 @@ public class HomeRepository implements IHomeRepository{
 				}
 				storedProcedure.cleanup();
 			}
-
 			// for courses if user is not guest
 			else{
 				storedProcedure = new StoredProcedure("Courses(?)");
@@ -84,12 +78,8 @@ public class HomeRepository implements IHomeRepository{
 				storedProcedure.cleanup();
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}finally {
-//			storedProcedure.cleanup();
 		}
-
 		return CourseList;	
 	}
 

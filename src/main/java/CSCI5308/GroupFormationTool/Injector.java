@@ -41,11 +41,9 @@ public class Injector {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
 	private IUserService userService;
-
 	private ICsvImporter csvImporter;
 	private IEmailConfiguration emailConfiguration;
 	private IUserNotification userNotification;
-
 	private IHomeRepository homeRepository;
 	private IHomeService homeService;
 	private ICourseService courseService;
@@ -58,12 +56,10 @@ public class Injector {
 	private IQuestionResponsesRepo questionResponsesRepo;
 
 	private Injector()  {
-
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
 		passwordEncryptor = new BCryptEncryption();
 		userService = new UserService();
-
 		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
@@ -77,7 +73,6 @@ public class Injector {
 		questionManagerService = new QuestionManagerService();
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
-
 	}
 
 	public IQuestionResponsesService getQuestionResponsesService() {
@@ -216,9 +211,5 @@ public class Injector {
 
 	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
 
-    
-
     public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
-
-    
 }

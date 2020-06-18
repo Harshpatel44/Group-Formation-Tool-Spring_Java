@@ -5,11 +5,8 @@ import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorInjector;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Collection;
 import java.util.HashMap;
 
 @Controller
@@ -23,7 +20,6 @@ public class QuestionEditorController implements IQuestionEditorController {
                                     @RequestParam(name="courseName") String courseName
     ){
         ModelAndView mv = new ModelAndView("questionEditorHome");
-
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);
@@ -57,18 +53,15 @@ public class QuestionEditorController implements IQuestionEditorController {
                                      @RequestParam(name="userType") String userType,
                                      @RequestParam(name="courseName") String courseName)
 {
-
         ModelAndView mv = new ModelAndView();
         if(questionModel.getSelectedQuestionType().equals("Text") || questionModel.getSelectedQuestionType().equals("Numeric")){
             mv.setViewName("questionEditorPreview");
             mv.addObject("options",null);
             mv.addObject("ranks",null);
-
         }
         else{
             mv.setViewName("questionEditorOption");
         }
-
         mv.addObject("courseId",courseId);
         mv.addObject("userId",userId);
         mv.addObject("userType",userType);
@@ -111,7 +104,6 @@ public class QuestionEditorController implements IQuestionEditorController {
         return mv;
     }
 
-
     @Override
     @RequestMapping("/questionEditorFinish")
     public ModelAndView questionFinish(QuestionModel questionModel,
@@ -139,5 +131,4 @@ public class QuestionEditorController implements IQuestionEditorController {
         mv.addObject("message",returnMessage);
         return mv;
     }
-
 }

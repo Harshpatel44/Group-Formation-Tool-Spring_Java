@@ -15,7 +15,6 @@ public class AdminService implements IAdminService {
         AdminInjector.instance().setAdminRepository(adminRepository);
     }
 
-
     @Override
     public boolean AssignInstructorService(Instructor instructor) throws Exception {
         if(AdminInjector.instance().getAdminRepository().assignInstructorRepo(instructor)){

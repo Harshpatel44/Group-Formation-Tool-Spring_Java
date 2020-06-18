@@ -10,7 +10,6 @@ public class StoredProcedure
 	private String storedProcedureName;
 	private Connection connection;
 	private CallableStatement statement;
-
 	public StoredProcedure(String storedProcedureName)  throws SQLException
 	{
 		this.storedProcedureName = storedProcedureName;
@@ -20,9 +19,6 @@ public class StoredProcedure
 		createStatement();
 	}
 
-	public StoredProcedure(){
-
-	}
 	private void createStatement() throws SQLException
 	{
 		statement = connection.prepareCall("{call " + storedProcedureName + "}");

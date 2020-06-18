@@ -22,7 +22,6 @@ public class UserPasswordPolicy {
 
 	public static UserPasswordPolicy setInstance(Integer minLength, Integer maxLength, Integer minUpperCaseLetter,
 			Integer minLowerCaseLetter, Integer minNoOfSymbols, String notAllowedCharacters) {
-
 		if (instance == null) {
 			instance = new UserPasswordPolicy(minLength, maxLength, minUpperCaseLetter, minLowerCaseLetter,
 					minNoOfSymbols, notAllowedCharacters);
@@ -91,5 +90,4 @@ public class UserPasswordPolicy {
 	public void setNotAllowedCharacters(String notAllowedCharacters) {
 		this.notAllowedCharacters = notAllowedCharacters;
 	}
-
 }

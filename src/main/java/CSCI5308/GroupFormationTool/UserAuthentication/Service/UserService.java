@@ -32,7 +32,6 @@ public class UserService implements IUserService {
 		Boolean success = false;
 		userRepository = Injector.instance().getUserRepository();
 		encryptor = Injector.instance().getPasswordEncryptor();
-
 		Map<String, String> validationErrors = checkAllValidaations(user);
 		if (validationErrors.size() > 0) {
 			throw new ServiceLayerException() {
@@ -41,11 +40,8 @@ public class UserService implements IUserService {
 				}
 			};
 		}
-
 		user.setPassword(encryptor.encoder(user.getPassword()));
-
 		boolean bannerIdExists = userRepository.getUserByBannerId(user);
-
 		if (!bannerIdExists) {
 			success = userRepository.createUser(user);
 		} else {
@@ -57,14 +53,11 @@ public class UserService implements IUserService {
 				}
 			};
 		}
-
 		return success;
 	}
 
 	private Map<String, String> checkAllValidaations(User user) {
-
 		Map<String, String> errors = new HashMap<String, String>();
-
 		if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
 			errors.put("firstName", "first name cannot be  null or empty");
 		}
@@ -78,13 +71,11 @@ public class UserService implements IUserService {
 		} else {
 			errors.put("bannerId", "BannerId cant be null or empty");
 		}
-
 		if (user.getEmailId() == null || user.getEmailId().isEmpty()) {
 			errors.put("emailId", "Email cannot be  null or empty");
 		} else if (!validateEmail(user.getEmailId())) {
 			errors.put("emailId", "Enter valid Email");
 		}
-		
 		if(user.getContactNumber() == null || user.getContactNumber().isEmpty())
 		{
 			errors.put("contactNumber", "Contact Number cannot be  null or empty");
@@ -96,7 +87,6 @@ public class UserService implements IUserService {
 		if (user.getPassword() == null || user.getPassword().isEmpty()) {
 			errors.put("password", "Password cannot be null or empty");
 		}
-		
 		if (user.getConfirmPassword() == null || user.getConfirmPassword().isEmpty()) {
 			errors.put("confirmPassword", "Confirm Password cannot be  null or empty");
 		}
@@ -107,7 +97,6 @@ public class UserService implements IUserService {
 				checkPasswordValidation(user.getPassword(), errors);
 			}
 		}
-
 		return errors;
 	}
 
@@ -120,18 +109,15 @@ public class UserService implements IUserService {
 		if (password.length() > passwordPolicy.getMaxLength()) {
 			policyErrors.add("Password should have maximum "+ passwordPolicy.getMaxLength()+" letters" );
 		}
-
 		if (password.chars().filter((s) -> Character.isUpperCase(s)).count() < passwordPolicy.getMinUpperCaseLetter()) {
 
 			policyErrors.add("Password should have minimum "+ + passwordPolicy.getMinUpperCaseLetter()+" uppercaseLetters ");
 		}
-
 		if (password.chars().filter((s) -> Character.isLowerCase(s)).count() < passwordPolicy.getMinLowerCaseLetter()) {
 
 			policyErrors
 					.add("Password should have minimum " + passwordPolicy.getMinLowerCaseLetter()+" lowerrcaseLetters" );
 		}
-
 		if (password.split("[!@#$%^&*()\\[\\]|;',./{}\\\\:\"<>?]", -1).length - 1 < passwordPolicy
 				.getMinNoOfSymbols()) {
 			policyErrors.add("Password should have minimum "+ + passwordPolicy.getMinNoOfSymbols()+" symbols" );
@@ -146,7 +132,6 @@ public class UserService implements IUserService {
 	}
 
 	private boolean validateEmail(final String email) {
-
 		pattern = Pattern.compile(EMAIL_PATTERN);
 		matcher = pattern.matcher(email);
 		return matcher.matches();

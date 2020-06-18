@@ -42,7 +42,6 @@ public class CsvImporterService implements ICsvImporter {
 			results = new HashMap<Integer, List<String>>();
 			courseRepository = Injector.instance().getCourseRepository();
 			userRepository = Injector.instance().getUserRepository();
-			System.out.println("Inside Csv service");
 			List<String> bannerIds = userRepository.getAllBannerIds();
 			Reader reader = new InputStreamReader(file.getInputStream());
 			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
@@ -66,31 +65,25 @@ public class CsvImporterService implements ICsvImporter {
 
 	private void checkTheUserAndEnroll(String[] record, List<String> bannerIds, IUserRepository userRepository,
 			String courseId) {
-		//
 		List<User> successfullUsers = new ArrayList<User>();
 		encryptor = Injector.instance().getPasswordEncryptor();
 		userNotification = Injector.instance().getUserNotification();
 		User user = new User(record[0], record[1], record[2], record[3], encryptor.encoder(record[0]), record[4]);
 		if (!bannerIds.contains(user.getBannerId())) {
-
 			boolean success = userRepository.createUser(user);
 			if (success) {
 				bannerIds.add(user.getBannerId());
-				System.out.println("User Created");
 				successfullResults.add("User was successfully created" + user.getBannerId());
 				try {
-					System.out.println("Credentials Sending");
 					successfullUsers.add(user);
 					userNotification.sendUserCredentials(user);
 					successfullResults.add("Credentials sent succesfully for user" + user.getBannerId());
 					enrollCourse(courseId, user, userRepository);
 				} catch (AddressException e) {
-
 					failureResults.add("Failed to Send the mail for the user" + user.getBannerId());
 					e.printStackTrace();
 				} catch (MessagingException e) {
 					failureResults.add("Failed to Send the mail for the user" + user.getBannerId());
-
 					e.printStackTrace();
 				}
 			} else {
@@ -99,13 +92,10 @@ public class CsvImporterService implements ICsvImporter {
 		} else {
 			enrollCourse(courseId, user, userRepository);
 		}
-
 	}
 
 	private void enrollCourse(String courseId, User user, IUserRepository userRepository) {
-
 		Boolean ifUserAlredyHasARole = courseRepository.getUserDetailsOnCourse(user, courseId);
-
 		if (!ifUserAlredyHasARole) {
 			Boolean enrollCourse = courseRepository.enrollStudentForCourse(user, courseId);
 			if (enrollCourse) {
@@ -115,5 +105,4 @@ public class CsvImporterService implements ICsvImporter {
 			failureResults.add("User has multiple roles to the course" + user.getBannerId());
 		}
 	}
-
 }

@@ -24,21 +24,19 @@ public class LoginController {
 	public String displaylogin() {
 		return "login";
 	}
-	
 
 	@GetMapping("/")
 	public String getLoginUser(Model model) {
-
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			return "redirect:/admin?userId=" + authentication.getPrincipal().toString();
-		} else if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		}
+		else if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			return "redirect:/home?userId=" + authentication.getPrincipal().toString();
-		} else {
+		}
+		else {
 			return "login";
 		}
-
 	}
 
 	@GetMapping("/updateNewPassword")

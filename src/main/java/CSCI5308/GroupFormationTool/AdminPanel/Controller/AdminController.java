@@ -32,9 +32,7 @@ public class AdminController implements IAdminController {
 		Instructor assignInstructor = new Instructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
-
 		if (authentication.getPrincipal().toString().equals("admin")) {
-
 			try {
 				Map<String, ?> flashAttribute = RequestContextUtils.getInputFlashMap(request);
 				String createMessage = (String) flashAttribute.get("courseCreateMessage");
@@ -51,8 +49,6 @@ public class AdminController implements IAdminController {
 				}
 			} catch (Exception ignored) {
 			}
-			;
-
 			mv.addObject("createCourse", createCourse);
 			mv.addObject("deleteCourse", deleteCourse);
 			mv.addObject("assignInstructor", assignInstructor);
@@ -70,15 +66,12 @@ public class AdminController implements IAdminController {
 	public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
-			System.out.println(redirectAttributes);
 			Injector.instance().getCourseService().CreateCourseService(createCourse);
 			redirectAttributes.addFlashAttribute("courseCreateMessage", createCourse.getCourseCreateMessage());
-			System.out.println(redirectAttributes);
 			return "redirect:admin";
 		} else {
 			return "redirect:/login";
 		}
-
 	}
 
 	// Author: Harsh Patel
@@ -103,7 +96,6 @@ public class AdminController implements IAdminController {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			ModelAndView mv = new ModelAndView();
-
 			AdminInjector.instance().getAdminService().AssignInstructorService(assignInstructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
 					assignInstructor.getInstructorAssignMessage());

@@ -12,11 +12,9 @@ public class ConnectionManager
 {
 	private static ConnectionManager instance = null;
 	private IDBConfiguration dbConfiguration;
-
 	private String url;
 	private String userName;
 	private String password;
-
 
 	private ConnectionManager() {
 		dbConfiguration = Injector.instance().getDbConfiguration();	

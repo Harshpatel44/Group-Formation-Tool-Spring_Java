@@ -11,7 +11,6 @@ import java.util.List;
 
 public class QuestionManagerService implements IQuestionManagerService {
     private IQuestionManagerRepository questionManagerRepository;
-
     public QuestionManagerService(){}
     public QuestionManagerService(QuestionManagerRepository questionManagerRepository) {
         Injector.instance().setQuestionManagerRepository(questionManagerRepository);
@@ -40,5 +39,4 @@ public class QuestionManagerService implements IQuestionManagerService {
         questionManagerRepository = Injector.instance().getQuestionManagerRepository();
         questionManagerRepository.deleteQuestion(questionId, userId);
     }
-
 }

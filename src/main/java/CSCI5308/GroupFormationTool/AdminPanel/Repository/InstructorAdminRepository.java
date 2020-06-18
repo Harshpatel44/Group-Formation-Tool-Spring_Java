@@ -10,7 +10,6 @@ import java.sql.SQLException;
 //  Author: Harsh Patel
 public class InstructorAdminRepository implements IInstructorAdminRepository {
 
-
     @Override
     public boolean assignInstructorRepo(Instructor assignInstructor) throws SQLException {
         StoredProcedure storedProcedure = new StoredProcedure("GetInstructorRole");

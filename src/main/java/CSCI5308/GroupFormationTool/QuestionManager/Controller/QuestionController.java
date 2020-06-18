@@ -21,7 +21,6 @@ public class QuestionController {
                                         @RequestParam(name="userType") String userType,
                                         @RequestParam(name="courseName") String courseName
     ){
-
         ModelAndView model=new ModelAndView("questionManager");
         model.addObject("courseId",courseId);
         model.addObject("userId",userId);
@@ -81,7 +80,7 @@ public class QuestionController {
     }
 
     @RequestMapping("/deleteQuestion")
-    public ModelAndView deleteQuestion(@RequestParam(name="selectedquestionId") Integer questionId,
+    public ModelAndView deleteQuestion(@RequestParam(name="selectedQuestionId") Integer questionId,
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
                                        @RequestParam(name="userType") String userType,
@@ -92,7 +91,6 @@ public class QuestionController {
         model.addObject("courseId",courseId);
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
-
         questionManagerService.deleteQuestion(questionId,userId);
         user.setUserId(userId);
         model.addObject("questions",questionManagerService.getQuestions(user, sortType));
@@ -100,7 +98,7 @@ public class QuestionController {
         return model;
     }
 
-    @RequestMapping("checkResponses")
+    @RequestMapping("/checkResponses")
     public ModelAndView checkResponses(@RequestParam(name="questionId") Integer questionId,
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
@@ -111,7 +109,6 @@ public class QuestionController {
         model.addObject("courseId",courseId);
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
-
         model.addObject("selectedQuestionId",questionId);
         boolean prompt = Injector.instance().getQuestionResponsesService().checkIfResponsesPresentService(questionId);
         if(prompt==false){
@@ -119,11 +116,10 @@ public class QuestionController {
         }
         else{
             model.addObject("prompt",prompt);
+            model.setViewName("questionList");
         }
         user.setUserId(userId);
-
         model.addObject("questions",questionManagerService.getQuestions(user, sortType));
-        model.setViewName("questionList");
         return model;
     }
 }

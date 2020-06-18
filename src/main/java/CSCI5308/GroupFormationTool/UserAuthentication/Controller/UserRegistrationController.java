@@ -33,29 +33,23 @@ public class UserRegistrationController implements WebMvcConfigurer {
 		mv.addObject("passwordPolicy", UserPasswordPolicy.getInstance());
 		try {
 			if (bindingResult.hasErrors()) {
-
 				mv.setViewName("signup");
 				return mv;
 			}
-
 			if (userService.createUser(user)) {
 				mv.setViewName("redirect:/login");
 				return mv;
 			}
-
 		} catch (ServiceLayerException e) {
 			if (e.getMapErrors().containsKey("confirmPassword")) {
 				if (e.getMapErrors().get("confirmPassword").split(";;").length > 0) {
 					String errorPassowrd = e.getMapErrors().get("confirmPassword");
 					mv.addObject("unfollowedPolicy", errorPassowrd.split(";;"));
-					System.out.print(errorPassowrd);
-
 				}
 			}
 			ErrorHelper.rejectErrors(bindingResult, e.getMapErrors());
 			mv.setViewName("signup");
 			return mv;
-
 		}
 		mv.setViewName("signup");
 		return mv;
@@ -70,5 +64,4 @@ public class UserRegistrationController implements WebMvcConfigurer {
 		mv.setViewName("signup");
 		return mv;
 	}
-
 }

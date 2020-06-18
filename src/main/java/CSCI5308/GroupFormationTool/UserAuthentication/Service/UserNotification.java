@@ -15,7 +15,6 @@ public class UserNotification implements IUserNotification {
 
 	@Override
 	public Boolean sendUserCredentials(User user) throws AddressException, MessagingException {
-		// TODO Auto-generated method stub
 		String subject = "Login Credentails for GroupFormation Tool";
 		String body = "Welcome to the GroupFormation Tool\n Your Login credentials are as follows: \n";
 		body += "Username: "+ user.getBannerId();
@@ -25,7 +24,6 @@ public class UserNotification implements IUserNotification {
 		message.setSubject(subject);
 		message.setText(body);
 		Transport.send(message);
-		System.out.println("Mail Sent");
 		return true;
 	}
 

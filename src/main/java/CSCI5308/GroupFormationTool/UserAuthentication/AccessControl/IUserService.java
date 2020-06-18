@@ -4,7 +4,6 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
 
 public interface IUserService {
-
 	public boolean createUser(User user) throws ServiceLayerException;
 	public UserPasswordPolicy getUserPasswordPolicy();
 }

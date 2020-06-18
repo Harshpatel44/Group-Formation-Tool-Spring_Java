@@ -9,7 +9,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class QuestionResponsesService implements IQuestionResponsesService {
-
     public QuestionResponsesService(){}
     public QuestionResponsesService(QuestionResponsesRepo questionResponsesRepo) {
         Injector.instance().setQuestionResponsesRepo(questionResponsesRepo);

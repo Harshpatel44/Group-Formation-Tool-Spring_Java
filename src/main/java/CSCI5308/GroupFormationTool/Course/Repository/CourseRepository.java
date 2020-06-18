@@ -1,5 +1,4 @@
 package CSCI5308.GroupFormationTool.Course.Repository;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,52 +10,6 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 //Dhruvesh Patel
 public class CourseRepository implements ICourseRepository {
-    String role;
-//	@Override
-//	public String checkRole(String userId, String courseId) {
-//		String role = "Guest";
-//		System.out.println(userId);
-//		System.out.println(courseId);
-//
-//		try {
-//			StoredProcedure rolecheck;
-//			rolecheck = new StoredProcedure("StudentRole(?,?)");
-//			rolecheck.setParameter(1, userId);
-//			rolecheck.setParameter(2,courseId);
-//			ResultSet rs = rolecheck.executeWithResults();
-//			if(rs.next()) {
-//
-//						role = "Student";
-//			}
-//			rolecheck.cleanup();
-//
-//			rolecheck = new StoredProcedure("TaRole(?,?)");
-//			rolecheck.setParameter(1, userId);
-//			rolecheck.setParameter(2,courseId);
-//			ResultSet rs1 = rolecheck.executeWithResults();
-//			if(rs1.next()) {
-//
-//						role = "TA";
-//			}
-//			rolecheck.cleanup();
-//
-//			rolecheck = new StoredProcedure("InstructorRole(?,?)");
-//			rolecheck.setParameter(1, userId);
-//			rolecheck.setParameter(2,courseId);
-//			ResultSet rs2 = rolecheck.executeWithResults();
-//			if(rs2.next()){
-//
-//						role = "Instructor";
-//			}
-//			rolecheck.cleanup();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		System.out.println(role);
-//
-//		return role;
-//	}
 
 	public boolean checkIfUserPresent(String taId){
 		StoredProcedure checkPresence = null;
@@ -67,14 +20,10 @@ public class CourseRepository implements ICourseRepository {
 			ResultSet rs = checkPresence.executeWithResults();
 			if(rs.next()){
 					result = true;
-			
 			}
 			checkPresence.cleanup();
-
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
-		}finally{
-			
 		}
         return result;
 	}
@@ -95,13 +44,9 @@ public class CourseRepository implements ICourseRepository {
 			checkPresence.cleanup();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
-		}finally{
-//			checkPresence.cleanup();
 		}
 		return result;
-
 	}
-
 
 	@Override
 	public String addTa(String taId, String courseId) {
@@ -132,6 +77,7 @@ public class CourseRepository implements ICourseRepository {
 		}
 		return result;
 	}
+
 	@Override
 	public boolean getUserDetailsOnCourse(User user, String courseId) {
 		StoredProcedure storedProcedure = null;
@@ -142,23 +88,18 @@ public class CourseRepository implements ICourseRepository {
 			ResultSet results = storedProcedure.executeWithResults();
 			if (results != null) {
 				if (results.next()) {
-
 					return true;
 				}
-
 			}
 			storedProcedure.cleanup();
-
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} 
 		return false;
-
 	}
 
 	@Override
 	public boolean enrollStudentForCourse(User user, String courseId) {
-
 		Boolean success = false;
 		StoredProcedure storedProcedure = null;
 		try {
@@ -166,8 +107,8 @@ public class CourseRepository implements ICourseRepository {
 			storedProcedure.setParameter(1, user.getBannerId());
 			storedProcedure.setParameter(2, courseId);
 			storedProcedure.execute();
-			success = true;
 			storedProcedure.cleanup();
+			success = true;
 		} catch (SQLException e) {
 
 			e.printStackTrace();
@@ -180,19 +121,15 @@ public class CourseRepository implements ICourseRepository {
 		ArrayList<String> courseNamesList = new ArrayList<>();
 		ArrayList<String> courseIdsList = new ArrayList<>();
 		ArrayList<ArrayList<String>> courseNamesWithIdsList = new ArrayList<>();
-
 		StoredProcedure storedProcedure = new StoredProcedure("AllCourses");
 		ResultSet result = storedProcedure.executeWithResults();
-
 		while(result.next()){
 			courseNamesList.add(result.getString("courseName"));
 			courseIdsList.add(result.getString("courseId"));
 		}
 		storedProcedure.cleanup();
-
 		courseNamesWithIdsList.add(courseIdsList);
 		courseNamesWithIdsList.add(courseNamesList);
-
 		return courseNamesWithIdsList;
 	}
 
@@ -202,10 +139,8 @@ public class CourseRepository implements ICourseRepository {
 		System.out.println("inside");
 		try {
 			StoredProcedure storedProcedure = new StoredProcedure("CreateCourse(?,?)");
-			System.out.println(storedProcedure);
 			storedProcedure.setParameter("cId", createCourse.getCourseId());
 			storedProcedure.setParameter("cName", createCourse.getCourseName());
-			System.out.println(storedProcedure);
 			storedProcedure.execute();
 			storedProcedure.cleanup();
 			return true;
@@ -231,8 +166,4 @@ public class CourseRepository implements ICourseRepository {
 			return false;
 		}
 	}
-
-
-
-
 }

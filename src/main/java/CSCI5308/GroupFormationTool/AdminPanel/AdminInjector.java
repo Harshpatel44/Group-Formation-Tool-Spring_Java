@@ -10,7 +10,6 @@ import CSCI5308.GroupFormationTool.AdminPanel.Service.AdminService;
 
 public class AdminInjector {
     private static AdminInjector instance = null;
-
     private IAdminController adminController;
     private IAdminService adminService;
     private IInstructorAdminRepository adminRepository;
@@ -27,7 +26,6 @@ public class AdminInjector {
         }
         return instance;
     }
-
 
     public IAdminController getAdminController() {
         return adminController;

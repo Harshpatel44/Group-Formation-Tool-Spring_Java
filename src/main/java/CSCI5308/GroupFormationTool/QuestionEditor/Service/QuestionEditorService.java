@@ -15,7 +15,6 @@ import static java.util.Map.Entry.*;
 public class QuestionEditorService implements IQuestionEditorService {
 
     public QuestionEditorService(){}
-
     public QuestionEditorService(QuestionEditorRepository questionEditorRepository) throws Exception {
         QuestionEditorInjector.instance().setQuestionEditorRepository(questionEditorRepository);
     }
@@ -23,7 +22,6 @@ public class QuestionEditorService implements IQuestionEditorService {
     @Override
     public String SaveQuestionServiceForTextAndNumeric(String questionText,String questionTitle,String selectedQuestionType, String userId) throws Exception {
         if(QuestionEditorInjector.instance().getQuestionEditorRepository().SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,userId)){
-
             return "Question submitted successfully";
         }
         else{
@@ -40,5 +38,4 @@ public class QuestionEditorService implements IQuestionEditorService {
             return "Question did not submit successfully";
         }
     }
-
 }

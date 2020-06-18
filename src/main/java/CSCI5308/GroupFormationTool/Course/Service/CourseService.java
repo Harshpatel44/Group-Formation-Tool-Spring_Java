@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.Course.Service;
 
-import CSCI5308.GroupFormationTool.AdminPanel.AdminInjector;
 import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
 import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
 import CSCI5308.GroupFormationTool.Course.Repository.CourseRepository;

@@ -1,5 +1,4 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Model;
-
 import java.sql.Date;
 
 //Dhruvesh Patel

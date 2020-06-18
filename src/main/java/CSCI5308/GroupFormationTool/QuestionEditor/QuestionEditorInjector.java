@@ -16,13 +16,8 @@ public class QuestionEditorInjector {
     private IQuestionEditorService questionEditorService;
     private IQuestionEditorRepository questionEditorRepository;
     private IRankFunctionsService rankFunctionsService;
-
     public IRankFunctionsService getRankFunctionsService() {
         return rankFunctionsService;
-    }
-
-    public void setRankFunctionsService(IRankFunctionsService rankFunctionsService) {
-        this.rankFunctionsService = rankFunctionsService;
     }
 
     private QuestionEditorInjector() throws Exception {
@@ -39,10 +34,13 @@ public class QuestionEditorInjector {
         return instance;
     }
 
+    public void setRankFunctionsService(IRankFunctionsService rankFunctionsService) {
+        this.rankFunctionsService = rankFunctionsService;
+    }
+
     public IQuestionEditorController getQuestionEditorController() {
         return questionEditorController;
     }
-
 
     public void setQuestionEditorController(IQuestionEditorController questionEditorController) {
         this.questionEditorController = questionEditorController;
