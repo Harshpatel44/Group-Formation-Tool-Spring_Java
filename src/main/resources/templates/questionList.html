@@ -76,13 +76,13 @@
                 <td th:text="${question.questionDescription}" />
                 <td th:text="${question.date}" />
                 <td>
-                    <form th:action="@{/deleteQuestion}" method="post" >
+                    <form th:action="@{/deleteQuestion}" method="post" id="delete-question-form">
                         <input  type="hidden" th:value="${question.questionId}" name="questionId" />
                         <input type="hidden"  th:value="${courseName}" name="courseName"/>
                         <input type="hidden" th:value="${userId}" name="userId" />
                         <input  type="hidden" th:value="${userType}" name="userType" />
                         <input type="hidden" th:value="${courseId}" name="courseId" />
-                        <button type="submit" class="submit-button" name="save" > Delete</button>
+                        <button type="submit" onclick="alertFunction()" class="submit-button" name="save" > Delete</button>
                     </form>
                 </td>
             </tr>
@@ -90,5 +90,14 @@
         </table>
     </li>
 </ul>
+<script type="text/javascript">
+    function alertFunction(){
+        if (confirm("The question you selected contain user responses. Are you sure you want to delete this question?")) {
+            document.getElementById("delete-question-form").submit();
+        } else {
+
+        }
+    }
+</script>
 </body>
 </html>

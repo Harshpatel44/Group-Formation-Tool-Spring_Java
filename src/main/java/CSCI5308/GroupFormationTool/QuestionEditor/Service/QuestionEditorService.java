@@ -20,8 +20,6 @@ public class QuestionEditorService implements IQuestionEditorService {
         QuestionEditorInjector.instance().setQuestionEditorRepository(questionEditorRepository);
     }
 
-
-
     @Override
     public String SaveQuestionServiceForTextAndNumeric(String questionText,String questionTitle,String selectedQuestionType, String userId) throws Exception {
         if(QuestionEditorInjector.instance().getQuestionEditorRepository().SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,userId)){
