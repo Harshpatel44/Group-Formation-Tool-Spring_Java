@@ -63,6 +63,7 @@ public class LoginController implements ILoginController {
 		boolean matchPassword;
 		boolean update;
 		String bannerid;
+		int passNumber;
 		Map<String, String> errors = new HashMap<>();
 		
 		UserPasswordPolicy userPasswordPolicy = Injector.instance().getUserRepository().getUserPasswordPolicy();
@@ -91,8 +92,10 @@ public class LoginController implements ILoginController {
 		}
 
 		bannerid = service.getBannerIdByPassKey(passKey);
-		oldPasswords = service.getPasswordByBannerId(bannerid);
 
+		passNumber = service.getPasswordPolicyNumber();
+
+		oldPasswords = service.getPasswordByBannerId(bannerid,passNumber);
 		for (String password : oldPasswords) {
 			if (encryption.passwordMatch(newPassword, password)) {
 				model.addAttribute("Error", "New password cannot be same as the old password");

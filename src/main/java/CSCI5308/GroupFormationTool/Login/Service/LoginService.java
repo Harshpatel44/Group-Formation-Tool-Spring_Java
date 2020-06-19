@@ -72,9 +72,12 @@ public class LoginService implements ILoginService {
 		BCryptEncryption encryption = new BCryptEncryption();
 		return Injector.instance().getLoginRepository().updatePassword(bannerid, encryption.encoder(newPassword));
 	}
-
-	@Override
-	public List<String> getPasswordByBannerId(String bannerid) {
-		return Injector.instance().getLoginRepository().getPasswordByBannerId(bannerid);
+    @Override
+    public int getPasswordPolicyNumber() {
+        return Injector.instance().getLoginRepository().getPasswordPolicyNumber();
+    }
+    @Override
+	public List<String> getPasswordByBannerId(String bannerid, int passNumber) {
+		return Injector.instance().getLoginRepository().getPasswordByBannerId(bannerid,passNumber);
 	}
 }

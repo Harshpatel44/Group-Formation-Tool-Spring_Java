@@ -8,7 +8,8 @@ public interface ILoginRepository {
     public String getEmailByBannerid(String bannerid);
     public boolean insertToForgetPassword(String bannerid, String passKey);
     public String getBannerIdByPassKey(String passKey);
+    public int getPasswordPolicyNumber();
     public boolean updatePassword(String bannerid,String newPassword);
-    public List<String> getPasswordByBannerId(String bannerid);
+    public List<String> getPasswordByBannerId(String bannerid,int passNumber);
 
 }
