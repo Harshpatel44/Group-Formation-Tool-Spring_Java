@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Course Admin</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+
+</head>
+<body>
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div th:text="${courseId}">
+                Course Admin panel
+            </div>
+        </li>
+    </ul>
+</div>
+
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, <span th:text="${userId}" />
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+                <form  class="nav-bar-element" th:action="@{/course}" method="post" >
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input  type="hidden" th:value="${courseId}" name="courseId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userId}" name="userId" />
+                    <button type="submit" class="submit-button" name="save">Course Home</button>
+                </form>
+                <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input type="hidden" th:value="${userId}" name="userId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input type="hidden" th:value="${courseId}" name="courseId" />
+                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userType}">Question Manager</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<ul class="functionalities-list" style="width: auto;">
+    <li class="list">
+        <div class="function-heading">Create Question</div>
+
+        <form th:action="@{/createOption}" method="post" th:object="${questionModel}">
+            <div class="entity">
+                <label >Question title:</label>
+                <input type="text" class="create-question-inputs" th:field="*{questionTitle}" required>
+            </div>
+            <div class="entity">
+                <label>Question text:</label>
+                <input type="text"  class="create-question-inputs" th:field="*{questionText}" required>
+            </div>
+            <div class="entity">
+                <label>Select question type:</label>
+                <select name="" class="create-question-inputs" th:field="*{selectedQuestionType}">
+                    <option th:each="selectValue: ${questionModel.questionTypeList}"
+                            th:value="${selectValue.value}"
+                            th:text="${selectValue.key}"
+                    ></option>
+                </select>
+            </div>
+
+            <input type="hidden"  th:value="${courseName}" name="courseName"/>
+            <input type="hidden" th:value="${userId}" name="userId" />
+            <input  type="hidden" th:value="${userType}" name="userType" />
+            <input type="hidden" th:value="${courseId}" name="courseId" />
+<!--            <input type="hidden" th:object="${questionModel}" name="questionModel" />-->
+            <button type="submit" name="Next" class="submit-button">Next</button>
+        </form>
+    </li>
+</ul>
+
+</body>
+</html>

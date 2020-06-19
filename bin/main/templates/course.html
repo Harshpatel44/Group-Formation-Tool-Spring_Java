@@ -1,25 +1,68 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title> Course Page </title>
-    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+<title>Course Page</title>
+<link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
-<div id="heading-box" th:text="${course_name}">
-    Course Page
-</div>
-<h3>Hello, <span th:text="${userId}"/></h3>
-<form th:action="@{/logout}"  method="post">
-    <div class="entity">
-        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
-    </div>
-</form>
 
-<form th:action="@{/courseadmin}" method="post">
-    <input type="hidden"  th:value="${course_name}" name="courseName"/>
-    <input  type="hidden" th:value="${courseId}" name="courseId" />
-    <input  type="hidden" th:value="${userId}" name="userId" style="float: none" />
-    <button type="submit" class="submit-button" name="save" th:if="${checkRole}" > GOTO Course Admin</button>
-</form>
+	<div>
+		<ul id="heading-box">
+			<li style="margin: auto;">
+				<div th:text="${courseId}">Course Admin panel</div>
+			</li>
+		</ul>
+	</div>
+
+
+	<div>
+		<ul id="heading-box2">
+			<li>
+				<div>
+					Hello, <span th:text="${userId}" />
+				</div>
+			</li>
+			<li>
+				<div class="nav-bar">
+					<form class="nav-bar-element" th:action="@{/logout}" method="post">
+						<div class="entity">
+							<button type="submit" class="submit-button" value="Logout"
+								name="Logout">Logout</button>
+						</div>
+					</form>
+					<form class="nav-bar-element" th:action="@{/home}" method="post">
+
+						<button type="submit" name="questionmanager" class="submit-button">Home
+							page</button>
+					</form>
+					<form class="nav-bar-element" th:action="@{/courseadmin}"
+						method="post">
+						<input type="hidden" th:value="${courseName}" name="courseName" />
+						<input type="hidden" th:value="${courseId}" name="courseId" /> <input
+							type="hidden" th:value="${userType}" name="userType" /> <input
+							type="hidden" th:value="${userId}" name="userId"
+							style="float: none" /> <input type="hidden"
+							th:value="${checkRole}" name="checkRole" style="float: none" />
+						<button type="submit" class="submit-button" name="courseadmin"
+							th:if="${checkRole}">Course Admin</button>
+					</form>
+					<form class="nav-bar-element" th:action="@{/questionManager}"
+						method="post">
+						<input type="hidden" th:value="${courseName}" name="courseName" />
+						<input type="hidden" th:value="${userId}" name="userId" /> <input
+							type="hidden" th:value="${userType}" name="userType" /> <input
+							type="hidden" th:value="${courseId}" name="courseId" />
+						<button type="submit" name="questionmanager" class="submit-button"
+							th:if="${userType}">Question Manager</button>
+					</form>
+				</div>
+			</li>
+		</ul>
+	</div>
+
+
+
+
 </body>
 </html>

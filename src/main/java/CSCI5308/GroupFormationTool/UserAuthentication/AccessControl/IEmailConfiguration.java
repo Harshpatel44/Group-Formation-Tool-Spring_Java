@@ -4,5 +4,4 @@ import javax.mail.internet.MimeMessage;
 
 public interface IEmailConfiguration {
 	public MimeMessage getMessageCredentials();
-	
 }

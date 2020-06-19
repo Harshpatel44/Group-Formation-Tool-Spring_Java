@@ -2,28 +2,22 @@ package CSCI5308.GroupFormationTool.AdminPanel;
 
 
 import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminController;
-import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminRepository;
+import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IInstructorAdminRepository;
 import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminService;
 import CSCI5308.GroupFormationTool.AdminPanel.Controller.AdminController;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.AssignInstructor;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.CreateCourse;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.DeleteCourse;
-import CSCI5308.GroupFormationTool.AdminPanel.Repository.AdminRepository;
+import CSCI5308.GroupFormationTool.AdminPanel.Repository.InstructorAdminRepository;
 import CSCI5308.GroupFormationTool.AdminPanel.Service.AdminService;
-
-import java.sql.SQLException;
 
 public class AdminInjector {
     private static AdminInjector instance = null;
-
     private IAdminController adminController;
     private IAdminService adminService;
-    private IAdminRepository adminRepository;
+    private IInstructorAdminRepository adminRepository;
 
     private AdminInjector() throws Exception {
         adminController = new AdminController();
         adminService = new AdminService();
-        adminRepository = new AdminRepository();
+        adminRepository = new InstructorAdminRepository();
     }
 
     public static AdminInjector instance() throws Exception {
@@ -32,7 +26,6 @@ public class AdminInjector {
         }
         return instance;
     }
-
 
     public IAdminController getAdminController() {
         return adminController;
@@ -50,11 +43,11 @@ public class AdminInjector {
         this.adminService = adminService;
     }
 
-    public IAdminRepository getAdminRepository() {
+    public IInstructorAdminRepository getAdminRepository() {
         return adminRepository;
     }
 
-    public void setAdminRepository(IAdminRepository adminRepository) {
+    public void setAdminRepository(IInstructorAdminRepository adminRepository) {
         this.adminRepository = adminRepository;
     }
 }
