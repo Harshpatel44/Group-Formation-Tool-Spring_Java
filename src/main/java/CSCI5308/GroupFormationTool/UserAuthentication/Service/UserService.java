@@ -131,7 +131,7 @@ public class UserService implements IUserService {
 			}
 		}
 		if (passwordPolicyStatus.getMinNoOfSymbols() == 1) {
-			if (password.split("[!@#$%^&*()\\[\\]|;',./{}\\\\:\"<>?]", -1).length - 1 < passwordPolicy
+			if (password.split("[!_/-@#$%^&*()\\[\\]|;',./{}\\\\:\"<>?]", -1).length - 1 < passwordPolicy
 					.getMinNoOfSymbols()) {
 				policyErrors.add("Password should have minimum " + +passwordPolicy.getMinNoOfSymbols() + " symbols");
 			}

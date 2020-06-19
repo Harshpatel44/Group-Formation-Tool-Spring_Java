@@ -73,29 +73,6 @@
 					here</span>
 			</form>
 		</li>
-
-<<<<<<< HEAD
-		<li class="list">
-			<div class="function-heading">Assign instructor</div>
-			<form action="" th:object="${assignInstructor}"
-				th:action="@{/assignInstructor}" method="post">
-				<div class="entity">
-					<label class="labels">User id:</label> <input type="text"
-						th:field="*{InstructorId}">
-				</div>
-				<div class="entity">
-					<label>Select course:</label> <select name=""
-						th:field="*{selectedInstructorCourseId}">
-						<option th:each="selectValue: ${assignInstructor.allCoursesList}"
-							th:value="${selectValue.value}" th:text="${selectValue.key}"></option>
-					</select>
-				</div>
-				<input class="submit-button" type="submit" value="Assign instructor">
-				<span class="message" th:text="*{instructorAssignMessage}">status
-					here</span>
-			</form>
-		</li>
-=======
     <li class="list">
         <div class="function-heading">Assign instructor</div>
         <form action="" th:object="${assignInstructor}" th:action="@{/assignInstructor}" method="post">
@@ -116,9 +93,6 @@
             <span class="message" th:text="*{instructorAssignMessage}">status here</span>
         </form>
     </li>
->>>>>>> origin/create-questions
-
 	</ul>
-
 </body>
 </html>
