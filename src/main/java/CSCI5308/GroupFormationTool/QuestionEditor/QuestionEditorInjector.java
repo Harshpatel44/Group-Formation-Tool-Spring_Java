@@ -1,18 +1,11 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
 
-import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminController;
-import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminRepository;
-import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminService;
-import CSCI5308.GroupFormationTool.AdminPanel.Controller.AdminController;
-import CSCI5308.GroupFormationTool.AdminPanel.Repository.AdminRepository;
-import CSCI5308.GroupFormationTool.AdminPanel.Service.AdminService;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorController;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorRepository;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorService;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IRankFunctionsService;
 import CSCI5308.GroupFormationTool.QuestionEditor.Controller.QuestionEditorController;
-import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.Repository.QuestionEditorRepository;
 import CSCI5308.GroupFormationTool.QuestionEditor.Service.QuestionEditorService;
 import CSCI5308.GroupFormationTool.QuestionEditor.Service.RankFunctionsService;
@@ -23,13 +16,8 @@ public class QuestionEditorInjector {
     private IQuestionEditorService questionEditorService;
     private IQuestionEditorRepository questionEditorRepository;
     private IRankFunctionsService rankFunctionsService;
-
     public IRankFunctionsService getRankFunctionsService() {
         return rankFunctionsService;
-    }
-
-    public void setRankFunctionsService(IRankFunctionsService rankFunctionsService) {
-        this.rankFunctionsService = rankFunctionsService;
     }
 
     private QuestionEditorInjector() throws Exception {
@@ -46,10 +34,13 @@ public class QuestionEditorInjector {
         return instance;
     }
 
+    public void setRankFunctionsService(IRankFunctionsService rankFunctionsService) {
+        this.rankFunctionsService = rankFunctionsService;
+    }
+
     public IQuestionEditorController getQuestionEditorController() {
         return questionEditorController;
     }
-
 
     public void setQuestionEditorController(IQuestionEditorController questionEditorController) {
         this.questionEditorController = questionEditorController;

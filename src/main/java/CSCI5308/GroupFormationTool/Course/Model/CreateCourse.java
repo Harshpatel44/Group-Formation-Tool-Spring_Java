@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.AdminPanel.Model;
+package CSCI5308.GroupFormationTool.Course.Model;
 
 import org.springframework.stereotype.Component;
 

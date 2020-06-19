@@ -4,6 +4,10 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**
 !**/src/test/**
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/create-questions
 
 ### STS ###
 .apt_generated

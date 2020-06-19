@@ -11,7 +11,6 @@ public class ErrorHelper {
 	            result.reject(error);
 	        }
 	    }
-	    
 	}
 	public static void rejectErrors(BindingResult result, final Map<String,String> errors) {
 	    if (errors != null) {
@@ -20,5 +19,4 @@ public class ErrorHelper {
 	        }
 	    }
 	}
-
 }

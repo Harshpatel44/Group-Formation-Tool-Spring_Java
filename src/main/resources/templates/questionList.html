@@ -56,6 +56,33 @@
     <button type="submit" class="submit-button" name="save" > sort by topic</button>
 </form>
 </div>
+<ul class="functionalities-list">
+    <li class="list">
+        <div th:if="${prompt}">
+            <div class="function-heading">Confirm to delete</div>
+           <div class="entity">
+               The question you selected contain user responses. Are you sure you want to delete this question?
+           </div>
+            <div style="display: flex">
+                <form th:action="@{/deleteQuestion}" method="post">
+                    <input  type="hidden" th:value="${selectedQuestionId}" name="selectedQuestionId" />
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input type="hidden" th:value="${userId}" name="userId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input type="hidden" th:value="${courseId}" name="courseId" />
+                    <button type="submit" class="submit-button" name="yes" >Yes</button>
+                </form>
+                <form th:action="@{/questionList}" method="post">
+                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
+                    <input type="hidden" th:value="${userId}" name="userId" />
+                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input type="hidden" th:value="${courseId}" name="courseId" />
+                    <button type="submit" class="submit-button" name="no" >No</button>
+                </form>
+            </div>
+        </div>
+    </li>
+</ul>
 <ul class="functionalities-list" style="width: auto">
     <li id="home_li"class="list">
         <table class="homepage_table" style="">
@@ -69,20 +96,19 @@
             </tr>
             </thead>
 
-
             <tr>
             <tr th:each="question: ${questions}">
                 <td th:text="${question.questionTopic}" />
                 <td th:text="${question.questionDescription}" />
                 <td th:text="${question.date}" />
                 <td>
-                    <form th:action="@{/deleteQuestion}" method="post" id="delete-question-form">
+                    <form th:action="@{/checkResponses}" method="post" id="delete-question-form">
                         <input  type="hidden" th:value="${question.questionId}" name="questionId" />
                         <input type="hidden"  th:value="${courseName}" name="courseName"/>
                         <input type="hidden" th:value="${userId}" name="userId" />
                         <input  type="hidden" th:value="${userType}" name="userType" />
                         <input type="hidden" th:value="${courseId}" name="courseId" />
-                        <button type="submit" onclick="alertFunction()" class="submit-button" name="save" > Delete</button>
+                        <button type="submit" class="submit-button" name="save" > Delete</button>
                     </form>
                 </td>
             </tr>

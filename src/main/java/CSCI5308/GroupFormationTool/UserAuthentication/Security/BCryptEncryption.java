@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 public class BCryptEncryption implements IPasswordEncryptor {
 
     private BCryptPasswordEncoder encode;
-
     public BCryptEncryption() {
         this.encode = new BCryptPasswordEncoder();
     }

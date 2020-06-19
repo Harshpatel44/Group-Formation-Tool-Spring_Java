@@ -2,25 +2,22 @@ package CSCI5308.GroupFormationTool.AdminPanel.Controller;
 
 import CSCI5308.GroupFormationTool.AdminPanel.AccessControl.IAdminController;
 import CSCI5308.GroupFormationTool.AdminPanel.AdminInjector;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.AssignInstructor;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.CreateCourse;
-import CSCI5308.GroupFormationTool.AdminPanel.Model.DeleteCourse;
+import CSCI5308.GroupFormationTool.AdminPanel.Model.Instructor;
 
-import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
+import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
+import CSCI5308.GroupFormationTool.Injector;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
 import javax.servlet.http.HttpServletRequest;
-import java.sql.SQLException;
 import java.util.Map;
 
 @Controller
@@ -32,12 +29,10 @@ public class AdminController implements IAdminController {
 	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
 		CreateCourse createCourse = new CreateCourse();
 		DeleteCourse deleteCourse = new DeleteCourse();
-		AssignInstructor assignInstructor = new AssignInstructor();
+		Instructor assignInstructor = new Instructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
-
 		if (authentication.getPrincipal().toString().equals("admin")) {
-
 			try {
 				Map<String, ?> flashAttribute = RequestContextUtils.getInputFlashMap(request);
 				String createMessage = (String) flashAttribute.get("courseCreateMessage");
@@ -54,8 +49,6 @@ public class AdminController implements IAdminController {
 				}
 			} catch (Exception ignored) {
 			}
-			;
-
 			mv.addObject("createCourse", createCourse);
 			mv.addObject("deleteCourse", deleteCourse);
 			mv.addObject("assignInstructor", assignInstructor);
@@ -73,15 +66,12 @@ public class AdminController implements IAdminController {
 	public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
-			System.out.println(redirectAttributes);
-			AdminInjector.instance().getAdminService().CreateCourseService(createCourse);
+			Injector.instance().getCourseService().CreateCourseService(createCourse);
 			redirectAttributes.addFlashAttribute("courseCreateMessage", createCourse.getCourseCreateMessage());
-			System.out.println(redirectAttributes);
 			return "redirect:admin";
 		} else {
 			return "redirect:/login";
 		}
-
 	}
 
 	// Author: Harsh Patel
@@ -90,7 +80,7 @@ public class AdminController implements IAdminController {
 	public String deleteCourse(DeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
-			AdminInjector.instance().getAdminService().DeleteCourseService(deleteCourse);
+			Injector.instance().getCourseService().DeleteCourseService(deleteCourse);
 			redirectAttributes.addFlashAttribute("courseDeleteMessage", deleteCourse.getCourseDeleteMessage());
 			return "redirect:admin";
 		} else {
@@ -101,12 +91,11 @@ public class AdminController implements IAdminController {
 	// Author: Harsh Patel
 	@PostMapping("/assignInstructor")
 	@Override
-	public String assignInstructor(AssignInstructor assignInstructor, RedirectAttributes redirectAttributes)
+	public String assignInstructor(Instructor assignInstructor, RedirectAttributes redirectAttributes)
 			throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			ModelAndView mv = new ModelAndView();
-
 			AdminInjector.instance().getAdminService().AssignInstructorService(assignInstructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
 					assignInstructor.getInstructorAssignMessage());

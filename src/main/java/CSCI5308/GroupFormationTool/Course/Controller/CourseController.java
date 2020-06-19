@@ -10,18 +10,16 @@ import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseController;
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseService;
 
-//Dhruvesh Patel
+
 @Controller
 public class CourseController implements ICourseController{
   
 	private ICourseService courseService;
-	//private ICourseRepository courseRepository;
 
 	@RequestMapping("/course")
 	public ModelAndView course(@RequestParam(name="userType") String userType,@RequestParam(name="courseId") String courseId,@RequestParam(name="courseName") String courseName,@RequestParam(name="userId") String userId){
 		courseService = Injector.instance().getCourseService();
 		ModelAndView model=new ModelAndView("course");
-
 		model.addObject("courseId",courseId);
 		model.addObject("userId",userId);
 		model.addObject("courseName",courseName);
@@ -39,14 +37,13 @@ public class CourseController implements ICourseController{
 									@RequestParam(name="checkRole") String checkRole){
 		courseService = Injector.instance().getCourseService();
 		ModelAndView model=new ModelAndView("courseadmin");
-
 		model.addObject("ta",new TA());
 		model.addObject("userId",userId);
 		model.addObject("courseId",courseId);
 		model.addObject("courseName",courseName);
 		model.addObject("userType",courseService.checkUserType(userType));
 		model.addObject("checkRole",checkRole);
-		//model.addObject("result",courseService.addTa(taId,courseId));
+
 		model.setViewName("courseadmin");
 		return model;
 	}
@@ -54,9 +51,7 @@ public class CourseController implements ICourseController{
 	@RequestMapping("/addta")
 	public ModelAndView addta( @RequestParam(name="taId") String taId,@RequestParam(name="courseId") String courseId, @RequestParam(name="courseName") String courseName, @RequestParam(name="userId") String userId ){
 		courseService = Injector.instance().getCourseService();
-
 		ModelAndView model=new ModelAndView("courseadmin");
-//		System.out.println(courseId);
 		model.addObject("userId",userId);
 		model.addObject("courseId",courseId);
 		model.addObject("courseName",courseName);
@@ -64,7 +59,4 @@ public class CourseController implements ICourseController{
 		model.setViewName("courseadmin");
 		return model;
 	}
-
-	        
-  
 }

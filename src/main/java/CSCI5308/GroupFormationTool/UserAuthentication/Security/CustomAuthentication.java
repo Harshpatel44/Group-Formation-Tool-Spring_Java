@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Security;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -10,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
@@ -19,12 +17,10 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-
-
 public class CustomAuthentication implements AuthenticationManager
 {
 	private static final String ADMIN_BANNER_ID = "ADMIN";
-	
+
 	private Authentication checkAdmin(String password, User u, Authentication authentication) throws AuthenticationException
 	{
 		// The admin password is not encrypted because it is hardcoded in the DB.
@@ -76,10 +72,8 @@ public class CustomAuthentication implements AuthenticationManager
 		IUserRepository userRepository = Injector.instance().getUserRepository();
 		ILoginRepository loginRepository = Injector.instance().getLoginRepository();
 		Boolean validity = false;
-		
 		try
 		{
-			
 			validity = loginRepository.isUser(bannerID);
 			
 		}

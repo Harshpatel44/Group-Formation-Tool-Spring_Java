@@ -4,25 +4,23 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Model;
 
 
 public class User {
-
-
 	private String firstName;
-
 	private String lastName;
-
 	private String bannerId;
-
-
 	private String emailId;
-
-
 	private String password;
-
-
 	private String confirmPassword;
-
 	private String contactNumber;
-
+	public User() {}
+	public User(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber)
+	{
+		this.bannerId = bannerId;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.emailId = emailId;
+		this.password = password;
+		this.contactNumber = contactNumber;
+	}
 
 
 	public String getFirstName() {
@@ -80,19 +78,4 @@ public class User {
 	public void setContactNumber(String contactNumber) {
 		this.contactNumber = contactNumber;
 	}
-		
-
-	public User() {}
-	public User(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber)
-	{
-		this.bannerId = bannerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.password = password;
-		this.contactNumber = contactNumber;
-	}
-
-
-
 }

@@ -6,6 +6,7 @@ import CSCI5308.GroupFormationTool.Exceptions.ErrorHelper;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicyStatus;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -36,19 +37,15 @@ public class UserRegistrationController implements WebMvcConfigurer {
 				mv.setViewName("signup");
 				return mv;
 			}
-
 			if (userService.createUser(user)) {
 				mv.setViewName("redirect:/login");
 				return mv;
 			}
-
 		} catch (ServiceLayerException e) {
 			if (e.getMapErrors().containsKey("confirmPassword")) {
 				if (e.getMapErrors().get("confirmPassword").split(";;").length > 0) {
 					String errorPassowrd = e.getMapErrors().get("confirmPassword");
 					mv.addObject("unfollowedPolicy", errorPassowrd.split(";;"));
-					System.out.print(errorPassowrd);
-
 				}
 			}
 			ErrorHelper.rejectErrors(bindingResult, e.getMapErrors());
@@ -64,10 +61,10 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	public ModelAndView register(User user) {
 		userService = Injector.instance().getUserService();
 		UserPasswordPolicy passwordPolicy = userService.getUserPasswordPolicy();
+		UserPasswordPolicyStatus passwordPolicyStatus = userService.getUserPasswordPolicyStatus();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("passwordPolicy", passwordPolicy);
 		mv.setViewName("signup");
 		return mv;
 	}
-
 }

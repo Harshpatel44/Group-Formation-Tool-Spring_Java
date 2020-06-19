@@ -61,7 +61,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             storedProcedure.setParameter("dStamp",date.toString());
             storedProcedure.execute();
             storedProcedure.cleanup();
-
             StoredProcedure storedProcedure2 = new StoredProcedure("GetQuestionId(?,?)");
             storedProcedure2.setParameter("uId",userId);
             storedProcedure2.setParameter("qTopic", questionTitle);
@@ -70,8 +69,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
                 qId = resultSet.getInt("questionId");
             }
             storedProcedure2.cleanup();
-
-
             for(int i=0;i<optionList.length;i++){
                 StoredProcedure storedProcedure3 = new StoredProcedure("SaveMcqOptionsToDB(?,?,?)");
                 storedProcedure3.setParameter("qId",qId.toString());
@@ -80,6 +77,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
                 storedProcedure3.execute();
                 storedProcedure3.cleanup();
             }
+
 
             return true;
         }

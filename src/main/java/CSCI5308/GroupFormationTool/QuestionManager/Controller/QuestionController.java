@@ -7,6 +7,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.sql.SQLException;
+
 @Controller
 public class QuestionController {
    private IQuestionManagerService questionManagerService;
@@ -18,7 +21,6 @@ public class QuestionController {
                                         @RequestParam(name="userType") String userType,
                                         @RequestParam(name="courseName") String courseName
     ){
-
         ModelAndView model=new ModelAndView("questionManager");
         model.addObject("courseId",courseId);
         model.addObject("userId",userId);
@@ -40,6 +42,7 @@ public class QuestionController {
         model.addObject("courseId",courseId);
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
+        model.addObject("prompt",false);
         model.addObject("questions",questionManagerService.getQuestions(user,sortType));
         return model;
     }
@@ -55,6 +58,7 @@ public class QuestionController {
         model.addObject("courseId",courseId);
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
+        model.addObject("prompt",false);
         model.setViewName("redirect:/questionList");
         return model;
     }
@@ -70,12 +74,13 @@ public class QuestionController {
         model.addObject("courseId",courseId);
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
+        model.addObject("prompt",false);
         model.setViewName("redirect:/questionList");
         return model;
     }
 
     @RequestMapping("/deleteQuestion")
-    public ModelAndView deleteQuestion(@RequestParam(name="questionId") Integer questionId,
+    public ModelAndView deleteQuestion(@RequestParam(name="selectedQuestionId") Integer questionId,
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
                                        @RequestParam(name="userType") String userType,
@@ -90,6 +95,31 @@ public class QuestionController {
         user.setUserId(userId);
         model.addObject("questions",questionManagerService.getQuestions(user, sortType));
         model.setViewName("redirect:/questionList");
+        return model;
+    }
+
+    @RequestMapping("/checkResponses")
+    public ModelAndView checkResponses(@RequestParam(name="questionId") Integer questionId,
+                                       @RequestParam(name="courseId") String courseId,
+                                       @RequestParam(name="userId") String userId,
+                                       @RequestParam(name="userType") String userType,
+                                       @RequestParam(name="courseName") String courseName) throws SQLException {
+        ModelAndView model=new ModelAndView("questionList");
+        model.addObject("userId",userId);
+        model.addObject("courseId",courseId);
+        model.addObject("userType",userType);
+        model.addObject("courseName",courseName);
+        model.addObject("selectedQuestionId",questionId);
+        boolean prompt = Injector.instance().getQuestionResponsesService().checkIfResponsesPresentService(questionId);
+        if(prompt==false){
+            model.setViewName("redirect:/deleteQuestion");
+        }
+        else{
+            model.addObject("prompt",prompt);
+            model.setViewName("questionList");
+        }
+        user.setUserId(userId);
+        model.addObject("questions",questionManagerService.getQuestions(user, sortType));
         return model;
     }
 }

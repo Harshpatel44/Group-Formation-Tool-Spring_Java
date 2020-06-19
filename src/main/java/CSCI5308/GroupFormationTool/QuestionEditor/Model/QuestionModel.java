@@ -10,7 +10,6 @@ public class QuestionModel {
     private String selectedQuestionType;
     private String questionSubmitMessage="Question did not submit successfully...";
 
-
     public QuestionModel(){
         this.questionTypeList.put("Numeric","Numeric");
         this.questionTypeList.put("Multiple Choice, Choose One","Multiple Choice, Choose One");

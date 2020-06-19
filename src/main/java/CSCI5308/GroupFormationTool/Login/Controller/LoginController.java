@@ -5,7 +5,7 @@ import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginController;
 import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
-
+import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicyStatus;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
@@ -37,17 +37,16 @@ public class LoginController implements ILoginController {
 	@Override
 	@GetMapping("/")
 	public String getLoginUser(Model model) {
-
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			return "redirect:/admin?userId=" + authentication.getPrincipal().toString();
-		} else if (!(authentication instanceof AnonymousAuthenticationToken)) {
+		}
+		else if (!(authentication instanceof AnonymousAuthenticationToken)) {
 			return "redirect:/home?userId=" + authentication.getPrincipal().toString();
-		} else {
+		}
+		else {
 			return "login";
 		}
-
 	}
 
 	@Override
@@ -67,6 +66,8 @@ public class LoginController implements ILoginController {
 		Map<String, String> errors = new HashMap<>();
 		
 		UserPasswordPolicy userPasswordPolicy = Injector.instance().getUserRepository().getUserPasswordPolicy();
+		UserPasswordPolicyStatus userPasswordPolicystatus = Injector.instance().getUserRepository().getUserPasswordPolicyStatus();
+
 		UserService userService = (UserService) Injector.instance().getUserService();
 		List<String> oldPasswords;
 		service = Injector.instance().getLoginService();

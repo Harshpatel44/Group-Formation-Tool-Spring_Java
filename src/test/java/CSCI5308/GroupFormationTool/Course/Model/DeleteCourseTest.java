@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.AdminPanel.Model;
+package CSCI5308.GroupFormationTool.Course.Model;
 
 import org.junit.jupiter.api.Test;
 
@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeleteCourseTest {
 

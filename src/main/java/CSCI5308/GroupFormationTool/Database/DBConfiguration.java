@@ -4,11 +4,13 @@ import CSCI5308.GroupFormationTool.ApplicationConstants;
 
 public class DBConfiguration implements IDBConfiguration {
 
+
 	private static final String URL = ApplicationConstants.applicationUrl;
 
 	private static final String USER = ApplicationConstants.dbUser;
 
 	private static final String PASSWORD = ApplicationConstants.dbPassword;
+
 
 	@Override
 	public String getDBUserName() {

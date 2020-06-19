@@ -9,4 +9,6 @@ public interface IQuestionManagerService {
     public List<Question> getQuestions(UserId user, String sortType);
 
     void deleteQuestion(Integer questionId, String userId);
+
+
 }

@@ -23,8 +23,6 @@ public class HomeService implements IHomeService {
 	}
 
 
-
-
 	public List<Course> getCourses(UserId user) {
 		homeRepository = Injector.instance().getHomeRepository();
 		return homeRepository.getcourse(user);
@@ -42,9 +40,7 @@ public class HomeService implements IHomeService {
 		{
 			return true;
 		}
-
 	}
-
 
 }
 	

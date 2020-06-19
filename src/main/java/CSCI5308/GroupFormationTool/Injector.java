@@ -1,10 +1,15 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionController;
+
+
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
 import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.Service.QuestionManagerService;
+
+import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.*;
+import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionResponsesRepo;
+import CSCI5308.GroupFormationTool.QuestionManager.Service.QuestionResponsesService;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
@@ -41,11 +46,9 @@ public class Injector {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
 	private IUserService userService;
-
 	private ICsvImporter csvImporter;
 	private IEmailConfiguration emailConfiguration;
 	private IUserNotification userNotification;
-
 	private IHomeRepository homeRepository;
 	private IHomeService homeService;
 	private ICourseService courseService;
@@ -55,13 +58,16 @@ public class Injector {
 	private IQuestionManagerService questionManagerService;
 	private IQuestionManagerRepository questionManagerRepository;
 
+	private IQuestionResponsesService questionResponsesService;
+	private IQuestionResponsesRepo questionResponsesRepo;
+	
+
 	private Injector()  {
 
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
 		passwordEncryptor = new BCryptEncryption();
 		userService = new UserService();
-
 		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
@@ -74,6 +80,25 @@ public class Injector {
 		questionManagerRepository = new QuestionManagerRepository();
 		questionManagerService = new QuestionManagerService();
 
+		questionResponsesRepo = new QuestionResponsesRepo();
+		questionResponsesService = new QuestionResponsesService();
+	}
+
+
+	public IQuestionResponsesService getQuestionResponsesService() {
+		return questionResponsesService;
+	}
+
+	public void setQuestionResponsesService(IQuestionResponsesService questionResponsesService) {
+		this.questionResponsesService = questionResponsesService;
+	}
+
+	public IQuestionResponsesRepo getQuestionResponsesRepo() {
+		return questionResponsesRepo;
+	}
+
+	public void setQuestionResponsesRepo(IQuestionResponsesRepo questionResponsesRepo) {
+		this.questionResponsesRepo = questionResponsesRepo;
 	}
 
 	public static Injector instance() {
@@ -196,9 +221,7 @@ public class Injector {
 
 	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
 
-    
 
     public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
 
-    
 }
