@@ -20,7 +20,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 public class CustomAuthentication implements AuthenticationManager
 {
 	private static final String ADMIN_BANNER_ID = "ADMIN";
-
 	private Authentication checkAdmin(String password, User u, Authentication authentication) throws AuthenticationException
 	{
 		// The admin password is not encrypted because it is hardcoded in the DB.
@@ -31,9 +30,7 @@ public class CustomAuthentication implements AuthenticationManager
 			rights.add(new SimpleGrantedAuthority("ADMIN"));
 			// Return valid authentication token.
 			UsernamePasswordAuthenticationToken token;
-			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
-																			authentication.getCredentials(),rights
-																			);
+			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),authentication.getCredentials(),rights);
 			return token;
 		}
 		else
@@ -53,9 +50,7 @@ public class CustomAuthentication implements AuthenticationManager
 			rights.add(new SimpleGrantedAuthority("USER"));
 			// Return valid authentication token.
 			UsernamePasswordAuthenticationToken token;
-			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),
-																			authentication.getCredentials(),rights
-																			);
+			token = new UsernamePasswordAuthenticationToken(authentication.getPrincipal(),authentication.getCredentials(),rights);
 			return token;
 		}
 		else
@@ -63,7 +58,7 @@ public class CustomAuthentication implements AuthenticationManager
 			throw new BadCredentialsException("1000");
 		}
 	}
-	
+
 	// Authenticate against our database using the input banner ID and password.
 	public Authentication authenticate(Authentication authentication) throws AuthenticationException
 	{
@@ -75,7 +70,6 @@ public class CustomAuthentication implements AuthenticationManager
 		try
 		{
 			validity = loginRepository.isUser(bannerID);
-			
 		}
 		catch (Exception e)
 		{
