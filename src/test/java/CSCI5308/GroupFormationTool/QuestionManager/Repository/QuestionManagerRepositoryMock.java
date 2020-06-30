@@ -23,7 +23,5 @@ public class QuestionManagerRepositoryMock {
         }
         return questionList;
     }
-//
-//    public void deleteQuestion(Integer questionId,)
 }
 
