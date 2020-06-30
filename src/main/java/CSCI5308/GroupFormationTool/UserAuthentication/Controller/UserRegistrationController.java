@@ -51,7 +51,6 @@ public class UserRegistrationController implements WebMvcConfigurer {
 			ErrorHelper.rejectErrors(bindingResult, e.getMapErrors());
 			mv.setViewName("signup");
 			return mv;
-
 		}
 		mv.setViewName("signup");
 		return mv;

@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.QuestionManager.Model;
 
 import java.sql.Date;
 
-//Dhruvesh Patel
 public class Question {
     private String questionTopic;
     private Integer questionId;

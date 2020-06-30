@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Controller;
 
-import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorController;
 import CSCI5308.GroupFormationTool.QuestionEditor.Model.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorInjector;
 import org.springframework.stereotype.Controller;
@@ -10,9 +9,9 @@ import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
 
 @Controller
-public class QuestionEditorController implements IQuestionEditorController {
+public class QuestionEditorController{
 
-	@Override
+
 	@RequestMapping("/addQuestion")
 	public ModelAndView addQuestion(@RequestParam(name = "courseId") String courseId,
 			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
@@ -25,7 +24,6 @@ public class QuestionEditorController implements IQuestionEditorController {
 		return mv;
 	}
 
-	@Override
 	@RequestMapping("/createQuestion")
 	public ModelAndView createQuestion(@RequestParam(name = "courseId") String courseId,
 			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
@@ -40,7 +38,6 @@ public class QuestionEditorController implements IQuestionEditorController {
 		return mv;
 	}
 
-	@Override
 	@RequestMapping("/createOption")
 	public ModelAndView createOption(QuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
 			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
@@ -65,7 +62,6 @@ public class QuestionEditorController implements IQuestionEditorController {
 		return mv;
 	}
 
-	@Override
 	@RequestMapping(value = "/questionPreview")
 	public ModelAndView questionPreview(QuestionModel questionModel,
 			@RequestParam(name = "optionText") String optionText, @RequestParam(name = "rankText") String rankText,
@@ -94,7 +90,6 @@ public class QuestionEditorController implements IQuestionEditorController {
 		return mv;
 	}
 
-	@Override
 	@RequestMapping("/questionEditorFinish")
 	public ModelAndView questionFinish(QuestionModel questionModel, @RequestParam(name = "ranks") String ranks,
 			@RequestParam(name = "options") String options, @RequestParam(name = "questionText") String questionText,

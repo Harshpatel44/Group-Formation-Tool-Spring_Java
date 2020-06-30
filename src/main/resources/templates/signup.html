@@ -13,7 +13,7 @@
 		<li class="list">
 			<div class="function-heading">Sign Up</div>
 			<form action="#" th:action="@{/register}" method="post"
-				th:object="${user}">
+				th:object="${userId}">
 				<p>Please fill in this form to create an account.</p>
 				<div class="entity">
 					<label for="firstname"><b>First Name</b></label> <input type="text"
@@ -62,7 +62,7 @@
 					<button type="submit" class="submit-button2">Sign Up</button>
 				</div>
 				<div id="home_li">
-					<a th:href="@{/login}">Are you an existing user? Click here to
+					<a th:href="@{/login}">Are you an existing userId? Click here to
 						log in!</a>
 				</div>
 				</div>

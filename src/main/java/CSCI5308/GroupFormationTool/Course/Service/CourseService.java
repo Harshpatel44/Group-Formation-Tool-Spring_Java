@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
-//Dhruvesh Patel
 public class CourseService implements ICourseService {
    private ICourseRepository courseRepository;
 
@@ -103,7 +102,6 @@ public class CourseService implements ICourseService {
 			return false;
 		}
 	}
-
 }
 
 

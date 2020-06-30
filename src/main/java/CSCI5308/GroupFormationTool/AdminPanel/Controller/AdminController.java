@@ -23,7 +23,6 @@ import java.util.Map;
 @Controller
 public class AdminController implements IAdminController {
 
-	// Author: Harsh Patel
 	@GetMapping("/admin")
 	@Override
 	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
@@ -60,7 +59,6 @@ public class AdminController implements IAdminController {
 		}
 	}
 
-	// Author: Harsh Patel
 	@PostMapping("/createCourse")
 	@Override
 	public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
@@ -74,7 +72,6 @@ public class AdminController implements IAdminController {
 		}
 	}
 
-	// Author: Harsh Patel
 	@PostMapping("/deleteCourse")
 	@Override
 	public String deleteCourse(DeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
@@ -88,7 +85,6 @@ public class AdminController implements IAdminController {
 		}
 	}
 
-	// Author: Harsh Patel
 	@PostMapping("/assignInstructor")
 	@Override
 	public String assignInstructor(Instructor assignInstructor, RedirectAttributes redirectAttributes)
@@ -104,5 +100,4 @@ public class AdminController implements IAdminController {
 			return "redirect:/login";
 		}
 	}
-
 }

@@ -8,8 +8,11 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicyStatus;
 
 public interface IUserService {
-	public boolean createUser(User user) throws ServiceLayerException;
-	public UserPasswordPolicy getUserPasswordPolicy();
-	public List<String> checkPasswordValidation(String password, Map<String, String> errors);
-	public UserPasswordPolicyStatus getUserPasswordPolicyStatus();
+	boolean createUser(User user) throws ServiceLayerException;
+
+	UserPasswordPolicy getUserPasswordPolicy();
+
+	List<String> checkPasswordValidation(String password, Map<String, String> errors);
+
+	UserPasswordPolicyStatus getUserPasswordPolicyStatus();
 }

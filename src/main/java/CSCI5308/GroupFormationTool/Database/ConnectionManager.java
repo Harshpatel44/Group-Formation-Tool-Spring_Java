@@ -3,8 +3,6 @@ package CSCI5308.GroupFormationTool.Database;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-
 import CSCI5308.GroupFormationTool.Injector;
 
 

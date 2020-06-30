@@ -61,7 +61,7 @@
         <div th:if="${prompt}">
             <div class="function-heading">Confirm to delete</div>
            <div class="entity">
-               The question you selected contain user responses. Are you sure you want to delete this question?
+               The question you selected contain userId responses. Are you sure you want to delete this question?
            </div>
             <div style="display: flex">
                 <form th:action="@{/deleteQuestion}" method="post">
@@ -118,7 +118,7 @@
 </ul>
 <script type="text/javascript">
     function alertFunction(){
-        if (confirm("The question you selected contain user responses. Are you sure you want to delete this question?")) {
+        if (confirm("The question you selected contain userId responses. Are you sure you want to delete this question?")) {
             document.getElementById("delete-question-form").submit();
         } else {
 

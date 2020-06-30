@@ -1,5 +1,5 @@
 package CSCI5308.GroupFormationTool.Course.Model;
-//Dhruvesh Patel
+
 public class Course{
 	private String courseId;
 	private String courseName;

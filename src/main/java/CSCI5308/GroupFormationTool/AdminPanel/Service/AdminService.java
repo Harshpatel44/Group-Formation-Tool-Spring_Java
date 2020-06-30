@@ -6,7 +6,6 @@ import CSCI5308.GroupFormationTool.AdminPanel.Model.Instructor;
 
 import CSCI5308.GroupFormationTool.AdminPanel.Repository.InstructorAdminRepository;
 
-//  Author: Harsh Patel
 public class AdminService implements IAdminService {
 
     public AdminService() throws Exception {}
@@ -25,6 +24,5 @@ public class AdminService implements IAdminService {
             instructor.setInstructorAssignMessage("User does not exist or already an instructor");
             return false;
         }
-
     }
 }

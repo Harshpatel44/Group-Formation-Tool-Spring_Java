@@ -7,7 +7,6 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-//  Author: Harsh Patel
 public class InstructorAdminRepository implements IInstructorAdminRepository {
 
     @Override
@@ -31,9 +30,5 @@ public class InstructorAdminRepository implements IInstructorAdminRepository {
             return false;
         }
     }
-
-
-
-
 }
 

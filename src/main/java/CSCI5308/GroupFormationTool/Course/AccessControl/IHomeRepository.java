@@ -6,6 +6,7 @@ import CSCI5308.GroupFormationTool.Course.Model.Course;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 
 public interface IHomeRepository {
-   public List<Course> getcourse(UserId user);
-    public boolean checkRole(UserId user);
+    List<Course> getcourse(UserId userId);
+
+    boolean checkRole(UserId userId);
 }

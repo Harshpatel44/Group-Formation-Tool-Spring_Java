@@ -7,11 +7,17 @@ import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicyStatus;
 
 public interface IUserRepository {
-    public boolean createUser(User user);
-    public boolean getUserByEmailId(User user);
-    public boolean getUserByBannerId(User user);
-    public List<String> getAllBannerIds();
-    public User loadUserByID(String bannerId);
-    public UserPasswordPolicy getUserPasswordPolicy();
-    public UserPasswordPolicyStatus getUserPasswordPolicyStatus();
+    boolean createUser(User user);
+
+    boolean getUserByEmailId(User user);
+
+    boolean getUserByBannerId(User user);
+
+    List<String> getAllBannerIds();
+
+    User loadUserByID(String bannerId);
+
+    UserPasswordPolicy getUserPasswordPolicy();
+
+    UserPasswordPolicyStatus getUserPasswordPolicyStatus();
 }

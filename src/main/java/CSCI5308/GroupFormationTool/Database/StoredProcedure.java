@@ -57,7 +57,6 @@ public class StoredProcedure
 	public void setParameter(int paramIndex, String value) throws SQLException
 	{
 		statement.setString(paramIndex, value);
-
 	}
 
 	public void setParameter(String paramIndex, String value) throws SQLException
@@ -84,7 +83,6 @@ public class StoredProcedure
 	{
 		if (statement.execute())
 		{
-
 			return statement.getResultSet();
 		}
 		return null;

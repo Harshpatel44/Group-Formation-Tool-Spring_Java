@@ -1,12 +1,11 @@
 package CSCI5308.GroupFormationTool.Course.AccessControl;
 
 import java.util.List;
-
 import CSCI5308.GroupFormationTool.Course.Model.Course;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 
 public interface IHomeService {
-	public List<Course> getCourses(UserId user);
+	List<Course> getCourses(UserId userId);
 
-    public boolean checkRole(UserId user);
+    boolean checkRole(UserId userId);
 }

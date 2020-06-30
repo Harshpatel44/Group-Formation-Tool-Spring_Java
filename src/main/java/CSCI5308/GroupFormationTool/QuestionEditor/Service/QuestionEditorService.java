@@ -38,5 +38,4 @@ public class QuestionEditorService implements IQuestionEditorService {
             return false;
         }
     }
-
 }

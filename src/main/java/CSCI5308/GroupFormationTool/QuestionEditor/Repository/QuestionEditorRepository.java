@@ -77,8 +77,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
                 storedProcedure3.execute();
                 storedProcedure3.cleanup();
             }
-
-
             return true;
         }
         catch (Exception e){

@@ -7,12 +7,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseController;
 import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseService;
 
-
 @Controller
-public class CourseController implements ICourseController{
+public class CourseController {
   
 	private ICourseService courseService;
 
@@ -43,7 +41,6 @@ public class CourseController implements ICourseController{
 		model.addObject("courseName",courseName);
 		model.addObject("userType",courseService.checkUserType(userType));
 		model.addObject("checkRole",checkRole);
-
 		model.setViewName("courseadmin");
 		return model;
 	}

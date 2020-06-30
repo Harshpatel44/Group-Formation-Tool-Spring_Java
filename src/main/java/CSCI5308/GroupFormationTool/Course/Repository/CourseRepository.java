@@ -8,7 +8,7 @@ import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
 import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
-//Dhruvesh Patel
+
 public class CourseRepository implements ICourseRepository {
 
 	public boolean checkIfUserPresent(String taId){

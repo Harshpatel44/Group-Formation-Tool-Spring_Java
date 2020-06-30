@@ -1,8 +1,6 @@
 package CSCI5308.GroupFormationTool.Course.Model;
 
-
 import CSCI5308.GroupFormationTool.Injector;
-
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -18,7 +16,6 @@ public class DeleteCourse {
         allCoursesList=Injector.instance().getCourseService().CoursesWithIdForDropdown();
     }
     public DeleteCourse(String s){
-
     }
 
     public ArrayList<String> getAllCourseIds() {

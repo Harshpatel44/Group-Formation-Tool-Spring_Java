@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.Course.Model;
 
 import org.springframework.stereotype.Component;
 
-//  Author: Harsh Patel
 @Component
 public class CreateCourse {
     private String courseId;

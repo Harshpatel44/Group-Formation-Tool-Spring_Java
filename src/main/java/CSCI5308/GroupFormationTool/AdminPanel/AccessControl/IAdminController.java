@@ -8,7 +8,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 
-//  Author: Harsh Patel
 public interface IAdminController {
     public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception;
     public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception;

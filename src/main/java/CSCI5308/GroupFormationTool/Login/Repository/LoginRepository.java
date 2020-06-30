@@ -194,7 +194,4 @@ public class LoginRepository implements ILoginRepository {
         }
         return  bannerid;
     }
-
-
-
 }

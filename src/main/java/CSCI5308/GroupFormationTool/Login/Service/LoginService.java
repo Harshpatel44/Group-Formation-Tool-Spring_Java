@@ -38,7 +38,6 @@ public class LoginService implements ILoginService {
 	public String generatePassKey() {
 		// Code taken from geeksforgeeks
 		String AlphaNumericString = ApplicationConstants.randomKeyForLink;
-
 		StringBuilder sb = new StringBuilder(10);
 		for (int i = 0; i < 10; i++) {
 			int index = (int) (AlphaNumericString.length() * Math.random());
@@ -50,7 +49,6 @@ public class LoginService implements ILoginService {
 	@Override
 	public boolean insertToForgetPassword(String bannerid, String passKey) {
 		return Injector.instance().getLoginRepository().insertToForgetPassword(bannerid, passKey);
-
 	}
 	
 	@Override
@@ -76,6 +74,7 @@ public class LoginService implements ILoginService {
     public int getPasswordPolicyNumber() {
         return Injector.instance().getLoginRepository().getPasswordPolicyNumber();
     }
+
     @Override
 	public List<String> getPasswordByBannerId(String bannerid, int passNumber) {
 		return Injector.instance().getLoginRepository().getPasswordByBannerId(bannerid,passNumber);

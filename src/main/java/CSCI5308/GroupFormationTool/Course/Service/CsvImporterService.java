@@ -65,7 +65,6 @@ public class CsvImporterService implements ICsvImporter {
 
 	private void checkTheUserAndEnroll(String[] record, List<String> bannerIds, IUserRepository userRepository,
 			String courseId) {
-
 		List<User> successfullUsers = new ArrayList<User>();
 		encryptor = Injector.instance().getPasswordEncryptor();
 		userNotification = Injector.instance().getUserNotification();
@@ -94,7 +93,6 @@ public class CsvImporterService implements ICsvImporter {
 		} else {
 			enrollCourse(courseId, user, userRepository);
 		}
-
 	}
 
 	private void enrollCourse(String courseId, User user, IUserRepository userRepository) {

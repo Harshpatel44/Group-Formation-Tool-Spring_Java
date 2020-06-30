@@ -8,7 +8,6 @@ import java.util.Dictionary;
 
 public interface ICourseService {
 
-
     String addTa(String taId, String courseId);
 
     boolean checkRole(String userType);
