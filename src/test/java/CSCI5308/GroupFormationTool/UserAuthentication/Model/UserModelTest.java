@@ -57,7 +57,6 @@ public class UserModelTest {
 	void setUserFirstName() {
 		User user = new User();
 		assertNull(user.getFirstName());
-
 		user.setFirstName("arjun");
 		assertEquals("arjun", user.getFirstName());
 
@@ -67,7 +66,6 @@ public class UserModelTest {
 	void setUserLastName() {
 		User user = new User();
 		assertNull(user.getLastName());
-
 		user.setLastName("arjun");
 		assertEquals("arjun", user.getLastName());
 
@@ -77,7 +75,6 @@ public class UserModelTest {
 	void setUserBannerId() {
 		User user = new User();
 		assertNull(user.getBannerId());
-
 		user.setBannerId("B00854475");
 		assertEquals("B00854475", user.getBannerId());
 
@@ -87,7 +84,6 @@ public class UserModelTest {
 	void setUserEmailId() {
 		User user = new User();
 		assertNull(user.getEmailId());
-
 		user.setEmailId("arjunstar14@gmail.com");
 		assertEquals("arjunstar14@gmail.com", user.getEmailId());
 
@@ -97,7 +93,6 @@ public class UserModelTest {
 	void setUserPassword() {
 		User user = new User();
 		assertNull(user.getPassword());
-
 		user.setPassword("qwerty12345");
 		assertEquals("qwerty12345", user.getPassword());
 		
@@ -107,7 +102,6 @@ public class UserModelTest {
 	void setContactNumber() {
 		User user = new User();
 		assertNull(user.getContactNumber());
-
 		user.setContactNumber("1234567890");
 		assertEquals("1234567890", user.getContactNumber());
 	}

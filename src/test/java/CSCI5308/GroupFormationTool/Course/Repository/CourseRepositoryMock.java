@@ -1,12 +1,6 @@
 package CSCI5308.GroupFormationTool.Course.Repository;
 
-import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
-
 public class CourseRepositoryMock {
-
 
     public boolean checkIfUserPresent(String taId){
         boolean result = false;
@@ -22,10 +16,7 @@ public class CourseRepositoryMock {
                     result = true;
                 }
         return result;
-
     }
-
-
 
     public String addTaTest(String taId, String courseId) {
         String result=null;
@@ -35,7 +26,6 @@ public class CourseRepositoryMock {
                 result = "Already user is TA of courseId:"+courseId+".";
             }
             else{
-
                     result = "user with Id:"+taId+" is add as a TA for courseId"+courseId+".";
                 }
         }

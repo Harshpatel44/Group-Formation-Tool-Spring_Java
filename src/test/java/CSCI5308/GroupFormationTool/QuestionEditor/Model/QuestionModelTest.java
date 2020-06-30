@@ -1,10 +1,8 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Model;
 
 import org.junit.jupiter.api.Test;
-
 import java.util.Dictionary;
 import java.util.Hashtable;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class QuestionModelTest {
@@ -26,12 +24,10 @@ class QuestionModelTest {
     void getQuestionTypeList() {
         QuestionModel questionModel = new QuestionModel();
         Dictionary questionTypeList = new Hashtable();
-
         questionTypeList.put("Numeric","Numeric");
         questionTypeList.put("Multiple Choice, Choose One","Multiple Choice, Choose One");
         questionTypeList.put("Multiple Choice, Choose Multiple","Multiple Choice, Choose Multiple");
         questionTypeList.put("Text","Text");
-
         assertEquals(questionTypeList,questionModel.getQuestionTypeList());
     }
 
@@ -39,7 +35,6 @@ class QuestionModelTest {
     void setQuestionTypeList() {
         QuestionModel questionModel = new QuestionModel();
         Dictionary questionTypeList = new Hashtable();
-
         questionTypeList.put("Numeric","Numeric");
         questionTypeList.put("Multiple Choice, Choose One","Multiple Choice, Choose One");
         questionTypeList.put("Multiple Choice, Choose Multiple","Multiple Choice, Choose Multiple");
@@ -51,7 +46,6 @@ class QuestionModelTest {
     @Test
     void getSelectedQuestionType() {
         QuestionModel questionModel = new QuestionModel();
-
         assertEquals(null,questionModel.getSelectedQuestionType());
     }
 

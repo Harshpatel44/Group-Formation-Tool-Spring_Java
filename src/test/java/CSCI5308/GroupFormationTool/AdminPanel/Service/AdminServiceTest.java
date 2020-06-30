@@ -5,12 +5,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
-
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Matchers.anyMap;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -30,11 +25,9 @@ class AdminServiceTest {
     @Test
     void assignInstructorService() throws Exception {
         Instructor assignInstructor = new Instructor("test");
-
         when(adminRepository.assignInstructorRepo(assignInstructor)).thenReturn(true);
         assertTrue(adminService.AssignInstructorService(assignInstructor));
         assertEquals("Instructor assigned",assignInstructor.getInstructorAssignMessage());
-
         when(adminRepository.assignInstructorRepo(assignInstructor)).thenReturn(false);
         assertFalse(adminService.AssignInstructorService(assignInstructor));
         assertEquals("User does not exist or already an instructor",assignInstructor.getInstructorAssignMessage());

@@ -23,7 +23,6 @@ public class QuestionTest {
         assertTrue(question.getQuestionDescription()=="QuestionDescription1");
     }
 
-
     @Test
     public void setDateTest(){
         Question question=new Question();
@@ -37,7 +36,4 @@ public class QuestionTest {
         question.setQuestionId(2);
         assertTrue(question.getQuestionId()==2);
     }
-
-
-
 }

@@ -33,39 +33,31 @@ public class CourseRepositoryTest {
 		MockitoAnnotations.initMocks(this);
 		courseRepository = mock(CourseRepository.class);
 		Injector.instance().setCourseRepository(courseRepository);
-
 	}
 
 	@Test
 	public void getUserDetailsOnCourse() {
 		User user = UserMockDB.setDefault();
-
 		when(courseRepository.getUserDetailsOnCourse(user, "CSCI10")).thenReturn(false);
-
 		assertEquals(false, courseRepository.getUserDetailsOnCourse(user, "CSCI10"));
 	}
 
 	@Test
 	public void getEnrollCourse() {
 		User user = UserMockDB.setDefault();
-
 		when(courseRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(true);
-
 		assertEquals(true, courseRepository.enrollStudentForCourse(user, "CSCI10"));
 	}
 
 	@Test
 	public void getEnrollCourseFails() {
 		User user = UserMockDB.setDefault();
-
 		when(courseRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(false);
-
 		assertEquals(false, courseRepository.enrollStudentForCourse(user, "CSCI10"));
 	}
 
 	@Test
 	void createCourseRepo() throws SQLException {
-
 		CreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseName("testname");
 		createCourse.setCourseId("testid");
@@ -75,7 +67,6 @@ public class CourseRepositoryTest {
 		assertFalse(createCourse.getCourseId().isEmpty());
 		assertTrue(createCourse.getCourseId() instanceof String);
 		assertTrue(createCourse.getCourseName() instanceof String);
-
 	}
 
 	@Test
@@ -86,5 +77,4 @@ public class CourseRepositoryTest {
 		assertFalse(deleteCourse.getSelectedCourseId().isEmpty());
 		assertTrue(deleteCourse.getSelectedCourseId() instanceof String);
 	}
-
 }

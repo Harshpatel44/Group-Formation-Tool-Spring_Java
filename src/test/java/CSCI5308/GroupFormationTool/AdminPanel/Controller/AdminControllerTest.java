@@ -17,9 +17,6 @@ import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.context.WebApplicationContext;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 
-
-//  Author: Harsh Patel
-
 @SpringBootTest
 public class AdminControllerTest {
 
@@ -50,23 +47,5 @@ public class AdminControllerTest {
                 get("/admin")
                         .header("Origin","*")
                         .accept(MimeTypeUtils.APPLICATION_JSON_VALUE));
-    }
-
-
-
-    @Test
-    void createCourse() throws Exception {
-        
-    }
-
-
-    @Test
-    void deleteCourse() throws Exception{
-
-    }
-
-    @Test
-    void assignInstructor() throws Exception{
-
     }
 }

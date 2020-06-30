@@ -4,7 +4,6 @@ import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserReposit
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserPasswordPolicyDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -24,66 +23,50 @@ public class UserRepositoryTest {
 	@Test
 	public void createUserCorrectionDetails() {
 		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
 		when(userRepository.createUser(user)).thenReturn(true);
-
 		assertEquals(true, userRepository.createUser(user));
 	}
 
 	@Test
 	public void createUserWrongDetails() {
 		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
 		when(userRepository.createUser(user)).thenReturn(false);
-
 		assertEquals(false, userRepository.createUser(user));
 	}
 
 	@Test
 	public void getBannerIdIfExistsDetails() {
 		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
-
-		// doThrow(Exception.class).when(userRepository).createUser(user);
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByBannerId(user)).thenReturn(true);
-
 		assertEquals(true, userRepository.getUserByBannerId(user));
 	}
 
 	@Test
 	public void getBannerIdIfDoesntNotExists() {
 		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
-
-		// doThrow(Exception.class).when(userRepository).createUser(user);
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByBannerId(user)).thenReturn(false);
-
 		assertEquals(false, userRepository.getUserByBannerId(user));
 	}
 
 	@Test
 	public void getEmailIdDetails() {
 		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByEmailId(user)).thenReturn(true);
-
 		assertEquals(true, userRepository.getUserByEmailId(user));
 	}
 
 	@Test
 	public void getEmailIdIfDoesNotExists() {
 		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByEmailId(user)).thenReturn(false);
-
 		assertEquals(false, userRepository.getUserByEmailId(user));
 	}
 
@@ -91,17 +74,13 @@ public class UserRepositoryTest {
 
 	@Test
 	public void getBannerIDs() {
-		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
-
 		when(userRepository.getAllBannerIds()).thenReturn(new ArrayList<String>() {
 			{
 				add("B00854475");
 				add("B0085476");
 			}
 		});
-
 		assertEquals(new ArrayList<String>() {
 			{
 				add("B00854475");
@@ -113,13 +92,8 @@ public class UserRepositoryTest {
 	
 	@Test
 	public void getUserPasswordPolicy() {
-		User user = UserMockDB.setDefault();
-
 		userRepository = mock(UserRepository.class);
-
 		when(userRepository.getUserPasswordPolicy()).thenReturn(UserPasswordPolicyDB.getDefault());
 		assertThat(userRepository.getUserPasswordPolicy()).isEqualToComparingFieldByField(UserPasswordPolicyDB.getDefault());
 	}
-	
-
 }

@@ -5,12 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Map;
-
-import static java.util.Map.Entry.comparingByKey;
-import static java.util.stream.Collectors.toMap;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -70,5 +64,4 @@ class QuestionEditorServiceTest {
         when(questionEditorRepository.SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,userId)).thenReturn(false);
         assertEquals(false,questionEditorService.saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId));
     }
-
 }

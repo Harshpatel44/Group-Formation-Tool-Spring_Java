@@ -11,16 +11,13 @@ class CreateCourseTest {
     void getCourseCreateMessage() {
         CreateCourse createCourse = new CreateCourse();
         assertEquals("status here",createCourse.getCourseCreateMessage());
-
         createCourse.setCourseCreateMessage("Course Created");
         assertEquals("Course Created",createCourse.getCourseCreateMessage());
-
     }
 
     @Test
     void setCourseCreateMessage() {
         CreateCourse createCourse = new CreateCourse();
-
         createCourse.setCourseCreateMessage("Course Created");
         assertEquals("Course Created",createCourse.getCourseCreateMessage());
 
@@ -31,7 +28,6 @@ class CreateCourseTest {
     void getCourseId() {
          CreateCourse createCourse = new CreateCourse();
          assertNull(createCourse.getCourseId());
-
          createCourse.setCourseId("B00845449");
          assertEquals("B00845449",createCourse.getCourseId());
     }
@@ -40,7 +36,6 @@ class CreateCourseTest {
     @Test
     void setCourseId() {
         CreateCourse createCourse = new CreateCourse();
-
         createCourse.setCourseId("B00845449");
         assertEquals("B00845449",createCourse.getCourseId());
     }
@@ -49,7 +44,6 @@ class CreateCourseTest {
     void getCourseName() {
         CreateCourse createCourse = new CreateCourse();
         assertNull(createCourse.getCourseName());
-
         createCourse.setCourseName("Advanced Software Developement Concepts");
         assertEquals("Advanced Software Developement Concepts",createCourse.getCourseName());
     }

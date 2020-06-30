@@ -20,7 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-//Dhruvesh Patel
 @SpringBootTest
 public class CourseServiceTest {
 	public CourseService courseService;
@@ -85,16 +84,13 @@ public class CourseServiceTest {
 		String userType;
 		userType = "instructor";
 		assertTrue(courseService.checkUserType(userType));
-
 	}
 
 	@Test
 	void createCourseService1() throws Exception {
-
 		CreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseName("testname");
 		createCourse.setCourseId("testid");
-
 		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
 		ArrayList<String> courseName = new ArrayList<>();
 		ArrayList<String> courseId = new ArrayList<>();
@@ -102,11 +98,9 @@ public class CourseServiceTest {
 		courseName.add("course1");
 		allCoursesArray.add(courseId);
 		allCoursesArray.add(courseName);
-
 		when(courseRepository.createCourseRepo(createCourse)).thenReturn(true);
 		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
 		assertTrue(courseService.CreateCourseService(createCourse));
-
 		assertEquals("Course created", createCourse.getCourseCreateMessage());
 	}
 
@@ -115,7 +109,6 @@ public class CourseServiceTest {
 		CreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseName("testname2");
 		createCourse.setCourseId("testid");
-
 		ArrayList<String> courseName = new ArrayList<>();
 		ArrayList<String> courseId = new ArrayList<>();
 		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
@@ -134,7 +127,6 @@ public class CourseServiceTest {
 		CreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseId("testid2");
 		createCourse.setCourseName("testname");
-
 		ArrayList<String> courseName = new ArrayList<>();
 		ArrayList<String> courseId = new ArrayList<>();
 		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
@@ -153,11 +145,9 @@ public class CourseServiceTest {
 	void deleteCourseService() throws Exception {
 		DeleteCourse deleteCourse = new DeleteCourse("test");
 		deleteCourse.setSelectedCourseId("testid");
-
 		Dictionary allCoursesList = new Hashtable();
 		allCoursesList.put("testid testname", "testid");
 		deleteCourse.setAllCoursesList(allCoursesList);
-
 		ArrayList<String> courseName = new ArrayList<>();
 		ArrayList<String> courseId = new ArrayList<>();
 		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
@@ -166,11 +156,9 @@ public class CourseServiceTest {
 		allCoursesArray.add(courseId);
 		allCoursesArray.add(courseName);
 		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
-
 		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(true);
 		assertTrue(courseService.DeleteCourseService(deleteCourse));
 		assertEquals("Course deleted", deleteCourse.getCourseDeleteMessage());
-
 		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(false);
 		assertFalse(courseService.DeleteCourseService(deleteCourse));
 		assertEquals("Course does not exist", deleteCourse.getCourseDeleteMessage());
@@ -178,11 +166,7 @@ public class CourseServiceTest {
 
 	@Test
 	void coursesWithIdForDropdown() throws SQLException {
-		ArrayList<ArrayList<String>> tempCourse;
-		ArrayList<String> allCourseIds;
-		ArrayList<String> allCourseNames;
 		Dictionary allCoursesList = new Hashtable();
-
 		ArrayList<ArrayList<String>> mainList = new ArrayList<>();
 		ArrayList<String> courseId = new ArrayList<>();
 		ArrayList<String> courseName = new ArrayList<>();
@@ -191,7 +175,6 @@ public class CourseServiceTest {
 		mainList.add(courseId);
 		mainList.add(courseName);
 		when(courseRepository.getAllCourses()).thenReturn(mainList);
-
 		for (int i = 0; i < mainList.get(0).size(); i++) {
 			allCoursesList.put(mainList.get(0).get(i) + " " + mainList.get(1).get(i), mainList.get(0).get(i));
 		}

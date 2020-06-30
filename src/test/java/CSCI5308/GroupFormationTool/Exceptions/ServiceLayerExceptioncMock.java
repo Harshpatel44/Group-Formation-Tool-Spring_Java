@@ -5,7 +5,6 @@ import java.util.HashMap;
 
 public class ServiceLayerExceptioncMock {
 	public static ServiceLayerException getServiceLayerExceptionDefault() {
-
 		return new ServiceLayerException() {
 			{
 				setErrors(new ArrayList<String>() {

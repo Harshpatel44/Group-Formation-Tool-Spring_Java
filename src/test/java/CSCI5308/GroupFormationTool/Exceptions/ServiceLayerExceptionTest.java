@@ -26,7 +26,6 @@ public class ServiceLayerExceptionTest {
 		ServiceLayerException serviceLayerException = new ServiceLayerException();
 		serviceLayerException.setErrors(errors);
 		assertEquals(serviceLayerException.getErrors(), errors);
-
 	}
 
 	@Test
@@ -39,7 +38,6 @@ public class ServiceLayerExceptionTest {
 		ServiceLayerException serviceLayerException = new ServiceLayerException();
 		serviceLayerException.setMapErrors(errors);
 		assertEquals(serviceLayerException.getMapErrors(), errors);
-
 	}
 
 	@Test
@@ -52,7 +50,6 @@ public class ServiceLayerExceptionTest {
 				add("error1");
 			}
 		});
-
 	}
 
 	@Test
@@ -65,6 +62,5 @@ public class ServiceLayerExceptionTest {
 				put("1", "error1");
 			}
 		});
-
 	}
 }

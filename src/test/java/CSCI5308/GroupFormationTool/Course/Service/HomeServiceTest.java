@@ -5,10 +5,8 @@ package CSCI5308.GroupFormationTool.Course.Service;
 import CSCI5308.GroupFormationTool.Course.Model.Course;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
-import CSCI5308.GroupFormationTool.Course.Repository.HomeRepositoryMock;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -63,6 +61,4 @@ public class HomeServiceTest {
         when(homeRepository.checkRole(user)).thenReturn(false);
         assertTrue(homeService.checkRole(user));
     }
-
-
 }

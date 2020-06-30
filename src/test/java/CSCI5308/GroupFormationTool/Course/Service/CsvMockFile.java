@@ -5,15 +5,9 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.mail.Multipart;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.multipart.MultipartFile;
-
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 
 public class CsvMockFile {
 	public static MultipartFile getFile() {
@@ -64,10 +58,7 @@ public class CsvMockFile {
             public void transferTo(File dest) throws IOException, IllegalStateException {
                 // not reqd
             }
-
-	
         };
         return multipartFile;
 	}
-
 }

@@ -29,7 +29,6 @@ class LoginServiceTest {
 
     @Test
     void checkLoginTest() throws Exception{
-
         when(loginRepository.checkLogin("B00835088","123")).thenReturn(true);
         assertTrue(loginService.checkLogin("B00835088","123"));
     }

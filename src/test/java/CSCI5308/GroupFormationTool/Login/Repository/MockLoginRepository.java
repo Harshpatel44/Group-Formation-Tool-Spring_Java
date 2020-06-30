@@ -79,5 +79,4 @@ public class MockLoginRepository implements ILoginRepository {
         }
         return null;
     }
-
 }
