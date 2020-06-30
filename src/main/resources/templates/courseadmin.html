@@ -4,7 +4,6 @@
 <head>
 	<title>Course Admin</title>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css" />
-
 </head>
 <body>
 <div>
@@ -48,7 +47,6 @@
 		<div class="function-heading">Add students to course</div>
 		<form th:action="@{/course/uploadcsv}" method="post"
 			  enctype="multipart/form-data">
-
 			<input type="hidden" th:value="${courseName}" name="courseName" />
 			<input type="hidden" th:value="${userId}" name="userId" />
 			<input type="hidden" th:value="${courseId}" name="id"/>
@@ -64,9 +62,6 @@
 				<input type="submit"
 					   value="Add Students" class="submit-button">
 			</div>
-
-
-
 		</form>
 	</li>
 	<li class="list">
@@ -91,8 +86,6 @@
 			<tr th:each="user_success: ${success}">
 				<td th:text="*{user_success}"></td>
 		</table>
-
-
 		<table>
 			<tr>
 				<div class="function-heading">Failure results</div>
