@@ -35,7 +35,7 @@ class QuestionEditorServiceTest {
         String selectedQuestionType = "Multiple Choice, Choose Multiple";
         String userId="B00000001";
         when(questionEditorRepository.SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,userId)).thenReturn(true);
-        assertEquals("Question submitted successfully",questionEditorService.SaveQuestionServiceForTextAndNumeric(questionText,questionTitle,selectedQuestionType,userId));
+        assertEquals(true,questionEditorService.SaveQuestionServiceForTextAndNumeric(questionText,questionTitle,selectedQuestionType,userId));
     }
 
     @Test
@@ -45,7 +45,7 @@ class QuestionEditorServiceTest {
         String selectedQuestionType = "abcd";
         String userId="B00000001";
         when(questionEditorRepository.SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,userId)).thenReturn(false);
-        assertEquals("Question did not submit successfully",questionEditorService.SaveQuestionServiceForTextAndNumeric(questionText,questionTitle,selectedQuestionType,userId));
+        assertEquals(false,questionEditorService.SaveQuestionServiceForTextAndNumeric(questionText,questionTitle,selectedQuestionType,userId));
     }
 
     @Test
@@ -57,7 +57,7 @@ class QuestionEditorServiceTest {
         String options="Delhi,Kolkata,Ahmedabad,Vadodara";
         String ranks = "2,1,4,3";
         when(questionEditorRepository.SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,userId)).thenReturn(true);
-        assertEquals("Question submitted successfully",questionEditorService.saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId));
+        assertEquals(true,questionEditorService.saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId));
     }
     @Test
     void saveQuestionForMultipleChoiceService2() throws Exception {
@@ -68,7 +68,7 @@ class QuestionEditorServiceTest {
         String options="SimpleText";
         String ranks = "2";
         when(questionEditorRepository.SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,userId)).thenReturn(false);
-        assertEquals("Question did not submit successfully",questionEditorService.saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId));
+        assertEquals(false,questionEditorService.saveQuestionForMultipleChoiceService(questionText,questionTitle,selectedQuestionType,options,ranks,userId));
     }
 
 }
