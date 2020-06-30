@@ -20,22 +20,22 @@ public class QuestionEditorService implements IQuestionEditorService {
     }
 
     @Override
-    public String SaveQuestionServiceForTextAndNumeric(String questionText,String questionTitle,String selectedQuestionType, String userId) throws Exception {
+    public Boolean SaveQuestionServiceForTextAndNumeric(String questionText,String questionTitle,String selectedQuestionType, String userId) throws Exception {
         if(QuestionEditorInjector.instance().getQuestionEditorRepository().SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,userId)){
-            return "Question submitted successfully";
+            return true;
         }
         else{
-            return "Question did not submit successfully";
+            return false;
         }
     }
 
     @Override
-    public String saveQuestionForMultipleChoiceService(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId) throws Exception {
+    public Boolean saveQuestionForMultipleChoiceService(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks, String userId) throws Exception {
         if(QuestionEditorInjector.instance().getQuestionEditorRepository().SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,userId)){
-            return "Question submitted successfully";
+            return true;
         }
         else{
-            return "Question did not submit successfully";
+            return false;
         }
     }
 

@@ -103,16 +103,33 @@ public class QuestionEditorController implements IQuestionEditorController {
 			@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
 			@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
 			throws Exception {
+		boolean result;
 		String returnMessage = null;
 		if (selectedQuestionType.equals("Text") || selectedQuestionType.equals("Numeric")) {
-			returnMessage = QuestionEditorInjector.instance().getQuestionEditorService()
+			result = QuestionEditorInjector.instance().getQuestionEditorService()
 					.SaveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType, userId);
+			if(result)
+			{
+				returnMessage="Question submitted successfully";
+			}
+			else
+			{
+				returnMessage="Question did not submit successfully";
+			}
 		}
 		if (selectedQuestionType.equals("Multiple Choice, Choose Multiple")
 				|| selectedQuestionType.equals("Multiple Choice, Choose One")) {
-			returnMessage = QuestionEditorInjector.instance().getQuestionEditorService()
+			result = QuestionEditorInjector.instance().getQuestionEditorService()
 					.saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options,
 							ranks, userId);
+			if(result)
+			{
+				returnMessage="Question submitted successfully";
+			}
+			else
+			{
+				returnMessage="Question did not submit successfully";
+			}
 		}
 		ModelAndView mv = new ModelAndView("questionEditorFinish");
 		mv.addObject("courseId", courseId);
