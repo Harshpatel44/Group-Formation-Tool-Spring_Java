@@ -41,12 +41,12 @@ public class QuestionEditorController{
 	}
 
 	@RequestMapping("/createOption")
-	public ModelAndView createOption(IQuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
+	public ModelAndView createOption(QuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
 									 @RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
 									 @RequestParam(name = "courseName") String courseName) {
 		ModelAndView mv = new ModelAndView();
-		if (questionModel.getSelectedQuestionType().equals("Text")
-				|| questionModel.getSelectedQuestionType().equals("Numeric")) {
+		if (questionModel.getSelectedQuestionType().equals(text)
+				|| questionModel.getSelectedQuestionType().equals(numeric)) {
 			mv.setViewName("questionEditorPreview");
 			mv.addObject("options", null);
 			mv.addObject("ranks", null);
@@ -65,7 +65,7 @@ public class QuestionEditorController{
 	}
 
 	@RequestMapping(value = "/questionPreview")
-	public ModelAndView questionPreview(IQuestionModel questionModel,
+	public ModelAndView questionPreview(QuestionModel questionModel,
 										@RequestParam(name = "optionText") String optionText, @RequestParam(name = "rankText") String rankText,
 										@RequestParam(name = "questionText") String questionText,
 										@RequestParam(name = "questionTitle") String questionTitle,
@@ -92,7 +92,7 @@ public class QuestionEditorController{
 	}
 
 	@RequestMapping("/questionEditorFinish")
-	public ModelAndView questionFinish(IQuestionModel questionModel, @RequestParam(name = "ranks") String ranks,
+	public ModelAndView questionFinish(QuestionModel questionModel, @RequestParam(name = "ranks") String ranks,
 									   @RequestParam(name = "options") String options, @RequestParam(name = "questionText") String questionText,
 									   @RequestParam(name = "questionTitle") String questionTitle,
 									   @RequestParam(name = "selectedQuestionType") String selectedQuestionType,

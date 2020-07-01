@@ -9,6 +9,7 @@ import java.util.List;
 
 public class QuestionManagerRepository implements IQuestionManagerRepository {
     private List<IQuestion> questionList = new ArrayList<IQuestion>();
+
     @Override
     public List<IQuestion> getQuestions(String userId) {
         try{
@@ -71,7 +72,7 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
     }
 
     @Override
-    public List<Question> getQuestionsByDate(String userId) throws Exception {
+    public List<IQuestion> getQuestionsByDate(String userId) throws Exception {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("QuestionsByDate(?)");

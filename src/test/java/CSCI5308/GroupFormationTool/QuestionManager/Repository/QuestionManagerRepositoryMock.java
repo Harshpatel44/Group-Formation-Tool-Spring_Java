@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionManagerRepositoryMock {
-    public List<Question> getQuestionsTest(IUserRole user) {
-        List<Question> questionList = new ArrayList<IQuestion>();
+    public List<IQuestion> getQuestionsTest(IUserRole user) {
+        List<IQuestion> questionList = new ArrayList<IQuestion>();
         if(user.getUserId().equals("B00123456"))
         {
             IQuestion iQuestion = new Question();
@@ -19,10 +19,10 @@ public class QuestionManagerRepositoryMock {
             iQuestion.setQuestionDescription("QuestionDescription");
             iQuestion.setQuestionTopic("QuestionTopic");
             iQuestion.setDate(Date.valueOf("2020-12-30"));
-            iQuestionList.add(iQuestion);
+            questionList.add(iQuestion);
 
         }
-        return iQuestionList;
+        return questionList;
     }
 }
 

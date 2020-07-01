@@ -13,7 +13,7 @@ import CSCI5308.GroupFormationTool.Injector;
 public class UserNotification implements IUserNotification {
 
 	@Override
-	public Boolean sendUserCredentials(IUser user) throws Exception, AddressException, MessagingException {
+	public Boolean sendUserCredentials(IUser user) throws Exception {
 		String subject = "Login Credentails for GroupFormation Tool";
 		String body = "Welcome to the GroupFormation Tool\n Your Login credentials are as follows: \n";
 		body += "Username: "+ user.getBannerId();

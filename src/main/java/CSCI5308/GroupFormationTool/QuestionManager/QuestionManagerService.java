@@ -16,7 +16,7 @@ public class QuestionManagerService implements IQuestionManagerService {
     }
 
     @Override
-    public List<Question> getQuestions(String userId, String sortType) throws Exception {
+    public List<IQuestion> getQuestions(String userId, String sortType) throws Exception {
         questionManagerRepository = Injector.instance().getQuestionManagerRepository();
         if (sortType.equals(sortByTopic))
         {

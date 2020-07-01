@@ -56,7 +56,7 @@ public class UserRepositoryTest {
 	}
 
 	@Test
-	public void getEmailIdDetails() {
+	public void getEmailIdDetails() throws Exception {
 		IUser user = UserMockDB.setDefault();
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByEmailId(user)).thenReturn(true);
@@ -64,7 +64,7 @@ public class UserRepositoryTest {
 	}
 
 	@Test
-	public void getEmailIdIfDoesNotExists() {
+	public void getEmailIdIfDoesNotExists() throws Exception {
 		IUser user = UserMockDB.setDefault();
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByEmailId(user)).thenReturn(false);

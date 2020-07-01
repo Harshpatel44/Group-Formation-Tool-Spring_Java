@@ -19,10 +19,10 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-public class AdminController implements IAdminController {
+public class AdminController{
 
 	@GetMapping("/admin")
-	@Override
+
 	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
 		ICreateCourse createCourse = new CreateCourse();
 		IDeleteCourse deleteCourse = new DeleteCourse();
@@ -58,8 +58,7 @@ public class AdminController implements IAdminController {
 	}
 
 	@PostMapping("/createCourse")
-	@Override
-	public String createCourse(ICreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
+	public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			Injector.instance().getCourseService().CreateCourseService(createCourse);
@@ -71,8 +70,7 @@ public class AdminController implements IAdminController {
 	}
 
 	@PostMapping("/deleteCourse")
-	@Override
-	public String deleteCourse(IDeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
+	public String deleteCourse(DeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			Injector.instance().getCourseService().DeleteCourseService(deleteCourse);
@@ -84,8 +82,7 @@ public class AdminController implements IAdminController {
 	}
 
 	@PostMapping("/assignInstructor")
-	@Override
-	public String assignInstructor(IInstructor instructor, RedirectAttributes redirectAttributes)
+	public String assignInstructor(Instructor instructor, RedirectAttributes redirectAttributes)
 			throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
