@@ -85,14 +85,14 @@ public class AdminController implements IAdminController {
 
 	@PostMapping("/assignInstructor")
 	@Override
-	public String assignInstructor(IInstructor assignInstructor, RedirectAttributes redirectAttributes)
+	public String assignInstructor(IInstructor instructor, RedirectAttributes redirectAttributes)
 			throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			ModelAndView mv = new ModelAndView();
-			AdminInjector.instance().getAdminService().AssignInstructorService(assignInstructor);
+			Injector.instance().getAdminService().AssignInstructorService(instructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
-					assignInstructor.getInstructorAssignMessage());
+					instructor.getInstructorAssignMessage());
 			return "redirect:admin";
 		} else {
 			return "redirect:/login";

@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class InstructorAdminRepository implements IInstructorAdminRepository {
 
     @Override
-    public boolean assignInstructorRepo(IInstructor iInstructor) throws SQLException {
+    public boolean assignInstructorRepo(IInstructor instructor) throws SQLException {
         StoredProcedure storedProcedure = new StoredProcedure("GetInstructorRole");
         ResultSet resultSet = storedProcedure.executeWithResults();
         resultSet.next();
@@ -16,9 +16,9 @@ public class InstructorAdminRepository implements IInstructorAdminRepository {
         storedProcedure.cleanup();
         try{
             StoredProcedure storedProcedure2 = new StoredProcedure("AssignInstructor(?,?,?)");
-            storedProcedure2.setParameter(1,iInstructor.getInstructorId());
+            storedProcedure2.setParameter(1,instructor.getInstructorId());
             storedProcedure2.setParameter(2, String.valueOf(instructorRoleId));
-            storedProcedure2.setParameter(3,iInstructor.getSelectedInstructorCourseId());
+            storedProcedure2.setParameter(3,instructor.getSelectedInstructorCourseId());
             storedProcedure2.execute();
             storedProcedure2.cleanup();
             return true;

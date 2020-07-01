@@ -1,5 +1,8 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
+import CSCI5308.GroupFormationTool.AdminPanel.IAdminService;
+import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
 import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
 import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
 import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
@@ -56,17 +59,21 @@ public class Injector {
 	private IHomeService homeService;
 	private ICourseService courseService;
 	private ICourseRepository courseRepository;
+
 	private ILoginService loginService;
 	private IForgetPasswordService forgetPasswordService;
 	private ILoginRepository loginRepository;
 	private IForgetPasswordRepository forgetPasswordRepository;
+
 	private IQuestionManagerService questionManagerService;
 	private IQuestionManagerRepository questionManagerRepository;
-
 	private IQuestionResponsesService questionResponsesService;
 	private IQuestionResponsesRepo questionResponsesRepo;
 
-	private Injector()  {
+	private IAdminService adminService;
+	private InstructorAdminRepository instructorAdminRepository;
+
+	private Injector() throws Exception {
 
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
@@ -75,6 +82,7 @@ public class Injector {
 		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
+
 		loginService = new LoginService();
 		forgetPasswordService = new ForgetPasswordService();
 		homeRepository = new HomeRepository();
@@ -83,11 +91,30 @@ public class Injector {
 		courseRepository = new CourseRepository();
 		loginRepository = new LoginRepository();
 		forgetPasswordRepository =new ForgetPasswordRepository();
+
 		questionManagerRepository = new QuestionManagerRepository();
 		questionManagerService = new QuestionManagerService();
-
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
+
+		adminService = new AdminService();
+		instructorAdminRepository = new InstructorAdminRepository();
+	}
+
+	public IAdminService getAdminService() {
+		return adminService;
+	}
+
+	public void setAdminService(IAdminService adminService) {
+		this.adminService = adminService;
+	}
+
+	public InstructorAdminRepository getInstructorAdminRepository() {
+		return instructorAdminRepository;
+	}
+
+	public void setInstructorAdminRepository(InstructorAdminRepository instructorAdminRepository) {
+		this.instructorAdminRepository = instructorAdminRepository;
 	}
 
 	public IQuestionResponsesService getQuestionResponsesService() {
@@ -106,7 +133,7 @@ public class Injector {
 		this.questionResponsesRepo = questionResponsesRepo;
 	}
 
-	public static Injector instance() {
+	public static Injector instance() throws Exception {
 
 		if (instance == null) {
 			instance = new Injector();

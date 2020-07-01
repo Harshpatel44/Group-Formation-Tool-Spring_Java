@@ -11,5 +11,5 @@ public interface IAdminController {
     public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception;
     public String createCourse(ICreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception;
     public String deleteCourse(IDeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception;
-    public String assignInstructor(IInstructor assignInstructor, RedirectAttributes redirectAttributes) throws Exception;
+    public String assignInstructor(IInstructor instructor, RedirectAttributes redirectAttributes) throws Exception;
 }

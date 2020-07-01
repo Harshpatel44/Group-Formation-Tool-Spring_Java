@@ -1,21 +1,23 @@
 package CSCI5308.GroupFormationTool.AdminPanel;
 
+import CSCI5308.GroupFormationTool.Injector;
+
 public class AdminService implements IAdminService {
 
     public AdminService() throws Exception {}
 
     public AdminService(InstructorAdminRepository adminRepository) throws Exception {
-        AdminInjector.instance().setAdminRepository(adminRepository);
+        Injector.instance().setInstructorAdminRepository(adminRepository);
     }
 
     @Override
-    public boolean AssignInstructorService(IInstructor iInstructor) throws Exception {
-        if(AdminInjector.instance().getAdminRepository().assignInstructorRepo(iInstructor)){
-            iInstructor.setInstructorAssignMessage("Instructor assigned");
+    public boolean AssignInstructorService(IInstructor instructor) throws Exception {
+        if(Injector.instance().getInstructorAdminRepository().assignInstructorRepo(instructor)){
+            instructor.setInstructorAssignMessage("Instructor assigned");
             return true;
         }
         else{
-            iInstructor.setInstructorAssignMessage("User does not exist or already an instructor");
+            instructor.setInstructorAssignMessage("User does not exist or already an instructor");
             return false;
         }
     }
