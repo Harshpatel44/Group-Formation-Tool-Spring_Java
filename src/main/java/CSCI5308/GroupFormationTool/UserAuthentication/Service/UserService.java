@@ -156,14 +156,12 @@ public class UserService implements IUserService {
 
 	@Override
 	public UserPasswordPolicy getUserPasswordPolicy() {
-		// TODO Auto-generated method stub
 		userRepository = Injector.instance().getUserRepository();
 		return userRepository.getUserPasswordPolicy();
 	}
 
 	@Override
 	public UserPasswordPolicyStatus getUserPasswordPolicyStatus() {
-		// TODO Auto-generated method stub
 		userRepository = Injector.instance().getUserRepository();
 		return userRepository.getUserPasswordPolicyStatus();
 	}

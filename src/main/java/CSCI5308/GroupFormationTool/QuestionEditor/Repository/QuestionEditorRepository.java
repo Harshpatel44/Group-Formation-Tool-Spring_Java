@@ -2,10 +2,12 @@ package CSCI5308.GroupFormationTool.QuestionEditor.Repository;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorRepository;
-
 import java.sql.ResultSet;
 import java.time.LocalDate;
-
+import static CSCI5308.GroupFormationTool.ApplicationConstants.numeric;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.text;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCO;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCM;
 public class QuestionEditorRepository implements IQuestionEditorRepository {
 
     @Override
@@ -30,19 +32,18 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     }
 
     public String changeQuestionTypeName(String selectedQuestionType){
-        if(selectedQuestionType.equals("Numeric")){
-            return "numeric";
+        switch (selectedQuestionType){
+            case numeric:
+                return "numeric";
+            case text:
+                return "text";
+            case MCCO:
+                return "mcqs";
+            case MCCM:
+                return "mcqm";
+            default:
+                return null;
         }
-        if(selectedQuestionType.equals("Text")){
-            return "text";
-        }
-        if(selectedQuestionType.equals("Multiple Choice, Choose One")){
-            return "mcqs";
-        }
-        if(selectedQuestionType.equals("Multiple Choice, Choose Multiple")){
-            return "mcqm";
-        }
-        return null;
     }
 
     @Override

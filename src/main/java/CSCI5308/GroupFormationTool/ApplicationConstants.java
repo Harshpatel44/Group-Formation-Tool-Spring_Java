@@ -13,5 +13,10 @@ public class ApplicationConstants {
 			+ "abcdefghijklmnopqrstuvxyz";
 	public static final String emailPattern = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
 			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
-
+  public static final String sortByDate = "sortByDate";
+  public static final String sortByTopic ="sortByTopic";
+  public static final String numeric = "Numeric";
+  public static final String text="Text";
+  public static final String MCCM = "Multiple Choice, Choose Multiple";
+  public static final String MCCO ="Multiple Choice, Choose One";
 }

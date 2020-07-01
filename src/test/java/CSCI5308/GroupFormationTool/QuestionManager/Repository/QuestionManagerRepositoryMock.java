@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 
 
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;
 
 import java.sql.Date;
@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionManagerRepositoryMock {
-    public List<Question> getQuestionsTest(UserId user) {
+    public List<Question> getQuestionsTest(IUserId user) {
         List<Question> questionList = new ArrayList<Question>();
         if(user.getUserId().equals("B00123456"))
         {

@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.Course.Repository;
 
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Course.Model.Course;
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,7 +10,7 @@ public class HomeRepositoryMock {
 
     private List<Course> CourseList = new ArrayList<Course>();
 
-    public boolean checkRoleTest(UserId user) {
+    public boolean checkRoleTest(IUserId user) {
         boolean result = true;
 
         if(user.getUserId().equals("B00123456"))
@@ -20,7 +20,7 @@ public class HomeRepositoryMock {
         return result;
     }
 
-    public List<Course> getcourseTest(UserId user) {
+    public List<Course> getcourseTest(IUserId user) {
         List<Course> courseList = new ArrayList<Course>();
         if(user.getUserId().equals("B00123456"))
         {

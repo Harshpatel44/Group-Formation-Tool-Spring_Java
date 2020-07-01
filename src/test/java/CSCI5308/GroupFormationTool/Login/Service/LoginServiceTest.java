@@ -1,20 +1,16 @@
 package CSCI5308.GroupFormationTool.Login.Service;
 
 import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
-
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class LoginServiceTest {
-
 
     public LoginRepository loginRepository;
     public LoginService loginService;
@@ -25,7 +21,6 @@ class LoginServiceTest {
         loginRepository = mock(LoginRepository.class);
         loginService = new LoginService(loginRepository);
     }
-
 
     @Test
     void checkLoginTest() throws Exception{
@@ -73,7 +68,6 @@ class LoginServiceTest {
         assertEquals(password,loginService.getPasswordByBannerId("B00835088",3));
     }
 
-
     @Test
     void comparePassword() {
         String newPassword="abc";
@@ -84,8 +78,6 @@ class LoginServiceTest {
         String confirmPassword2="def";
         assertFalse(loginService.comparePassword(newPassword2,confirmPassword2));
     }
-
-
 
     @Test
     void updatePassword() {

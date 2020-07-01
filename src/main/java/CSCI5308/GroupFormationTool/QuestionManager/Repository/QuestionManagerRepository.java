@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;
@@ -12,11 +12,11 @@ import java.util.List;
 public class QuestionManagerRepository implements IQuestionManagerRepository {
     private List<Question> questionList = new ArrayList<Question>();
     @Override
-    public List<Question> getQuestions(UserId user) {
+    public List<Question> getQuestions(String userId) {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("Questions(?)");
-            sp.setParameter(1,user.getUserId());
+            sp.setParameter(1,userId);
             ResultSet rs= sp.executeWithResults();
             while(rs.next()){
                 Question temp = new Question();
@@ -47,11 +47,11 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
     }
 
     @Override
-    public List<Question> getQuestionsByTopic(UserId user) {
+    public List<Question> getQuestionsByTopic(String userId) {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("QuestionsByTopic(?)");
-            sp.setParameter(1,user.getUserId());
+            sp.setParameter(1,userId);
             ResultSet rs= sp.executeWithResults();
             while(rs.next()){
                 Question temp = new Question();
@@ -69,11 +69,11 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
     }
 
     @Override
-    public List<Question> getQuestionsByDate(UserId user) {
+    public List<Question> getQuestionsByDate(String userId) {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("QuestionsByDate(?)");
-            sp.setParameter(1,user.getUserId());
+            sp.setParameter(1,userId);
             ResultSet rs= sp.executeWithResults();
             while(rs.next()){
                 Question temp = new Question();

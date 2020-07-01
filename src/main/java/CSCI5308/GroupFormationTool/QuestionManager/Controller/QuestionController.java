@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Controller;
 
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
@@ -13,7 +14,6 @@ import java.sql.SQLException;
 @Controller
 public class QuestionController {
    private IQuestionManagerService questionManagerService;
-    UserId user = new UserId();
     String sortType = "unsorted";
     @RequestMapping("/questionManager")
     public ModelAndView questionManager(@RequestParam(name="courseId") String courseId,
@@ -37,13 +37,12 @@ public class QuestionController {
                                      @RequestParam(name="courseName") String courseName){
         ModelAndView model=new ModelAndView("questionList");
         questionManagerService = Injector.instance().getQuestionManagerService();
-        user.setUserId(userId);
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
         model.addObject("prompt",false);
-        model.addObject("questions",questionManagerService.getQuestions(user,sortType));
+        model.addObject("questions",questionManagerService.getQuestions(userId,sortType));
         return model;
     }
 
@@ -92,8 +91,7 @@ public class QuestionController {
         model.addObject("userType",userType);
         model.addObject("courseName",courseName);
         questionManagerService.deleteQuestion(questionId,userId);
-        user.setUserId(userId);
-        model.addObject("questions",questionManagerService.getQuestions(user, sortType));
+        model.addObject("questions",questionManagerService.getQuestions(userId, sortType));
         model.setViewName("redirect:/questionList");
         return model;
     }
@@ -118,8 +116,7 @@ public class QuestionController {
             model.addObject("prompt",prompt);
             model.setViewName("questionList");
         }
-        user.setUserId(userId);
-        model.addObject("questions",questionManagerService.getQuestions(user, sortType));
+        model.addObject("questions",questionManagerService.getQuestions(userId, sortType));
         return model;
     }
 }

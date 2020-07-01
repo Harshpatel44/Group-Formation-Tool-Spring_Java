@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import java.util.HashMap;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.numeric;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.text;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCO;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCM;
 
 @Controller
 public class QuestionEditorController{
@@ -71,8 +75,7 @@ public class QuestionEditorController{
 			@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
 			@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
 			throws Exception {
-		HashMap<Integer, String> map = QuestionEditorInjector.instance().getRankFunctionsService()
-				.arrangeOptionsBasedOnRank(optionText, rankText);
+		HashMap<Integer, String> map = QuestionEditorInjector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
 		String[] rankList = rankText.split(",");
 		ModelAndView mv = new ModelAndView("questionEditorPreview");
@@ -100,9 +103,8 @@ public class QuestionEditorController{
 			throws Exception {
 		boolean result;
 		String returnMessage = null;
-		if (selectedQuestionType.equals("Text") || selectedQuestionType.equals("Numeric")) {
-			result = QuestionEditorInjector.instance().getQuestionEditorService()
-					.SaveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType, userId);
+		if (selectedQuestionType.equals(text) || selectedQuestionType.equals(numeric)) {
+			result = QuestionEditorInjector.instance().getQuestionEditorService().SaveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType, userId);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";
@@ -112,11 +114,9 @@ public class QuestionEditorController{
 				returnMessage="Question did not submit successfully";
 			}
 		}
-		if (selectedQuestionType.equals("Multiple Choice, Choose Multiple")
-				|| selectedQuestionType.equals("Multiple Choice, Choose One")) {
-			result = QuestionEditorInjector.instance().getQuestionEditorService()
-					.saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options,
-							ranks, userId);
+		if (selectedQuestionType.equals(MCCM)
+				|| selectedQuestionType.equals(MCCO)) {
+			result = QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks, userId);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";

@@ -3,7 +3,7 @@ package CSCI5308.GroupFormationTool.Course.Service;
 
 import java.util.List;
 
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
 import org.springframework.stereotype.Service;
 
@@ -23,15 +23,15 @@ public class HomeService implements IHomeService {
 	}
 
 
-	public List<Course> getCourses(UserId userId) {
+	public List<Course> getCourses(IUserId iUserId) {
 		homeRepository = Injector.instance().getHomeRepository();
-		return homeRepository.getcourse(userId);
+		return homeRepository.getcourse(iUserId);
 	}
 
 	@Override
-	public boolean checkRole(UserId userId) {
+	public boolean checkRole(IUserId iUserId) {
 		homeRepository = Injector.instance().getHomeRepository();
-		boolean result = homeRepository.checkRole(userId);
+		boolean result = homeRepository.checkRole(iUserId);
 		if(result)
 		{
 			return false;

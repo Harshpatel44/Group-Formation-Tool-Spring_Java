@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeRepository;
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Course.Model.Course;
 
@@ -15,12 +15,12 @@ public class HomeRepository implements IHomeRepository{
 	private List<Course> CourseList = new ArrayList<Course>();
 
 	@Override
-	public boolean checkRole(UserId userId) {
+	public boolean checkRole(IUserId iUserId) {
 		boolean result = true;//Guest
 		StoredProcedure role = null;
 		try {
 			role = new StoredProcedure("CheckGuest(?)");
-			role.setParameter(1, userId.getUserId());
+			role.setParameter(1, iUserId.getUserId());
 			ResultSet rs = role.executeWithResults();
 			if(rs.next())//if data present, then not guest
 			{
@@ -34,8 +34,8 @@ public class HomeRepository implements IHomeRepository{
 	}
 
 	@Override
-	public List<Course> getcourse(UserId userId) {
-		boolean result = checkRole(userId);
+	public List<Course> getcourse(IUserId iUserId) {
+		boolean result = checkRole(iUserId);
 		StoredProcedure storedProcedure = null;
 		try {
 			CourseList.clear();
@@ -55,7 +55,7 @@ public class HomeRepository implements IHomeRepository{
 			// for courses if user is not guest
 			else{
 				storedProcedure = new StoredProcedure("Courses(?)");
-				storedProcedure.setParameter(1, userId.getUserId());
+				storedProcedure.setParameter(1, iUserId.getUserId());
 				ResultSet rs = storedProcedure.executeWithResults();
 				while(rs.next())
 				{

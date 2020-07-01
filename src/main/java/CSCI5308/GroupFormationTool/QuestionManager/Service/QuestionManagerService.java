@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Service;
 
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
@@ -8,6 +8,9 @@ import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
 
 import java.util.List;
+
+import static CSCI5308.GroupFormationTool.ApplicationConstants.sortByDate;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.sortByTopic;
 
 public class QuestionManagerService implements IQuestionManagerService {
     private IQuestionManagerRepository questionManagerRepository;
@@ -18,20 +21,20 @@ public class QuestionManagerService implements IQuestionManagerService {
     }
 
     @Override
-    public List<Question> getQuestions(UserId user,String sortType)
+    public List<Question> getQuestions(String userId, String sortType)
     {
         questionManagerRepository = Injector.instance().getQuestionManagerRepository();
-        if (sortType.equals("sortByTopic"))
+        if (sortType.equals(sortByTopic))
         {
-            return questionManagerRepository.getQuestionsByTopic(user);
+            return questionManagerRepository.getQuestionsByTopic(userId);
         }
-        else if (sortType.equals("sortByDate"))
+        else if (sortType.equals(sortByDate))
         {
-            return questionManagerRepository.getQuestionsByDate(user);
+            return questionManagerRepository.getQuestionsByDate(userId);
         }
         else
         {
-            return questionManagerRepository.getQuestions(user);
+            return questionManagerRepository.getQuestions(userId);
         }
     }
 

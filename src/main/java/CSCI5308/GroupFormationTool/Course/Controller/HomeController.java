@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Course.Controller;
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeService;
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.Injector;
 
@@ -16,7 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 	private IHomeService homeService;
-	UserId userId = new UserId();
+	IUserId iUserId = new UserId();
 
 	@RequestMapping("/home")
 	public ModelAndView home() {
@@ -27,11 +28,11 @@ public class HomeController {
 			return model;
 		}
 
-		userId.setUserId(authentication.getPrincipal().toString());
+		iUserId.setUserId(authentication.getPrincipal().toString());
 		homeService = Injector.instance().getHomeService();
-		model.addObject("userId", userId.getUserId());
-		model.addObject("courses", homeService.getCourses(userId));
-		model.addObject("checkRole", homeService.checkRole(userId));
+		model.addObject("userId", iUserId.getUserId());
+		model.addObject("courses", homeService.getCourses(iUserId));
+		model.addObject("checkRole", homeService.checkRole(iUserId));
 		model.setViewName("home");
 		return model;
 	}

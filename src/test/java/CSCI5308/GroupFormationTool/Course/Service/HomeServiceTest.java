@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Course.Service;
 
 
 
+import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Course.Model.Course;
 import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
@@ -31,7 +32,7 @@ public class HomeServiceTest {
 
     @Test
     public void getCoursesTest(){
-        UserId user = new UserId();
+        IUserId user = new UserId();
         List<Course> courseList = new ArrayList<Course>();
         Course course = new Course();
         course.setCourseId("CSCI1");
@@ -47,7 +48,7 @@ public class HomeServiceTest {
 
     @Test //when user is guest
     public void checkRoleTestGuest() {
-        UserId user = new UserId();
+        IUserId user = new UserId();
         user.setUserId("B00103456");//guest
         when(homeRepository.checkRole(user)).thenReturn(true);
         assertFalse(homeService.checkRole(user));
@@ -56,7 +57,7 @@ public class HomeServiceTest {
 
     @Test //when user is Not a guest
     public void checkRoleTestNotGuest() {
-        UserId user = new UserId();
+        IUserId user = new UserId();
         user.setUserId("B00123456");
         when(homeRepository.checkRole(user)).thenReturn(false);
         assertTrue(homeService.checkRole(user));
