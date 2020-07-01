@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -13,7 +14,7 @@ public class UserModelTest {
 
 	@Test
 	void getUserFirstName() {
-		User user = UserMockDB.setDefault();	
+		User user = UserMockDB.setDefault();
 		assertEquals("Arjun", user.getFirstName());
 
 	}

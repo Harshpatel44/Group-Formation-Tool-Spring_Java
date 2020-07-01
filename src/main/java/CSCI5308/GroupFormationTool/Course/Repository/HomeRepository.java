@@ -4,11 +4,11 @@ import java.sql. ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeRepository;
 import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Course.Model.Course;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 
 public class HomeRepository implements IHomeRepository{
@@ -47,7 +47,7 @@ public class HomeRepository implements IHomeRepository{
 					Course temp = new Course();
 					temp.setCourseId(rs.getString("courseId"));
 					temp.setCourseName(rs.getString("courseName"));
-					temp.setRole("Guest");
+					temp.setRole(guest);
 					CourseList.add(temp);
 				}
 				storedProcedure.cleanup();

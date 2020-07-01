@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Service;
 
-import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
-import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionResponsesRepo;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionResponsesRepo;
+import CSCI5308.GroupFormationTool.QuestionManager.QuestionResponsesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

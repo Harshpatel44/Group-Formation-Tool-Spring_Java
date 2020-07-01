@@ -2,7 +2,7 @@ package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 
 
 import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
-import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;
+import CSCI5308.GroupFormationTool.QuestionManager.Question;
 
 import java.sql.Date;
 import java.util.ArrayList;

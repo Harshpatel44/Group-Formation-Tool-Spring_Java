@@ -1,10 +1,11 @@
 package CSCI5308.GroupFormationTool.UserAuthentication.Repository;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserPasswordPolicyDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

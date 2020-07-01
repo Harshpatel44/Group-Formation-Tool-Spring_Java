@@ -1,14 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
 
-import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorRepository;
-import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IQuestionEditorService;
-import CSCI5308.GroupFormationTool.QuestionEditor.AccessControl.IRankFunctionsService;
-import CSCI5308.GroupFormationTool.QuestionEditor.Controller.QuestionEditorController;
-import CSCI5308.GroupFormationTool.QuestionEditor.Repository.QuestionEditorRepository;
-import CSCI5308.GroupFormationTool.QuestionEditor.Service.QuestionEditorService;
-import CSCI5308.GroupFormationTool.QuestionEditor.Service.RankFunctionsService;
-
 public class QuestionEditorInjector {
     private static QuestionEditorInjector instance = null;
     private IQuestionEditorService questionEditorService;

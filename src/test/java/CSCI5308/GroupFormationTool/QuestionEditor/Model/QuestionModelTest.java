@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Model;
 
+import CSCI5308.GroupFormationTool.QuestionEditor.QuestionModel;
 import org.junit.jupiter.api.Test;
 import java.util.Dictionary;
 import java.util.Hashtable;

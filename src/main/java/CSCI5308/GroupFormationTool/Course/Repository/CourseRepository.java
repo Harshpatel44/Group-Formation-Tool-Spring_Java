@@ -7,7 +7,7 @@ import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
 import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
 import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 public class CourseRepository implements ICourseRepository {
 

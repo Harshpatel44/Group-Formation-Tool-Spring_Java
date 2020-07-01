@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.Course.AccessControl;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
 import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
 import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
 import java.sql.SQLException;

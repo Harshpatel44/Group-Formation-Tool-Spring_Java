@@ -8,12 +8,13 @@ import static org.mockito.Mockito.when;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 @SpringBootTest
 public class UserNotificationTest {

@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Login.Service;
 
-import CSCI5308.GroupFormationTool.Login.Repository.ForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.Login.ForgetPasswordService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

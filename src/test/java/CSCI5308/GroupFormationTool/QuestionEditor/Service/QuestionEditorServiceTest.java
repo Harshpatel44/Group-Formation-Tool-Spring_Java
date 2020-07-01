@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Service;
 
-import CSCI5308.GroupFormationTool.QuestionEditor.Repository.QuestionEditorRepository;
+import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorRepository;
+import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

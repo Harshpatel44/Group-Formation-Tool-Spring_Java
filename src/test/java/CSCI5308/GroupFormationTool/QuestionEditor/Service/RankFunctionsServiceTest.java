@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Service;
 
+import CSCI5308.GroupFormationTool.QuestionEditor.RankFunctionsService;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashMap;

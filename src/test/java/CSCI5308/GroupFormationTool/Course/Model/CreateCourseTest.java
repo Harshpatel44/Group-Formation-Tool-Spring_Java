@@ -20,8 +20,6 @@ class CreateCourseTest {
         CreateCourse createCourse = new CreateCourse();
         createCourse.setCourseCreateMessage("Course Created");
         assertEquals("Course Created",createCourse.getCourseCreateMessage());
-
-
     }
 
     @Test

@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.Login.Repository;
 
-import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
+import CSCI5308.GroupFormationTool.Login.ILoginRepository;
 
 public class MockLoginRepository implements ILoginRepository {
 
