@@ -3,15 +3,15 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 import java.util.List;
 
 public interface IUserRepository {
-    boolean createUser(User user);
+    boolean createUser(IUser user);
 
-    boolean getUserByEmailId(User user);
+    boolean getUserByEmailId(IUser user);
 
-    boolean getUserByBannerId(User user);
+    boolean getUserByBannerId(IUser user);
 
     List<String> getAllBannerIds();
 
-    User loadUserByID(String bannerId);
+    IUser loadUserByID(String bannerId);
 
     UserPasswordPolicy getUserPasswordPolicy();
 

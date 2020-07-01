@@ -7,7 +7,7 @@ import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.Course.CreateCourse;
 import CSCI5308.GroupFormationTool.Course.DeleteCourse;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
 
 public class CourseRepository implements ICourseRepository {
 
@@ -80,11 +80,11 @@ public class CourseRepository implements ICourseRepository {
 
 
 	@Override
-	public boolean getUserDetailsOnCourse(User user, String courseId) {
+	public boolean getUserDetailsOnCourse(IUser iUser, String courseId) {
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByCourse(?,?)");
-			storedProcedure.setParameter(1, user.getBannerId());
+			storedProcedure.setParameter(1, iUser.getBannerId());
 			storedProcedure.setParameter(2, courseId);
 			ResultSet results = storedProcedure.executeWithResults();
 			if (results != null) {
@@ -100,7 +100,7 @@ public class CourseRepository implements ICourseRepository {
 	}
 
 	@Override
-	public boolean enrollStudentForCourse(User user, String courseId) {
+	public boolean enrollStudentForCourse(IUser user, String courseId) {
 		Boolean success = false;
 		StoredProcedure storedProcedure = null;
 		try {

@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor.Model;
 
+import CSCI5308.GroupFormationTool.QuestionEditor.IQuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.QuestionModel;
 import org.junit.jupiter.api.Test;
 import java.util.Dictionary;
@@ -10,20 +11,20 @@ class QuestionModelTest {
 
     @Test
     void getQuestionSubmitMessage() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         assertEquals("Question did not submit successfully...",questionModel.getQuestionSubmitMessage());
     }
 
     @Test
     void setQuestionSubmitMessage() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         questionModel.setQuestionSubmitMessage("Question submitted successfully");
         assertEquals("Question submitted successfully",questionModel.getQuestionSubmitMessage());
     }
 
     @Test
     void getQuestionTypeList() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         Dictionary questionTypeList = new Hashtable();
         questionTypeList.put("Numeric","Numeric");
         questionTypeList.put("Multiple Choice, Choose One","Multiple Choice, Choose One");
@@ -34,7 +35,7 @@ class QuestionModelTest {
 
     @Test
     void setQuestionTypeList() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         Dictionary questionTypeList = new Hashtable();
         questionTypeList.put("Numeric","Numeric");
         questionTypeList.put("Multiple Choice, Choose One","Multiple Choice, Choose One");
@@ -46,13 +47,13 @@ class QuestionModelTest {
 
     @Test
     void getSelectedQuestionType() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         assertEquals(null,questionModel.getSelectedQuestionType());
     }
 
     @Test
     void setSelectedQuestionType() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         String selectedQuestionType="sample message";
         questionModel.setSelectedQuestionType(selectedQuestionType);
         assertEquals("sample message",questionModel.getSelectedQuestionType());
@@ -60,13 +61,13 @@ class QuestionModelTest {
 
     @Test
     void getQuestionTitle() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         assertEquals(null,questionModel.getQuestionTitle());
     }
 
     @Test
     void setQuestionTitle() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         String questionTitle="sample title";
         questionModel.setQuestionTitle(questionTitle);
         assertEquals("sample title",questionModel.getQuestionTitle());
@@ -74,13 +75,13 @@ class QuestionModelTest {
 
     @Test
     void getQuestionText() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         assertEquals(null,questionModel.getQuestionText());
     }
 
     @Test
     void setQuestionText() {
-        QuestionModel questionModel = new QuestionModel();
+        IQuestionModel questionModel = new QuestionModel();
         String questionText="sample text";
         questionModel.setQuestionText(questionText);
         assertEquals("sample text",questionModel.getQuestionText());

@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerRepository;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerService;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerRepository;
 
 import java.util.List;
 
@@ -20,7 +16,7 @@ public class QuestionManagerService implements IQuestionManagerService {
     }
 
     @Override
-    public List<Question> getQuestions(String userId, String sortType)
+    public List<IQuestion> getQuestions(String userId, String sortType)
     {
         questionManagerRepository = Injector.instance().getQuestionManagerRepository();
         if (sortType.equals(sortByTopic))

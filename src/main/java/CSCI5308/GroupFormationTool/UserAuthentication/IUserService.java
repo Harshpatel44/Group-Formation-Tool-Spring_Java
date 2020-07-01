@@ -5,7 +5,7 @@ import java.util.Map;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 
 public interface IUserService {
-	boolean createUser(User user) throws ServiceLayerException;
+	boolean createUser(IUser user) throws ServiceLayerException;
 
 	UserPasswordPolicy getUserPasswordPolicy();
 

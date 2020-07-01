@@ -62,7 +62,6 @@ public class Injector {
 	private IForgetPasswordRepository forgetPasswordRepository;
 	private IQuestionManagerService questionManagerService;
 	private IQuestionManagerRepository questionManagerRepository;
-
 	private IQuestionResponsesService questionResponsesService;
 	private IQuestionResponsesRepo questionResponsesRepo;
 
@@ -85,7 +84,6 @@ public class Injector {
 		forgetPasswordRepository =new ForgetPasswordRepository();
 		questionManagerRepository = new QuestionManagerRepository();
 		questionManagerService = new QuestionManagerService();
-
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
 	}

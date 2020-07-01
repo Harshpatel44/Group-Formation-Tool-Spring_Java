@@ -32,21 +32,21 @@ public class UserServiceTest {
 	
 	@Test
 	public void createUserWithExceptions() throws ServiceLayerException {
-		User user = new User();
+		IUser iUser = new User();
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(7, exception.getMapErrors().size());
 	}
 
 	@Test
 	public void createExistingUserCorrectDetails() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
+		IUser iUser = UserMockDB.setDefault();
 		userService = Injector.instance().getUserService();
-		when(userRepository.getUserByBannerId(user)).thenReturn(true);
+		when(userRepository.getUserByBannerId(iUser)).thenReturn(true);
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("bannerId"), "Banner ID already exists");
@@ -54,11 +54,11 @@ public class UserServiceTest {
 
 	@Test
 	public void createWithEmptyFirstname() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setFirstName("");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setFirstName("");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("firstName"), "first name cannot be  null or empty");
@@ -66,11 +66,11 @@ public class UserServiceTest {
 
 	@Test
 	public void createWithEmptyLastname() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setLastName("");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setLastName("");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("lastName"), "last name cannot be null or empty");
@@ -78,11 +78,11 @@ public class UserServiceTest {
 
 	@Test
 	public void createWithInvalidEmail() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setEmailId("neofvno");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setEmailId("neofvno");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("emailId"), "Enter valid Email");
@@ -90,12 +90,12 @@ public class UserServiceTest {
 
 	@Test
 	public void createInvalidPassword() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("qwert");
-		user.setConfirmPassword("qwerty");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("qwert");
+		iUser.setConfirmPassword("qwerty");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("confirmPassword"), "Passwords and confirm password Does not match");
@@ -103,12 +103,12 @@ public class UserServiceTest {
 
 	@Test
 	public void createInvalidPassword1() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("qwerty!");
-		user.setConfirmPassword("qwerty!");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("qwerty!");
+		iUser.setConfirmPassword("qwerty!");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("confirmPassword"), "Password should have minimum 1 uppercaseLetters ");
@@ -116,12 +116,12 @@ public class UserServiceTest {
 
 	@Test
 	public void createInvalidPassword2() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("QWERTY!");
-		user.setConfirmPassword("QWERTY!");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("QWERTY!");
+		iUser.setConfirmPassword("QWERTY!");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("confirmPassword"), "Password should have minimum 1 lowerrcaseLetters");
@@ -129,12 +129,12 @@ public class UserServiceTest {
 
 	@Test
 	public void createInvalidPassword3() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
-		user.setConfirmPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
+		iUser.setConfirmPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("confirmPassword"), "Password should have maximum 23 letters");
@@ -142,24 +142,24 @@ public class UserServiceTest {
 
 	@Test
 	public void createInvalidPassword4() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("");
-		user.setConfirmPassword("");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("");
+		iUser.setConfirmPassword("");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 2, true);
 	}
 
 	@Test
 	public void createInvalidPassword5() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("Qwertyuiop");
-		user.setConfirmPassword("Qwertyuiop");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("Qwertyuiop");
+		iUser.setConfirmPassword("Qwertyuiop");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("confirmPassword"), "Password should have minimum 1 symbols");
@@ -167,12 +167,12 @@ public class UserServiceTest {
 
 	@Test
 	public void createInvalidPassword6() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
-		user.setPassword("Qwertyuiop@");
-		user.setConfirmPassword("Qwertyuiop@");
+		IUser iUser = UserMockDB.setDefault();
+		iUser.setPassword("Qwertyuiop@");
+		iUser.setConfirmPassword("Qwertyuiop@");
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-			userService.createUser(user);
+			userService.createUser(iUser);
 		});
 		assertEquals(exception.getMapErrors().size() == 1, true);
 		assertEquals(exception.getMapErrors().get("confirmPassword"), "Following characters are not allowed in password @#");
@@ -180,10 +180,10 @@ public class UserServiceTest {
 
 	@Test
 	public void creaUserCorrectDetails() throws ServiceLayerException {
-		User user = UserMockDB.setDefault();
+		IUser iUser = UserMockDB.setDefault();
 		userService = mock(UserService.class);
-		when(userService.createUser(user)).thenReturn(true);
-		assertEquals(true, userService.createUser(user));
+		when(userService.createUser(iUser)).thenReturn(true);
+		assertEquals(true, userService.createUser(iUser));
 	}
 
 	@Test
