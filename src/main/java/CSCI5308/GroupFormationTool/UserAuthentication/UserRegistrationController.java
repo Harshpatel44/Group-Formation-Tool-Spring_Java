@@ -23,7 +23,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	}
 
 	@PostMapping("/register")
-	public ModelAndView createUser(User user, BindingResult bindingResult) throws Exception {
+	public ModelAndView createUser(IUser user, BindingResult bindingResult) throws Exception {
 		userService = Injector.instance().getUserService();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("passwordPolicy", UserPasswordPolicy.getInstance());
@@ -53,7 +53,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	}
 
 	@GetMapping("/register")
-	public ModelAndView register(User user) throws Exception {
+	public ModelAndView register(IUser user) throws Exception {
 		userService = Injector.instance().getUserService();
 		UserPasswordPolicy passwordPolicy = userService.getUserPasswordPolicy();
 		UserPasswordPolicyStatus passwordPolicyStatus = userService.getUserPasswordPolicyStatus();

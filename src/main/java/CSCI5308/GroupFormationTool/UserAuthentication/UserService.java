@@ -1,14 +1,8 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserService;
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicyStatus;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,7 +23,7 @@ public class UserService implements IUserService {
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	@Override
-	public boolean createUser(User user) throws Exception {
+	public boolean createUser(IUser user) throws ServiceLayerException, Exception {
 		Boolean success = false;
 		userRepository = Injector.instance().getUserRepository();
 		encryptor = Injector.instance().getPasswordEncryptor();
@@ -57,7 +51,7 @@ public class UserService implements IUserService {
 		return success;
 	}
 
-	private Map<String, String> checkAllValidaations(User user) {
+	private Map<String, String> checkAllValidaations(IUser user) {
 		Map<String, String> errors = new HashMap<String, String>();
 		if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
 			errors.put("firstName", "first name cannot be  null or empty");
@@ -117,7 +111,6 @@ public class UserService implements IUserService {
 		if (passwordPolicyStatus.getMinUpperCaseLetter() == 1) {
 			if (password.chars().filter((s) -> Character.isUpperCase(s)).count() < passwordPolicy
 					.getMinUpperCaseLetter()) {
-
 				policyErrors.add("Password should have minimum " + +passwordPolicy.getMinUpperCaseLetter()
 						+ " uppercaseLetters ");
 			}
@@ -125,7 +118,6 @@ public class UserService implements IUserService {
 		if (passwordPolicyStatus.getMinLowerCaseLetter() == 1) {
 			if (password.chars().filter((s) -> Character.isLowerCase(s)).count() < passwordPolicy
 					.getMinLowerCaseLetter()) {
-
 				policyErrors.add("Password should have minimum " + passwordPolicy.getMinLowerCaseLetter()
 						+ " lowerrcaseLetters");
 			}

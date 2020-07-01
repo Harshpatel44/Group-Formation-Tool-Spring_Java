@@ -9,13 +9,11 @@ import javax.mail.internet.MimeMessage;
 
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 public class UserNotification implements IUserNotification {
 
 	@Override
-	public Boolean sendUserCredentials(User user) throws Exception {
+	public Boolean sendUserCredentials(IUser user) throws Exception, AddressException, MessagingException {
 		String subject = "Login Credentails for GroupFormation Tool";
 		String body = "Welcome to the GroupFormation Tool\n Your Login credentials are as follows: \n";
 		body += "Username: "+ user.getBannerId();

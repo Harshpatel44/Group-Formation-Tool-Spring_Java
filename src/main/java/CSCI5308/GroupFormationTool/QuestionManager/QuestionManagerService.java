@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerRepository;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerService;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerRepository;
 
 import java.util.List;
 

@@ -12,15 +12,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Login.ILoginRepository;
 import CSCI5308.GroupFormationTool.Login.ILoginService;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
 public class CustomAuthentication implements AuthenticationManager
 {
 	private static final String ADMIN_BANNER_ID = "ADMIN";
-	private Authentication checkAdmin(String password, User u, Authentication authentication) throws AuthenticationException
+	private Authentication checkAdmin(String password, IUser u, Authentication authentication) throws AuthenticationException
 	{
 		// The admin password is not encrypted because it is hardcoded in the DB.
 		if (password.equals(u.getPassword()))
@@ -89,10 +87,10 @@ public class CustomAuthentication implements AuthenticationManager
 
 		if (validity)
 		{
-			User user = userRepository.loadUserByID(bannerID);
+			IUser iUser = userRepository.loadUserByID(bannerID);
 			if (bannerID.toUpperCase().equals(ADMIN_BANNER_ID))
 			{
-				return checkAdmin(password, user, authentication);
+				return checkAdmin(password, iUser, authentication);
 			}
 			else
 			{

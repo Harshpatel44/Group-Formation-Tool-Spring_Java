@@ -1,11 +1,12 @@
 package CSCI5308.GroupFormationTool.UserAuthentication.AccessControll;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
 import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 public class UserMockDB {
 
-	public static User setDefault() {
-		User u = new User() {
+	public static IUser setDefault() {
+		IUser u = new User() {
 			{
 				setFirstName("Arjun");
 				setLastName("Suresh");

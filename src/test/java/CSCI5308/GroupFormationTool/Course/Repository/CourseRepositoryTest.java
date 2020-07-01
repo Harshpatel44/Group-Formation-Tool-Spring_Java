@@ -8,6 +8,7 @@ import static org.mockito.Mockito.when;
 
 import CSCI5308.GroupFormationTool.Course.*;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -15,8 +16,6 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
-
 
 
 import java.sql.SQLException;
@@ -35,23 +34,23 @@ public class CourseRepositoryTest {
 
 	@Test
 	public void getUserDetailsOnCourse() throws Exception {
-		User user = UserMockDB.setDefault();
+		IUser user = UserMockDB.setDefault();
 		when(courseRepository.getUserDetailsOnCourse(user, "CSCI10")).thenReturn(false);
 		assertEquals(false, courseRepository.getUserDetailsOnCourse(user, "CSCI10"));
 	}
 
 	@Test
 	public void getEnrollCourse() {
-		User user = UserMockDB.setDefault();
-		when(courseRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(true);
-		assertEquals(true, courseRepository.enrollStudentForCourse(user, "CSCI10"));
+		IUser iUser = UserMockDB.setDefault();
+		when(courseRepository.enrollStudentForCourse(iUser, "CSCI10")).thenReturn(true);
+		assertEquals(true, courseRepository.enrollStudentForCourse(iUser, "CSCI10"));
 	}
 
 	@Test
 	public void getEnrollCourseFails() {
-		User user = UserMockDB.setDefault();
-		when(courseRepository.enrollStudentForCourse(user, "CSCI10")).thenReturn(false);
-		assertEquals(false, courseRepository.enrollStudentForCourse(user, "CSCI10"));
+		IUser iUser = UserMockDB.setDefault();
+		when(courseRepository.enrollStudentForCourse(iUser, "CSCI10")).thenReturn(false);
+		assertEquals(false, courseRepository.enrollStudentForCourse(iUser, "CSCI10"));
 	}
 
 	@Test

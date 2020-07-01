@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Service;
 
+import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerService;
@@ -29,50 +30,50 @@ public class QuestionManagerServiceTest {
     @Test
     public void getquestionsTestByTopic() throws Exception {
         String userId;
-        List<Question> questionList = new ArrayList<Question>();
-        Question question = new Question();
-        question.setQuestionId(1);
-        question.setQuestionDescription("QuestionDescription");
-        question.setQuestionTopic("QuestionTopic");
-        question.setDate(Date.valueOf("2020-12-30"));
-        questionList.add(question);
+        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
+        IQuestion iQuestion = new Question();
+        iQuestion.setQuestionId(1);
+        iQuestion.setQuestionDescription("QuestionDescription");
+        iQuestion.setQuestionTopic("QuestionTopic");
+        iQuestion.setDate(Date.valueOf("2020-12-30"));
+        iQuestionList.add(iQuestion);
         userId = "B00123456";
         String sortType = "sortByTopic";
-        when(questionManagerRepository.getQuestionsByTopic(userId)).thenReturn(questionList);
-        List<Question> returnedList = questionManagerService.getQuestions(userId,sortType);
-        assertEquals(returnedList,questionList);
+        when(questionManagerRepository.getQuestionsByTopic(userId)).thenReturn(iQuestionList);
+        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
+        assertEquals(returnedList, iQuestionList);
     }
     @Test
     public void getquestionsTestByDate() throws Exception {
         String userId;
-        List<Question> questionList = new ArrayList<Question>();
-        Question question = new Question();
-        question.setQuestionId(1);
-        question.setQuestionDescription("QuestionDescription");
-        question.setQuestionTopic("QuestionTopic");
-        question.setDate(Date.valueOf("2020-12-30"));
-        questionList.add(question);
+        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
+        IQuestion iQuestion = new Question();
+        iQuestion.setQuestionId(1);
+        iQuestion.setQuestionDescription("QuestionDescription");
+        iQuestion.setQuestionTopic("QuestionTopic");
+        iQuestion.setDate(Date.valueOf("2020-12-30"));
+        iQuestionList.add(iQuestion);
         userId="B00123456";
         String sortType = "sortByDate";
-        when(questionManagerRepository.getQuestionsByDate(userId)).thenReturn(questionList);
-        List<Question> returnedList = questionManagerService.getQuestions(userId,sortType);
-        assertEquals(returnedList,questionList);
+        when(questionManagerRepository.getQuestionsByDate(userId)).thenReturn(iQuestionList);
+        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
+        assertEquals(returnedList, iQuestionList);
     }
     @Test
     public void getquestionsTest() throws Exception {
         String userId;
-        List<Question> questionList = new ArrayList<Question>();
-        Question question = new Question();
-        question.setQuestionId(1);
-        question.setQuestionDescription("QuestionDescription");
-        question.setQuestionTopic("QuestionTopic");
-        question.setDate(Date.valueOf("2020-12-30"));
-        questionList.add(question);
+        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
+        IQuestion iQuestion = new Question();
+        iQuestion.setQuestionId(1);
+        iQuestion.setQuestionDescription("QuestionDescription");
+        iQuestion.setQuestionTopic("QuestionTopic");
+        iQuestion.setDate(Date.valueOf("2020-12-30"));
+        iQuestionList.add(iQuestion);
         userId="B00123456";
         String sortType = "unsorted";
-        when(questionManagerRepository.getQuestions(userId)).thenReturn(questionList);
-        List<Question> returnedList = questionManagerService.getQuestions(userId,sortType);
-        assertEquals(returnedList,questionList);
+        when(questionManagerRepository.getQuestions(userId)).thenReturn(iQuestionList);
+        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
+        assertEquals(returnedList, iQuestionList);
     }
 
     @Test

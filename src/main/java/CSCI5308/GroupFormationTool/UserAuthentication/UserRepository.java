@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicyStatus;
 
 import org.springframework.stereotype.Repository;
 
@@ -17,7 +13,7 @@ import java.util.List;
 public class UserRepository implements IUserRepository {
 
 	@Override
-	public boolean createUser(User user) {
+	public boolean createUser(IUser user) {
 		Boolean success = false;
 		StoredProcedure storedProcedure = null;
 		try {
@@ -42,7 +38,7 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public boolean getUserByEmailId(User user) throws Exception {
+	public boolean getUserByEmailId(IUser user) throws Exception {
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByEmailID(?)");
@@ -61,7 +57,7 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public boolean getUserByBannerId(User user) {
+	public boolean getUserByBannerId(IUser user) {
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByBannerID(?)");
@@ -101,9 +97,9 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public User loadUserByID(String BannerId) {
+	public IUser loadUserByID(String BannerId) {
 		StoredProcedure proc = null;
-		User user = null;
+		IUser user = null;
 		try {
 			proc = new StoredProcedure("spLoadUser(?)");
 			proc.setParameter(1, BannerId);

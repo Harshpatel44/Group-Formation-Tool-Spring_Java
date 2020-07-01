@@ -8,13 +8,13 @@ import static org.mockito.Mockito.when;
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
+import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 @SpringBootTest
 public class UserNotificationTest {
@@ -23,15 +23,15 @@ public class UserNotificationTest {
 	@Test
 	public void notificationTesting() throws Exception {
 		userNotification = mock(UserNotification.class);
-		User user = UserMockDB.setDefault();
-		when(userNotification.sendUserCredentials(user)).thenReturn(true);
-		assertTrue(userNotification.sendUserCredentials(user));
+		IUser iUser = UserMockDB.setDefault();
+		when(userNotification.sendUserCredentials(iUser)).thenReturn(true);
+		assertTrue(userNotification.sendUserCredentials(iUser));
 	}
 	@Test
 	public void notificationTestingFails() throws Exception {
 		userNotification = mock(UserNotification.class);
-		User user = UserMockDB.setDefault();
-		when(userNotification.sendUserCredentials(user)).thenReturn(false);
-		assertFalse(userNotification.sendUserCredentials(user));
+		IUser iUser = UserMockDB.setDefault();
+		when(userNotification.sendUserCredentials(iUser)).thenReturn(false);
+		assertFalse(userNotification.sendUserCredentials(iUser));
 	}
 }

@@ -1,24 +1,23 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerRepository;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionManagerRepository implements IQuestionManagerRepository {
-    private List<Question> questionList = new ArrayList<Question>();
+    private List<IQuestion> questionList = new ArrayList<IQuestion>();
     @Override
-    public List<Question> getQuestions(String userId) {
+    public List<IQuestion> getQuestions(String userId) {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("Questions(?)");
             sp.setParameter(1,userId);
             ResultSet rs= sp.executeWithResults();
             while(rs.next()){
-                Question temp = new Question();
+                IQuestion temp = new Question();
                 temp.setDate(rs.getDate("dateStamp"));
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionDescription(rs.getString("questionDesc"));
@@ -48,14 +47,14 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
     }
 
     @Override
-    public List<Question> getQuestionsByTopic(String userId) {
+    public List<IQuestion> getQuestionsByTopic(String userId) {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("QuestionsByTopic(?)");
             sp.setParameter(1,userId);
             ResultSet rs= sp.executeWithResults();
             while(rs.next()){
-                Question temp = new Question();
+                IQuestion temp = new Question();
                 temp.setDate(rs.getDate("dateStamp"));
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionDescription(rs.getString("questionDesc"));
@@ -79,7 +78,7 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
             sp.setParameter(1,userId);
             ResultSet rs= sp.executeWithResults();
             while(rs.next()){
-                Question temp = new Question();
+                IQuestion temp = new Question();
                 temp.setDate(rs.getDate("dateStamp"));
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionDescription(rs.getString("questionDesc"));

@@ -30,7 +30,7 @@ public class QuestionEditorController{
 	public ModelAndView createQuestion(@RequestParam(name = "courseId") String courseId,
 			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
 			@RequestParam(name = "courseName") String courseName) {
-		QuestionModel questionModel = new QuestionModel();
+		IQuestionModel questionModel = new QuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);
@@ -41,9 +41,9 @@ public class QuestionEditorController{
 	}
 
 	@RequestMapping("/createOption")
-	public ModelAndView createOption(QuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
-			@RequestParam(name = "courseName") String courseName) {
+	public ModelAndView createOption(IQuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
+									 @RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
+									 @RequestParam(name = "courseName") String courseName) {
 		ModelAndView mv = new ModelAndView();
 		if (questionModel.getSelectedQuestionType().equals("Text")
 				|| questionModel.getSelectedQuestionType().equals("Numeric")) {
@@ -65,13 +65,13 @@ public class QuestionEditorController{
 	}
 
 	@RequestMapping(value = "/questionPreview")
-	public ModelAndView questionPreview(QuestionModel questionModel,
-			@RequestParam(name = "optionText") String optionText, @RequestParam(name = "rankText") String rankText,
-			@RequestParam(name = "questionText") String questionText,
-			@RequestParam(name = "questionTitle") String questionTitle,
-			@RequestParam(name = "selectedQuestionType") String selectedQuestionType,
-			@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
-			@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
+	public ModelAndView questionPreview(IQuestionModel questionModel,
+										@RequestParam(name = "optionText") String optionText, @RequestParam(name = "rankText") String rankText,
+										@RequestParam(name = "questionText") String questionText,
+										@RequestParam(name = "questionTitle") String questionTitle,
+										@RequestParam(name = "selectedQuestionType") String selectedQuestionType,
+										@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
+										@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
 			throws Exception {
 		HashMap<Integer, String> map = QuestionEditorInjector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
@@ -92,12 +92,12 @@ public class QuestionEditorController{
 	}
 
 	@RequestMapping("/questionEditorFinish")
-	public ModelAndView questionFinish(QuestionModel questionModel, @RequestParam(name = "ranks") String ranks,
-			@RequestParam(name = "options") String options, @RequestParam(name = "questionText") String questionText,
-			@RequestParam(name = "questionTitle") String questionTitle,
-			@RequestParam(name = "selectedQuestionType") String selectedQuestionType,
-			@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
-			@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
+	public ModelAndView questionFinish(IQuestionModel questionModel, @RequestParam(name = "ranks") String ranks,
+									   @RequestParam(name = "options") String options, @RequestParam(name = "questionText") String questionText,
+									   @RequestParam(name = "questionTitle") String questionTitle,
+									   @RequestParam(name = "selectedQuestionType") String selectedQuestionType,
+									   @RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
+									   @RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
 			throws Exception {
 		boolean result;
 		String returnMessage = null;
