@@ -1,7 +1,9 @@
 package CSCI5308.GroupFormationTool;
 
-
-
+import CSCI5308.GroupFormationTool.Login.AccessControl.IForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.Login.AccessControl.IForgetPasswordService;
+import CSCI5308.GroupFormationTool.Login.Repository.ForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.Login.Service.ForgetPasswordService;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
 import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
@@ -54,13 +56,14 @@ public class Injector {
 	private ICourseService courseService;
 	private ICourseRepository courseRepository;
 	private ILoginService loginService;
+	private IForgetPasswordService forgetPasswordService;
 	private ILoginRepository loginRepository;
+	private IForgetPasswordRepository forgetPasswordRepository;
 	private IQuestionManagerService questionManagerService;
 	private IQuestionManagerRepository questionManagerRepository;
 
 	private IQuestionResponsesService questionResponsesService;
 	private IQuestionResponsesRepo questionResponsesRepo;
-	
 
 	private Injector()  {
 
@@ -72,18 +75,19 @@ public class Injector {
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
 		loginService = new LoginService();
+		forgetPasswordService = new ForgetPasswordService();
 		homeRepository = new HomeRepository();
 		homeService = new HomeService();
 		courseService = new CourseService();
 		courseRepository = new CourseRepository();
 		loginRepository = new LoginRepository();
+		forgetPasswordRepository =new ForgetPasswordRepository();
 		questionManagerRepository = new QuestionManagerRepository();
 		questionManagerService = new QuestionManagerService();
 
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
 	}
-
 
 	public IQuestionResponsesService getQuestionResponsesService() {
 		return questionResponsesService;
@@ -165,6 +169,14 @@ public class Injector {
 		this.loginRepository = loginRepository;
 	}
 
+	public void setForgetPasswordService(IForgetPasswordService forgetPasswordService) {
+		this.forgetPasswordService = forgetPasswordService;
+	}
+
+	public void setForgetPasswordRepository(IForgetPasswordRepository forgetPasswordRepository) {
+		this.forgetPasswordRepository = forgetPasswordRepository;
+	}
+
 	public IUserRepository getUserRepository() {
 		return userRepository;
 	}
@@ -217,11 +229,17 @@ public class Injector {
 		return loginRepository;
 	}
 
+	public IForgetPasswordService getForgetPasswordService() {
+		return forgetPasswordService;
+	}
+
+	public IForgetPasswordRepository getForgetPasswordRepository() {
+		return forgetPasswordRepository;
+	}
+
 	public IQuestionManagerService getQuestionManagerService(){return questionManagerService;}
 
 	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
 
-
     public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
-
 }
