@@ -18,16 +18,16 @@ import static org.mockito.Mockito.when;
 public class QuestionManagerServiceTest {
     public QuestionManagerService questionManagerService;
     public QuestionManagerRepository questionManagerRepository;
-    
+
     @BeforeEach
-    public void init(){
+    public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         questionManagerRepository = mock(QuestionManagerRepository.class);
         questionManagerService = new QuestionManagerService(questionManagerRepository);
     }
 
     @Test
-    public void getquestionsTestByTopic(){
+    public void getquestionsTestByTopic() throws Exception {
         String userId;
         List<Question> questionList = new ArrayList<Question>();
         Question question = new Question();
@@ -43,7 +43,7 @@ public class QuestionManagerServiceTest {
         assertEquals(returnedList,questionList);
     }
     @Test
-    public void getquestionsTestByDate(){
+    public void getquestionsTestByDate() throws Exception {
         String userId;
         List<Question> questionList = new ArrayList<Question>();
         Question question = new Question();
@@ -59,7 +59,7 @@ public class QuestionManagerServiceTest {
         assertEquals(returnedList,questionList);
     }
     @Test
-    public void getquestionsTest(){
+    public void getquestionsTest() throws Exception {
         String userId;
         List<Question> questionList = new ArrayList<Question>();
         Question question = new Question();
@@ -76,7 +76,7 @@ public class QuestionManagerServiceTest {
     }
 
     @Test
-    public void deleteQuestionTest(){
+    public void deleteQuestionTest() throws Exception {
    String userId ="B00100100";
    Integer questionId=1;
    questionManagerService.deleteQuestion(questionId,userId);

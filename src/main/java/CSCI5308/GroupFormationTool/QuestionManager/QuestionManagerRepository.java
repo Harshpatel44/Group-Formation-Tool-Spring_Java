@@ -28,12 +28,14 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
             sp.cleanup();
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return questionList;
     }
 
     @Override
-    public void deleteQuestion(Integer questionId, String userId) {
+    public void deleteQuestion(Integer questionId, String userId) throws Exception {
         try{
            StoredProcedure sp =new StoredProcedure("DeleteQuestion(?,?)");
            sp.setParameter(1,userId);
@@ -63,12 +65,14 @@ public class QuestionManagerRepository implements IQuestionManagerRepository {
             sp.cleanup();
         }catch (SQLException throwables) {
             throwables.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return questionList;
     }
 
     @Override
-    public List<Question> getQuestionsByDate(String userId) {
+    public List<Question> getQuestionsByDate(String userId) throws Exception {
         try{
             questionList.clear();
             StoredProcedure sp = new StoredProcedure("QuestionsByDate(?)");

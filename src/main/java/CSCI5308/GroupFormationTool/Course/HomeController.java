@@ -17,7 +17,7 @@ public class HomeController {
 	IUserRole userRole = new UserRole();
 
 	@RequestMapping("/home")
-	public ModelAndView home() {
+	public ModelAndView home() throws Exception {
 		ModelAndView model = new ModelAndView();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if ((authentication instanceof AnonymousAuthenticationToken)) {

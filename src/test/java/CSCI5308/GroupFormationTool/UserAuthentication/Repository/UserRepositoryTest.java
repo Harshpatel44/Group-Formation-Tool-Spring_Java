@@ -56,7 +56,7 @@ public class UserRepositoryTest {
 	}
 
 	@Test
-	public void getEmailIdDetails() {
+	public void getEmailIdDetails() throws Exception {
 		User user = UserMockDB.setDefault();
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByEmailId(user)).thenReturn(true);
@@ -64,7 +64,7 @@ public class UserRepositoryTest {
 	}
 
 	@Test
-	public void getEmailIdIfDoesNotExists() {
+	public void getEmailIdIfDoesNotExists() throws Exception {
 		User user = UserMockDB.setDefault();
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserByEmailId(user)).thenReturn(false);
@@ -74,7 +74,7 @@ public class UserRepositoryTest {
 	
 
 	@Test
-	public void getBannerIDs() {
+	public void getBannerIDs() throws Exception {
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getAllBannerIds()).thenReturn(new ArrayList<String>() {
 			{
@@ -92,7 +92,7 @@ public class UserRepositoryTest {
 
 	
 	@Test
-	public void getUserPasswordPolicy() {
+	public void getUserPasswordPolicy() throws Exception {
 		userRepository = mock(UserRepository.class);
 		when(userRepository.getUserPasswordPolicy()).thenReturn(UserPasswordPolicyDB.getDefault());
 		assertThat(userRepository.getUserPasswordPolicy()).isEqualToComparingFieldByField(UserPasswordPolicyDB.getDefault());

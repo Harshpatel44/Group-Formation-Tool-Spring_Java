@@ -20,7 +20,7 @@ public class CsvController {
 	private ICsvImporter csvImporter; 
 	
 	@RequestMapping(value = "/course/uploadcsv", consumes = {"multipart/form-data"})
-    public String upload(@RequestParam(name = "file") MultipartFile file,@RequestParam(name="courseName") String courseName,@RequestParam(name="userId") String userId, @RequestParam(name = "id") String courseID, Model model) throws ServiceLayerException
+    public String upload(@RequestParam(name = "file") MultipartFile file,@RequestParam(name="courseName") String courseName,@RequestParam(name="userId") String userId, @RequestParam(name = "id") String courseID, Model model) throws Exception
     {
 		csvImporter = Injector.instance().getCsvImporter();
 		Map<Integer,List<String>> results = csvImporter.StudentsEnrolledForCourse(courseID, file);

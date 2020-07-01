@@ -17,7 +17,7 @@ public class ForgetPasswordService implements IForgetPasswordService {
     }
 
     @Override
-    public String getEmailByBannerid(String bannerid) {
+    public String getEmailByBannerid(String bannerid) throws Exception {
         return Injector.instance().getForgetPasswordRepository().getEmailByBannerid(bannerid);
 
     }
@@ -34,7 +34,7 @@ public class ForgetPasswordService implements IForgetPasswordService {
     }
 
     @Override
-    public boolean insertToForgetPassword(String bannerid, String passKey) {
+    public boolean insertToForgetPassword(String bannerid, String passKey) throws Exception {
         return Injector.instance().getForgetPasswordRepository().insertToForgetPassword(bannerid, passKey);
     }
 
@@ -48,22 +48,22 @@ public class ForgetPasswordService implements IForgetPasswordService {
     }
 
     @Override
-    public String getBannerIdByPassKey(String passKey) {
+    public String getBannerIdByPassKey(String passKey) throws Exception {
         return Injector.instance().getForgetPasswordRepository().getBannerIdByPassKey(passKey);
     }
 
     @Override
-    public boolean updatePassword(String bannerid, String newPassword) {
+    public boolean updatePassword(String bannerid, String newPassword) throws Exception {
         BCryptEncryption encryption = new BCryptEncryption();
         return Injector.instance().getForgetPasswordRepository().updatePassword(bannerid, encryption.encoder(newPassword));
     }
     @Override
-    public int getPasswordPolicyNumber() {
+    public int getPasswordPolicyNumber() throws Exception {
         return Injector.instance().getForgetPasswordRepository().getPasswordPolicyNumber();
     }
 
     @Override
-    public List<String> getPasswordByBannerId(String bannerid, int passNumber) {
+    public List<String> getPasswordByBannerId(String bannerid, int passNumber) throws Exception {
         return Injector.instance().getForgetPasswordRepository().getPasswordByBannerId(bannerid,passNumber);
     }
 }

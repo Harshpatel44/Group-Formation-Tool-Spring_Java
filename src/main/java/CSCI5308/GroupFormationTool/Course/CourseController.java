@@ -13,7 +13,7 @@ public class CourseController {
 	private ICourseService courseService;
 
 	@RequestMapping("/course")
-	public ModelAndView course(@RequestParam(name="userType") String userType,@RequestParam(name="courseId") String courseId,@RequestParam(name="courseName") String courseName,@RequestParam(name="userId") String userId){
+	public ModelAndView course(@RequestParam(name="userType") String userType,@RequestParam(name="courseId") String courseId,@RequestParam(name="courseName") String courseName,@RequestParam(name="userId") String userId) throws Exception {
 		courseService = Injector.instance().getCourseService();
 		ModelAndView model=new ModelAndView("course");
 		model.addObject("courseId",courseId);
@@ -30,7 +30,7 @@ public class CourseController {
 									@RequestParam(name="courseId") String courseId,
 									@RequestParam(name="courseName") String courseName,
 									@RequestParam(name="userId") String userId,
-									@RequestParam(name="checkRole") String checkRole){
+									@RequestParam(name="checkRole") String checkRole) throws Exception {
 		courseService = Injector.instance().getCourseService();
 		ModelAndView model=new ModelAndView("courseadmin");
 		model.addObject("ta",new TA());
@@ -44,7 +44,7 @@ public class CourseController {
 	}
 
 	@RequestMapping("/addta")
-	public ModelAndView addta( @RequestParam(name="taId") String taId,@RequestParam(name="courseId") String courseId, @RequestParam(name="courseName") String courseName, @RequestParam(name="userId") String userId ){
+	public ModelAndView addta( @RequestParam(name="taId") String taId,@RequestParam(name="courseId") String courseId, @RequestParam(name="courseName") String courseName, @RequestParam(name="userId") String userId ) throws Exception {
 		courseService = Injector.instance().getCourseService();
 		ModelAndView model=new ModelAndView("courseadmin");
 		model.addObject("userId",userId);

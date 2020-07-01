@@ -15,13 +15,12 @@ public class QuestionManagerService implements IQuestionManagerService {
     private IQuestionManagerRepository questionManagerRepository;
 
     public QuestionManagerService(){}
-    public QuestionManagerService(QuestionManagerRepository questionManagerRepository) {
+    public QuestionManagerService(QuestionManagerRepository questionManagerRepository) throws Exception {
         Injector.instance().setQuestionManagerRepository(questionManagerRepository);
     }
 
     @Override
-    public List<Question> getQuestions(String userId, String sortType)
-    {
+    public List<Question> getQuestions(String userId, String sortType) throws Exception {
         questionManagerRepository = Injector.instance().getQuestionManagerRepository();
         if (sortType.equals(sortByTopic))
         {
@@ -38,7 +37,7 @@ public class QuestionManagerService implements IQuestionManagerService {
     }
 
     @Override
-    public void deleteQuestion(Integer questionId, String userId) {
+    public void deleteQuestion(Integer questionId, String userId) throws Exception {
         questionManagerRepository = Injector.instance().getQuestionManagerRepository();
         questionManagerRepository.deleteQuestion(questionId, userId);
     }

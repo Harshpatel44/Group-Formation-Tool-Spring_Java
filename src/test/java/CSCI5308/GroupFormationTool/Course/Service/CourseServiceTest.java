@@ -23,14 +23,14 @@ public class CourseServiceTest {
 	public CourseRepository courseRepository;
 
 	@BeforeEach
-	public void init() {
+	public void init() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		courseRepository = mock(CourseRepository.class);
 		courseService = new CourseService(courseRepository);
 	}
 
 	@Test
-	public void addTaTestIfAlready() {
+	public void addTaTestIfAlready() throws Exception {
 		String taId, courseId, result;
 		taId = "B00123456";
 		courseId = "CSCI1";
@@ -41,7 +41,7 @@ public class CourseServiceTest {
 	}
 
 	@Test
-	public void addTaTest() {
+	public void addTaTest() throws Exception {
 		String taId, courseId, result;
 		taId = "B00123456";
 		courseId = "CSCI2";
@@ -52,7 +52,7 @@ public class CourseServiceTest {
 	}
 
 	@Test
-	public void addTaTestNotUser() {
+	public void addTaTestNotUser() throws Exception {
 		String taId, courseId, result;
 		taId = "B00103456";
 		courseId = "CSCI1";
@@ -162,7 +162,7 @@ public class CourseServiceTest {
 	}
 
 	@Test
-	void coursesWithIdForDropdown() throws SQLException {
+	void coursesWithIdForDropdown() throws Exception {
 		Dictionary allCoursesList = new Hashtable();
 		ArrayList<ArrayList<String>> mainList = new ArrayList<>();
 		ArrayList<String> courseId = new ArrayList<>();

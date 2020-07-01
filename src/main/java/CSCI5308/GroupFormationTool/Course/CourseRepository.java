@@ -21,8 +21,10 @@ public class CourseRepository implements ICourseRepository {
 			checkPresence.cleanup();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-        return result;
+		return result;
 	}
 
 	private boolean checkIfAlreadyTa(String taId, String courseId) {
@@ -41,12 +43,14 @@ public class CourseRepository implements ICourseRepository {
 			checkPresence.cleanup();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
 
 	@Override
-	public String addTa(String taId, String courseId) {
+	public String addTa(String taId, String courseId) throws Exception {
 		String result=null;
 		StoredProcedure addTa = null;
 		if(checkIfUserPresent(taId))
@@ -77,7 +81,7 @@ public class CourseRepository implements ICourseRepository {
 
 
 	@Override
-	public boolean getUserDetailsOnCourse(User user, String courseId) {
+	public boolean getUserDetailsOnCourse(User user, String courseId) throws Exception {
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByCourse(?,?)");
@@ -110,12 +114,14 @@ public class CourseRepository implements ICourseRepository {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
-		} 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return success;
 	}
 
 	@Override
-	public ArrayList<ArrayList<String>> getAllCourses() throws SQLException{
+	public ArrayList<ArrayList<String>> getAllCourses() throws Exception {
 		ArrayList<String> courseNamesList = new ArrayList<>();
 		ArrayList<String> courseIdsList = new ArrayList<>();
 		ArrayList<ArrayList<String>> courseNamesWithIdsList = new ArrayList<>();

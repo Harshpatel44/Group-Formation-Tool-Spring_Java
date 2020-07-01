@@ -4,5 +4,5 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface IQuestionResponsesRepo {
-    ArrayList<String> getResponsesOfQuestionIdRepo(Integer questionId) throws SQLException;
+    ArrayList<String> getResponsesOfQuestionIdRepo(Integer questionId) throws Exception;
 }

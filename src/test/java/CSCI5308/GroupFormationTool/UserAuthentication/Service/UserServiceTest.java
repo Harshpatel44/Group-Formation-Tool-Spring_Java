@@ -31,7 +31,7 @@ public class UserServiceTest {
     }
 	
 	@Test
-	public void createUserWithExceptions() throws ServiceLayerException {
+	public void createUserWithExceptions() throws Exception {
 		User user = new User();
 		userService = Injector.instance().getUserService();
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
@@ -41,7 +41,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createExistingUserCorrectDetails() throws ServiceLayerException {
+	public void createExistingUserCorrectDetails() throws Exception {
 		User user = UserMockDB.setDefault();
 		userService = Injector.instance().getUserService();
 		when(userRepository.getUserByBannerId(user)).thenReturn(true);
@@ -53,7 +53,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createWithEmptyFirstname() throws ServiceLayerException {
+	public void createWithEmptyFirstname() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setFirstName("");
 		userService = Injector.instance().getUserService();
@@ -65,7 +65,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createWithEmptyLastname() throws ServiceLayerException {
+	public void createWithEmptyLastname() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setLastName("");
 		userService = Injector.instance().getUserService();
@@ -77,7 +77,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createWithInvalidEmail() throws ServiceLayerException {
+	public void createWithInvalidEmail() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setEmailId("neofvno");
 		userService = Injector.instance().getUserService();
@@ -89,7 +89,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword() throws ServiceLayerException {
+	public void createInvalidPassword() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("qwert");
 		user.setConfirmPassword("qwerty");
@@ -102,7 +102,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword1() throws ServiceLayerException {
+	public void createInvalidPassword1() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("qwerty!");
 		user.setConfirmPassword("qwerty!");
@@ -115,7 +115,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword2() throws ServiceLayerException {
+	public void createInvalidPassword2() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("QWERTY!");
 		user.setConfirmPassword("QWERTY!");
@@ -128,7 +128,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword3() throws ServiceLayerException {
+	public void createInvalidPassword3() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
 		user.setConfirmPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
@@ -141,7 +141,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword4() throws ServiceLayerException {
+	public void createInvalidPassword4() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("");
 		user.setConfirmPassword("");
@@ -153,7 +153,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword5() throws ServiceLayerException {
+	public void createInvalidPassword5() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("Qwertyuiop");
 		user.setConfirmPassword("Qwertyuiop");
@@ -166,7 +166,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void createInvalidPassword6() throws ServiceLayerException {
+	public void createInvalidPassword6() throws Exception {
 		User user = UserMockDB.setDefault();
 		user.setPassword("Qwertyuiop@");
 		user.setConfirmPassword("Qwertyuiop@");
@@ -179,7 +179,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void creaUserCorrectDetails() throws ServiceLayerException {
+	public void creaUserCorrectDetails() throws Exception {
 		User user = UserMockDB.setDefault();
 		userService = mock(UserService.class);
 		when(userService.createUser(user)).thenReturn(true);
@@ -187,7 +187,7 @@ public class UserServiceTest {
 	}
 
 	@Test
-	public void getUserPasswordPolicy() {
+	public void getUserPasswordPolicy() throws Exception {
 		userService = Injector.instance().getUserService();
 		when(userRepository.getUserPasswordPolicy()).thenReturn(UserPasswordPolicyDB.getDefault());
 		System.out.println(UserPasswordPolicyDB.getDefault().getMaxLength());

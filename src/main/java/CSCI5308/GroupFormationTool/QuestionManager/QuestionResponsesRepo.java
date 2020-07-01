@@ -8,7 +8,7 @@ import java.util.ArrayList;
 
 public class QuestionResponsesRepo implements IQuestionResponsesRepo {
     @Override
-    public ArrayList<String> getResponsesOfQuestionIdRepo(Integer questionId) throws SQLException {
+    public ArrayList<String> getResponsesOfQuestionIdRepo(Integer questionId) throws Exception {
         ArrayList<String> responses = new ArrayList<>();
         StoredProcedure sp = new StoredProcedure("getResponsesByQuestionId(?)");
         try{

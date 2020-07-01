@@ -62,7 +62,7 @@ public class CsvImporterService implements ICsvImporter {
 	}
 
 	private void checkTheUserAndEnroll(String[] record, List<String> bannerIds, IUserRepository userRepository,
-			String courseId) {
+			String courseId) throws Exception {
 		List<User> successfullUsers = new ArrayList<User>();
 		encryptor = Injector.instance().getPasswordEncryptor();
 		userNotification = Injector.instance().getUserNotification();
@@ -93,7 +93,7 @@ public class CsvImporterService implements ICsvImporter {
 		}
 	}
 
-	private void enrollCourse(String courseId, User user, IUserRepository userRepository) {
+	private void enrollCourse(String courseId, User user, IUserRepository userRepository) throws Exception {
 		Boolean ifUserAlredyHasARole = courseRepository.getUserDetailsOnCourse(user, courseId);
 
 		if (!ifUserAlredyHasARole) {

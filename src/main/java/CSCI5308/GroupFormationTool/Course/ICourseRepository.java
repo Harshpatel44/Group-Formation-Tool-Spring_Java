@@ -6,13 +6,13 @@ import java.util.ArrayList;
 
 public interface ICourseRepository {
 
-    String addTa(String taId, String courseId);
+    String addTa(String taId, String courseId) throws Exception;
 
-    boolean getUserDetailsOnCourse(User user, String courseId);
+    boolean getUserDetailsOnCourse(User user, String courseId) throws Exception;
 
     boolean enrollStudentForCourse(User user, String courseId);
 
-    ArrayList<ArrayList<String>> getAllCourses() throws SQLException;
+    ArrayList<ArrayList<String>> getAllCourses() throws Exception;
 
     boolean createCourseRepo(ICreateCourse createCourse) throws SQLException;
 

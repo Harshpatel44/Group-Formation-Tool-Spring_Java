@@ -4,10 +4,10 @@ import java.sql.SQLException;
 import java.util.Dictionary;
 
 public interface ICourseService {
-    String addTa(String taId, String courseId);
+    String addTa(String taId, String courseId) throws Exception;
     boolean checkRole(String userType);
     boolean checkUserType(String userType);
-    Dictionary CoursesWithIdForDropdown() throws SQLException;
+    Dictionary CoursesWithIdForDropdown() throws Exception;
     boolean CreateCourseService(ICreateCourse createCourse) throws Exception;
     boolean DeleteCourseService(IDeleteCourse deleteCourse) throws Exception;
 }

@@ -32,7 +32,7 @@ public class QuestionController {
     public ModelAndView questionList(@RequestParam(name="courseId") String courseId,
                                      @RequestParam(name="userId") String userId,
                                      @RequestParam(name="userType") String userType,
-                                     @RequestParam(name="courseName") String courseName){
+                                     @RequestParam(name="courseName") String courseName) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         questionManagerService = Injector.instance().getQuestionManagerService();
         model.addObject("userId",userId);
@@ -81,7 +81,7 @@ public class QuestionController {
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
                                        @RequestParam(name="userType") String userType,
-                                       @RequestParam(name="courseName") String courseName){
+                                       @RequestParam(name="courseName") String courseName) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         questionManagerService = Injector.instance().getQuestionManagerService();
         model.addObject("userId",userId);
@@ -99,7 +99,7 @@ public class QuestionController {
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
                                        @RequestParam(name="userType") String userType,
-                                       @RequestParam(name="courseName") String courseName) throws SQLException {
+                                       @RequestParam(name="courseName") String courseName) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);

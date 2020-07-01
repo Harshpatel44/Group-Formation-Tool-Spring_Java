@@ -21,14 +21,14 @@ public class UserNotificationTest {
 	private IUserNotification userNotification;
 	
 	@Test
-	public void notificationTesting() throws AddressException, MessagingException {
+	public void notificationTesting() throws Exception {
 		userNotification = mock(UserNotification.class);
 		User user = UserMockDB.setDefault();
 		when(userNotification.sendUserCredentials(user)).thenReturn(true);
 		assertTrue(userNotification.sendUserCredentials(user));
 	}
 	@Test
-	public void notificationTestingFails() throws AddressException, MessagingException {
+	public void notificationTestingFails() throws Exception {
 		userNotification = mock(UserNotification.class);
 		User user = UserMockDB.setDefault();
 		when(userNotification.sendUserCredentials(user)).thenReturn(false);

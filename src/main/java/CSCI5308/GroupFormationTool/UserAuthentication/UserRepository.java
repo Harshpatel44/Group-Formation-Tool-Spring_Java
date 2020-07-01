@@ -35,12 +35,14 @@ public class UserRepository implements IUserRepository {
 		} catch (SQLException e) {
 
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return success;
 	}
 
 	@Override
-	public boolean getUserByEmailId(User user) {
+	public boolean getUserByEmailId(User user) throws Exception {
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByEmailID(?)");
@@ -73,12 +75,14 @@ public class UserRepository implements IUserRepository {
 			storedProcedure.cleanup();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return false;
 	}
 
 	@Override
-	public List<String> getAllBannerIds() {
+	public List<String> getAllBannerIds() throws Exception {
 		List<String> bannerIds = new ArrayList<String>();
 		StoredProcedure storedProcedure = null;
 		try {
@@ -126,13 +130,15 @@ public class UserRepository implements IUserRepository {
 				proc.cleanup();
 			}
 
-		} catch (SQLException e) { }
+		} catch (SQLException e) { } catch (Exception e) {
+			e.printStackTrace();
+		}
 
 		return user;
 	}
 
 	@Override
-	public UserPasswordPolicy getUserPasswordPolicy() {
+	public UserPasswordPolicy getUserPasswordPolicy() throws Exception {
 		StoredProcedure proc = null;
 		UserPasswordPolicy passwordPolicy = null;
 		try {
@@ -178,7 +184,10 @@ public class UserRepository implements IUserRepository {
 				}
 			}
 
-		} catch (SQLException e) { };
+		} catch (SQLException e) { } catch (Exception e) {
+			e.printStackTrace();
+		}
+		;
 		return passwordPolicy;
 	}
 

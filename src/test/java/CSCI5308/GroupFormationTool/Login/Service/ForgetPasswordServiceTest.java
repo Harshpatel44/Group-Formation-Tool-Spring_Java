@@ -25,13 +25,13 @@ public class ForgetPasswordServiceTest {
     }
 
         @Test
-        void getEmailByBanneridTest(){
+        void getEmailByBanneridTest() throws Exception {
             when(forgetPasswordRepository.getEmailByBannerid("B00835088")).thenReturn("rutikapatel09@gmail.com");
             assertEquals("rutikapatel09@gmail.com",forgetPasswordService.getEmailByBannerid("B00835088"));
         }
 
         @Test
-        void insertToForgetPasswordTest() {
+        void insertToForgetPasswordTest() throws Exception {
             when(forgetPasswordRepository.insertToForgetPassword("B00123456","e3Twq6Hyip")).thenReturn(true);
             assertTrue(forgetPasswordService.insertToForgetPassword("B00123456","e3Twq6Hyip"));
         }
@@ -43,13 +43,13 @@ public class ForgetPasswordServiceTest {
         }
 
         @Test
-        void getBannerIdByPassKeyTest() {
+        void getBannerIdByPassKeyTest() throws Exception {
             when(forgetPasswordRepository.getBannerIdByPassKey("randomstring")).thenReturn("B00100100");
             assertEquals("B00100100",forgetPasswordService.getBannerIdByPassKey("randomstring"));
         }
 
         @Test
-        void getPasswordByBannerId() {
+        void getPasswordByBannerId() throws Exception {
             List<String> password = new ArrayList<>();
             password.add("passwordValue");
             password.add("passwordValue2");
@@ -69,12 +69,12 @@ public class ForgetPasswordServiceTest {
         }
 
         @Test
-        void updatePassword() {
+        void updatePassword() throws Exception {
             assertFalse(forgetPasswordService.updatePassword("B00835088","123456"));
         }
 
         @Test
-        void getPasswordPolicyNumber() {
+        void getPasswordPolicyNumber() throws Exception {
             when(forgetPasswordRepository.getPasswordPolicyNumber()).thenReturn(3);
             assertEquals(3,forgetPasswordService.getPasswordPolicyNumber());
         }

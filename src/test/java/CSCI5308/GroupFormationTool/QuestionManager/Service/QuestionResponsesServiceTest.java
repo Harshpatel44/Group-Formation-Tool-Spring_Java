@@ -18,14 +18,14 @@ class QuestionResponsesServiceTest {
     public QuestionResponsesRepo questionResponsesRepo;
     public QuestionResponsesService questionResponsesService;
     @BeforeEach
-    public void init(){
+    public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         questionResponsesRepo = mock(QuestionResponsesRepo.class);
         questionResponsesService = new QuestionResponsesService(questionResponsesRepo);
     }
 
     @Test
-    void checkIfResponsesPresentService1() throws SQLException {
+    void checkIfResponsesPresentService1() throws Exception {
         Integer questionId = 1;
         ArrayList<String> responses = new ArrayList<>();
         when(questionResponsesRepo.getResponsesOfQuestionIdRepo(questionId)).thenReturn(responses);
@@ -33,7 +33,7 @@ class QuestionResponsesServiceTest {
     }
 
     @Test
-    void checkIfResponsesPresentService2() throws SQLException {
+    void checkIfResponsesPresentService2() throws Exception {
         Integer questionId = 1;
         ArrayList<String> responses = new ArrayList<>();
         responses.add("response1");

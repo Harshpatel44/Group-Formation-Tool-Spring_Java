@@ -9,12 +9,12 @@ import java.util.ArrayList;
 
 public class QuestionResponsesService implements IQuestionResponsesService {
     public QuestionResponsesService(){}
-    public QuestionResponsesService(QuestionResponsesRepo questionResponsesRepo) {
+    public QuestionResponsesService(QuestionResponsesRepo questionResponsesRepo) throws Exception {
         Injector.instance().setQuestionResponsesRepo(questionResponsesRepo);
     }
 
     @Override
-    public boolean checkIfResponsesPresentService(Integer questionId) throws SQLException {
+    public boolean checkIfResponsesPresentService(Integer questionId) throws Exception {
         ArrayList<String> responses= Injector.instance().getQuestionResponsesRepo().getResponsesOfQuestionIdRepo(questionId);
         if(responses.size()==0){
             return false;

@@ -34,7 +34,7 @@ public class CourseRepositoryTest {
 	}
 
 	@Test
-	public void getUserDetailsOnCourse() {
+	public void getUserDetailsOnCourse() throws Exception {
 		User user = UserMockDB.setDefault();
 		when(courseRepository.getUserDetailsOnCourse(user, "CSCI10")).thenReturn(false);
 		assertEquals(false, courseRepository.getUserDetailsOnCourse(user, "CSCI10"));

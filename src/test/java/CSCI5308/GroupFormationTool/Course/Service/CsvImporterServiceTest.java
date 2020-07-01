@@ -49,7 +49,7 @@ public class CsvImporterServiceTest {
 	}
 
 	@Test
-	public void testCsv() throws AddressException, MessagingException {
+	public void testCsv() throws Exception {
 		csvImporterService = Injector.instance().getCsvImporter();
 		List<String> bannerIds = new ArrayList<String>() {
 			{
@@ -68,7 +68,7 @@ public class CsvImporterServiceTest {
 	}
 
 	@Test
-	public void testCsvWhenUserIsNotCreated() throws AddressException, MessagingException {
+	public void testCsvWhenUserIsNotCreated() throws Exception {
 		csvImporterService = Injector.instance().getCsvImporter();
 		List<String> bannerIds = new ArrayList<String>() {
 			{
@@ -82,7 +82,7 @@ public class CsvImporterServiceTest {
 	}
 
 	@Test
-	public void testCsvWhenUserHasMultipleRows() throws AddressException, MessagingException {
+	public void testCsvWhenUserHasMultipleRows() throws Exception {
 		csvImporterService = Injector.instance().getCsvImporter();
 		List<String> bannerIds = new ArrayList<String>() {
 			{
@@ -100,7 +100,7 @@ public class CsvImporterServiceTest {
 	}
 
 	@Test
-	public void testCsvWhenUserHasMultipleRowsWithExistingBannerIds() throws AddressException, MessagingException {
+	public void testCsvWhenUserHasMultipleRowsWithExistingBannerIds() throws Exception {
 		csvImporterService = Injector.instance().getCsvImporter();
 		List<String> bannerIds = new ArrayList<String>() {
 			{
@@ -117,7 +117,7 @@ public class CsvImporterServiceTest {
 	}
 
 	@Test
-	public void testCsvWhenUserExistingBannerIds() throws AddressException, MessagingException {
+	public void testCsvWhenUserExistingBannerIds() throws Exception {
 		csvImporterService = Injector.instance().getCsvImporter();
 		List<String> bannerIds = new ArrayList<String>() {
 			{

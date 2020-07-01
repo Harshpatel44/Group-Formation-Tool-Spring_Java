@@ -27,12 +27,14 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
         }
         catch (SQLException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return email;
     }
 
     @Override
-    public boolean updatePassword(String bannerid, String newPassword) {
+    public boolean updatePassword(String bannerid, String newPassword) throws Exception {
         System.out.print("inside update password");
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
@@ -65,12 +67,14 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
         {
             e.printStackTrace();
             return 0;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return passNumber;
     }
 
     @Override
-    public List<String> getPasswordByBannerId(String bannerid, int passNumber) {
+    public List<String> getPasswordByBannerId(String bannerid, int passNumber) throws Exception {
         List<String> passwords = new ArrayList<String>();
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
@@ -106,12 +110,14 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
         catch (SQLException e) {
             e.printStackTrace();
             return false;
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return true;
     }
 
     @Override
-    public String getBannerIdByPassKey(String passKey) {
+    public String getBannerIdByPassKey(String passKey) throws Exception {
         String bannerid = "";
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();

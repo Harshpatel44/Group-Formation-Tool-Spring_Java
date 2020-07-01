@@ -28,12 +28,14 @@ public class HomeRepository implements IHomeRepository{
 			role.cleanup();
 		} catch (SQLException throwables) {
 			throwables.printStackTrace();
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return result;
 	}
 
 	@Override
-	public List<ICourse> getcourse(IUserRole userRole) {
+	public List<ICourse> getcourse(IUserRole userRole) throws Exception {
 		boolean result = checkRole(userRole);
 		StoredProcedure storedProcedure = null;
 		try {

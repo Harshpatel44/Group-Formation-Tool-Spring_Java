@@ -29,7 +29,7 @@ public class UserService implements IUserService {
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	@Override
-	public boolean createUser(User user) throws ServiceLayerException {
+	public boolean createUser(User user) throws Exception {
 		Boolean success = false;
 		userRepository = Injector.instance().getUserRepository();
 		encryptor = Injector.instance().getPasswordEncryptor();
@@ -155,13 +155,13 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public UserPasswordPolicy getUserPasswordPolicy() {
+	public UserPasswordPolicy getUserPasswordPolicy() throws Exception {
 		userRepository = Injector.instance().getUserRepository();
 		return userRepository.getUserPasswordPolicy();
 	}
 
 	@Override
-	public UserPasswordPolicyStatus getUserPasswordPolicyStatus() {
+	public UserPasswordPolicyStatus getUserPasswordPolicyStatus() throws Exception {
 		userRepository = Injector.instance().getUserRepository();
 		return userRepository.getUserPasswordPolicyStatus();
 	}

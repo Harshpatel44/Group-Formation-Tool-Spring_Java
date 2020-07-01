@@ -27,7 +27,7 @@ public class ForgetPasswordController {
     @RequestMapping(value = "/updateNewPassword", method = RequestMethod.POST)
     public String newPassword(@RequestParam("newPassword") String newPassword,
                               @RequestParam("confirmPassword") String confirmPassword, @RequestParam("passKey") String passKey,
-                              Model model) {
+                              Model model) throws Exception {
         boolean matchPassword;
         boolean update;
         String bannerid;
@@ -76,7 +76,7 @@ public class ForgetPasswordController {
     }
 
     @PostMapping("/resetPassword")
-    public String resetPassword(@RequestParam("bannerid") String bannerid, Model model) throws MessagingException {
+    public String resetPassword(@RequestParam("bannerid") String bannerid, Model model) throws Exception {
         boolean isUser;
         boolean addUser;
         boolean mailSend;

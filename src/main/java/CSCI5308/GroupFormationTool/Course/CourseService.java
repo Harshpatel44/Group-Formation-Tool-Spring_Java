@@ -14,7 +14,7 @@ public class CourseService implements ICourseService {
    private ICourseRepository courseRepository;
 
    public CourseService(){}
-   public CourseService(CourseRepository courseRepository){
+   public CourseService(CourseRepository courseRepository) throws Exception {
    	Injector.instance().setCourseRepository(courseRepository);
    }
 
@@ -41,14 +41,14 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public String addTa(String taId, String courseId) {
+	public String addTa(String taId, String courseId) throws Exception {
 		courseRepository = Injector.instance().getCourseRepository();
 		return courseRepository.addTa(taId,courseId);
 	}
 
 
 	@Override
-	public Dictionary CoursesWithIdForDropdown() throws SQLException {
+	public Dictionary CoursesWithIdForDropdown() throws Exception {
 		ArrayList<ArrayList<String>> tempCourse;
 		ArrayList<String> allCourseIds;
 		ArrayList<String> allCourseNames;

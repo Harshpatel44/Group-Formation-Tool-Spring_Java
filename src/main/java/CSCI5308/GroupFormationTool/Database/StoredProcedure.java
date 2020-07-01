@@ -10,7 +10,7 @@ public class StoredProcedure
 	private String storedProcedureName;
 	private Connection connection;
 	private CallableStatement statement;
-	public StoredProcedure(String storedProcedureName)  throws SQLException
+	public StoredProcedure(String storedProcedureName) throws Exception
 	{
 		this.storedProcedureName = storedProcedureName;
 		connection = null;
@@ -24,7 +24,7 @@ public class StoredProcedure
 		statement = connection.prepareCall("{call " + storedProcedureName + "}");
 	}
 
-	private void openConnection() throws SQLException
+	private void openConnection() throws Exception
 	{
 		connection = ConnectionManager.instance().getDBConnection();
 		System.out.println(connection);

@@ -39,7 +39,7 @@ public class CustomAuthentication implements AuthenticationManager
 		}
 	}
 	
-	private Authentication checkNormal(Authentication authentication) throws AuthenticationException
+	private Authentication checkNormal(Authentication authentication) throws Exception
 	{
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
@@ -60,12 +60,23 @@ public class CustomAuthentication implements AuthenticationManager
 	}
 
 	// Authenticate against our database using the input banner ID and password.
-	public Authentication authenticate(Authentication authentication) throws AuthenticationException
-	{
+	public Authentication authenticate(Authentication authentication) {
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
-		IUserRepository userRepository = Injector.instance().getUserRepository();
-		ILoginRepository loginRepository = Injector.instance().getLoginRepository();
+		IUserRepository userRepository = null;
+		try {
+			userRepository = Injector.instance().getUserRepository();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		ILoginRepository loginRepository = null;
+		try {
+			loginRepository = Injector.instance().getLoginRepository();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		Boolean validity = false;
 		try
 		{
@@ -75,6 +86,7 @@ public class CustomAuthentication implements AuthenticationManager
 		{
 			throw new AuthenticationServiceException("1000");
 		}
+
 		if (validity)
 		{
 			User user = userRepository.loadUserByID(bannerID);
@@ -84,13 +96,18 @@ public class CustomAuthentication implements AuthenticationManager
 			}
 			else
 			{
-				return checkNormal(authentication);
+				try {
+					return checkNormal(authentication);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 		else
 		{
 			// No user with this banner id found.
 			throw new BadCredentialsException("1001");
-		}			
+		}
+	return null;
 	}
 }

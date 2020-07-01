@@ -45,6 +45,8 @@ public class LoginRepository implements ILoginRepository {
         catch (SQLException e)
         {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         return isValid;
     }
@@ -69,7 +71,9 @@ public class LoginRepository implements ILoginRepository {
             connection.close();
         }
         catch (SQLException e)
-        { e.printStackTrace(); }
+        { e.printStackTrace(); } catch (Exception e) {
+            e.printStackTrace();
+        }
         return isUser;
     }
 

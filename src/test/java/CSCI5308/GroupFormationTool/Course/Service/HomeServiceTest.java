@@ -21,14 +21,14 @@ public class HomeServiceTest {
   public HomeService homeService;
 
     @BeforeEach
-    public void init(){
+    public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         homeRepository = mock(HomeRepository.class);
         homeService = new HomeService(homeRepository);
     }
 
     @Test
-    public void getCoursesTest(){
+    public void getCoursesTest() throws Exception {
         IUserRole userRole = new UserRole();
         List<ICourse> courseList = new ArrayList<ICourse>();
         ICourse course = new Course();
@@ -44,7 +44,7 @@ public class HomeServiceTest {
 
 
     @Test //when user is guest
-    public void checkRoleTestGuest() {
+    public void checkRoleTestGuest() throws Exception {
         IUserRole userRole = new UserRole();
         userRole.setUserId("B00103456");//guest
         when(homeRepository.checkRole(userRole)).thenReturn(true);
@@ -53,7 +53,7 @@ public class HomeServiceTest {
 
 
     @Test //when user is Not a guest
-    public void checkRoleTestNotGuest() {
+    public void checkRoleTestNotGuest() throws Exception {
         IUserRole userRole = new UserRole();
         userRole.setUserId("B00123456");
         when(homeRepository.checkRole(userRole)).thenReturn(false);
