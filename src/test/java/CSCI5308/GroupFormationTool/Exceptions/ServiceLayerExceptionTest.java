@@ -10,9 +10,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
-
 @SpringBootTest
 public class ServiceLayerExceptionTest {
 

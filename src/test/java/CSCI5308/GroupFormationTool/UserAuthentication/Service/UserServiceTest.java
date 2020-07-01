@@ -2,14 +2,9 @@ package CSCI5308.GroupFormationTool.UserAuthentication.Service;
 
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserService;
+import CSCI5308.GroupFormationTool.UserAuthentication.*;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserPasswordPolicyDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

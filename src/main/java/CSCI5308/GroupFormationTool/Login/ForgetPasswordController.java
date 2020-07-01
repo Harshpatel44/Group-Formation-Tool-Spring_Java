@@ -1,13 +1,11 @@
 package CSCI5308.GroupFormationTool.Login;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
-import CSCI5308.GroupFormationTool.Login.ILoginService;
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
-import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserService;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicyStatus;
+import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserService;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 

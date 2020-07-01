@@ -13,7 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 @Controller
 public class CsvController {

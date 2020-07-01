@@ -14,6 +14,8 @@ import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
+import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
+
 public class CourseService implements ICourseService {
    private ICourseRepository courseRepository;
 
@@ -25,7 +27,7 @@ public class CourseService implements ICourseService {
 	@Override
 	public boolean checkRole(String userType) {
 		boolean roleCheck = true;
-		if(userType.equals("student") || userType.equals("Guest")){
+		if(userType.equals(student) || userType.equals(guest)){
 			roleCheck=false;
 		}
 		else{
@@ -37,7 +39,7 @@ public class CourseService implements ICourseService {
 	@Override
 	public boolean checkUserType(String userType) {
 		boolean user = false;
-		if(userType.equals("instructor"))
+		if(userType.equals(instructor))
 		{
 			user = true;
 		}

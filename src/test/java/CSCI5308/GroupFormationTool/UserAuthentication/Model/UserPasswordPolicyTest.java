@@ -1,6 +1,8 @@
 package CSCI5308.GroupFormationTool.UserAuthentication.Model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

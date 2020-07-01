@@ -17,16 +17,16 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Course.ICourseRepository;
-import CSCI5308.GroupFormationTool.Course.ICsvImporter;
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.Service.UserNotification;
+import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
+import CSCI5308.GroupFormationTool.Course.AccessControl.ICsvImporter;
+import CSCI5308.GroupFormationTool.Course.Repository.CourseRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.User;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 
 @SpringBootTest
 public class CsvImporterServiceTest {

@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Model;
 
+import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

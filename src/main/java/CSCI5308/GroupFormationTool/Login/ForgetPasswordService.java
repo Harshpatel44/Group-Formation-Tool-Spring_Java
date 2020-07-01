@@ -2,9 +2,7 @@ package CSCI5308.GroupFormationTool.Login;
 
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
-import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
+import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;

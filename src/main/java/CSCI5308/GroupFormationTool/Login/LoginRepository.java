@@ -1,8 +1,7 @@
 package CSCI5308.GroupFormationTool.Login;
 
 import CSCI5308.GroupFormationTool.Database.ConnectionManager;
-import CSCI5308.GroupFormationTool.Login.ILoginRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
+import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
