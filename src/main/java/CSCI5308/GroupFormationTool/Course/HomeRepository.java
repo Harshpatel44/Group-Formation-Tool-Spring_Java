@@ -4,10 +4,10 @@ import java.sql. ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeRepository;
-import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
+import CSCI5308.GroupFormationTool.Course.IHomeRepository;
+import CSCI5308.GroupFormationTool.Course.IUserId;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.Course.Model.Course;
+import CSCI5308.GroupFormationTool.Course.Course;
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 
