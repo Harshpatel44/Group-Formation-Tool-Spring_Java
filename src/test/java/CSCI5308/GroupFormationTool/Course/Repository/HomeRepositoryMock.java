@@ -1,30 +1,31 @@
 package CSCI5308.GroupFormationTool.Course.Repository;
 
-import CSCI5308.GroupFormationTool.Course.IUserId;
+import CSCI5308.GroupFormationTool.Course.ICourse;
 import CSCI5308.GroupFormationTool.Course.Course;
+import CSCI5308.GroupFormationTool.Course.IUserRole;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class HomeRepositoryMock {
 
-    private List<Course> CourseList = new ArrayList<Course>();
+    private List<ICourse> CourseList = new ArrayList<ICourse>();
 
-    public boolean checkRoleTest(IUserId user) {
+    public boolean checkRoleTest(IUserRole userRole) {
         boolean result = true;
 
-        if(user.getUserId().equals("B00123456"))
+        if(userRole.getUserId().equals("B00123456"))
         {
             result = false;
         }
         return result;
     }
 
-    public List<Course> getcourseTest(IUserId user) {
-        List<Course> courseList = new ArrayList<Course>();
-        if(user.getUserId().equals("B00123456"))
+    public List<ICourse> getcourseTest(IUserRole userRole) {
+        List<ICourse> courseList = new ArrayList<ICourse>();
+        if(userRole.getUserId().equals("B00123456"))
         {
-            Course course = new Course();
+            ICourse course = new Course();
             course.setCourseId("CSCI1");
             course.setCourseName("DATA");
             course.setRole("Student");

@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Model;
 
+import CSCI5308.GroupFormationTool.AdminPanel.IInstructor;
 import CSCI5308.GroupFormationTool.AdminPanel.Instructor;
 import org.junit.jupiter.api.Test;
 
@@ -9,20 +10,20 @@ class AssignInstructorTest {
 
     @Test
     void getInstructorAssignMessage() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assertEquals("status here",assignInstructor.getInstructorAssignMessage());
     }
 
     @Test
     void setInstructorAssignMessage() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assignInstructor.setInstructorAssignMessage("course deleted");
         assertEquals("course deleted",assignInstructor.getInstructorAssignMessage());
     }
 
     @Test
     void getInstructorId() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assertEquals(null,assignInstructor.getInstructorId());
         assignInstructor.setInstructorId("B00123456");
         assertEquals("B00123456",assignInstructor.getInstructorId());
@@ -30,7 +31,7 @@ class AssignInstructorTest {
 
     @Test
     void setInstructorId() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assertEquals(null,assignInstructor.getInstructorId());
         assignInstructor.setInstructorId("B00123456");
         assertEquals("B00123456",assignInstructor.getInstructorId());
@@ -38,7 +39,7 @@ class AssignInstructorTest {
 
     @Test
     void getSelectedInstructorCourseId() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assertEquals(null,assignInstructor.getSelectedInstructorCourseId());
         assignInstructor.setSelectedInstructorCourseId("B00123456");
         assertEquals("B00123456",assignInstructor.getSelectedInstructorCourseId());
@@ -46,7 +47,7 @@ class AssignInstructorTest {
 
     @Test
     void setSelectedInstructorCourseId() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assertEquals(null,assignInstructor.getSelectedInstructorCourseId());
         assignInstructor.setSelectedInstructorCourseId("B00123456");
         assertEquals("B00123456",assignInstructor.getSelectedInstructorCourseId());

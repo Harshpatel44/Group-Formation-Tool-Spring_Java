@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool.Course.Service;
 
-import CSCI5308.GroupFormationTool.Course.CourseService;
-import CSCI5308.GroupFormationTool.Course.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
-
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
+import CSCI5308.GroupFormationTool.Course.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -89,7 +85,7 @@ public class CourseServiceTest {
 
 	@Test
 	void createCourseService1() throws Exception {
-		CreateCourse createCourse = new CreateCourse();
+		ICreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseName("testname");
 		createCourse.setCourseId("testid");
 		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
@@ -107,7 +103,7 @@ public class CourseServiceTest {
 
 	@Test
 	void createCourseService2() throws Exception {
-		CreateCourse createCourse = new CreateCourse();
+		ICreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseName("testname2");
 		createCourse.setCourseId("testid");
 		ArrayList<String> courseName = new ArrayList<>();
@@ -125,7 +121,7 @@ public class CourseServiceTest {
 
 	@Test
 	void createCourseService3() throws Exception {
-		CreateCourse createCourse = new CreateCourse();
+		ICreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseId("testid2");
 		createCourse.setCourseName("testname");
 		ArrayList<String> courseName = new ArrayList<>();
@@ -144,7 +140,7 @@ public class CourseServiceTest {
 
 	@Test
 	void deleteCourseService() throws Exception {
-		DeleteCourse deleteCourse = new DeleteCourse("test");
+		IDeleteCourse deleteCourse = new DeleteCourse("test");
 		deleteCourse.setSelectedCourseId("testid");
 		Dictionary allCoursesList = new Hashtable();
 		allCoursesList.put("testid testname", "testid");

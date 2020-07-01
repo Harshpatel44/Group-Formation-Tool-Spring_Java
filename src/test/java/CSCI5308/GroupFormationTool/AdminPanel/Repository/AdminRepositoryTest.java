@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Repository;
 
+import CSCI5308.GroupFormationTool.AdminPanel.IInstructor;
 import CSCI5308.GroupFormationTool.AdminPanel.Instructor;
 import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
@@ -20,7 +21,7 @@ class AdminRepositoryTest {
 
     @Test
     void assignInstructorRepo() {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         assignInstructor.setInstructorId("B00123456");
         assignInstructor.setSelectedInstructorCourseId("testname");
         assertTrue(assignInstructor.getSelectedInstructorCourseId().length()<=200);

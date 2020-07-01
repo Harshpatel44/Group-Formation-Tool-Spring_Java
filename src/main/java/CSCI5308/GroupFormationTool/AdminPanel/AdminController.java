@@ -2,6 +2,8 @@ package CSCI5308.GroupFormationTool.AdminPanel;
 
 import CSCI5308.GroupFormationTool.Course.CreateCourse;
 import CSCI5308.GroupFormationTool.Course.DeleteCourse;
+import CSCI5308.GroupFormationTool.Course.ICreateCourse;
+import CSCI5308.GroupFormationTool.Course.IDeleteCourse;
 import CSCI5308.GroupFormationTool.Injector;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -22,9 +24,9 @@ public class AdminController implements IAdminController {
 	@GetMapping("/admin")
 	@Override
 	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
-		CreateCourse createCourse = new CreateCourse();
-		DeleteCourse deleteCourse = new DeleteCourse();
-		Instructor assignInstructor = new Instructor();
+		ICreateCourse createCourse = new CreateCourse();
+		IDeleteCourse deleteCourse = new DeleteCourse();
+		IInstructor iInstructor = new Instructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
 		if (authentication.getPrincipal().toString().equals("admin")) {
@@ -40,13 +42,13 @@ public class AdminController implements IAdminController {
 					deleteCourse.setCourseDeleteMessage(deleteMessage);
 				}
 				if (assignMessage != null) {
-					assignInstructor.setInstructorAssignMessage(assignMessage);
+					iInstructor.setInstructorAssignMessage(assignMessage);
 				}
 			} catch (Exception ignored) {
 			}
 			mv.addObject("createCourse", createCourse);
 			mv.addObject("deleteCourse", deleteCourse);
-			mv.addObject("assignInstructor", assignInstructor);
+			mv.addObject("assignInstructor", iInstructor);
 			mv.setViewName("admin");
 			return mv;
 		} else {
@@ -57,7 +59,7 @@ public class AdminController implements IAdminController {
 
 	@PostMapping("/createCourse")
 	@Override
-	public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
+	public String createCourse(ICreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			Injector.instance().getCourseService().CreateCourseService(createCourse);
@@ -70,7 +72,7 @@ public class AdminController implements IAdminController {
 
 	@PostMapping("/deleteCourse")
 	@Override
-	public String deleteCourse(DeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
+	public String deleteCourse(IDeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			Injector.instance().getCourseService().DeleteCourseService(deleteCourse);
@@ -83,7 +85,7 @@ public class AdminController implements IAdminController {
 
 	@PostMapping("/assignInstructor")
 	@Override
-	public String assignInstructor(Instructor assignInstructor, RedirectAttributes redirectAttributes)
+	public String assignInstructor(IInstructor assignInstructor, RedirectAttributes redirectAttributes)
 			throws Exception {
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {

@@ -3,7 +3,7 @@ package CSCI5308.GroupFormationTool.Course;
 import java.util.List;
 
 public interface IHomeRepository {
-    List<Course> getcourse(IUserId iUserId);
+    List<ICourse> getcourse(IUserRole userRole);
 
-    boolean checkRole(IUserId iUserId);
+    boolean checkRole(IUserRole userRole);
 }

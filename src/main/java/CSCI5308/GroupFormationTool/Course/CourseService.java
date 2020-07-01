@@ -1,13 +1,7 @@
 package CSCI5308.GroupFormationTool.Course;
 
-
-import CSCI5308.GroupFormationTool.Course.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
-
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Course.ICourseRepository;
-import CSCI5308.GroupFormationTool.Course.ICourseService;
+
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -73,7 +67,7 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public boolean CreateCourseService(CreateCourse createCourse) throws Exception {
+	public boolean CreateCourseService(ICreateCourse createCourse) throws Exception {
 		ArrayList<String> allCourseNames = Injector.instance().getCourseRepository().getAllCourses().get(1);
 		for(int i=0;i<allCourseNames.size();i++){
 			if(allCourseNames.get(i).equals(createCourse.getCourseName())){
@@ -92,7 +86,7 @@ public class CourseService implements ICourseService {
 	}
 	
 	@Override
-	public boolean DeleteCourseService(DeleteCourse deleteCourse) throws Exception {
+	public boolean DeleteCourseService(IDeleteCourse deleteCourse) throws Exception {
 		if(Injector.instance().getCourseRepository().deleteCourseRepo(deleteCourse)){
 			deleteCourse.setCourseDeleteMessage("Course deleted");
 			deleteCourse.setAllCourseIds(Injector.instance().getCourseRepository().getAllCourses().get(0));

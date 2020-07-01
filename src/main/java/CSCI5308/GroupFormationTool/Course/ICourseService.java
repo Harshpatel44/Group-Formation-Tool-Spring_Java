@@ -8,6 +8,6 @@ public interface ICourseService {
     boolean checkRole(String userType);
     boolean checkUserType(String userType);
     Dictionary CoursesWithIdForDropdown() throws SQLException;
-    boolean CreateCourseService(CreateCourse createCourse) throws Exception;
-    boolean DeleteCourseService(DeleteCourse deleteCourse) throws Exception;
+    boolean CreateCourseService(ICreateCourse createCourse) throws Exception;
+    boolean DeleteCourseService(IDeleteCourse deleteCourse) throws Exception;
 }

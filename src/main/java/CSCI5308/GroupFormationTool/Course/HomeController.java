@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 	private IHomeService homeService;
-	IUserId iUserId = new UserId();
+	IUserRole userRole = new UserRole();
 
 	@RequestMapping("/home")
 	public ModelAndView home() {
@@ -25,11 +25,11 @@ public class HomeController {
 			return model;
 		}
 
-		iUserId.setUserId(authentication.getPrincipal().toString());
+		userRole.setUserId(authentication.getPrincipal().toString());
 		homeService = Injector.instance().getHomeService();
-		model.addObject("userId", iUserId.getUserId());
-		model.addObject("courses", homeService.getCourses(iUserId));
-		model.addObject("checkRole", homeService.checkRole(iUserId));
+		model.addObject("userId", userRole.getUserId());
+		model.addObject("courses", homeService.getCourses(userRole));
+		model.addObject("checkRole", homeService.checkRole(userRole));
 		model.setViewName("home");
 		return model;
 	}

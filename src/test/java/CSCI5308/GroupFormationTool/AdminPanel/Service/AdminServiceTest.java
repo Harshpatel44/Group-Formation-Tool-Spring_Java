@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Service;
 import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
+import CSCI5308.GroupFormationTool.AdminPanel.IInstructor;
 import CSCI5308.GroupFormationTool.AdminPanel.Instructor;
 import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,7 +26,7 @@ class AdminServiceTest {
 
     @Test
     void assignInstructorService() throws Exception {
-        Instructor assignInstructor = new Instructor("test");
+        IInstructor assignInstructor = new Instructor("test");
         when(adminRepository.assignInstructorRepo(assignInstructor)).thenReturn(true);
         assertTrue(adminService.AssignInstructorService(assignInstructor));
         assertEquals("Instructor assigned",assignInstructor.getInstructorAssignMessage());

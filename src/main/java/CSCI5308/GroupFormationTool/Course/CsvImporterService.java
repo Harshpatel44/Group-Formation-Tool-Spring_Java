@@ -18,8 +18,6 @@ import com.opencsv.CSVReader;
 import com.opencsv.CSVReaderBuilder;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Course.ICourseRepository;
-import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;

@@ -3,9 +3,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-import CSCI5308.GroupFormationTool.Course.ICourseRepository;
-import CSCI5308.GroupFormationTool.Course.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
@@ -136,7 +133,7 @@ public class CourseRepository implements ICourseRepository {
 
 
 	@Override
-	public boolean createCourseRepo(CreateCourse createCourse) throws SQLException {
+	public boolean createCourseRepo(ICreateCourse createCourse) throws SQLException {
 		System.out.println("inside");
 		try {
 			StoredProcedure storedProcedure = new StoredProcedure("CreateCourse(?,?)");
@@ -153,7 +150,7 @@ public class CourseRepository implements ICourseRepository {
 	}
 
 	@Override
-	public boolean deleteCourseRepo(DeleteCourse deleteCourse) {
+	public boolean deleteCourseRepo(IDeleteCourse deleteCourse) {
 		try {
 			System.out.println(deleteCourse.getSelectedCourseId());
 			StoredProcedure storedProcedure = new StoredProcedure("DeleteCourse(?)");

@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
-import CSCI5308.GroupFormationTool.Course.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
+import CSCI5308.GroupFormationTool.Course.*;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,7 +14,6 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
@@ -59,7 +56,7 @@ public class CourseRepositoryTest {
 
 	@Test
 	void createCourseRepo() throws SQLException {
-		CreateCourse createCourse = new CreateCourse();
+		ICreateCourse createCourse = new CreateCourse();
 		createCourse.setCourseName("testname");
 		createCourse.setCourseId("testid");
 		assertTrue(createCourse.getCourseName().length()<200);
@@ -72,7 +69,7 @@ public class CourseRepositoryTest {
 
 	@Test
 	void deleteCourseRepo() throws Exception {
-		DeleteCourse deleteCourse = new DeleteCourse("test");
+		IDeleteCourse deleteCourse = new DeleteCourse("test");
 		deleteCourse.setSelectedCourseId("testname");
 		assertTrue(deleteCourse.getSelectedCourseId().length()<=200);
 		assertFalse(deleteCourse.getSelectedCourseId().isEmpty());

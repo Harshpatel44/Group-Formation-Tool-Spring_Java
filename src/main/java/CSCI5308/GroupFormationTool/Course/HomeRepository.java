@@ -4,23 +4,22 @@ import java.sql. ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import CSCI5308.GroupFormationTool.Course.IHomeRepository;
-import CSCI5308.GroupFormationTool.Course.IUserId;
+
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.Course.Course;
+
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 
 public class HomeRepository implements IHomeRepository{
-	private List<Course> CourseList = new ArrayList<Course>();
+	private List<ICourse> CourseList = new ArrayList<ICourse>();
 
 	@Override
-	public boolean checkRole(IUserId iUserId) {
+	public boolean checkRole(IUserRole userRole) {
 		boolean result = true;//Guest
 		StoredProcedure role = null;
 		try {
 			role = new StoredProcedure("CheckGuest(?)");
-			role.setParameter(1, iUserId.getUserId());
+			role.setParameter(1, userRole.getUserId());
 			ResultSet rs = role.executeWithResults();
 			if(rs.next())//if data present, then not guest
 			{
@@ -34,8 +33,8 @@ public class HomeRepository implements IHomeRepository{
 	}
 
 	@Override
-	public List<Course> getcourse(IUserId iUserId) {
-		boolean result = checkRole(iUserId);
+	public List<ICourse> getcourse(IUserRole userRole) {
+		boolean result = checkRole(userRole);
 		StoredProcedure storedProcedure = null;
 		try {
 			CourseList.clear();
@@ -44,22 +43,22 @@ public class HomeRepository implements IHomeRepository{
 				storedProcedure = new StoredProcedure("AllCourses");
 				ResultSet rs = storedProcedure.executeWithResults();
 				while(rs.next()) {
-					Course temp = new Course();
-					temp.setCourseId(rs.getString("courseId"));
-					temp.setCourseName(rs.getString("courseName"));
-					temp.setRole(guest);
-					CourseList.add(temp);
+					ICourse course = new Course();
+					course.setCourseId(rs.getString("courseId"));
+					course.setCourseName(rs.getString("courseName"));
+					course.setRole(guest);
+					CourseList.add(course);
 				}
 				storedProcedure.cleanup();
 			}
 			// for courses if user is not guest
 			else{
 				storedProcedure = new StoredProcedure("Courses(?)");
-				storedProcedure.setParameter(1, iUserId.getUserId());
+				storedProcedure.setParameter(1, userRole.getUserId());
 				ResultSet rs = storedProcedure.executeWithResults();
 				while(rs.next())
 				{
-					Course temp = new Course();
+					ICourse course = new Course();
 					storedProcedure = new StoredProcedure("courseName(?)");
 					storedProcedure.setParameter(1,rs.getString("courseId"));
 					ResultSet rs1 = storedProcedure.executeWithResults();
@@ -68,10 +67,10 @@ public class HomeRepository implements IHomeRepository{
 					ResultSet rs2 = storedProcedure.executeWithResults();
 					if(rs1.next() && rs2.next())
 					{
-						temp.setCourseId(rs.getString("courseId"));
-						temp.setCourseName(rs1.getString("courseName"));
-						temp.setRole(rs2.getString("roleType"));
-						CourseList.add(temp);
+						course.setCourseId(rs.getString("courseId"));
+						course.setCourseName(rs1.getString("courseName"));
+						course.setRole(rs2.getString("roleType"));
+						CourseList.add(course);
 					}
 					storedProcedure.cleanup();
 					storedProcedure.cleanup();
