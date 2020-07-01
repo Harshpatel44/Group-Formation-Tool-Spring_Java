@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Course.Model;
 
+import CSCI5308.GroupFormationTool.Course.CreateCourse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

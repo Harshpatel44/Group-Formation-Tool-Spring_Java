@@ -10,8 +10,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
-import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
+import CSCI5308.GroupFormationTool.Login.ILoginRepository;
+import CSCI5308.GroupFormationTool.Login.ILoginService;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 

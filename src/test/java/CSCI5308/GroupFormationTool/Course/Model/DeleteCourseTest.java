@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Course.Model;
 
+import CSCI5308.GroupFormationTool.Course.DeleteCourse;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.Course.Repository;
 
-import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
-import CSCI5308.GroupFormationTool.Course.Model.Course;
+import CSCI5308.GroupFormationTool.Course.IUserId;
+import CSCI5308.GroupFormationTool.Course.Course;
 
 import java.util.ArrayList;
 import java.util.List;

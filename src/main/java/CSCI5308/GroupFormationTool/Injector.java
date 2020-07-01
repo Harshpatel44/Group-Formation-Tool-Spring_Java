@@ -1,9 +1,9 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.Login.AccessControl.IForgetPasswordRepository;
-import CSCI5308.GroupFormationTool.Login.AccessControl.IForgetPasswordService;
-import CSCI5308.GroupFormationTool.Login.Repository.ForgetPasswordRepository;
-import CSCI5308.GroupFormationTool.Login.Service.ForgetPasswordService;
+import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
+import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.Login.ForgetPasswordService;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
 import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionManagerRepository;
@@ -14,27 +14,27 @@ import CSCI5308.GroupFormationTool.QuestionManager.Repository.QuestionResponsesR
 import CSCI5308.GroupFormationTool.QuestionManager.Service.QuestionResponsesService;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IEmailConfiguration;
 
-import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
-import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseService;
-import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeRepository;
-import CSCI5308.GroupFormationTool.Course.AccessControl.IHomeService;
-import CSCI5308.GroupFormationTool.Course.Repository.CourseRepository;
-import CSCI5308.GroupFormationTool.Course.Repository.HomeRepository;
-import CSCI5308.GroupFormationTool.Course.Service.CourseService;
-import CSCI5308.GroupFormationTool.Course.Service.HomeService;
+import CSCI5308.GroupFormationTool.Course.ICourseRepository;
+import CSCI5308.GroupFormationTool.Course.ICourseService;
+import CSCI5308.GroupFormationTool.Course.IHomeRepository;
+import CSCI5308.GroupFormationTool.Course.IHomeService;
+import CSCI5308.GroupFormationTool.Course.CourseRepository;
+import CSCI5308.GroupFormationTool.Course.HomeRepository;
+import CSCI5308.GroupFormationTool.Course.CourseService;
+import CSCI5308.GroupFormationTool.Course.HomeService;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControl.IUserService;
-import CSCI5308.GroupFormationTool.Course.AccessControl.ICsvImporter;
-import CSCI5308.GroupFormationTool.Course.Service.CsvImporterService;
+import CSCI5308.GroupFormationTool.Course.ICsvImporter;
+import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
-import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginRepository;
-import CSCI5308.GroupFormationTool.Login.AccessControl.ILoginService;
-import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
-import CSCI5308.GroupFormationTool.Login.Service.LoginService;
+import CSCI5308.GroupFormationTool.Login.ILoginRepository;
+import CSCI5308.GroupFormationTool.Login.ILoginService;
+import CSCI5308.GroupFormationTool.Login.LoginRepository;
+import CSCI5308.GroupFormationTool.Login.LoginService;
 import CSCI5308.GroupFormationTool.UserAuthentication.Repository.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.Security.BCryptEncryption;
 import CSCI5308.GroupFormationTool.UserAuthentication.Service.EmailConfiguration;

@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Course.Model;
 
-import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
+import CSCI5308.GroupFormationTool.Course.IUserId;
+import CSCI5308.GroupFormationTool.Course.UserId;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;

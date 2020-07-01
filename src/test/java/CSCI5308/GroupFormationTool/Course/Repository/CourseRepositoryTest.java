@@ -6,8 +6,9 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
-import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
+import CSCI5308.GroupFormationTool.Course.CourseRepository;
+import CSCI5308.GroupFormationTool.Course.CreateCourse;
+import CSCI5308.GroupFormationTool.Course.DeleteCourse;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Course.AccessControl.ICourseRepository;
+import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
 import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
 

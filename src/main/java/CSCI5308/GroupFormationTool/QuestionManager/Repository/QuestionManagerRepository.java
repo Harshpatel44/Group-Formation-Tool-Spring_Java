@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 
-import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.Model.Question;

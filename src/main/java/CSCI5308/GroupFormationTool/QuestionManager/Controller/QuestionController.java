@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Controller;
 
-import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
-import CSCI5308.GroupFormationTool.Course.Model.UserId;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
 import org.springframework.stereotype.Controller;

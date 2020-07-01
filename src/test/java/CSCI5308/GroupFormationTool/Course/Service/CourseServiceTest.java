@@ -1,9 +1,10 @@
 package CSCI5308.GroupFormationTool.Course.Service;
 
-import CSCI5308.GroupFormationTool.Course.Model.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.Model.DeleteCourse;
+import CSCI5308.GroupFormationTool.Course.CourseService;
+import CSCI5308.GroupFormationTool.Course.CreateCourse;
+import CSCI5308.GroupFormationTool.Course.DeleteCourse;
 
-import CSCI5308.GroupFormationTool.Course.Repository.CourseRepository;
+import CSCI5308.GroupFormationTool.Course.CourseRepository;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

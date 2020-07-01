@@ -1,10 +1,7 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Model;
 
+import CSCI5308.GroupFormationTool.AdminPanel.Instructor;
 import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-import java.util.Dictionary;
-import java.util.Hashtable;
 
 import static org.junit.jupiter.api.Assertions.*;
 

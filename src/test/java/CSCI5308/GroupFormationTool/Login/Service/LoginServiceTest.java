@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Login.Service;
 
-import CSCI5308.GroupFormationTool.Login.Repository.LoginRepository;
+import CSCI5308.GroupFormationTool.Login.LoginRepository;
+import CSCI5308.GroupFormationTool.Login.LoginService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

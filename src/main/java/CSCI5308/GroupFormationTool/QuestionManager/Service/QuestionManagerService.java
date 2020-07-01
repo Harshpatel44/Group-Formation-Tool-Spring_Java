@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Service;
 
-import CSCI5308.GroupFormationTool.Course.AccessControl.IUserId;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerRepository;
 import CSCI5308.GroupFormationTool.QuestionManager.AccessControl.IQuestionManagerService;
