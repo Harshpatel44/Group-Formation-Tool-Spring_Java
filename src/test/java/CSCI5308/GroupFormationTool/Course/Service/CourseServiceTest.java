@@ -140,7 +140,7 @@ public class CourseServiceTest {
 
 	@Test
 	void deleteCourseService() throws Exception {
-		IDeleteCourse deleteCourse = new DeleteCourse("test");
+		IDeleteCourse deleteCourse = new DeleteCourse();
 		deleteCourse.setSelectedCourseId("testid");
 		Dictionary allCoursesList = new Hashtable();
 		allCoursesList.put("testid testname", "testid");

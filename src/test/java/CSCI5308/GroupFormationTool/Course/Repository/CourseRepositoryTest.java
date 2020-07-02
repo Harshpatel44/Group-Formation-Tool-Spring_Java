@@ -68,7 +68,7 @@ public class CourseRepositoryTest {
 
 	@Test
 	void deleteCourseRepo() throws Exception {
-		IDeleteCourse deleteCourse = new DeleteCourse("test");
+		IDeleteCourse deleteCourse = new DeleteCourse();
 		deleteCourse.setSelectedCourseId("testname");
 		assertTrue(deleteCourse.getSelectedCourseId().length()<=200);
 		assertFalse(deleteCourse.getSelectedCourseId().isEmpty());
