@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.AdminPanel.Model;
 
-import CSCI5308.GroupFormationTool.AdminPanel.IInstructor;
-import CSCI5308.GroupFormationTool.AdminPanel.Instructor;
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.Instructor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;

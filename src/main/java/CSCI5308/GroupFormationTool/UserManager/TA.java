@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Course;
+package CSCI5308.GroupFormationTool.UserManager;
 
 public class TA implements ITA {
     private String TaId;

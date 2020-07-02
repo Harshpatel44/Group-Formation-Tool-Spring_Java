@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManager.Repository;
 
 
-import CSCI5308.GroupFormationTool.Course.IUserRole;
+import CSCI5308.GroupFormationTool.UserManager.IUserRole;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 

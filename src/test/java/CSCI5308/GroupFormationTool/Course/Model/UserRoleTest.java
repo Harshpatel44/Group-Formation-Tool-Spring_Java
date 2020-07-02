@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.Course.Model;
 
-import CSCI5308.GroupFormationTool.Course.IUserRole;
-import CSCI5308.GroupFormationTool.Course.UserRole;
+import CSCI5308.GroupFormationTool.UserManager.IUserRole;
+import CSCI5308.GroupFormationTool.UserManager.UserRole;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.AdminPanel;
+package CSCI5308.GroupFormationTool.UserManager;
 
 public interface IInstructor {
     String getInstructorAssignMessage();

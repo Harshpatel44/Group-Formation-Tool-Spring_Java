@@ -7,6 +7,7 @@ import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserManager.IUserRole;
 
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 

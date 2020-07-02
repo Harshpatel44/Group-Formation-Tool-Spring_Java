@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.Course.Model;
 
-import CSCI5308.GroupFormationTool.Course.ITA;
-import CSCI5308.GroupFormationTool.Course.TA;
+import CSCI5308.GroupFormationTool.UserManager.ITA;
+import CSCI5308.GroupFormationTool.UserManager.TA;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

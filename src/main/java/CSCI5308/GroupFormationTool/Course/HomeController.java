@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
 
+import CSCI5308.GroupFormationTool.UserManager.IUserRole;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,7 +15,10 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 	private IHomeService homeService;
-	IUserRole userRole = new UserRole();
+	IUserRole userRole = Injector.instance().getUserRole();
+
+	public HomeController() throws Exception {
+	}
 
 	@RequestMapping("/home")
 	public ModelAndView home() throws Exception {

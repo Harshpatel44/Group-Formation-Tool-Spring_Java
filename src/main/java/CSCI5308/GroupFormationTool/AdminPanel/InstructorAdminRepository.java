@@ -1,9 +1,9 @@
 package CSCI5308.GroupFormationTool.AdminPanel;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class InstructorAdminRepository implements IInstructorAdminRepository {
 

@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.AdminPanel;
+package CSCI5308.GroupFormationTool.UserManager;
 
 public class Instructor implements IInstructor {
     private String InstructorId;

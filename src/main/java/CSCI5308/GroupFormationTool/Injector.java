@@ -32,6 +32,7 @@ import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
 import CSCI5308.GroupFormationTool.UserAuthentication.EmailConfiguration;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserService;
+import CSCI5308.GroupFormationTool.UserManager.*;
 
 public class Injector {
 

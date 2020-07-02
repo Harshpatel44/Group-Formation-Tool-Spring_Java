@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.UserManager.IUserRole;
 import org.springframework.stereotype.Service;
 
 import CSCI5308.GroupFormationTool.Injector;

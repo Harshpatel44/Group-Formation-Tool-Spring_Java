@@ -11,8 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
 
 @Controller
 public class CsvController {
@@ -33,7 +31,7 @@ public class CsvController {
     }
 	
 	@GetMapping("/course/csv")
-	public String register(User user) {
+	public String register() {
 		return "courseadmin";
 	}
 }

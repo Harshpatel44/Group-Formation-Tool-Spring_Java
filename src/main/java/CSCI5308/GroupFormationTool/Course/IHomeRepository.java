@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.Course;
 
+import CSCI5308.GroupFormationTool.UserManager.IUserRole;
+
 import java.util.List;
 
 public interface IHomeRepository {

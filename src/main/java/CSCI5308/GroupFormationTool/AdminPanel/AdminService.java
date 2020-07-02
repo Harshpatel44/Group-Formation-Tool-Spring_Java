@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.AdminPanel;
 
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 
 public class AdminService implements IAdminService {
 
