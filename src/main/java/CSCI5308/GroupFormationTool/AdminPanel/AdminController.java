@@ -26,7 +26,7 @@ public class AdminController{
 	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
 		ICreateCourse createCourse = new CreateCourse();
 		IDeleteCourse deleteCourse = new DeleteCourse();
-		IInstructor iInstructor = new Instructor();
+		IInstructor instructor = new Instructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
 		if (authentication.getPrincipal().toString().equals("admin")) {
@@ -42,13 +42,13 @@ public class AdminController{
 					deleteCourse.setCourseDeleteMessage(deleteMessage);
 				}
 				if (assignMessage != null) {
-					iInstructor.setInstructorAssignMessage(assignMessage);
+					instructor.setInstructorAssignMessage(assignMessage);
 				}
 			} catch (Exception ignored) {
 			}
 			mv.addObject("createCourse", createCourse);
 			mv.addObject("deleteCourse", deleteCourse);
-			mv.addObject("assignInstructor", iInstructor);
+			mv.addObject("assignInstructor", instructor);
 			mv.setViewName("admin");
 			return mv;
 		} else {
