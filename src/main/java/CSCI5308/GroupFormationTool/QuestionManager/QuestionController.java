@@ -1,13 +1,10 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.sql.SQLException;
 
 @Controller
 public class QuestionController {
