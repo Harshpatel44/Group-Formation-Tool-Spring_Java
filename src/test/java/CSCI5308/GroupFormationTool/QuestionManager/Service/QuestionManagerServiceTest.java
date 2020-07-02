@@ -78,8 +78,8 @@ public class QuestionManagerServiceTest {
 
     @Test
     public void deleteQuestionTest() throws Exception {
-   String userId ="B00100100";
-   Integer questionId=1;
-   questionManagerService.deleteQuestion(questionId,userId);
+    String userId ="B00100100";
+    Integer questionId=1;
+    questionManagerService.deleteQuestion(questionId,userId);
     }
 }

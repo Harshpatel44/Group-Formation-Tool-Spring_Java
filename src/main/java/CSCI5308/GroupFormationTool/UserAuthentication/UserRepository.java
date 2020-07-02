@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 
+import CSCI5308.GroupFormationTool.Injector;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -112,16 +113,13 @@ public class UserRepository implements IUserRepository {
 					String lastName = results.getString(4);
 					String email = results.getString(5);
 					String contactNo = results.getString(6);
-					user = new User() {
-						{
-							setFirstName(firstName);
-							setLastName(lastName);
-							setEmailId(email);
-							setContactNumber(contactNo);
-							setBannerId(bannerID);
-							setPassword(password);
-						}
-					};
+					user =  Injector.instance().getUser();
+					user.setFirstName(firstName);
+					user.setLastName(lastName);
+					user.setEmailId(email);
+					user.setContactNumber(contactNo);
+					user.setBannerId(bannerID);
+					user.setPassword(password);
 				}
 				proc.cleanup();
 			}
@@ -142,14 +140,12 @@ public class UserRepository implements IUserRepository {
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {
-
 					Integer minLength = results.getInt(1);
 					Integer maxLength = results.getInt(2);
 					Integer minUpperCaseLetter = results.getInt(3);
 					Integer minLowerCaseLetter = results.getInt(4);
 					Integer minNoOfSymbols = results.getInt(5);
 					String notAllowedCharacters = results.getString(6);
-
 					passwordPolicy = UserPasswordPolicy.setInstance(minLength, maxLength, minUpperCaseLetter, minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
 					proc.cleanup();
 				}
@@ -158,6 +154,7 @@ public class UserRepository implements IUserRepository {
 		} catch (SQLException e) { };
 		return passwordPolicy;
 	}
+
 	@Override
 	public UserPasswordPolicyStatus getUserPasswordPolicyStatus() {
 		StoredProcedure proc = null;
@@ -167,14 +164,12 @@ public class UserRepository implements IUserRepository {
 			ResultSet results = proc.executeWithResults();
 			if (null != results) {
 				while (results.next()) {
-
 					Integer minLength = results.getInt(2);
 					Integer maxLength = results.getInt(3);
 					Integer minUpperCaseLetter = results.getInt(4);
 					Integer minLowerCaseLetter = results.getInt(5);
 					Integer minNoOfSymbols = results.getInt(6);
 					Integer notAllowedCharacters = results.getInt(7);
-
 					passwordPolicy = UserPasswordPolicyStatus.setInstance(minLength, maxLength, minUpperCaseLetter, minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
 					proc.cleanup();
 				}
@@ -183,7 +178,6 @@ public class UserRepository implements IUserRepository {
 		} catch (SQLException e) { } catch (Exception e) {
 			e.printStackTrace();
 		}
-		;
 		return passwordPolicy;
 	}
 

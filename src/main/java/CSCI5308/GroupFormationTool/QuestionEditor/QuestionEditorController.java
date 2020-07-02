@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
+import CSCI5308.GroupFormationTool.Injector;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -29,8 +30,8 @@ public class QuestionEditorController{
 	@RequestMapping("/createQuestion")
 	public ModelAndView createQuestion(@RequestParam(name = "courseId") String courseId,
 			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
-			@RequestParam(name = "courseName") String courseName) {
-		IQuestionModel questionModel = new QuestionModel();
+			@RequestParam(name = "courseName") String courseName) throws Exception {
+		IQuestionModel questionModel = Injector.instance().getQuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);

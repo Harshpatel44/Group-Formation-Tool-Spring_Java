@@ -7,16 +7,11 @@ import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
 import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
 import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
 import CSCI5308.GroupFormationTool.Login.ForgetPasswordService;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerRepository;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerService;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionResponsesRepo;
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionResponsesService;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerRepository;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerService;
+import CSCI5308.GroupFormationTool.QuestionEditor.IQuestionModel;
+import CSCI5308.GroupFormationTool.QuestionEditor.QuestionModel;
+import CSCI5308.GroupFormationTool.QuestionManager.*;
 
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionResponsesRepo;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionResponsesService;
-import CSCI5308.GroupFormationTool.UserAuthentication.IEmailConfiguration;
+import CSCI5308.GroupFormationTool.UserAuthentication.*;
 
 import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.Course.ICourseService;
@@ -27,10 +22,6 @@ import CSCI5308.GroupFormationTool.Course.HomeRepository;
 import CSCI5308.GroupFormationTool.Course.CourseService;
 import CSCI5308.GroupFormationTool.Course.HomeService;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserService;
 import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
@@ -39,11 +30,6 @@ import CSCI5308.GroupFormationTool.Login.ILoginRepository;
 import CSCI5308.GroupFormationTool.Login.ILoginService;
 import CSCI5308.GroupFormationTool.Login.LoginRepository;
 import CSCI5308.GroupFormationTool.Login.LoginService;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
-import CSCI5308.GroupFormationTool.UserAuthentication.EmailConfiguration;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserService;
 
 public class Injector {
 
@@ -59,19 +45,20 @@ public class Injector {
 	private IHomeService homeService;
 	private ICourseService courseService;
 	private ICourseRepository courseRepository;
-
 	private ILoginService loginService;
 	private IForgetPasswordService forgetPasswordService;
 	private ILoginRepository loginRepository;
 	private IForgetPasswordRepository forgetPasswordRepository;
-
 	private IQuestionManagerService questionManagerService;
 	private IQuestionManagerRepository questionManagerRepository;
 	private IQuestionResponsesService questionResponsesService;
 	private IQuestionResponsesRepo questionResponsesRepo;
-
 	private IAdminService adminService;
 	private InstructorAdminRepository instructorAdminRepository;
+    private IUser user;
+	private IQuestion question;
+	private IQuestionModel questionModel;
+
 
 	private Injector() throws Exception {
 
@@ -82,7 +69,6 @@ public class Injector {
 		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
-
 		loginService = new LoginService();
 		forgetPasswordService = new ForgetPasswordService();
 		homeRepository = new HomeRepository();
@@ -91,14 +77,15 @@ public class Injector {
 		courseRepository = new CourseRepository();
 		loginRepository = new LoginRepository();
 		forgetPasswordRepository =new ForgetPasswordRepository();
-
 		questionManagerRepository = new QuestionManagerRepository();
 		questionManagerService = new QuestionManagerService();
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
-
 		adminService = new AdminService();
 		instructorAdminRepository = new InstructorAdminRepository();
+		user = new User();
+		question = new Question();
+		questionModel = new QuestionModel();
 	}
 
 	public IAdminService getAdminService() {
@@ -269,5 +256,17 @@ public class Injector {
 
 	public IQuestionManagerRepository getQuestionManagerRepository(){return questionManagerRepository;}
 
-    public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
+	public IUser getUser() { return user; }
+
+	public void setUser(IUser user) { this.user = user; }
+
+	public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){this.questionManagerRepository = questionManagerRepository;}
+
+	public IQuestion getQuestion() { return question; }
+
+	public void setQuestion(IQuestion question) { this.question = question; }
+
+	public IQuestionModel getQuestionModel() { return questionModel; }
+
+	public void setQuestionModel(IQuestionModel questionModel) { this.questionModel = questionModel; }
 }

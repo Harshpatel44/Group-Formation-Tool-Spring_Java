@@ -53,7 +53,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	}
 
 	@GetMapping("/register")
-	public ModelAndView register(IUser user) throws Exception {
+	public ModelAndView register(User user) throws Exception {
 		userService = Injector.instance().getUserService();
 		UserPasswordPolicy passwordPolicy = userService.getUserPasswordPolicy();
 		UserPasswordPolicyStatus passwordPolicyStatus = userService.getUserPasswordPolicyStatus();
