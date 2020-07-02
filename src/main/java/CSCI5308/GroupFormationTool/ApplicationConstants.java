@@ -20,4 +20,5 @@ public class ApplicationConstants {
 	public static final String guest="Guest";
 	public static final String instructor="instructor";
 	public static final String student="student";
+	public static final String admin="admin";
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -29,7 +30,7 @@ public class AdminController{
 		IInstructor instructor = Injector.instance().getInstructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
-		if (authentication.getPrincipal().toString().equals("admin")) {
+		if (authentication.getPrincipal().toString().equals(admin)) {
 			try {
 				Map<String, ?> flashAttribute = RequestContextUtils.getInputFlashMap(request);
 				String createMessage = (String) flashAttribute.get("courseCreateMessage");
@@ -49,7 +50,7 @@ public class AdminController{
 			mv.addObject("createCourse", createCourse);
 			mv.addObject("deleteCourse", deleteCourse);
 			mv.addObject("assignInstructor", instructor);
-			mv.setViewName("admin");
+			mv.setViewName(admin);
 			return mv;
 		} else {
 			mv.setViewName("redirect:/login");
@@ -66,7 +67,7 @@ public class AdminController{
 		createCourse.setCourseId(courseId);
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication.getPrincipal().toString().equals("admin")) {
+		if (authentication.getPrincipal().toString().equals(admin)) {
 			Injector.instance().getCourseService().CreateCourseService(createCourse);
 			redirectAttributes.addFlashAttribute("courseCreateMessage", createCourse.getCourseCreateMessage());
 			return "redirect:admin";
@@ -82,7 +83,7 @@ public class AdminController{
 		deleteCourse.setSelectedCourseId(selectedCourseId);
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication.getPrincipal().toString().equals("admin")) {
+		if (authentication.getPrincipal().toString().equals(admin)) {
 			Injector.instance().getCourseService().DeleteCourseService(deleteCourse);
 			redirectAttributes.addFlashAttribute("courseDeleteMessage", deleteCourse.getCourseDeleteMessage());
 			return "redirect:admin";
@@ -99,7 +100,7 @@ public class AdminController{
 		instructor.setSelectedInstructorCourseId(selectedInstructorCourseId);
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if (authentication.getPrincipal().toString().equals("admin")) {
+		if (authentication.getPrincipal().toString().equals(admin)) {
 			Injector.instance().getAdminService().AssignInstructorService(instructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
 					instructor.getInstructorAssignMessage());

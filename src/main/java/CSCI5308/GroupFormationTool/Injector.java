@@ -77,8 +77,8 @@ public class Injector {
 	private IDeleteCourse deleteCourse;
 	private ITA ta;
 	private IUserRole userRole;
-    private IUser user;
-	
+	private IUser user;
+
 	private Injector() throws Exception {
 
 		dbConfiguration = new DBConfiguration();
@@ -100,9 +100,8 @@ public class Injector {
 		questionManagerService = new QuestionManagerService();
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
-<<<<<<< HEAD
-
-
+		user = new User();
+		
 		adminService = new AdminService();
 		instructorAdminRepository = new InstructorAdminRepository();
 		instructor = new Instructor();
@@ -112,6 +111,12 @@ public class Injector {
 		deleteCourse = new DeleteCourse();
 		ta = new TA();
 		userRole = new UserRole();
+
+		adminService = new AdminService();
+		instructorAdminRepository = new InstructorAdminRepository();
+		
+		question = new Question();
+		questionModel = new QuestionModel();
 	}
 
 	public IInstructor getInstructor() {
@@ -150,8 +155,6 @@ public class Injector {
 		this.createCourse = createCourse;
 	}
 
-
-
 	public void setDeleteCourse(DeleteCourse deleteCourse) {
 		this.deleteCourse = deleteCourse;
 	}
@@ -170,13 +173,6 @@ public class Injector {
 
 	public void setUserRole(IUserRole userRole) {
 		this.userRole = userRole;
-=======
-		adminService = new AdminService();
-		instructorAdminRepository = new InstructorAdminRepository();
-		user = new User();
-		question = new Question();
-		questionModel = new QuestionModel();
->>>>>>> ee04ba69d204b76902468f8cdbecb498d056c0fa
 	}
 
 	public IAdminService getAdminService() {
