@@ -11,5 +11,5 @@ public interface ICreateCourse {
 
     String getCourseName();
 
-    void setCourseName(String couseName);
+    void setCourseName(String courseName);
 }

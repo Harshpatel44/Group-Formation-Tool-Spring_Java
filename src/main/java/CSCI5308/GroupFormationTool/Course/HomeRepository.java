@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import CSCI5308.GroupFormationTool.Injector;
 
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
@@ -45,7 +46,7 @@ public class HomeRepository implements IHomeRepository{
 				storedProcedure = new StoredProcedure("AllCourses");
 				ResultSet rs = storedProcedure.executeWithResults();
 				while(rs.next()) {
-					ICourse course = new Course();
+					ICourse course = Injector.instance().getCourse();
 					course.setCourseId(rs.getString("courseId"));
 					course.setCourseName(rs.getString("courseName"));
 					course.setRole(guest);
@@ -60,7 +61,7 @@ public class HomeRepository implements IHomeRepository{
 				ResultSet rs = storedProcedure.executeWithResults();
 				while(rs.next())
 				{
-					ICourse course = new Course();
+					ICourse course = Injector.instance().getCourse();
 					storedProcedure = new StoredProcedure("courseName(?)");
 					storedProcedure.setParameter(1,rs.getString("courseId"));
 					ResultSet rs1 = storedProcedure.executeWithResults();

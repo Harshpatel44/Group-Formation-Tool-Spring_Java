@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.AdminPanel;
 
-import CSCI5308.GroupFormationTool.Course.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
 import CSCI5308.GroupFormationTool.Course.ICreateCourse;
 import CSCI5308.GroupFormationTool.Course.IDeleteCourse;
 import CSCI5308.GroupFormationTool.Injector;
@@ -10,7 +8,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
@@ -24,9 +24,9 @@ public class AdminController{
 	@GetMapping("/admin")
 
 	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
-		ICreateCourse createCourse = new CreateCourse();
-		IDeleteCourse deleteCourse = new DeleteCourse();
-		IInstructor instructor = new Instructor();
+		ICreateCourse createCourse = Injector.instance().getCreateCourse();
+		IDeleteCourse deleteCourse = Injector.instance().getDeleteCourse();
+		IInstructor instructor = Injector.instance().getInstructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
 		if (authentication.getPrincipal().toString().equals("admin")) {
@@ -58,7 +58,13 @@ public class AdminController{
 	}
 
 	@PostMapping("/createCourse")
-	public String createCourse(CreateCourse createCourse, RedirectAttributes redirectAttributes) throws Exception {
+	public String createCourse(@RequestParam(name="courseName") String courseName,
+							   @RequestParam(name="courseId") String courseId,
+							   RedirectAttributes redirectAttributes) throws Exception {
+		ICreateCourse createCourse = Injector.instance().getCreateCourse();
+		createCourse.setCourseName(courseName);
+		createCourse.setCourseId(courseId);
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			Injector.instance().getCourseService().CreateCourseService(createCourse);
@@ -70,7 +76,11 @@ public class AdminController{
 	}
 
 	@PostMapping("/deleteCourse")
-	public String deleteCourse(DeleteCourse deleteCourse, RedirectAttributes redirectAttributes) throws Exception {
+	public String deleteCourse(@RequestParam(name="selectedCourseId") String selectedCourseId,
+							   RedirectAttributes redirectAttributes) throws Exception {
+		IDeleteCourse deleteCourse = Injector.instance().getDeleteCourse();
+		deleteCourse.setSelectedCourseId(selectedCourseId);
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
 			Injector.instance().getCourseService().DeleteCourseService(deleteCourse);
@@ -82,11 +92,14 @@ public class AdminController{
 	}
 
 	@PostMapping("/assignInstructor")
-	public String assignInstructor(Instructor instructor, RedirectAttributes redirectAttributes)
+	public String assignInstructor(@RequestParam(name="selectedInstructorCourseId") String selectedInstructorCourseId,
+								   RedirectAttributes redirectAttributes)
 			throws Exception {
+		IInstructor instructor = Injector.instance().getInstructor();
+		instructor.setSelectedInstructorCourseId(selectedInstructorCourseId);
+
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals("admin")) {
-			ModelAndView mv = new ModelAndView();
 			Injector.instance().getAdminService().AssignInstructorService(instructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
 					instructor.getInstructorAssignMessage());

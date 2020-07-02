@@ -33,7 +33,7 @@ public class CourseController {
 									@RequestParam(name="checkRole") String checkRole) throws Exception {
 		courseService = Injector.instance().getCourseService();
 		ModelAndView model=new ModelAndView("courseadmin");
-		model.addObject("ta",new TA());
+		model.addObject("ta",Injector.instance().getTA());
 		model.addObject("userId",userId);
 		model.addObject("courseId",courseId);
 		model.addObject("courseName",courseName);

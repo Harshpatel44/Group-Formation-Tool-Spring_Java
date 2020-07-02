@@ -12,7 +12,7 @@ public interface IDeleteCourse {
 
     void setAllCourseNames(ArrayList<String> allCourseNames);
 
-    Dictionary getAllCoursesList();
+    Dictionary getAllCoursesList() throws Exception;
 
     void setAllCoursesList(Dictionary allCoursesList);
 

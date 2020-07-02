@@ -12,12 +12,6 @@ public class DeleteCourse implements IDeleteCourse {
     private ArrayList<String> allCourseIds;
     private ArrayList<String> allCourseNames;
 
-    public DeleteCourse() throws Exception {
-        allCoursesList=Injector.instance().getCourseService().CoursesWithIdForDropdown();
-    }
-    public DeleteCourse(String s){
-    }
-
     @Override
     public ArrayList<String> getAllCourseIds() {
         return allCourseIds;
@@ -39,12 +33,14 @@ public class DeleteCourse implements IDeleteCourse {
     }
 
     @Override
-    public Dictionary getAllCoursesList() {
+    public Dictionary getAllCoursesList() throws Exception {
+        allCoursesList=Injector.instance().getCourseService().CoursesWithIdForDropdown();
         return allCoursesList;
     }
 
     @Override
     public void setAllCoursesList(Dictionary allCoursesList) {
+
         this.allCoursesList = allCoursesList;
     }
 

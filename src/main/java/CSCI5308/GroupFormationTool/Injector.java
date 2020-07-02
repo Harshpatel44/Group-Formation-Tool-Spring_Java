@@ -1,8 +1,7 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
-import CSCI5308.GroupFormationTool.AdminPanel.IAdminService;
-import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
+import CSCI5308.GroupFormationTool.AdminPanel.*;
+import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
 import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
 import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
@@ -18,21 +17,10 @@ import CSCI5308.GroupFormationTool.QuestionManager.QuestionResponsesRepo;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionResponsesService;
 import CSCI5308.GroupFormationTool.UserAuthentication.IEmailConfiguration;
 
-import CSCI5308.GroupFormationTool.Course.ICourseRepository;
-import CSCI5308.GroupFormationTool.Course.ICourseService;
-import CSCI5308.GroupFormationTool.Course.IHomeRepository;
-import CSCI5308.GroupFormationTool.Course.IHomeService;
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
-import CSCI5308.GroupFormationTool.Course.HomeRepository;
-import CSCI5308.GroupFormationTool.Course.CourseService;
-import CSCI5308.GroupFormationTool.Course.HomeService;
-
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserService;
-import CSCI5308.GroupFormationTool.Course.ICsvImporter;
-import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
 import CSCI5308.GroupFormationTool.Login.ILoginRepository;
@@ -72,6 +60,13 @@ public class Injector {
 
 	private IAdminService adminService;
 	private InstructorAdminRepository instructorAdminRepository;
+	private IInstructor instructor;
+
+	private ICourse course;
+	private ICreateCourse createCourse;
+	private IDeleteCourse deleteCourse;
+	private ITA ta;
+	private IUserRole userRole;
 
 	private Injector() throws Exception {
 
@@ -97,8 +92,74 @@ public class Injector {
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
 
+
 		adminService = new AdminService();
 		instructorAdminRepository = new InstructorAdminRepository();
+		instructor = new Instructor();
+
+		course = new Course();
+		createCourse = new CreateCourse();
+		deleteCourse = new DeleteCourse();
+		ta = new TA();
+		userRole = new UserRole();
+	}
+
+	public IInstructor getInstructor() {
+		return instructor;
+	}
+
+	public void setInstructor(IInstructor instructor) {
+		this.instructor = instructor;
+	}
+
+	public ICourse getCourse() {
+		return course;
+	}
+
+	public void setCourse(ICourse course) {
+		this.course = course;
+	}
+
+	public ICreateCourse getCreateCourse() {
+		return createCourse;
+	}
+
+	public void setCreateCourse(ICreateCourse createCourse) {
+		this.createCourse = createCourse;
+	}
+
+	public IDeleteCourse getDeleteCourse() {
+		return deleteCourse;
+	}
+
+	public void setDeleteCourse(IDeleteCourse deleteCourse) {
+		this.deleteCourse = deleteCourse;
+	}
+
+	public void setCreateCourse(CreateCourse createCourse) {
+		this.createCourse = createCourse;
+	}
+
+
+
+	public void setDeleteCourse(DeleteCourse deleteCourse) {
+		this.deleteCourse = deleteCourse;
+	}
+
+	public ITA getTA() {
+		return ta;
+	}
+
+	public void setTA(ITA ta) {
+		this.ta = ta;
+	}
+
+	public IUserRole getUserRole() {
+		return userRole;
+	}
+
+	public void setUserRole(IUserRole userRole) {
+		this.userRole = userRole;
 	}
 
 	public IAdminService getAdminService() {

@@ -1,8 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import org.springframework.stereotype.Component;
-
-@Component
 public class CreateCourse implements ICreateCourse {
     private String courseId;
     private String courseName;
@@ -34,7 +31,7 @@ public class CreateCourse implements ICreateCourse {
     }
 
     @Override
-    public void setCourseName(String couseName) {
-        this.courseName = couseName;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
     }
 }
