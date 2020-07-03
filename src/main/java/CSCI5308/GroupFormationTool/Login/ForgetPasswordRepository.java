@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.Login;
 
 import CSCI5308.GroupFormationTool.Database.ConnectionManager;
-import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
