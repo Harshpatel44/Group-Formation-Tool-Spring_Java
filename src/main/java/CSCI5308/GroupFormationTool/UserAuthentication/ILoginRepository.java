@@ -1,6 +1,5 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.UserAuthentication;
 
 public interface ILoginRepository {
     public boolean checkLogin(String bannerid, String password);
-    public boolean isUser(String bannerid);
 }

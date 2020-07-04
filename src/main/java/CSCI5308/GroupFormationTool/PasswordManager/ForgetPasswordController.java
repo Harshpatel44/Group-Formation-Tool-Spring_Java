@@ -78,7 +78,7 @@ public class ForgetPasswordController {
         String email;
         service = Injector.instance().getForgetPasswordService();
         userNotification = Injector.instance().getUserNotification();
-        isUser = Injector.instance().getLoginService().isUser(bannerID);
+        isUser = Injector.instance().getUserService().checkIfUserExists(bannerID);
         if (isUser == false) {
             model.addAttribute("Error", "Not a valid user");
             return "forgetPassword";

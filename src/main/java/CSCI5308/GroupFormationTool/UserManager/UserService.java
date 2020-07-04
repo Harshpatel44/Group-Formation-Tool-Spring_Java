@@ -135,18 +135,19 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public boolean setCurrentUserByBannerID(String BannerID){
+	public ICurrentUser setCurrentUserByBannerID(String BannerID){
 		try{
 			IUser iUser = new User();
 			iUser = Injector.instance().getUserRepository().setUserByBannerId(BannerID,iUser);
 			CurrentUser.instance().setBannerId(iUser.getBannerId());
 			CurrentUser.instance().setFirstName(iUser.getFirstName());
 			CurrentUser.instance().setLastName(iUser.getLastName());
-			return true;
+			return CurrentUser.instance();
 		}
 		catch (Exception e){
-			return false;
+			e.printStackTrace();
 		}
+		return CurrentUser.instance();
 	}
 
 	@Override

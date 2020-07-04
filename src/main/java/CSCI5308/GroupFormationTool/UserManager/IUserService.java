@@ -16,7 +16,7 @@ public interface IUserService {
 
 	boolean checkIfUserIsGuest(String bannerID);
 
-	boolean setCurrentUserByBannerID(String BannerID);
+	ICurrentUser setCurrentUserByBannerID(String BannerID);
 
 	boolean AssignInstructor(IInstructor instructor);
 }

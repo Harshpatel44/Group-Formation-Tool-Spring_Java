@@ -1,7 +1,5 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.UserAuthentication;
 
 public interface ILoginService {
     public boolean checkLogin(String bannerid, String password) throws Exception;
-    public boolean isUser(String bannerid) throws Exception;
-
 }

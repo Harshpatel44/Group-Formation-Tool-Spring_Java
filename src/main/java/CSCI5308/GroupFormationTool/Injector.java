@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool;
 
-import CSCI5308.GroupFormationTool.AdminPanel.*;
 import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.IQuestionModel;
@@ -26,10 +25,8 @@ import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
-import CSCI5308.GroupFormationTool.Login.ILoginRepository;
-import CSCI5308.GroupFormationTool.Login.ILoginService;
-import CSCI5308.GroupFormationTool.Login.LoginRepository;
-import CSCI5308.GroupFormationTool.Login.LoginService;
+import CSCI5308.GroupFormationTool.UserAuthentication.ILoginRepository;
+import CSCI5308.GroupFormationTool.UserAuthentication.ILoginService;
 import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
 import CSCI5308.GroupFormationTool.UserAuthentication.EmailConfiguration;
@@ -65,8 +62,6 @@ public class Injector {
 	private IQuestionResponsesService questionResponsesService;
 	private IQuestionResponsesRepo questionResponsesRepo;
 
-	private IAdminService adminService;
-	private InstructorAdminRepository instructorAdminRepository;
 	private IInstructor instructor;
 
 	private ICourse course;
@@ -117,9 +112,7 @@ public class Injector {
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
 		user = new User();
-		
-		adminService = new AdminService();
-		instructorAdminRepository = new InstructorAdminRepository();
+
 		instructor = new Instructor();
 
 		course = new Course();
@@ -128,8 +121,6 @@ public class Injector {
 		ta = new TA();
 		userRole = new UserRole();
 
-		adminService = new AdminService();
-		instructorAdminRepository = new InstructorAdminRepository();
 		
 		question = new Question();
 		questionModel = new QuestionModel();
@@ -192,22 +183,6 @@ public class Injector {
 
 	public void setUserRole(IUserRole userRole) {
 		this.userRole = userRole;
-	}
-
-	public IAdminService getAdminService() {
-		return adminService;
-	}
-
-	public void setAdminService(IAdminService adminService) {
-		this.adminService = adminService;
-	}
-
-	public InstructorAdminRepository getInstructorAdminRepository() {
-		return instructorAdminRepository;
-	}
-
-	public void setInstructorAdminRepository(InstructorAdminRepository instructorAdminRepository) {
-		this.instructorAdminRepository = instructorAdminRepository;
 	}
 
 	public IQuestionResponsesService getQuestionResponsesService() {
