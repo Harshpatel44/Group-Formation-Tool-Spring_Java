@@ -101,7 +101,7 @@ public class AdminController{
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals(admin)) {
-			Injector.instance().getAdminService().AssignInstructorService(instructor);
+			Injector.instance().getUserService().AssignInstructor(instructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
 					instructor.getInstructorAssignMessage());
 			return "redirect:admin";

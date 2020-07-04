@@ -2,7 +2,6 @@ package CSCI5308.GroupFormationTool.AdminPanel;
 
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import CSCI5308.GroupFormationTool.UserManager.Instructor;
-import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;

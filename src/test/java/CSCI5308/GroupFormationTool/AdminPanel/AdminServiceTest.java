@@ -1,8 +1,6 @@
 package CSCI5308.GroupFormationTool.AdminPanel;
-import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import CSCI5308.GroupFormationTool.UserManager.Instructor;
-import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

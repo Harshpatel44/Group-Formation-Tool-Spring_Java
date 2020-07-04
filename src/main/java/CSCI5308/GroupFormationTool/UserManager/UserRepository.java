@@ -65,11 +65,11 @@ public class UserRepository implements IUserRepository {
 	}
 
 	@Override
-	public IUser setUserByBannerId(String BannerID, IUser iUser) {
+	public IUser setUserByBannerId(String bannerID, IUser iUser) {
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByBannerID(?)");
-			storedProcedure.setParameter(1, BannerID);
+			storedProcedure.setParameter(1, bannerID);
 			ResultSet results = storedProcedure.executeWithResults();
 			if (results != null) {
 				if (results.next()) {
@@ -115,6 +115,7 @@ public class UserRepository implements IUserRepository {
 		}
 	}
 
+	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
 		StoredProcedure storedProcedure = null;
 		try {
@@ -159,6 +160,42 @@ public class UserRepository implements IUserRepository {
 		return result;
 	}
 
+	@Override
+	public boolean assignInstructor(IInstructor instructor){
+		StoredProcedure storedProcedure = null;
+		StoredProcedure storedProcedure1 = null;
+		try {
+			storedProcedure = new StoredProcedure("GetInstructorRole");
+			ResultSet resultSet = storedProcedure.executeWithResults();
+			resultSet.next();
+			int instructorRoleId = resultSet.getInt("roleId");
+			try {
+				storedProcedure1 = new StoredProcedure("AssignInstructor(?,?,?)");
+				storedProcedure1.setParameter(1, instructor.getInstructorId());
+				storedProcedure1.setParameter(2, String.valueOf(instructorRoleId));
+				storedProcedure1.setParameter(3, instructor.getSelectedInstructorCourseId());
+				storedProcedure1.execute();
+				return true;
+			} catch (Exception e) {
+				e.printStackTrace();
+				return false;
+			}
+			finally {
+				if(storedProcedure1 != null){
+					storedProcedure1.cleanup();
+				}
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+			return false;
+		}
+		finally {
+			if(storedProcedure!=null){
+				storedProcedure.cleanup();
+			}
+		}
+	}
 
 
 //	@Override

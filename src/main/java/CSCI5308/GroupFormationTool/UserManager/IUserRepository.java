@@ -10,4 +10,9 @@ public interface IUserRepository {
 
     List<String> getAllBannerIds();
 
+    String checkUserRoleForCourse(String bannerID, String courseID);
+
+    public boolean checkIfUserIsGuest(String bannerID);
+
+    public boolean assignInstructor(IInstructor instructor);
 }

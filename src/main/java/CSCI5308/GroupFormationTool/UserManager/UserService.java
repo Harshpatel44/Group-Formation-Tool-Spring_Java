@@ -4,6 +4,7 @@ import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 
+import java.security.InvalidKeyException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -103,6 +104,37 @@ public class UserService implements IUserService {
 		return matcher.matches();
 	}
 
+	@Override
+	public boolean checkIfUserExists(String bannerID){
+		if(Injector.instance().getUserRepository().checkIfUserExists(bannerID)){
+			return true;
+		}
+		else{
+			return false;
+		}
+	}
+
+	@Override
+	public IUser setUserByBannerId(String bannerId, IUser iUser){
+		return Injector.instance().getUserRepository().setUserByBannerId(bannerId,iUser);
+	}
+
+	@Override
+	public List<String> getAllBannerIds(){
+		return Injector.instance().getUserRepository().getAllBannerIds();
+	}
+
+	@Override
+	public String checkUserRoleForCourse(String bannerID, String courseID){
+		return Injector.instance().getUserRepository().checkUserRoleForCourse(bannerID,courseID);
+	}
+
+	@Override
+	public boolean checkIfUserIsGuest(String bannerID){
+		return Injector.instance().getUserRepository().checkIfUserIsGuest(bannerID);
+	}
+
+	@Override
 	public boolean setCurrentUserByBannerID(String BannerID){
 		try{
 			IUser iUser = new User();
@@ -113,6 +145,18 @@ public class UserService implements IUserService {
 			return true;
 		}
 		catch (Exception e){
+			return false;
+		}
+	}
+
+	@Override
+	public boolean AssignInstructor(IInstructor instructor){
+		if(Injector.instance().getUserRepository().assignInstructor(instructor)){
+			instructor.setInstructorAssignMessage("Instructor assigned");
+			return true;
+		}
+		else{
+			instructor.setInstructorAssignMessage("User does not exist or already an instructor");
 			return false;
 		}
 	}

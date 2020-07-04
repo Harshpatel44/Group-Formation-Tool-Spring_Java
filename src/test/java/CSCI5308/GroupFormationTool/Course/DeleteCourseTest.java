@@ -1,11 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
-import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
-import CSCI5308.GroupFormationTool.Course.CourseService;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
-import CSCI5308.GroupFormationTool.Course.IDeleteCourse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
