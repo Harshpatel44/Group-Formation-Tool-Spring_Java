@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
-import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -11,12 +10,14 @@ import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IUser;
 
+import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
+
 public class UserNotification implements IUserNotification {
 
 	@Override
-	public Boolean sendUserCredentials(IUser user) throws AddressException, MessagingException {
-		String subject = "Login Credentails for GroupFormation Tool";
-		String body = "Welcome to the GroupFormation Tool\n Your Login credentials are as follows: \n";
+	public Boolean sendUserCredentials(IUser user) throws MessagingException {
+		String subject = userNotificationSubject;
+		String body = userNotificationBody;
 		body += "Username: "+ user.getBannerId();
 		body += "\nPassword: "+ user.getBannerId();
 		MimeMessage message = Injector.instance().getEmailConfiguration().getMessageCredentials();		
@@ -33,7 +34,7 @@ public class UserNotification implements IUserNotification {
             
             MimeMessage msg = Injector.instance().getEmailConfiguration().getMessageCredentials();
             msg.setRecipients(Message.RecipientType.TO, InternetAddress.parse(email));
-            msg.setSubject("Password Reset Link");
+            msg.setSubject(passwordResetSubject);
             resetLink = ApplicationConstants.restLink + ApplicationConstants.updatePasswordLink +passKey;
             msg.setContent(resetLink, "text/html");
             Transport.send(msg);

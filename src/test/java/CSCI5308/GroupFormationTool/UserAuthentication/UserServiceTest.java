@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
 import CSCI5308.GroupFormationTool.UserManager.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +25,7 @@ public class UserServiceTest {
         MockitoAnnotations.initMocks(this);
         userRepository = mock(UserRepository.class);
         Injector.instance().setUserRepository(userRepository);
-        UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
+        IUserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
         UserPasswordPolicyStatus.setInstance(1,1,1,1,1,1);
     }
 	

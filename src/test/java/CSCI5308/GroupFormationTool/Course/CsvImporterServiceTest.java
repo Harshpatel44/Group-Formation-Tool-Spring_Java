@@ -18,7 +18,6 @@ import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
 import CSCI5308.GroupFormationTool.UserManager.User;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 
@@ -39,7 +38,7 @@ public class CsvImporterServiceTest {
 		Injector.instance().setUserRepository(userRepository);
 		Injector.instance().setCourseRepository(courseRepository);
 		Injector.instance().setUserNotification(userNotification);
-		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
+        IUserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 	}
 
 	@Test
