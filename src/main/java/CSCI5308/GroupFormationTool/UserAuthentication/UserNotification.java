@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Transport;
+import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
@@ -13,7 +14,7 @@ import CSCI5308.GroupFormationTool.UserManager.IUser;
 public class UserNotification implements IUserNotification {
 
 	@Override
-	public Boolean sendUserCredentials(IUser user) throws Exception {
+	public Boolean sendUserCredentials(IUser user) throws AddressException, MessagingException {
 		String subject = "Login Credentails for GroupFormation Tool";
 		String body = "Welcome to the GroupFormation Tool\n Your Login credentials are as follows: \n";
 		body += "Username: "+ user.getBannerId();
@@ -26,7 +27,7 @@ public class UserNotification implements IUserNotification {
 		return true;
 	}
 	
-	public Boolean sendUserForgetPasswordLink(String email, String passKey) throws Exception {
+	public Boolean sendUserForgetPasswordLink(String email, String passKey){
         String resetLink="";
         try {
             

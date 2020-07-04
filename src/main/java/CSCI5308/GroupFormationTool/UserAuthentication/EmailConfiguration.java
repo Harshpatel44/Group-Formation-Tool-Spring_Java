@@ -6,8 +6,6 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IEmailConfiguration;
-
 public class EmailConfiguration implements IEmailConfiguration {
 	
 	private static MimeMessage message;

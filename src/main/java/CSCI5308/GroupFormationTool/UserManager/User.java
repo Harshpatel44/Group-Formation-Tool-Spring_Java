@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
-
 public class User implements IUser {
 	private String firstName;
 	private String lastName;
@@ -12,25 +10,17 @@ public class User implements IUser {
 	private String contactNumber;
 	private String userType;
 
+	@Override
 	public String getUserType() {
 		return userType;
 	}
 
+	@Override
 	public void setUserType(String userType) {
 		this.userType = userType;
 	}
 
 	public User() {}
-	public User(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber)
-	{
-		this.bannerId = bannerId;
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.emailId = emailId;
-		this.password = password;
-		this.contactNumber = contactNumber;
-		this.userType=guest;
-	}
 
     @Override
 	public String getFirstName() {

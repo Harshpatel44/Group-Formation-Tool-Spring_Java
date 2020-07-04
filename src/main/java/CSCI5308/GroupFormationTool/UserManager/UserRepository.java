@@ -5,6 +5,7 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
+import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
@@ -61,6 +62,11 @@ public class UserRepository implements IUserRepository {
 				storedProcedure.cleanup();
 			}
 		}
+		return false;
+	}
+
+	@Override
+	public boolean checkIfUserIsAuthenticated(String bannerID, String Password, IPasswordEncryptor iPasswordEncryptor){
 		return false;
 	}
 

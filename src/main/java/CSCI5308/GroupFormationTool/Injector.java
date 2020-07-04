@@ -70,7 +70,7 @@ public class Injector {
 	private ITA ta;
 	private IUserRole userRole;
 	private IUser user;
-
+	private ICurrentUser currentUser;
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
 		return userPasswordPolicyService;
@@ -90,6 +90,15 @@ public class Injector {
 
 	private IUserPasswordPolicyService userPasswordPolicyService;
 	private IUserPasswordPolicyRepository userPasswordPolicyRepository;
+
+	public ICurrentUser getCurrentUser() {
+		return currentUser;
+	}
+
+	public void setCurrentUser(ICurrentUser currentUser) {
+		this.currentUser = currentUser;
+	}
+
 	private Injector(){
 
 		dbConfiguration = new DBConfiguration();
@@ -99,13 +108,13 @@ public class Injector {
 		csvImporter = new CsvImporterService();
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
-		loginService = new LoginService();
+		loginService = new UserLoginService();
 		forgetPasswordService = new ForgetPasswordService();
 		homeRepository = new HomeRepository();
 		homeService = new HomeService();
 		courseService = new CourseService();
 		courseRepository = new CourseRepository();
-		loginRepository = new LoginRepository();
+		loginRepository = new UserLoginRepository();
 		forgetPasswordRepository =new ForgetPasswordRepository();
 		questionManagerRepository = new QuestionManagerRepository();
 		questionManagerService = new QuestionManagerService();
@@ -127,6 +136,7 @@ public class Injector {
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
 		userPasswordPolicyService = new UserPasswordPolicyService();
+		currentUser = new CurrentUser();
 	}
 
 	public IInstructor getInstructor() {

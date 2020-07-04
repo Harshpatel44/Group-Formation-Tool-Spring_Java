@@ -3,9 +3,8 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 import java.util.ArrayList;
 import java.util.List;
 
-import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
 import CSCI5308.GroupFormationTool.UserManager.IUser;
-import CSCI5308.GroupFormationTool.UserManager.User;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -63,24 +62,18 @@ public class CustomAuthentication implements AuthenticationManager
 	public Authentication authenticate(Authentication authentication) {
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
-		IUserRepository userRepository = null;
+
+		IUserService iUserService = null;
 		try {
-			userRepository = Injector.instance().getUserRepository();
+			iUserService = Injector.instance().getUserService();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		ILoginRepository loginRepository = null;
-		try {
-			loginRepository = Injector.instance().getLoginRepository();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-		Boolean validity = false;
+		Boolean validity;
 		try
 		{
-			validity = loginRepository.isUser(bannerID);
+			validity = iUserService.checkIfUserExists(bannerID);
 		}
 		catch (Exception e)
 		{
@@ -89,11 +82,11 @@ public class CustomAuthentication implements AuthenticationManager
 
 		if (validity)
 		{
-			IUser iUser = new User();
-			userRepository.setUserByBannerId(bannerID,iUser);
+			IUser iUser =  Injector.instance().getUser();
+			iUserService.setUserByBannerId(bannerID,iUser);
 			if (bannerID.toUpperCase().equals(ADMIN_BANNER_ID))
 			{
-				return checkAdmin(password, iUser, authentication);
+				return checkAdmin(password, Injector.instance().getUser(), authentication);
 			}
 			else
 			{

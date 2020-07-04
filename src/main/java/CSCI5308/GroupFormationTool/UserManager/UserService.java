@@ -4,8 +4,6 @@ import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 
-import java.security.InvalidKeyException;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,10 +11,9 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
+
+import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 @Service
 public class UserService implements IUserService {
@@ -105,6 +102,19 @@ public class UserService implements IUserService {
 	}
 
 	@Override
+	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
+		IUser iUser = new User();
+		iUser.setFirstName(firstName);
+		iUser.setLastName(lastName);
+		iUser.setPassword(password);
+		iUser.setBannerId(bannerId);
+		iUser.setContactNumber(contactNumber);
+		iUser.setEmailId(emailId);
+		iUser.setUserType(guest);
+		return iUser;
+	}
+
+	@Override
 	public boolean checkIfUserExists(String bannerID){
 		if(Injector.instance().getUserRepository().checkIfUserExists(bannerID)){
 			return true;
@@ -112,6 +122,11 @@ public class UserService implements IUserService {
 		else{
 			return false;
 		}
+	}
+
+	@Override
+	public boolean checkIfUserIsAuthenticated(String bannerID, String Password, IPasswordEncryptor iPasswordEncryptor){
+		return false;
 	}
 
 	@Override
