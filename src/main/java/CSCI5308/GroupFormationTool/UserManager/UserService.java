@@ -13,6 +13,7 @@ import java.util.regex.Pattern;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Service;
 
+import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 @Service
@@ -150,19 +151,24 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public ICurrentUser setCurrentUserByBannerID(String BannerID){
-		try{
-			IUser iUser = new User();
-			iUser = Injector.instance().getUserRepository().setUserByBannerId(BannerID,iUser);
-			CurrentUser.instance().setBannerId(iUser.getBannerId());
-			CurrentUser.instance().setFirstName(iUser.getFirstName());
-			CurrentUser.instance().setLastName(iUser.getLastName());
-			return CurrentUser.instance();
+	public void setCurrentUserByBannerID(String BannerID){
+		if(BannerID.equals(admin)){
+			CurrentUser.instance().setBannerId(admin);
+			CurrentUser.instance().setFirstName(admin);
+			CurrentUser.instance().setLastName(admin);
+		}else{
+			try{
+				IUser iUser = new User();
+				iUser = Injector.instance().getUserRepository().setUserByBannerId(BannerID,iUser);
+				CurrentUser.instance().setBannerId(iUser.getBannerId());
+				CurrentUser.instance().setFirstName(iUser.getFirstName());
+				CurrentUser.instance().setLastName(iUser.getLastName());
+			}
+			catch (Exception e){
+				e.printStackTrace();
+			}
 		}
-		catch (Exception e){
-			e.printStackTrace();
-		}
-		return CurrentUser.instance();
+
 	}
 
 	@Override

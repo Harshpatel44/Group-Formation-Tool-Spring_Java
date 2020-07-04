@@ -24,7 +24,7 @@ public class AdminController{
 
 	@GetMapping("/admin")
 
-	public ModelAndView adminPage(Model model, HttpServletRequest request) throws Exception {
+	public ModelAndView adminPage(HttpServletRequest request) throws Exception {
 		ICreateCourse createCourse = Injector.instance().getCreateCourse();
 		IDeleteCourse deleteCourse = Injector.instance().getDeleteCourse();
 		IInstructor instructor = Injector.instance().getInstructor();
@@ -95,7 +95,7 @@ public class AdminController{
 	@PostMapping("/assignInstructor")
 	public String assignInstructor(@RequestParam(name="selectedInstructorCourseId") String selectedInstructorCourseId,
 								   RedirectAttributes redirectAttributes)
-			throws Exception {
+	{
 		IInstructor instructor = Injector.instance().getInstructor();
 		instructor.setSelectedInstructorCourseId(selectedInstructorCourseId);
 
