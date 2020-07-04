@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.UserAuthentication;
 
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -8,7 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-public class LoginController{
+public class UserLoginController {
 
 	@GetMapping("/login")
 	public String displaylogin() {
@@ -22,6 +22,7 @@ public class LoginController{
 			return "redirect:/admin?userId=" + authentication.getPrincipal().toString();
 		}
 		else if ((authentication instanceof AnonymousAuthenticationToken) == false) {
+
 			return "redirect:/home?userId=" + authentication.getPrincipal().toString();
 		}
 		else {

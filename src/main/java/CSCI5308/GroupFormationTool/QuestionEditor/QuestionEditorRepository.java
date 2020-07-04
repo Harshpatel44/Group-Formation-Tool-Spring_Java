@@ -31,7 +31,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         }
     }
 
-    public String changeQuestionTypeName(String selectedQuestionType){
+    private String changeQuestionTypeName(String selectedQuestionType){
         switch (selectedQuestionType){
             case numeric:
                 return "numeric";

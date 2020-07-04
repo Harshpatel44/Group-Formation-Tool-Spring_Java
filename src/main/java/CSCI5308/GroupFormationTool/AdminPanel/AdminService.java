@@ -5,7 +5,7 @@ import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 
 public class AdminService implements IAdminService {
 
-    public AdminService() throws Exception {}
+    public AdminService(){}
 
     public AdminService(InstructorAdminRepository adminRepository) throws Exception {
         Injector.instance().setInstructorAdminRepository(adminRepository);

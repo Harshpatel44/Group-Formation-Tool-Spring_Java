@@ -8,6 +8,7 @@ import javax.mail.internet.MimeMessage;
 
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
 
 public class UserNotification implements IUserNotification {
 

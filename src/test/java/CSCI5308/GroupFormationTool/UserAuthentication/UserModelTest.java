@@ -3,6 +3,8 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import CSCI5308.GroupFormationTool.UserManager.IUser;
+import CSCI5308.GroupFormationTool.UserManager.User;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 

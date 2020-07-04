@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.PasswordManager;
 
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
@@ -12,15 +12,15 @@ public class ForgetPasswordService implements IForgetPasswordService {
     public ForgetPasswordService() {
     }
 
-    public ForgetPasswordService(ForgetPasswordRepository forgetPasswordRepository) throws Exception {
+    public ForgetPasswordService(ForgetPasswordRepository forgetPasswordRepository){
         Injector.instance().setForgetPasswordRepository(forgetPasswordRepository);
     }
 
     @Override
-    public String getEmailByBannerid(String bannerid) throws Exception {
-        return Injector.instance().getForgetPasswordRepository().getEmailByBannerid(bannerid);
-
+    public String getEmailByBannerID(String bannerID){
+        return Injector.instance().getForgetPasswordRepository().getEmailByBannerID(bannerID);
     }
+
     @Override
     public String generatePassKey() {
         // Code taken from geeksforgeeks
@@ -34,13 +34,13 @@ public class ForgetPasswordService implements IForgetPasswordService {
     }
 
     @Override
-    public boolean insertToForgetPassword(String bannerid, String passKey) throws Exception {
-        return Injector.instance().getForgetPasswordRepository().insertToForgetPassword(bannerid, passKey);
+    public boolean insertToForgetPassword(String bannerID, String passKey) throws Exception {
+        return Injector.instance().getForgetPasswordRepository().insertToForgetPassword(bannerID, passKey);
     }
 
     @Override
     public boolean comparePassword(@NotNull String newPassword, String confirmPassword) {
-        if (newPassword.equals(confirmPassword)) {
+        if(newPassword.equals(confirmPassword)) {
             return true;
         } else {
             return false;
@@ -48,22 +48,23 @@ public class ForgetPasswordService implements IForgetPasswordService {
     }
 
     @Override
-    public String getBannerIdByPassKey(String passKey) throws Exception {
-        return Injector.instance().getForgetPasswordRepository().getBannerIdByPassKey(passKey);
+    public String getBannerIDByPassKey(String passKey) throws Exception {
+        return Injector.instance().getForgetPasswordRepository().getBannerIDByPassKey(passKey);
     }
 
     @Override
-    public boolean updatePassword(String bannerid, String newPassword) throws Exception {
+    public boolean updatePassword(String bannerID, String newPassword) throws Exception {
         BCryptEncryption encryption = new BCryptEncryption();
-        return Injector.instance().getForgetPasswordRepository().updatePassword(bannerid, encryption.encoder(newPassword));
+        return Injector.instance().getForgetPasswordRepository().updatePassword(bannerID, encryption.encoder(newPassword));
     }
+
     @Override
-    public int getPasswordPolicyNumber() throws Exception {
+    public int getPasswordPolicyNumber(){
         return Injector.instance().getForgetPasswordRepository().getPasswordPolicyNumber();
     }
 
     @Override
-    public List<String> getPasswordByBannerId(String bannerid, int passNumber) throws Exception {
-        return Injector.instance().getForgetPasswordRepository().getPasswordByBannerId(bannerid,passNumber);
+    public List<String> getPasswordByBannerID(String bannerID, int passNumber) throws Exception {
+        return Injector.instance().getForgetPasswordRepository().getPasswordByBannerID(bannerID,passNumber);
     }
 }

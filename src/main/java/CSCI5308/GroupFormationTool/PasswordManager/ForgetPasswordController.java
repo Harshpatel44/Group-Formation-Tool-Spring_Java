@@ -1,23 +1,21 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.PasswordManager;
 
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserService;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@Controller
 public class ForgetPasswordController {
     private IForgetPasswordService service;
-    private ILoginService loginService;
     private IUserNotification userNotification;
+    private IUserPasswordPolicyService iUserPasswordPolicyService;
 
     @GetMapping("/updateNewPassword")
     public String displayNewPassword() {
@@ -30,39 +28,36 @@ public class ForgetPasswordController {
                               Model model) throws Exception {
         boolean matchPassword;
         boolean update;
-        String bannerid;
+        String bannerID;
         int passNumber;
+
         Map<String, String> errors = new HashMap<>();
-        UserPasswordPolicy userPasswordPolicy = Injector.instance().getUserRepository().getUserPasswordPolicy();
-        UserPasswordPolicyStatus userPasswordPolicystatus = Injector.instance().getUserRepository().getUserPasswordPolicyStatus();
-        UserService userService = (UserService) Injector.instance().getUserService();
         List<String> oldPasswords;
         service = Injector.instance().getForgetPasswordService();
-        BCryptEncryption encryption = new BCryptEncryption();
+        IPasswordEncryptor encryption = Injector.instance().getPasswordEncryptor();
         matchPassword = service.comparePassword(newPassword, confirmPassword);
         if (matchPassword == false) {
             model.addAttribute("passKey", passKey);
             model.addAttribute("Error", "Passwords do not match");
             return "newPassword";
         }
-        List<String> validationErrors = userService.checkPasswordValidation(newPassword, errors);
+        iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+        List<String> validationErrors = iUserPasswordPolicyService.checkPasswordValidation(newPassword, errors);
         if (validationErrors.size() > 0) {
-            UserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
             model.addAttribute("isError", true);
             model.addAttribute("AllErrors", validationErrors);
-
             return "newPassword";
         }
-        bannerid = service.getBannerIdByPassKey(passKey);
+        bannerID = service.getBannerIDByPassKey(passKey);
         passNumber = service.getPasswordPolicyNumber();
-        oldPasswords = service.getPasswordByBannerId(bannerid,passNumber);
+        oldPasswords = service.getPasswordByBannerID(bannerID,passNumber);
         for (String password : oldPasswords) {
             if (encryption.passwordMatch(newPassword, password)) {
                 model.addAttribute("Error", "New password cannot be same as the old password");
                 return "newPassword";
             }
         }
-        update = service.updatePassword(bannerid, newPassword);
+        update = service.updatePassword(bannerID, newPassword);
         if (update == false) {
             model.addAttribute("Error", "Error updating the password");
             return "newPassword";
@@ -76,25 +71,25 @@ public class ForgetPasswordController {
     }
 
     @PostMapping("/resetPassword")
-    public String resetPassword(@RequestParam("bannerid") String bannerid, Model model) throws Exception {
+    public String resetPassword(@RequestParam("bannerID") String bannerID, Model model) throws Exception {
         boolean isUser;
         boolean addUser;
         boolean mailSend;
         String email;
         service = Injector.instance().getForgetPasswordService();
         userNotification = Injector.instance().getUserNotification();
-        isUser = loginService.isUser(bannerid);
+        isUser = Injector.instance().getLoginService().isUser(bannerID);
         if (isUser == false) {
             model.addAttribute("Error", "Not a valid user");
             return "forgetPassword";
         }
         String passKey = service.generatePassKey();
-        addUser = service.insertToForgetPassword(bannerid, passKey);
+        addUser = service.insertToForgetPassword(bannerID, passKey);
         if (addUser==false) {
             model.addAttribute("Error", "Error adding the user");
             return "forgetPassword";
         }
-        email = service.getEmailByBannerid(bannerid);
+        email = service.getEmailByBannerID(bannerID);
         mailSend = userNotification.sendUserForgetPasswordLink(email, passKey);
         if (mailSend == false) {
             model.addAttribute("Error", "Error sending the mail");

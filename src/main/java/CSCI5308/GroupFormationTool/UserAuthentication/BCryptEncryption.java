@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 

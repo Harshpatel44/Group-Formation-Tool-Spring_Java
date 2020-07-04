@@ -5,7 +5,7 @@ public class Instructor implements IInstructor {
     private String selectedInstructorCourseId;
     private String InstructorAssignMessage="status here";
 
-    public Instructor() throws Exception {
+    public Instructor(){
     }
 
     public Instructor(String s){}

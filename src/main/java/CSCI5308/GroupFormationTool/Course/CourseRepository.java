@@ -4,7 +4,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
 
 public class CourseRepository implements ICourseRepository {
 

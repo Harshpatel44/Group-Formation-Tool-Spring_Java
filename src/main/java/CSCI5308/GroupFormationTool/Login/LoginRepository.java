@@ -13,7 +13,6 @@ public class LoginRepository implements ILoginRepository {
     @Override
     public boolean checkLogin(String bannerid, String password)
     {
-        System.out.println("inside");
         boolean isValid = false;
         String encryptedPassword = "";
         try

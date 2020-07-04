@@ -4,6 +4,10 @@ import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ErrorHelper;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -55,8 +59,8 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	@GetMapping("/register")
 	public ModelAndView register(User user) throws Exception {
 		userService = Injector.instance().getUserService();
-		UserPasswordPolicy passwordPolicy = userService.getUserPasswordPolicy();
-		UserPasswordPolicyStatus passwordPolicyStatus = userService.getUserPasswordPolicyStatus();
+		UserPasswordPolicy passwordPolicy = Injector.instance().getUserPasswordPolicyService().getUserPasswordPolicy();
+		UserPasswordPolicyStatus passwordPolicyStatus = Injector.instance().getUserPasswordPolicyService().getUserPasswordPolicyStatus();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("passwordPolicy", passwordPolicy);
 		mv.addObject("userId",user);

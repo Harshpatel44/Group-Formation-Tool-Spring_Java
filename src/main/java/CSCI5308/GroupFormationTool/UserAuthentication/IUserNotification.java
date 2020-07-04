@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
+import CSCI5308.GroupFormationTool.UserManager.IUser;
+
 import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 

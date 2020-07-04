@@ -2,6 +2,9 @@ package CSCI5308.GroupFormationTool.UserAuthentication;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -87,7 +90,7 @@ public class CustomAuthentication implements AuthenticationManager
 
 		if (validity)
 		{
-			IUser iUser = userRepository.loadUserByID(bannerID);
+			IUser iUser = userRepository.setUserByBannerID(bannerID);
 			if (bannerID.toUpperCase().equals(ADMIN_BANNER_ID))
 			{
 				return checkAdmin(password, iUser, authentication);

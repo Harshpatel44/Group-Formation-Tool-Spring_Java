@@ -1,7 +1,6 @@
-package CSCI5308.GroupFormationTool.UserAuthentication;
+package CSCI5308.GroupFormationTool.UserManager;
 
-
-
+import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 public class User implements IUser {
 	private String firstName;
@@ -11,6 +10,16 @@ public class User implements IUser {
 	private String password;
 	private String confirmPassword;
 	private String contactNumber;
+	private String userType;
+
+	public String getUserType() {
+		return userType;
+	}
+
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
 	public User() {}
 	public User(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber)
 	{
@@ -20,6 +29,7 @@ public class User implements IUser {
 		this.emailId = emailId;
 		this.password = password;
 		this.contactNumber = contactNumber;
+		this.userType=guest;
 	}
 
     @Override

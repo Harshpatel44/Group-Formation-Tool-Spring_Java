@@ -20,8 +20,8 @@ import com.opencsv.CSVReaderBuilder;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
+import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
+import CSCI5308.GroupFormationTool.UserManager.User;
 
 public class CsvImporterService implements ICsvImporter {
 	private IUserRepository userRepository;

@@ -2,10 +2,7 @@ package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.AdminPanel.*;
 import CSCI5308.GroupFormationTool.Course.*;
-import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
-import CSCI5308.GroupFormationTool.Login.IForgetPasswordService;
-import CSCI5308.GroupFormationTool.Login.ForgetPasswordRepository;
-import CSCI5308.GroupFormationTool.Login.ForgetPasswordService;
+import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.IQuestionModel;
 import CSCI5308.GroupFormationTool.QuestionEditor.QuestionModel;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
@@ -14,8 +11,8 @@ import CSCI5308.GroupFormationTool.UserAuthentication.*;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.Course.ICourseService;
 import CSCI5308.GroupFormationTool.Course.IHomeRepository;
@@ -33,11 +30,11 @@ import CSCI5308.GroupFormationTool.Login.ILoginRepository;
 import CSCI5308.GroupFormationTool.Login.ILoginService;
 import CSCI5308.GroupFormationTool.Login.LoginRepository;
 import CSCI5308.GroupFormationTool.Login.LoginService;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserRepository;
+import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
 import CSCI5308.GroupFormationTool.UserAuthentication.EmailConfiguration;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserService;
+import CSCI5308.GroupFormationTool.UserManager.UserService;
 import CSCI5308.GroupFormationTool.UserManager.*;
 
 public class Injector {
@@ -79,7 +76,26 @@ public class Injector {
 	private IUserRole userRole;
 	private IUser user;
 
-	private Injector() throws Exception {
+
+	public IUserPasswordPolicyService getUserPasswordPolicyService() {
+		return userPasswordPolicyService;
+	}
+
+	public void setUserPasswordPolicyService(IUserPasswordPolicyService userPasswordPolicyService) {
+		this.userPasswordPolicyService = userPasswordPolicyService;
+	}
+
+	public IUserPasswordPolicyRepository getUserPasswordPolicyRepository() {
+		return userPasswordPolicyRepository;
+	}
+
+	public void setUserPasswordPolicyRepository(IUserPasswordPolicyRepository userPasswordPolicyRepository) {
+		this.userPasswordPolicyRepository = userPasswordPolicyRepository;
+	}
+
+	private IUserPasswordPolicyService userPasswordPolicyService;
+	private IUserPasswordPolicyRepository userPasswordPolicyRepository;
+	private Injector(){
 
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
@@ -117,6 +133,9 @@ public class Injector {
 		
 		question = new Question();
 		questionModel = new QuestionModel();
+
+		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
+		userPasswordPolicyService = new UserPasswordPolicyService();
 	}
 
 	public IInstructor getInstructor() {
@@ -207,7 +226,7 @@ public class Injector {
 		this.questionResponsesRepo = questionResponsesRepo;
 	}
 
-	public static Injector instance() throws Exception {
+	public static Injector instance(){
 
 		if (instance == null) {
 			instance = new Injector();

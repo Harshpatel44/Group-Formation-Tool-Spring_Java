@@ -30,9 +30,9 @@ public class StoredProcedure
 		System.out.println(connection);
 	}
 
-	public void cleanup() throws SQLException {
-		connection.close();
-		System.out.println("Connection closed");
+	public void cleanup(){
+//		connection.close();
+//		System.out.println("Connection closed");
 		try
 		{
 			if (null != statement)
@@ -50,7 +50,14 @@ public class StoredProcedure
 		}
 		catch (Exception e)
 		{
-
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
 		}
 	}
 

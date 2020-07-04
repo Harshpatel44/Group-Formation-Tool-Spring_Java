@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
 import java.sql.SQLException;
 import java.util.ArrayList;
 

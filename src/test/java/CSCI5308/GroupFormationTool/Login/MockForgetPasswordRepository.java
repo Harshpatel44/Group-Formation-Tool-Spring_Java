@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.Login;
 
-import CSCI5308.GroupFormationTool.Login.IForgetPasswordRepository;
+import CSCI5308.GroupFormationTool.PasswordManager.IForgetPasswordRepository;
 
 import java.util.ArrayList;
 import java.util.List;

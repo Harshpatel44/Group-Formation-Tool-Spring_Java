@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 
 public class UserPasswordPolicyDB {
 	public static UserPasswordPolicy getDefault() {

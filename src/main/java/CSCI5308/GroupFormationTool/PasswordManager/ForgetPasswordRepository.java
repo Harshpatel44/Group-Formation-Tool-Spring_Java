@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.PasswordManager;
 
 import CSCI5308.GroupFormationTool.Database.ConnectionManager;
 
@@ -11,7 +11,7 @@ import java.util.List;
 
 public class ForgetPasswordRepository implements IForgetPasswordRepository {
     @Override
-    public String getEmailByBannerid(String bannerid) {
+    public String getEmailByBannerID(String bannerid) {
         String email = new String();
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
@@ -73,7 +73,7 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
     }
 
     @Override
-    public List<String> getPasswordByBannerId(String bannerid, int passNumber) throws Exception {
+    public List<String> getPasswordByBannerID(String bannerid, int passNumber) throws Exception {
         List<String> passwords = new ArrayList<String>();
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
@@ -116,8 +116,8 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
     }
 
     @Override
-    public String getBannerIdByPassKey(String passKey) throws Exception {
-        String bannerid = "";
+    public String getBannerIDByPassKey(String passKey) throws Exception {
+        String bannerID = "";
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
             CallableStatement st = connection.prepareCall("{CALL BannerIdByKey(?)}");
@@ -125,14 +125,14 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
             ResultSet result = st.executeQuery();
             if(result.next())
             {
-                bannerid = result.getString(1);
+                bannerID = result.getString(1);
             }
             connection.close();
         }
         catch (SQLException e) {
             e.printStackTrace();
         }
-        return  bannerid;
+        return  bannerID;
     }
 
 }
