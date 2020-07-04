@@ -7,6 +7,8 @@ public class ApplicationConstants {
 	public static final String dbPassword = "CSCI5308_9_DEVINT_9017";
 	public static final String emailSender = "sdcmaster09@gmail.com";
 	public static final String emailSenderPassword = "sdc.master";
+	public static final Integer emailPort = 587;
+	public static final String emailHost="smtp.gmail.com";
 	public static final String restLink = "https://group9-develop.herokuapp.com/";
 	public static final String updatePasswordLink = "updateNewPassword?passKey=";
 	public static final String randomKeyForLink = "ABCDEFGHIJKLMNOPQRSTUVWXYZ" + "0123456789" + "abcdefghijklmnopqrstuvxyz";
@@ -24,4 +26,5 @@ public class ApplicationConstants {
 	public static final String user="USER";
 	public static final String badCredentialsException="1000";
 	public static final String noUserFoundException="1001";
+
 }
