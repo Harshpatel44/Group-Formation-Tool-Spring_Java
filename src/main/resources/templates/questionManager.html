@@ -48,17 +48,9 @@
     <li class="list">
         <div class="function-heading">Question Manager</div>
         <form th:action="@{/questionList}" method="post">
-            <input type="hidden"  th:value="${courseName}" name="courseName"/>
-            <input  type="hidden" th:value="${courseId}" name="courseId" />
-            <input  type="hidden" th:value="${userRole}" name="userRole" />
-            <input  type="hidden" th:value="${userId}" name="userId" />
             <button type="submit" name="save" class="submit-button">Question list</button>
         </form>
         <form th:action="@{/addQuestion}" method="post">
-            <input type="hidden"  th:value="${courseName}" name="courseName"/>
-            <input  type="hidden" th:value="${courseId}" name="courseId" />
-            <input  type="hidden" th:value="${userRole}" name="userRole" />
-            <input  type="hidden" th:value="${userId}" name="userId" />
             <button type="submit" name="save" class="submit-button">Add Question</button>
         </form>
     </li>
