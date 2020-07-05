@@ -47,7 +47,7 @@ public class HomeRepository implements IHomeRepository {
 						storedProcedure = new StoredProcedure("courseName(?)");
 						storedProcedure.setParameter(1, rs.getString("courseId"));
 						ResultSet rs1 = storedProcedure.executeWithResults();
-						storedProcedure = new StoredProcedure("userType(?)");
+						storedProcedure = new StoredProcedure("userRole(?)");
 						storedProcedure.setParameter(1, rs.getInt("roleId"));
 						ResultSet rs2 = storedProcedure.executeWithResults();
 						if (rs1.next() && rs2.next()) {

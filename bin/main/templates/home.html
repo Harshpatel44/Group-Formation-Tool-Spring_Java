@@ -56,7 +56,7 @@
 	                            <form th:action="@{/course}" method="post" >
 	                                <input type="hidden"  th:value="${course.courseName}" name="courseName"/>
 	                                <input  type="hidden" th:value="${course.courseId}" name="courseId" />
-	                                <input  type="hidden" th:value="${course.role}" name="userType" />
+	                                <input  type="hidden" th:value="${course.role}" name="userRole" />
 	                                <input  type="hidden" th:value="${userId}" name="userId" />
 	                                <button type="submit" class="submit-button" name="save" th:if="${checkRole}" >Course Home</button>
 	                            </form>

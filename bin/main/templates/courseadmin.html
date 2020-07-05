@@ -34,7 +34,7 @@
 				<form class="nav-bar-element" th:action="@{/course}" method="post" >
 					<input type="hidden"  th:value="${courseName}" name="courseName"/>
 					<input  type="hidden" th:value="${courseId}" name="courseId" />
-					<input  type="hidden" th:value="${checkRole}" name="userType" />
+					<input  type="hidden" th:value="${userRole}" name="userRole" />
 					<input  type="hidden" th:value="${userId}" name="userId" />
 					<button type="submit" class="submit-button" name="save" th:if="${checkRole}" >Course Home</button>
 				</form>

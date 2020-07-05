@@ -88,7 +88,7 @@ public class CourseRepository implements ICourseRepository {
 	}
 
 	@Override
-	public String addTa(String taId, String courseId) throws Exception {
+	public String addTaForCourse(String taId, String courseId) throws Exception {
 		String result=null;
 		StoredProcedure addTa = null;
 		if(checkIfUserPresent(taId))

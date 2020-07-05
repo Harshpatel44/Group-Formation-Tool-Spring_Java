@@ -17,25 +17,25 @@ public class QuestionEditorController{
 
 	@RequestMapping("/addQuestion")
 	public ModelAndView addQuestion(@RequestParam(name = "courseId") String courseId,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
+			@RequestParam(name = "userId") String userId, @RequestParam(name = "userRole") String userRole,
 			@RequestParam(name = "courseName") String courseName) {
 		ModelAndView mv = new ModelAndView("questionEditorHome");
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
+		mv.addObject("userRole", userRole);
 		mv.addObject("courseName", courseName);
 		return mv;
 	}
 
 	@RequestMapping("/createQuestion")
 	public ModelAndView createQuestion(@RequestParam(name = "courseId") String courseId,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
+			@RequestParam(name = "userId") String userId, @RequestParam(name = "userRole") String userRole,
 			@RequestParam(name = "courseName") String courseName) throws Exception {
 		IQuestionModel questionModel = Injector.instance().getQuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
+		mv.addObject("userRole", userRole);
 		mv.addObject("courseName", courseName);
 		mv.addObject("questionModel", questionModel);
 		return mv;
@@ -43,7 +43,7 @@ public class QuestionEditorController{
 
 	@RequestMapping("/createOption")
 	public ModelAndView createOption(QuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
-									 @RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
+									 @RequestParam(name = "userId") String userId, @RequestParam(name = "userRole") String userRole,
 									 @RequestParam(name = "courseName") String courseName) {
 		ModelAndView mv = new ModelAndView();
 		if (questionModel.getSelectedQuestionType().equals(text)
@@ -56,7 +56,7 @@ public class QuestionEditorController{
 		}
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
+		mv.addObject("userRole", userRole);
 		mv.addObject("courseName", courseName);
 		mv.addObject("questionModel", questionModel);
 		mv.addObject("questionText", questionModel.getQuestionText());
@@ -72,7 +72,7 @@ public class QuestionEditorController{
 										@RequestParam(name = "questionTitle") String questionTitle,
 										@RequestParam(name = "selectedQuestionType") String selectedQuestionType,
 										@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
-										@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
+										@RequestParam(name = "userRole") String userRole, @RequestParam(name = "courseName") String courseName)
 			throws Exception {
 		HashMap<Integer, String> map = QuestionEditorInjector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
@@ -80,7 +80,7 @@ public class QuestionEditorController{
 		ModelAndView mv = new ModelAndView("questionEditorPreview");
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
+		mv.addObject("userRole", userRole);
 		mv.addObject("courseName", courseName);
 		mv.addObject("questionModel", questionModel);
 		mv.addObject("questionText", questionText);
@@ -98,7 +98,7 @@ public class QuestionEditorController{
 									   @RequestParam(name = "questionTitle") String questionTitle,
 									   @RequestParam(name = "selectedQuestionType") String selectedQuestionType,
 									   @RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
-									   @RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
+									   @RequestParam(name = "userRole") String userRole, @RequestParam(name = "courseName") String courseName)
 			throws Exception {
 		boolean result;
 		String returnMessage = null;
@@ -128,7 +128,7 @@ public class QuestionEditorController{
 		ModelAndView mv = new ModelAndView("questionEditorFinish");
 		mv.addObject("courseId", courseId);
 		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
+		mv.addObject("userRole", userRole);
 		mv.addObject("courseName", courseName);
 		mv.addObject("message", returnMessage);
 		return mv;

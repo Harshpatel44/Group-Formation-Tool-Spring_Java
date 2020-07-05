@@ -20,9 +20,9 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public boolean roleAllowInstructorAndTA(String userType) {
+	public boolean roleAllowInstructorAndTA(String userRole) {
 		boolean roleCheck;
-		if(userType.equals(student) || userType.equals(guest)){
+		if(userRole.equals(student) || userRole.equals(guest)){
 			roleCheck=false;
 		}
 		else{
@@ -32,9 +32,9 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public boolean roleAllowInstructor(String userType) {
+	public boolean roleAllowInstructor(String userRole) {
 		boolean flag = false;
-		if(userType.equals(instructor))
+		if(userRole.equals(instructor))
 		{
 			flag = true;
 		}
@@ -57,7 +57,7 @@ public class CourseService implements ICourseService {
 	@Override
 	public String addTAForCourse(String taId, String courseId) throws Exception {
 		courseRepository = Injector.instance().getCourseRepository();
-		return courseRepository.addTa(taId,courseId);
+		return courseRepository.addTaForCourse(taId,courseId);
 	}
 
 

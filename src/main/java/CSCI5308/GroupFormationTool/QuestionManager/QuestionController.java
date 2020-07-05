@@ -13,13 +13,13 @@ public class QuestionController {
     @RequestMapping("/questionManager")
     public ModelAndView questionManager(@RequestParam(name="courseId") String courseId,
                                         @RequestParam(name="userId") String userId,
-                                        @RequestParam(name="userType") String userType,
+                                        @RequestParam(name="userRole") String userRole,
                                         @RequestParam(name="courseName") String courseName
     ){
         ModelAndView model=new ModelAndView("questionManager");
         model.addObject("courseId",courseId);
         model.addObject("userId",userId);
-        model.addObject("userType",userType);
+        model.addObject("userRole",userRole);
         model.addObject("courseName",courseName);
         model.setViewName("questionManager");
         return model;
@@ -28,13 +28,13 @@ public class QuestionController {
     @RequestMapping("/questionList")
     public ModelAndView questionList(@RequestParam(name="courseId") String courseId,
                                      @RequestParam(name="userId") String userId,
-                                     @RequestParam(name="userType") String userType,
+                                     @RequestParam(name="userRole") String userRole,
                                      @RequestParam(name="courseName") String courseName) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         questionManagerService = Injector.instance().getQuestionManagerService();
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);
-        model.addObject("userType",userType);
+        model.addObject("userRole",userRole);
         model.addObject("courseName",courseName);
         model.addObject("prompt",false);
         model.addObject("questions",questionManagerService.getQuestions(userId,sortType));
@@ -44,13 +44,13 @@ public class QuestionController {
     @RequestMapping("/sortQuestionByDate")
     public ModelAndView sortByDate(@RequestParam(name="courseId") String courseId,
                                    @RequestParam(name="userId") String userId,
-                                   @RequestParam(name="userType") String userType,
+                                   @RequestParam(name="userRole") String userRole,
                                    @RequestParam(name="courseName") String courseName){
         ModelAndView model=new ModelAndView("questionList");
         sortType="sortByDate";
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);
-        model.addObject("userType",userType);
+        model.addObject("userRole",userRole);
         model.addObject("courseName",courseName);
         model.addObject("prompt",false);
         model.setViewName("redirect:/questionList");
@@ -60,13 +60,13 @@ public class QuestionController {
     @RequestMapping("/sortQuestionByTopic")
     public ModelAndView sortByTopic(@RequestParam(name="courseId") String courseId,
                                     @RequestParam(name="userId") String userId,
-                                    @RequestParam(name="userType") String userType,
+                                    @RequestParam(name="userRole") String userRole,
                                     @RequestParam(name="courseName") String courseName){
         ModelAndView model=new ModelAndView("questionList");
         sortType="sortByTopic";
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);
-        model.addObject("userType",userType);
+        model.addObject("userRole",userRole);
         model.addObject("courseName",courseName);
         model.addObject("prompt",false);
         model.setViewName("redirect:/questionList");
@@ -77,13 +77,13 @@ public class QuestionController {
     public ModelAndView deleteQuestion(@RequestParam(name="selectedQuestionId") Integer questionId,
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
-                                       @RequestParam(name="userType") String userType,
+                                       @RequestParam(name="userRole") String userRole,
                                        @RequestParam(name="courseName") String courseName) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         questionManagerService = Injector.instance().getQuestionManagerService();
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);
-        model.addObject("userType",userType);
+        model.addObject("userRole",userRole);
         model.addObject("courseName",courseName);
         questionManagerService.deleteQuestion(questionId,userId);
         model.addObject("questions",questionManagerService.getQuestions(userId, sortType));
@@ -95,12 +95,12 @@ public class QuestionController {
     public ModelAndView checkResponses(@RequestParam(name="questionId") Integer questionId,
                                        @RequestParam(name="courseId") String courseId,
                                        @RequestParam(name="userId") String userId,
-                                       @RequestParam(name="userType") String userType,
+                                       @RequestParam(name="userRole") String userRole,
                                        @RequestParam(name="courseName") String courseName) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         model.addObject("userId",userId);
         model.addObject("courseId",courseId);
-        model.addObject("userType",userType);
+        model.addObject("userRole",userRole);
         model.addObject("courseName",courseName);
         model.addObject("selectedQuestionId",questionId);
         boolean prompt = Injector.instance().getQuestionResponsesService().checkIfResponsesPresentService(questionId);

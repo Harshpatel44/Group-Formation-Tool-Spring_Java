@@ -64,23 +64,23 @@ public class CourseServiceTest {
 
 	@Test
 	public void CheckRoleTestTAorInstructor() {
-		String userType;
-		userType = "TA";
-		assertTrue(courseService.checkRole(userType));
+		String userRole;
+		userRole = "TA";
+		assertTrue(courseService.checkRole(userRole));
 	}
 
 	@Test
 	public void CheckRoleTestStudentOrGuest() {
-		String userType;
-		userType = "Guest";
-		assertFalse(courseService.checkRole(userType));
+		String userRole;
+		userRole = "Guest";
+		assertFalse(courseService.checkRole(userRole));
 	}
 
 	@Test
-	public void checkUserTypeTestInstrutor() {
-		String userType;
-		userType = "instructor";
-		assertTrue(courseService.checkUserType(userType));
+	public void checkuserRoleTestInstrutor() {
+		String userRole;
+		userRole = "instructor";
+		assertTrue(courseService.checkuserRole(userRole));
 	}
 
 	@Test

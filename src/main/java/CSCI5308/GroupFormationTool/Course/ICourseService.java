@@ -8,9 +8,9 @@ public interface ICourseService {
 
     boolean assignInstructorForCourse(IInstructor instructor);
 
-    boolean roleAllowInstructorAndTA(String userType);
+    boolean roleAllowInstructorAndTA(String userRole);
 
-    boolean roleAllowInstructor(String userType);
+    boolean roleAllowInstructor(String userRole);
 
     String addTAForCourse(String taId, String courseId) throws Exception;
 

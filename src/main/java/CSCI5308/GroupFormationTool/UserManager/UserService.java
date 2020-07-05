@@ -166,12 +166,10 @@ public class UserService implements IUserService {
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());
-				System.out.println(CurrentUser.instance().getBannerId());
 			}
 			catch (Exception e){
 				e.printStackTrace();
 			}
 		}
-		System.out.println(CurrentUser.instance().getBannerId());
 	}
 }

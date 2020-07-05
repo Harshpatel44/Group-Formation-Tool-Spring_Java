@@ -9,7 +9,7 @@ public interface ICourseRepository {
 
     boolean assignInstructorForCourse(IInstructor instructor);
 
-    String addTa(String taId, String courseId) throws Exception;
+    String addTaForCourse(String taId, String courseId) throws Exception;
 
     boolean getUserDetailsOnCourse(IUser user, String courseId) throws Exception;
 
