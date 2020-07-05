@@ -9,26 +9,7 @@ import CSCI5308.GroupFormationTool.UserManager.IUser;
 
 public class CourseRepository implements ICourseRepository {
 
-	public boolean checkIfUserPresent(String taId){
-		StoredProcedure checkPresence = null;
-		boolean result = false;
-		try {
-			checkPresence = new StoredProcedure("CheckUser(?)");
-			checkPresence.setParameter(1, taId);
-			ResultSet rs = checkPresence.executeWithResults();
-			if(rs.next()){
-					result = true;
-			}
-			checkPresence.cleanup();
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return result;
-	}
-
-	private boolean checkIfAlreadyTa(String taId, String courseId) {
+	private boolean checkIfAlreadyTaInCourse(String taId, String courseId) {
 		boolean result = false;
 		StoredProcedure checkPresence = null;
 		try {
@@ -88,38 +69,34 @@ public class CourseRepository implements ICourseRepository {
 	}
 
 	@Override
-	public String addTaForCourse(String taId, String courseId) throws Exception {
+	public String addTaForCourse(String taId, String courseId){
 		String result=null;
-		StoredProcedure addTa = null;
-		if(checkIfUserPresent(taId))
-		{
-            if(checkIfAlreadyTa(taId,courseId)){
-				result = "Already user has different role for courseId:"+courseId+".";
-			}
-            else{
-
-					try {
-						addTa = new StoredProcedure("InsertTa(?,?)");
-						addTa.setParameter(1, courseId);
-						addTa.setParameter(2, taId);
-						addTa.execute();
-						result = "user with Id:"+taId+" is add as a TA for courseId"+courseId+".";
-						addTa.cleanup();
-					} catch (SQLException throwables) {
-						throwables.printStackTrace();
-					}
-			}
+		StoredProcedure storedProcedure = null;
+		if(checkIfAlreadyTaInCourse(taId,courseId)){
+			result = "Already user has different role for courseId:"+courseId+".";
 		}
-		else
-		{
-			result = "No user exist with Id:"+taId+" present in system.";
+		else{
+				try {
+					storedProcedure = new StoredProcedure("InsertTa(?,?)");
+					storedProcedure.setParameter(1, courseId);
+					storedProcedure.setParameter(2, taId);
+					storedProcedure.execute();
+					result = "user with Id:"+taId+" is add as a TA for courseId"+courseId+".";
+					storedProcedure.cleanup();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}finally {
+					if(storedProcedure!=null){
+						storedProcedure.cleanup();
+					}
+				}
 		}
 		return result;
 	}
 
 
 	@Override
-	public boolean getUserDetailsOnCourse(IUser iUser, String courseId) throws Exception {
+	public boolean getUserDetailsOnCourse(IUser iUser, String courseId){
 		StoredProcedure storedProcedure = null;
 		try {
 			storedProcedure = new StoredProcedure("userByCourse(?,?)");
@@ -131,10 +108,13 @@ public class CourseRepository implements ICourseRepository {
 					return true;
 				}
 			}
-			storedProcedure.cleanup();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
-		} 
+		}finally {
+			if(storedProcedure!=null){
+				storedProcedure.cleanup();
+			}
+		}
 		return false;
 	}
 
@@ -159,25 +139,35 @@ public class CourseRepository implements ICourseRepository {
 	}
 
 	@Override
-	public ArrayList<ArrayList<String>> getAllCourses() throws Exception {
+	public ArrayList<ArrayList<String>> getAllCourses(){
 		ArrayList<String> courseNamesList = new ArrayList<>();
 		ArrayList<String> courseIdsList = new ArrayList<>();
 		ArrayList<ArrayList<String>> courseNamesWithIdsList = new ArrayList<>();
-		StoredProcedure storedProcedure = new StoredProcedure("AllCourses");
-		ResultSet result = storedProcedure.executeWithResults();
-		while(result.next()){
-			courseNamesList.add(result.getString("courseName"));
-			courseIdsList.add(result.getString("courseId"));
+		StoredProcedure storedProcedure = null;
+		try{
+			storedProcedure = new StoredProcedure("AllCourses");
+			ResultSet result = storedProcedure.executeWithResults();
+			while(result.next()){
+				courseNamesList.add(result.getString("courseName"));
+				courseIdsList.add(result.getString("courseId"));
+			}
+			storedProcedure.cleanup();
+			courseNamesWithIdsList.add(courseIdsList);
+			courseNamesWithIdsList.add(courseNamesList);
+			return courseNamesWithIdsList;
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			if(storedProcedure!=null){
+				storedProcedure.cleanup();
+			}
 		}
-		storedProcedure.cleanup();
-		courseNamesWithIdsList.add(courseIdsList);
-		courseNamesWithIdsList.add(courseNamesList);
 		return courseNamesWithIdsList;
 	}
 
 
 	@Override
-	public boolean createCourseRepo(ICreateCourse createCourse) throws SQLException {
+	public boolean createCourseRepo(ICreateCourse createCourse){
 		System.out.println("inside");
 		try {
 			StoredProcedure storedProcedure = new StoredProcedure("CreateCourse(?,?)");

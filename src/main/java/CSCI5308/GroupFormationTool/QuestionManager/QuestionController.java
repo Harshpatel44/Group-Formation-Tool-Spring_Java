@@ -11,16 +11,8 @@ public class QuestionController {
    private IQuestionManagerService questionManagerService;
     String sortType = "unsorted";
     @RequestMapping("/questionManager")
-    public ModelAndView questionManager(@RequestParam(name="courseId") String courseId,
-                                        @RequestParam(name="userId") String userId,
-                                        @RequestParam(name="userRole") String userRole,
-                                        @RequestParam(name="courseName") String courseName
-    ){
+    public ModelAndView questionManager(){
         ModelAndView model=new ModelAndView("questionManager");
-        model.addObject("courseId",courseId);
-        model.addObject("userId",userId);
-        model.addObject("userRole",userRole);
-        model.addObject("courseName",courseName);
         model.setViewName("questionManager");
         return model;
     }

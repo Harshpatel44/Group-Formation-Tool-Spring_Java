@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Course;
 
+import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 
@@ -56,8 +57,15 @@ public class CourseService implements ICourseService {
 
 	@Override
 	public String addTAForCourse(String taId, String courseId) throws Exception {
-		courseRepository = Injector.instance().getCourseRepository();
-		return courseRepository.addTaForCourse(taId,courseId);
+		if(Injector.instance().getUserService().checkIfUserExists(taId))
+		{
+			courseRepository = Injector.instance().getCourseRepository();
+			return courseRepository.addTaForCourse(taId,courseId);
+		}
+		else
+		{
+			return "No user exist with Id:"+taId+" present in system.";
+		}
 	}
 
 

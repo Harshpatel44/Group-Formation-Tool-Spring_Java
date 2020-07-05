@@ -67,7 +67,6 @@ public class Injector {
 	private ICourse course;
 	private ICreateCourse createCourse;
 	private IDeleteCourse deleteCourse;
-	private ITA ta;
 	private IUser user;
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
@@ -117,8 +116,6 @@ public class Injector {
 		course = new Course();
 		createCourse = new CreateCourse();
 		deleteCourse = new DeleteCourse();
-		ta = new TA();
-
 		
 		question = new Question();
 		questionModel = new QuestionModel();
@@ -165,14 +162,6 @@ public class Injector {
 
 	public void setDeleteCourse(DeleteCourse deleteCourse) {
 		this.deleteCourse = deleteCourse;
-	}
-
-	public ITA getTA() {
-		return ta;
-	}
-
-	public void setTA(ITA ta) {
-		this.ta = ta;
 	}
 
 	public IQuestionResponsesService getQuestionResponsesService() {

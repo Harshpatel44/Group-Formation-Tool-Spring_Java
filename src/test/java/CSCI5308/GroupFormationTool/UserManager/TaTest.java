@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-import CSCI5308.GroupFormationTool.UserManager.ITA;
-import CSCI5308.GroupFormationTool.UserManager.TA;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
