@@ -2,8 +2,7 @@ package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
-import CSCI5308.GroupFormationTool.QuestionEditor.IQuestionModel;
-import CSCI5308.GroupFormationTool.QuestionEditor.QuestionModel;
+import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.*;
@@ -69,6 +68,10 @@ public class Injector {
 	private IDeleteCourse deleteCourse;
 	private IUser user;
 
+	private IQuestionEditorService questionEditorService;
+	private IQuestionEditorRepository questionEditorRepository;
+	private IRankFunctionsService rankFunctionsService;
+
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
 		return userPasswordPolicyService;
 	}
@@ -122,6 +125,34 @@ public class Injector {
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
 		userPasswordPolicyService = new UserPasswordPolicyService();
+
+		questionEditorService = new QuestionEditorService();
+		questionEditorRepository = new QuestionEditorRepository();
+		rankFunctionsService = new RankFunctionsService();
+	}
+
+	public IRankFunctionsService getRankFunctionsService() {
+		return rankFunctionsService;
+	}
+
+	public void setRankFunctionsService(IRankFunctionsService rankFunctionsService) {
+		this.rankFunctionsService = rankFunctionsService;
+	}
+
+	public IQuestionEditorService getQuestionEditorService() {
+		return questionEditorService;
+	}
+
+	public void setQuestionEditorService(IQuestionEditorService questionEditorService) {
+		this.questionEditorService = questionEditorService;
+	}
+
+	public IQuestionEditorRepository getQuestionEditorRepository() {
+		return questionEditorRepository;
+	}
+
+	public void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository) {
+		this.questionEditorRepository = questionEditorRepository;
 	}
 
 	public IInstructor getInstructor() {

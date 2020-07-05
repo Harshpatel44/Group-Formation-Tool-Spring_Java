@@ -55,7 +55,7 @@ public class QuestionEditorController{
 										@RequestParam(name = "questionTitle") String questionTitle,
 										@RequestParam(name = "selectedQuestionType") String selectedQuestionType)
 			throws Exception {
-		HashMap<Integer, String> map = QuestionEditorInjector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
+		HashMap<Integer, String> map = Injector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
 		String[] rankList = rankText.split(",");
 		ModelAndView mv = new ModelAndView("questionEditorPreview");
@@ -78,7 +78,7 @@ public class QuestionEditorController{
 		boolean result;
 		String returnMessage = null;
 		if (selectedQuestionType.equals(text) || selectedQuestionType.equals(numeric)) {
-			result = QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
+			result = Injector.instance().getQuestionEditorService().saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";
@@ -90,7 +90,7 @@ public class QuestionEditorController{
 		}
 		if (selectedQuestionType.equals(MCCM)
 				|| selectedQuestionType.equals(MCCO)) {
-			result = QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks);
+			result = Injector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";
