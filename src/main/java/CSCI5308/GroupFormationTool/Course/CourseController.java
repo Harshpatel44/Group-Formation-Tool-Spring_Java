@@ -31,7 +31,7 @@ public class CourseController {
 		return model;
 	}
 
-	@RequestMapping("/courseadmin")
+	@RequestMapping("/course/admin")
 	public ModelAndView courseAdmin(@RequestParam(name="checkRole") String checkRole) throws Exception {
 		ModelAndView model=new ModelAndView("courseadmin");
 		model.addObject("ta",Injector.instance().getTA());
@@ -42,7 +42,7 @@ public class CourseController {
 		return model;
 	}
 
-	@RequestMapping("/addta")
+	@RequestMapping("/course/admin/addta")
 	public ModelAndView addta( @RequestParam(name="taId") String taId) throws Exception {
 		courseService = Injector.instance().getCourseService();
 		String courseId = CurrentCourse.instance().getCurrentCourseId();
