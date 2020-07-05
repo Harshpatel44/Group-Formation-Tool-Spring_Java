@@ -39,7 +39,7 @@ public class DeleteCourse implements IDeleteCourse {
 
     @Override
     public Dictionary getAllCoursesList() throws Exception {
-        allCoursesList=Injector.instance().getCourseService().CoursesWithIdForDropdown();
+        allCoursesList=Injector.instance().getCourseService().coursesWithIdForDropdown();
         return allCoursesList;
     }
 

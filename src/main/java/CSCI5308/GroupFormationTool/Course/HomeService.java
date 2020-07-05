@@ -1,32 +1,27 @@
 package CSCI5308.GroupFormationTool.Course;
-
-
 import java.util.List;
 
-import CSCI5308.GroupFormationTool.UserManager.IUserRole;
 import org.springframework.stereotype.Service;
-
 import CSCI5308.GroupFormationTool.Injector;
 
 @Service
 public class HomeService implements IHomeService {
-	public IUserRole user;
 	private IHomeRepository homeRepository;
 	public HomeService() {}
-    public HomeService(HomeRepository homeRepository) throws Exception {
+    public HomeService(HomeRepository homeRepository){
      Injector.instance().setHomeRepository(homeRepository);
 	}
 
 
-	public List<ICourse> getCourses(IUserRole userRole) throws Exception {
+	public List<ICourse> getCourseFromBannerID(String bannerID) throws Exception {
 		homeRepository = Injector.instance().getHomeRepository();
-		return homeRepository.getcourse(userRole);
+		boolean GuestOrNot = Injector.instance().getUserService().checkIfUserIsGuest(bannerID);
+		return homeRepository.getCourseFromBannerID(bannerID,GuestOrNot);
 	}
 
 	@Override
-	public boolean checkRole(IUserRole userRole) throws Exception {
-		homeRepository = Injector.instance().getHomeRepository();
-		boolean result = homeRepository.checkRole(userRole);
+	public boolean checkRoleOfUser(String bannerID){
+		boolean result = Injector.instance().getUserService().checkIfUserIsGuest(bannerID);
 		if(result)
 		{
 			return false;

@@ -82,8 +82,8 @@ public class CustomAuthentication implements AuthenticationManager
 
 		if (validity)
 		{
-			IUser iUser =  Injector.instance().getUser();
-			iUserService.setUserByBannerId(bannerID,iUser);
+//			IUser iUser =  Injector.instance().getUser();
+//			iUserService.setUserByBannerId(bannerID,iUser);
 			if (bannerID.toUpperCase().equals(admin))
 			{
 				return checkForAdmin(password, Injector.instance().getUser(), authentication);

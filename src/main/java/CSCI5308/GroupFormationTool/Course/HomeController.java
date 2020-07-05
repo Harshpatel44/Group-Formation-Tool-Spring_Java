@@ -2,7 +2,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
 
-import CSCI5308.GroupFormationTool.UserManager.IUserRole;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,9 +15,8 @@ import org.springframework.web.servlet.ModelAndView;
 public class HomeController {
 
 	private IHomeService homeService;
-	IUserRole userRole = Injector.instance().getUserRole();
-
-	public HomeController() throws Exception {
+	private IUserService iUserService;
+	public HomeController(){
 	}
 
 	@RequestMapping("/home")
@@ -28,12 +27,14 @@ public class HomeController {
 			model.setViewName("redirect:/login");
 			return model;
 		}
-
-		userRole.setUserId(authentication.getPrincipal().toString());
 		homeService = Injector.instance().getHomeService();
-		model.addObject("userId", userRole.getUserId());
-		model.addObject("courses", homeService.getCourses(userRole));
-		model.addObject("checkRole", homeService.checkRole(userRole));
+		iUserService = Injector.instance().getUserService();
+		iUserService.setCurrentUserByBannerID(authentication.getPrincipal().toString());
+		String bannerID = iUserService.getCurrentUserBannerID();
+
+		model.addObject("userId", bannerID);
+		model.addObject("courses", homeService.getCourseFromBannerID(bannerID));
+		model.addObject("checkRole", homeService.checkRoleOfUser(bannerID));
 		model.setViewName("home");
 		return model;
 	}

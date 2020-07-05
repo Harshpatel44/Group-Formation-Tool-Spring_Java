@@ -8,17 +8,6 @@ public class User implements IUser {
 	private String password;
 	private String confirmPassword;
 	private String contactNumber;
-	private String userType;
-
-	@Override
-	public String getUserType() {
-		return userType;
-	}
-
-	@Override
-	public void setUserType(String userType) {
-		this.userType = userType;
-	}
 
 	public User() {}
 

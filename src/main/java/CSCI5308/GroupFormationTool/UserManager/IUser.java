@@ -29,7 +29,4 @@ public interface IUser {
 
     void setContactNumber(String contactNumber);
 
-    String getUserType();
-
-    void setUserType(String userType);
 }

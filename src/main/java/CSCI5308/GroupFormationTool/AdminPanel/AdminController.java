@@ -7,7 +7,7 @@ import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -32,6 +32,7 @@ public class AdminController{
 		ModelAndView mv = new ModelAndView();
 		if (authentication.getPrincipal().toString().equals(admin)) {
 			try {
+				Injector.instance().getUserService().setCurrentUserByBannerID(authentication.getPrincipal().toString());
 				Map<String, ?> flashAttribute = RequestContextUtils.getInputFlashMap(request);
 				String createMessage = (String) flashAttribute.get("courseCreateMessage");
 				String deleteMessage = (String) flashAttribute.get("courseDeleteMessage");
@@ -68,7 +69,7 @@ public class AdminController{
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals(admin)) {
-			Injector.instance().getCourseService().CreateCourseService(createCourse);
+			Injector.instance().getCourseService().createCourse(createCourse);
 			redirectAttributes.addFlashAttribute("courseCreateMessage", createCourse.getCourseCreateMessage());
 			return "redirect:admin";
 		} else {
@@ -84,7 +85,7 @@ public class AdminController{
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals(admin)) {
-			Injector.instance().getCourseService().DeleteCourseService(deleteCourse);
+			Injector.instance().getCourseService().deleteCourse(deleteCourse);
 			redirectAttributes.addFlashAttribute("courseDeleteMessage", deleteCourse.getCourseDeleteMessage());
 			return "redirect:admin";
 		} else {
@@ -101,7 +102,7 @@ public class AdminController{
 
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals(admin)) {
-			Injector.instance().getUserService().AssignInstructor(instructor);
+			Injector.instance().getCourseService().assignInstructorForCourse(instructor);
 			redirectAttributes.addFlashAttribute("instructorAssignMessage",
 					instructor.getInstructorAssignMessage());
 			return "redirect:admin";

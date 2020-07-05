@@ -1,13 +1,22 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import java.sql.SQLException;
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+
 import java.util.Dictionary;
 
 public interface ICourseService {
-    String addTa(String taId, String courseId) throws Exception;
-    boolean checkRole(String userType);
-    boolean checkUserType(String userType);
-    Dictionary CoursesWithIdForDropdown() throws Exception;
-    boolean CreateCourseService(ICreateCourse createCourse) throws Exception;
-    boolean DeleteCourseService(IDeleteCourse deleteCourse) throws Exception;
+
+    boolean assignInstructorForCourse(IInstructor instructor);
+
+    boolean roleAllowInstructorAndTA(String userType);
+
+    boolean roleAllowInstructor(String userType);
+
+    String addTAForCourse(String taId, String courseId) throws Exception;
+
+    Dictionary coursesWithIdForDropdown() throws Exception;
+
+    boolean createCourse(ICreateCourse createCourse) throws Exception;
+
+    boolean deleteCourse(IDeleteCourse deleteCourse) throws Exception;
 }

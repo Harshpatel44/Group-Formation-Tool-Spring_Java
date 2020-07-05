@@ -13,8 +13,7 @@ import java.util.regex.Pattern;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Service;
 
-import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
-import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 
 @Service
 public class UserService implements IUserService {
@@ -111,7 +110,6 @@ public class UserService implements IUserService {
 		iUser.setBannerId(bannerId);
 		iUser.setContactNumber(contactNumber);
 		iUser.setEmailId(emailId);
-		iUser.setUserType(guest);
 		return iUser;
 	}
 
@@ -133,6 +131,11 @@ public class UserService implements IUserService {
 	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
 		return Injector.instance().getUserRepository().setUserByBannerId(bannerId,iUser);
+	}
+
+	@Override
+	public String getCurrentUserBannerID(){
+		return CurrentUser.instance().getBannerId();
 	}
 
 	@Override
@@ -163,23 +166,12 @@ public class UserService implements IUserService {
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());
+				System.out.println(CurrentUser.instance().getBannerId());
 			}
 			catch (Exception e){
 				e.printStackTrace();
 			}
 		}
-
-	}
-
-	@Override
-	public boolean AssignInstructor(IInstructor instructor){
-		if(Injector.instance().getUserRepository().assignInstructor(instructor)){
-			instructor.setInstructorAssignMessage("Instructor assigned");
-			return true;
-		}
-		else{
-			instructor.setInstructorAssignMessage("User does not exist or already an instructor");
-			return false;
-		}
+		System.out.println(CurrentUser.instance().getBannerId());
 	}
 }

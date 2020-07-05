@@ -1,9 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.Course.ICourse;
-import CSCI5308.GroupFormationTool.Course.Course;
-import CSCI5308.GroupFormationTool.UserManager.IUserRole;
-
 import java.util.ArrayList;
 import java.util.List;
 

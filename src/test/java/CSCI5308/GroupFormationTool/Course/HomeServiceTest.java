@@ -2,9 +2,6 @@ package CSCI5308.GroupFormationTool.Course;
 
 
 
-import CSCI5308.GroupFormationTool.Course.*;
-import CSCI5308.GroupFormationTool.UserManager.IUserRole;
-import CSCI5308.GroupFormationTool.UserManager.UserRole;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;

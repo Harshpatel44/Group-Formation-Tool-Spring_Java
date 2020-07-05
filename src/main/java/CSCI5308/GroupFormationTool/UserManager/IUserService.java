@@ -15,6 +15,8 @@ public interface IUserService {
 
 	IUser setUserByBannerId(String bannerId, IUser iUser);
 
+	String getCurrentUserBannerID();
+
 	List<String> getAllBannerIds();
 
 	String checkUserRoleForCourse(String bannerID, String courseID);
@@ -22,6 +24,4 @@ public interface IUserService {
 	boolean checkIfUserIsGuest(String bannerID);
 
 	void setCurrentUserByBannerID(String BannerID);
-
-	boolean AssignInstructor(IInstructor instructor);
 }

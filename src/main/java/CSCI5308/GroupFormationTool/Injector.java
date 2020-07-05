@@ -68,9 +68,7 @@ public class Injector {
 	private ICreateCourse createCourse;
 	private IDeleteCourse deleteCourse;
 	private ITA ta;
-	private IUserRole userRole;
 	private IUser user;
-	private ICurrentUser currentUser;
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
 		return userPasswordPolicyService;
@@ -90,14 +88,6 @@ public class Injector {
 
 	private IUserPasswordPolicyService userPasswordPolicyService;
 	private IUserPasswordPolicyRepository userPasswordPolicyRepository;
-
-	public ICurrentUser getCurrentUser() {
-		return currentUser;
-	}
-
-	public void setCurrentUser(ICurrentUser currentUser) {
-		this.currentUser = currentUser;
-	}
 
 	private Injector(){
 
@@ -128,7 +118,6 @@ public class Injector {
 		createCourse = new CreateCourse();
 		deleteCourse = new DeleteCourse();
 		ta = new TA();
-		userRole = new UserRole();
 
 		
 		question = new Question();
@@ -136,7 +125,6 @@ public class Injector {
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
 		userPasswordPolicyService = new UserPasswordPolicyService();
-		currentUser = new CurrentUser();
 	}
 
 	public IInstructor getInstructor() {
@@ -185,14 +173,6 @@ public class Injector {
 
 	public void setTA(ITA ta) {
 		this.ta = ta;
-	}
-
-	public IUserRole getUserRole() {
-		return userRole;
-	}
-
-	public void setUserRole(IUserRole userRole) {
-		this.userRole = userRole;
 	}
 
 	public IQuestionResponsesService getQuestionResponsesService() {
