@@ -10,6 +10,12 @@ import java.util.Map;
 public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     private IUserPasswordPolicyRepository iUserPasswordPolicyRepository;
 
+    public UserPasswordPolicyService(){}
+
+    public UserPasswordPolicyService(UserPasswordPolicyRepository userPasswordPolicyRepository){
+        Injector.instance().setUserPasswordPolicyRepository(userPasswordPolicyRepository);
+    }
+
     @Override
     public List<String> checkPasswordValidation(String password, Map<String, String> errors) {
         List<String> policyErrors = new ArrayList<String>();
@@ -58,14 +64,14 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     }
 
     @Override
-    public UserPasswordPolicy getUserPasswordPolicy() throws Exception {
+    public UserPasswordPolicy getUserPasswordPolicy(){
         iUserPasswordPolicyRepository = Injector.instance().getUserPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicy();
     }
 
 
     @Override
-    public UserPasswordPolicyStatus getUserPasswordPolicyStatus() throws Exception {
+    public UserPasswordPolicyStatus getUserPasswordPolicyStatus(){
         iUserPasswordPolicyRepository =  Injector.instance().getUserPasswordPolicyRepository();;
         return iUserPasswordPolicyRepository.getUserPasswordPolicyStatus();
     }

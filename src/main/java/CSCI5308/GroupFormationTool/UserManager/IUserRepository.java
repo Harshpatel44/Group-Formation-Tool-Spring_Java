@@ -8,8 +8,6 @@ public interface IUserRepository {
 
     boolean checkIfUserExists(String bannerID);
 
-    boolean checkIfUserIsAuthenticated(String bannerID, String Password, IPasswordEncryptor iPasswordEncryptor);
-
     IUser setUserByBannerId(String bannerID, IUser iUser);
 
     List<String> getAllBannerIds();

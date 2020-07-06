@@ -1,26 +1,23 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.Database.ConnectionManager;
-
-import java.sql.CallableStatement;
-import java.sql.Connection;
+import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 
 public class UserLoginRepository implements ILoginRepository {
 
     @Override
-    public boolean checkLogin(String bannerid, String password)
+    public boolean checkIfUserIsAuthenticated(String bannerID, String password)
     {
+        StoredProcedure storedProcedure = null;
         boolean isValid = false;
         String encryptedPassword = "";
         try
         {
             BCryptEncryption encryption = new BCryptEncryption();
-            Connection connection = ConnectionManager.instance().getDBConnection();
-            CallableStatement st = connection.prepareCall("{CALL GetCredentials(?)}");
-            st.setString(1,bannerid);
-            ResultSet result = st.executeQuery();
+            storedProcedure = new StoredProcedure("GetCredentials(?)");
+            storedProcedure.setParameter(1, bannerID);
+            storedProcedure.executeWithResults();
+            ResultSet result = storedProcedure.executeWithResults();
             if(result.next())
             {
                 encryptedPassword = result.getString(1);
@@ -37,16 +34,15 @@ public class UserLoginRepository implements ILoginRepository {
             {
                 isValid = false;
             }
-            connection.close();
-
         }
-        catch (SQLException e)
+        catch (Exception e)
         {
             e.printStackTrace();
-        } catch (Exception e) {
-            e.printStackTrace();
+        }finally {
+            if(storedProcedure!=null){
+                storedProcedure.cleanup();
+            }
         }
         return isValid;
     }
-
 }

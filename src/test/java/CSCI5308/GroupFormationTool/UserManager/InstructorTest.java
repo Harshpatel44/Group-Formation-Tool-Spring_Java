@@ -1,12 +1,15 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-import CSCI5308.GroupFormationTool.UserManager.IInstructor;
-import CSCI5308.GroupFormationTool.UserManager.Instructor;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class AssignInstructorTest {
+class InstructorTest {
+
+    @Test
+    void ConstructorTest(){
+        IInstructor assignInstructor2 = new Instructor();
+    }
 
     @Test
     void getInstructorAssignMessage() {

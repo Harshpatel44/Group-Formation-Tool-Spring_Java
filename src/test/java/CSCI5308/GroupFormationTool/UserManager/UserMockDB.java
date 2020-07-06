@@ -1,7 +1,4 @@
-package CSCI5308.GroupFormationTool.UserAuthentication;
-
-import CSCI5308.GroupFormationTool.UserManager.IUser;
-import CSCI5308.GroupFormationTool.UserManager.User;
+package CSCI5308.GroupFormationTool.UserManager;
 
 public class UserMockDB {
 

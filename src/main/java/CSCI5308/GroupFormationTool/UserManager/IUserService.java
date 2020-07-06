@@ -11,8 +11,6 @@ public interface IUserService {
 
 	boolean checkIfUserExists(String bannerID);
 
-	boolean checkIfUserIsAuthenticated(String bannerID, String Password, IPasswordEncryptor iPasswordEncryptor);
-
 	IUser setUserByBannerId(String bannerId, IUser iUser);
 
 	String getCurrentUserBannerID();

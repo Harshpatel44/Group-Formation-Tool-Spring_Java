@@ -10,8 +10,8 @@ public class UserPasswordPolicyStatus {
 	private Integer notAllowedCharacters;
 	
 	
-	private UserPasswordPolicyStatus(Integer minLength, Integer maxLength, Integer minUpperCaseLetter,
-			Integer minLowerCaseLetter, Integer minNoOfSymbols, Integer notAllowedCharacters) {
+	UserPasswordPolicyStatus(Integer minLength, Integer maxLength, Integer minUpperCaseLetter,
+							 Integer minLowerCaseLetter, Integer minNoOfSymbols, Integer notAllowedCharacters) {
 		this.minLength = minLength;
 		this.maxLength = maxLength;
 		this.minLowerCaseLetter = minLowerCaseLetter;

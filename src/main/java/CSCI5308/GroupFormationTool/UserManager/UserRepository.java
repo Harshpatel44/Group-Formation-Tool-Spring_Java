@@ -5,6 +5,7 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
+import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Repository;
 
@@ -65,10 +66,6 @@ public class UserRepository implements IUserRepository {
 		return false;
 	}
 
-	@Override
-	public boolean checkIfUserIsAuthenticated(String bannerID, String Password, IPasswordEncryptor iPasswordEncryptor){
-		return false;
-	}
 
 	@Override
 	public IUser setUserByBannerId(String bannerID, IUser iUser) {
@@ -163,7 +160,6 @@ public class UserRepository implements IUserRepository {
 			if(role!=null){
 				role.cleanup();
 			}
-
 		}
 		return result;
 	}

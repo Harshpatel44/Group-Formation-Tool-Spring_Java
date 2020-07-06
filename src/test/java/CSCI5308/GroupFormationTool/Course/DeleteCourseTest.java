@@ -30,7 +30,7 @@ class DeleteCourseTest {
 
         Dictionary testCoursesList = new Hashtable();
         testCoursesList.put("testid testname","testid");
-        when(courseService.CoursesWithIdForDropdown()).thenReturn(testCoursesList);
+        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
         assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
     }
 
@@ -40,7 +40,7 @@ class DeleteCourseTest {
         Dictionary testCoursesList = new Hashtable();
         testCoursesList.put("testid testname","testid");
         deleteCourse.setAllCoursesList(testCoursesList);
-        when(courseService.CoursesWithIdForDropdown()).thenReturn(testCoursesList);
+        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
         assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
     }
 

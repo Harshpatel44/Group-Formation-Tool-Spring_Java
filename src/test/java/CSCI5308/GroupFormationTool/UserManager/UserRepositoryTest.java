@@ -1,8 +1,5 @@
-package CSCI5308.GroupFormationTool.UserAuthentication;
+package CSCI5308.GroupFormationTool.UserManager;
 
-import CSCI5308.GroupFormationTool.UserManager.IUser;
-import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
-import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -36,20 +33,20 @@ public class UserRepositoryTest {
 
 	@Test
 	public void getBannerIdIfExistsDetails() {
-		IUser user = UserMockDB.setDefault();
+		String bannerID = "B00854475";
 		userRepository = mock(UserRepository.class);
 		userRepository = mock(UserRepository.class);
-		when(userRepository.getUserByBannerId(user)).thenReturn(true);
-		assertEquals(true, userRepository.getUserByBannerId(user));
+		when(userRepository.checkIfUserExists(bannerID)).thenReturn(true);
+		assertEquals(true, userRepository.checkIfUserExists(bannerID));
 	}
 
 	@Test
 	public void getBannerIdIfDoesntNotExists() {
-		IUser user = UserMockDB.setDefault();
+		String bannerID = "B00854475";
 		userRepository = mock(UserRepository.class);
 		userRepository = mock(UserRepository.class);
-		when(userRepository.getUserByBannerId(user)).thenReturn(false);
-		assertEquals(false, userRepository.getUserByBannerId(user));
+		when(userRepository.checkIfUserExists(bannerID)).thenReturn(false);
+		assertEquals(false, userRepository.checkIfUserExists(bannerID));
 	}
 
 //	@Test

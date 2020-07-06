@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Course;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import org.springframework.stereotype.Service;
 import CSCI5308.GroupFormationTool.Injector;
 
@@ -8,8 +9,9 @@ import CSCI5308.GroupFormationTool.Injector;
 public class HomeService implements IHomeService {
 	private IHomeRepository homeRepository;
 	public HomeService() {}
-    public HomeService(HomeRepository homeRepository){
+    public HomeService(HomeRepository homeRepository, UserRepository userRepository){
      Injector.instance().setHomeRepository(homeRepository);
+     Injector.instance().setUserRepository(userRepository);
 	}
 
 

@@ -24,6 +24,12 @@ public class UserService implements IUserService {
 
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
+	public UserService(){}
+	public UserService(UserRepository userRepository,CurrentUser currentUser){
+		Injector.instance().setUserRepository(userRepository);
+		CurrentUser.instance().setInstance(currentUser);
+	}
+
 	@Override
 	public boolean createUser(IUser user) throws ServiceLayerException{
 		Boolean success;
@@ -124,11 +130,6 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public boolean checkIfUserIsAuthenticated(String bannerID, String Password, IPasswordEncryptor iPasswordEncryptor){
-		return false;
-	}
-
-	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
 		return Injector.instance().getUserRepository().setUserByBannerId(bannerId,iUser);
 	}
@@ -154,22 +155,21 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public void setCurrentUserByBannerID(String BannerID){
-		if(BannerID.equals(admin)){
+	public void setCurrentUserByBannerID(String bannerID){
+		System.out.println(bannerID);
+		if(bannerID.equals(admin)){
 			CurrentUser.instance().setBannerId(admin);
 			CurrentUser.instance().setFirstName(admin);
 			CurrentUser.instance().setLastName(admin);
 		}else{
-			try{
+				System.out.println(bannerID);
 				IUser iUser = new User();
-				iUser = Injector.instance().getUserRepository().setUserByBannerId(BannerID,iUser);
+				System.out.println(bannerID);
+				iUser = Injector.instance().getUserRepository().setUserByBannerId(bannerID,iUser);
+				System.out.println(CurrentUser.instance().getBannerId());
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());
-			}
-			catch (Exception e){
-				e.printStackTrace();
-			}
 		}
 	}
 }

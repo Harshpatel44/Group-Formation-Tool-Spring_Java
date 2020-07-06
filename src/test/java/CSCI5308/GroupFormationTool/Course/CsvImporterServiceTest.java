@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Matchers;
@@ -38,7 +39,7 @@ public class CsvImporterServiceTest {
 		Injector.instance().setUserRepository(userRepository);
 		Injector.instance().setCourseRepository(courseRepository);
 		Injector.instance().setUserNotification(userNotification);
-        IUserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
+        UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 	}
 
 	@Test

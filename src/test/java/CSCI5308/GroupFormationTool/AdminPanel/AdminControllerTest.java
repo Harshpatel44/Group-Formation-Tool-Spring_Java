@@ -23,12 +23,8 @@ public class AdminControllerTest {
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
-    @Mock
-    private AdminService adminService;
-
     @InjectMocks
     private AdminController adminController;
-
 
     @BeforeEach
     public void init() {

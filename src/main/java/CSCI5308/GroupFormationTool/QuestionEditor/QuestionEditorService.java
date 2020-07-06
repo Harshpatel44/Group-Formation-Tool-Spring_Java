@@ -7,8 +7,9 @@ import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 public class QuestionEditorService implements IQuestionEditorService {
 
     public QuestionEditorService(){}
-    public QuestionEditorService(QuestionEditorRepository questionEditorRepository) throws Exception {
+    public QuestionEditorService(QuestionEditorRepository questionEditorRepository,CurrentUser currentUser){
         Injector.instance().setQuestionEditorRepository(questionEditorRepository);
+        CurrentUser.instance().setInstance(currentUser);
     }
 
     @Override

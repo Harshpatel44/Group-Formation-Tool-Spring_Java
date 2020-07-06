@@ -14,6 +14,13 @@ public class CurrentUser{
         return instance;
     }
 
+    public static CurrentUser getInstance() {
+        return instance;
+    }
+
+    public static void setInstance(CurrentUser instance) {
+        CurrentUser.instance = instance;
+    }
 
     public String getFirstName() {
         return firstName;

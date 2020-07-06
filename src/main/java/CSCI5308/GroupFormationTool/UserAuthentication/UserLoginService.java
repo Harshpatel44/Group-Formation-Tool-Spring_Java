@@ -7,12 +7,12 @@ public class UserLoginService implements ILoginService {
 	public UserLoginService() {
 	}
 
-	public UserLoginService(UserLoginRepository loginRepository) throws Exception {
+	public UserLoginService(UserLoginRepository loginRepository){
 		Injector.instance().setLoginRepository(loginRepository);
 	}
 
-	public boolean checkLogin(String bannerid, String password) throws Exception {
-		return Injector.instance().getLoginRepository().checkLogin(bannerid, password);
+	public boolean checkIfUserIsAuthenticated(String bannerid, String password){
+		return Injector.instance().getLoginRepository().checkIfUserIsAuthenticated(bannerid, password);
 	}
 
 }

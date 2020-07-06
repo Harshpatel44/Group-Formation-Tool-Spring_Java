@@ -43,7 +43,7 @@ public class CustomAuthentication implements AuthenticationManager
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
 		ILoginService loginService = Injector.instance().getLoginService();
-		if(loginService.checkLogin(bannerID, password))
+		if(loginService.checkIfUserIsAuthenticated(bannerID, password))
 		{
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
 			rights.add(new SimpleGrantedAuthority(user));

@@ -53,8 +53,7 @@ public class QuestionEditorController{
 										@RequestParam(name = "optionText") String optionText, @RequestParam(name = "rankText") String rankText,
 										@RequestParam(name = "questionText") String questionText,
 										@RequestParam(name = "questionTitle") String questionTitle,
-										@RequestParam(name = "selectedQuestionType") String selectedQuestionType)
-			throws Exception {
+										@RequestParam(name = "selectedQuestionType") String selectedQuestionType) {
 		HashMap<Integer, String> map = Injector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
 		String[] rankList = rankText.split(",");

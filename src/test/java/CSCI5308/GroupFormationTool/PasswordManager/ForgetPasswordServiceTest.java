@@ -1,4 +1,4 @@
-package CSCI5308.GroupFormationTool.Login;
+package CSCI5308.GroupFormationTool.PasswordManager;
 
 import CSCI5308.GroupFormationTool.PasswordManager.ForgetPasswordRepository;
 import CSCI5308.GroupFormationTool.PasswordManager.ForgetPasswordService;
@@ -25,9 +25,14 @@ public class ForgetPasswordServiceTest {
     }
 
         @Test
+        void generatePassKeyTest(){
+
+        }
+
+        @Test
         void getEmailByBanneridTest() throws Exception {
-            when(forgetPasswordRepository.getEmailByBannerid("B00835088")).thenReturn("rutikapatel09@gmail.com");
-            assertEquals("rutikapatel09@gmail.com",forgetPasswordService.getEmailByBannerid("B00835088"));
+            when(forgetPasswordRepository.getEmailByBannerID("B00835088")).thenReturn("rutikapatel09@gmail.com");
+            assertEquals("rutikapatel09@gmail.com",forgetPasswordService.getEmailByBannerID("B00835088"));
         }
 
         @Test
@@ -44,8 +49,8 @@ public class ForgetPasswordServiceTest {
 
         @Test
         void getBannerIdByPassKeyTest() throws Exception {
-            when(forgetPasswordRepository.getBannerIdByPassKey("randomstring")).thenReturn("B00100100");
-            assertEquals("B00100100",forgetPasswordService.getBannerIdByPassKey("randomstring"));
+            when(forgetPasswordRepository.getBannerIDByPassKey("randomstring")).thenReturn("B00100100");
+            assertEquals("B00100100",forgetPasswordService.getBannerIDByPassKey("randomstring"));
         }
 
         @Test
@@ -53,8 +58,8 @@ public class ForgetPasswordServiceTest {
             List<String> password = new ArrayList<>();
             password.add("passwordValue");
             password.add("passwordValue2");
-            when(forgetPasswordRepository.getPasswordByBannerId("B00835088",3)).thenReturn(password);
-            assertEquals(password,forgetPasswordService.getPasswordByBannerId("B00835088",3));
+            when(forgetPasswordRepository.getPasswordByBannerID("B00835088",3)).thenReturn(password);
+            assertEquals(password,forgetPasswordService.getPasswordByBannerID("B00835088",3));
         }
 
         @Test
