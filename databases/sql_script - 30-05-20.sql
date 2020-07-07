@@ -217,28 +217,28 @@ INSERT INTO `teachingAssistant` VALUES ('B00234561');
 UNLOCK TABLES;
 
 --
--- Table structure for table `userTypes`
+-- Table structure for table `userRoles`
 --
 
-DROP TABLE IF EXISTS `userTypes`;
+DROP TABLE IF EXISTS `userRoles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `userTypes` (
+CREATE TABLE `userRoles` (
   `userId` varchar(10) DEFAULT NULL,
-  `usertype` varchar(20) DEFAULT NULL,
+  `userRole` varchar(20) DEFAULT NULL,
   KEY `userId` (`userId`),
-  CONSTRAINT `userTypes_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`)
+  CONSTRAINT `userRoles_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `userTypes`
+-- Dumping data for table `userRoles`
 --
 
-LOCK TABLES `userTypes` WRITE;
-/*!40000 ALTER TABLE `userTypes` DISABLE KEYS */;
-INSERT INTO `userTypes` VALUES ('B00123456','instructor'),('B00123456','student'),('B00234561','TA'),('B00234561','student'),('B00345612','student');
-/*!40000 ALTER TABLE `userTypes` ENABLE KEYS */;
+LOCK TABLES `userRoles` WRITE;
+/*!40000 ALTER TABLE `userRoles` DISABLE KEYS */;
+INSERT INTO `userRoles` VALUES ('B00123456','instructor'),('B00123456','student'),('B00234561','TA'),('B00234561','student'),('B00345612','student');
+/*!40000 ALTER TABLE `userRoles` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --

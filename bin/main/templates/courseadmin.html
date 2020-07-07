@@ -8,13 +8,31 @@
 </head>
 <body>
 
-	<div>
-		<ul id="heading-box">
-			<li style="margin: auto;">
-				<div th:text="${courseId}">Course Admin Page</div>
-			</li>
-		</ul>
-	</div>
+<div>
+	<ul id="heading-box2">
+		<li>
+			<div>
+				Hello, <span th:text="${userId}" />
+			</div>
+		</li>
+		<li>
+			<div class="nav-bar">
+				<form class="nav-bar-element" th:action="@{/logout}" method="post">
+					<div class="entity">
+						<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+					</div>
+				</form>
+				<form class="nav-bar-element" th:action="@{/course}" method="post" >
+					<input type="hidden"  th:value="${courseName}" name="courseName"/>
+					<input  type="hidden" th:value="${courseId}" name="courseId" />
+					<input  type="hidden" th:value="${userRole}" name="userRole" />
+					<input  type="hidden" th:value="${userId}" name="userId" />
+					<button type="submit" class="submit-button" name="save" th:if="${checkRole}" >Course Home</button>
+				</form>
+			</div>
+		</li>
+	</ul>
+</div>
 
 	<div>
 		<ul id="heading-box2">

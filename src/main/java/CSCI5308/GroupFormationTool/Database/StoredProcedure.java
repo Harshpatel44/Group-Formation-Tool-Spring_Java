@@ -10,7 +10,7 @@ public class StoredProcedure
 	private String storedProcedureName;
 	private Connection connection;
 	private CallableStatement statement;
-	public StoredProcedure(String storedProcedureName)  throws SQLException
+	public StoredProcedure(String storedProcedureName) throws Exception
 	{
 		this.storedProcedureName = storedProcedureName;
 		connection = null;
@@ -24,15 +24,15 @@ public class StoredProcedure
 		statement = connection.prepareCall("{call " + storedProcedureName + "}");
 	}
 
-	private void openConnection() throws SQLException
+	private void openConnection() throws Exception
 	{
 		connection = ConnectionManager.instance().getDBConnection();
 		System.out.println(connection);
 	}
 
-	public void cleanup() throws SQLException {
-		connection.close();
-		System.out.println("Connection closed");
+	public void cleanup(){
+//		connection.close();
+//		System.out.println("Connection closed");
 		try
 		{
 			if (null != statement)
@@ -50,14 +50,20 @@ public class StoredProcedure
 		}
 		catch (Exception e)
 		{
-
+			e.printStackTrace();
+		}
+		finally {
+			try {
+				connection.close();
+			} catch (SQLException throwables) {
+				throwables.printStackTrace();
+			}
 		}
 	}
 
 	public void setParameter(int paramIndex, String value) throws SQLException
 	{
 		statement.setString(paramIndex, value);
-
 	}
 
 	public void setParameter(String paramIndex, String value) throws SQLException
@@ -84,7 +90,6 @@ public class StoredProcedure
 	{
 		if (statement.execute())
 		{
-
 			return statement.getResultSet();
 		}
 		return null;

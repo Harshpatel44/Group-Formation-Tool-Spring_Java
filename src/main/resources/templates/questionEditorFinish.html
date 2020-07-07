@@ -4,7 +4,6 @@
 <head>
     <title>Course Admin</title>
     <link rel="stylesheet" type="text/css" href="/css/admin.css" />
-
 </head>
 <body>
 <div>
@@ -34,16 +33,16 @@
                 <form class="nav-bar-element" th:action="@{/course}" method="post" >
                     <input type="hidden"  th:value="${courseName}" name="courseName"/>
                     <input  type="hidden" th:value="${courseId}" name="courseId" />
-                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userRole}" name="userRole" />
                     <input  type="hidden" th:value="${userId}" name="userId" />
                     <button type="submit" class="submit-button" name="save">Course Home</button>
                 </form>
                 <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
                     <input type="hidden"  th:value="${courseName}" name="courseName"/>
                     <input type="hidden" th:value="${userId}" name="userId" />
-                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userRole}" name="userRole" />
                     <input type="hidden" th:value="${courseId}" name="courseId" />
-                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userType}">Question Manager</button>
+                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userRole}">Question Manager</button>
                 </form>
             </div>
         </li>

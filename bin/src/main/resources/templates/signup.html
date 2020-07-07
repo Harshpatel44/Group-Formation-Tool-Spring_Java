@@ -13,7 +13,7 @@
 		<br>
 
 		<form action="#" th:action="@{/register}" method="post"
-			th:object="${user}">
+			th:object="${userId}">
 			<div>
 				<label>First Name</label> <br /> <input type="text"
 					th:field="*{firstName}" required />
@@ -71,7 +71,7 @@
 			</div>
 
 			<div>
-				<a th:href="@{/login}">Are you an existing user? Click here to
+				<a th:href="@{/login}">Are you an existing userId? Click here to
 					log in!</a>
 			</div>
 		</form>

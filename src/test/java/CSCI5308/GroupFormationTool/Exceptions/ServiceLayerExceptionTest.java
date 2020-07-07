@@ -10,9 +10,6 @@ import java.util.Map;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.AccessControll.UserMockDB;
-import CSCI5308.GroupFormationTool.UserAuthentication.Model.User;
-
 @SpringBootTest
 public class ServiceLayerExceptionTest {
 
@@ -26,7 +23,6 @@ public class ServiceLayerExceptionTest {
 		ServiceLayerException serviceLayerException = new ServiceLayerException();
 		serviceLayerException.setErrors(errors);
 		assertEquals(serviceLayerException.getErrors(), errors);
-
 	}
 
 	@Test
@@ -39,7 +35,6 @@ public class ServiceLayerExceptionTest {
 		ServiceLayerException serviceLayerException = new ServiceLayerException();
 		serviceLayerException.setMapErrors(errors);
 		assertEquals(serviceLayerException.getMapErrors(), errors);
-
 	}
 
 	@Test
@@ -52,7 +47,6 @@ public class ServiceLayerExceptionTest {
 				add("error1");
 			}
 		});
-
 	}
 
 	@Test
@@ -65,6 +59,5 @@ public class ServiceLayerExceptionTest {
 				put("1", "error1");
 			}
 		});
-
 	}
 }

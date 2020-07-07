@@ -3,7 +3,6 @@ body{
     background-color: #f2fcfe;
     margin: 0px;
     padding: 0px;
-    /*background: linear-gradient(to bottom, #1c92d2 0%, #f2fcfe 20%);*/
 }
 ul{
     padding:0px;
@@ -32,7 +31,6 @@ li{
     font-size: 20px;
     font-weight: bold;
     color:#05386b;
-    /*background-color: #406387;*/
     border-bottom: 2px solid #05386b;
     margin:0px;
 }
@@ -82,7 +80,6 @@ label{
     display: block;
 }
 input{
-    /*background-color: #EDF5E1;*/
     line-height: 1.5;
     font-size: 18px;
 }
@@ -159,8 +156,6 @@ footer{
     padding: 10px;
 }
 
-
-
 th{
     border: 1px solid black;
 }
@@ -168,10 +163,10 @@ th{
 #no_border{
     border: none;
 }
+
 .clearfix{
     text-align: center;
 }
-
 
 #courses-box{
 
@@ -188,10 +183,6 @@ th{
 .nav-bar-element{
     float: left;
 }
-
-/*.greeting{
-    float: left;
-}*/
 
 .starter{
     display: flow-root;

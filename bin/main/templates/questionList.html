@@ -32,9 +32,9 @@
                 <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
                     <input type="hidden"  th:value="${courseName}" name="courseName"/>
                     <input type="hidden" th:value="${userId}" name="userId" />
-                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userRole}" name="userRole" />
                     <input type="hidden" th:value="${courseId}" name="courseId" />
-                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userType}">Question Manager</button>
+                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userRole}">Question Manager</button>
                 </form>
             </div>
         </li>
@@ -44,14 +44,14 @@
 <form style="display:inline-block" th:action="@{/sortQuestionByDate}" method="post" >
     <input type="hidden"  th:value="${courseName}" name="courseName"/>
     <input type="hidden" th:value="${userId}" name="userId" />
-    <input  type="hidden" th:value="${userType}" name="userType" />
+    <input  type="hidden" th:value="${userRole}" name="userRole" />
     <input type="hidden" th:value="${courseId}" name="courseId" />
     <button type="submit" class="submit-button" name="save" > sort by date</button>
 </form>
 <form style="display:inline-block" th:action="@{/sortQuestionByTopic}" method="post" >
     <input type="hidden"  th:value="${courseName}" name="courseName"/>
     <input type="hidden" th:value="${userId}" name="userId" />
-    <input  type="hidden" th:value="${userType}" name="userType" />
+    <input  type="hidden" th:value="${userRole}" name="userRole" />
     <input type="hidden" th:value="${courseId}" name="courseId" />
     <button type="submit" class="submit-button" name="save" > sort by topic</button>
 </form>
@@ -61,21 +61,21 @@
         <div th:if="${prompt}">
             <div class="function-heading">Confirm to delete</div>
            <div class="entity">
-               The question you selected contain user responses. Are you sure you want to delete this question?
+               The question you selected contain userId responses. Are you sure you want to delete this question?
            </div>
             <div style="display: flex">
                 <form th:action="@{/deleteQuestion}" method="post">
                     <input  type="hidden" th:value="${selectedQuestionId}" name="selectedQuestionId" />
                     <input type="hidden"  th:value="${courseName}" name="courseName"/>
                     <input type="hidden" th:value="${userId}" name="userId" />
-                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userRole}" name="userRole" />
                     <input type="hidden" th:value="${courseId}" name="courseId" />
                     <button type="submit" class="submit-button" name="yes" >Yes</button>
                 </form>
                 <form th:action="@{/questionList}" method="post">
                     <input type="hidden"  th:value="${courseName}" name="courseName"/>
                     <input type="hidden" th:value="${userId}" name="userId" />
-                    <input  type="hidden" th:value="${userType}" name="userType" />
+                    <input  type="hidden" th:value="${userRole}" name="userRole" />
                     <input type="hidden" th:value="${courseId}" name="courseId" />
                     <button type="submit" class="submit-button" name="no" >No</button>
                 </form>
@@ -106,7 +106,7 @@
                         <input  type="hidden" th:value="${question.questionId}" name="questionId" />
                         <input type="hidden"  th:value="${courseName}" name="courseName"/>
                         <input type="hidden" th:value="${userId}" name="userId" />
-                        <input  type="hidden" th:value="${userType}" name="userType" />
+                        <input  type="hidden" th:value="${userRole}" name="userRole" />
                         <input type="hidden" th:value="${courseId}" name="courseId" />
                         <button type="submit" class="submit-button" name="save" > Delete</button>
                     </form>
@@ -118,7 +118,7 @@
 </ul>
 <script type="text/javascript">
     function alertFunction(){
-        if (confirm("The question you selected contain user responses. Are you sure you want to delete this question?")) {
+        if (confirm("The question you selected contain userId responses. Are you sure you want to delete this question?")) {
             document.getElementById("delete-question-form").submit();
         } else {
 
