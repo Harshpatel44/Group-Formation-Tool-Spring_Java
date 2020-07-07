@@ -19,10 +19,10 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 
 public class CustomAuthentication implements AuthenticationManager
 {
-	private Authentication checkForAdmin(String password, IUser u, Authentication authentication) throws AuthenticationException
+	private Authentication checkForAdmin(String password,Authentication authentication) throws AuthenticationException
 	{
 		// The admin password is not encrypted because it is hardcoded in the DB.
-		if (password.equals(u.getPassword()))
+		if (password.equals(Injector.instance().getUser().getPassword()))
 		{
 			// Grant ADMIN rights system-wide, this is used to protect controller mappings.
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();
@@ -63,12 +63,7 @@ public class CustomAuthentication implements AuthenticationManager
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
 
-		IUserService iUserService = null;
-		try {
-			iUserService = Injector.instance().getUserService();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+		IUserService iUserService = Injector.instance().getUserService();
 
 		Boolean validity;
 		try
@@ -82,11 +77,10 @@ public class CustomAuthentication implements AuthenticationManager
 
 		if (validity)
 		{
-//			IUser iUser =  Injector.instance().getUser();
-//			iUserService.setUserByBannerId(bannerID,iUser);
-			if (bannerID.toUpperCase().equals(admin))
+			if (bannerID.equals(admin))
 			{
-				return checkForAdmin(password, Injector.instance().getUser(), authentication);
+				Injector.instance().getUserService().setUserByBannerId(admin,Injector.instance().getUser());
+				return checkForAdmin(password, authentication);
 			}
 			else
 			{
