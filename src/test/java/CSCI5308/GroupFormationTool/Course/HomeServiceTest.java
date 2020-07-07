@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool.Course;
 
-
-
-import CSCI5308.GroupFormationTool.Course.*;
-import CSCI5308.GroupFormationTool.UserManager.IUserRole;
-import CSCI5308.GroupFormationTool.UserManager.UserRole;
+import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -21,44 +17,36 @@ import static org.mockito.Mockito.when;
 public class HomeServiceTest {
   public HomeRepository homeRepository;
   public HomeService homeService;
+  public UserRepository userRepository;
 
     @BeforeEach
-    public void init() throws Exception {
+    public void init(){
         MockitoAnnotations.initMocks(this);
         homeRepository = mock(HomeRepository.class);
-        homeService = new HomeService(homeRepository);
+        userRepository = mock(UserRepository.class);
+        homeService = new HomeService(homeRepository,userRepository);
     }
 
     @Test
     public void getCoursesTest() throws Exception {
-        IUserRole userRole = new UserRole();
+        String bannerID = "B23456789";
         List<ICourse> courseList = new ArrayList<ICourse>();
         ICourse course = new Course();
         course.setCourseId("CSCI1");
         course.setCourseName("DATA");
         course.setRole("Student");
         courseList.add(course);
-        userRole.setUserId("B00123456");
-        when(homeRepository.getcourse(userRole)).thenReturn(courseList);
-        List<ICourse> returnedList = homeService.getCourses(userRole);
+        when(homeRepository.getCourseFromBannerID(bannerID,false)).thenReturn(courseList);
+        List<ICourse> returnedList = homeService.getCourseFromBannerID(bannerID);
         assertEquals(returnedList,courseList);
     }
 
-
-    @Test //when user is guest
-    public void checkRoleTestGuest() throws Exception {
-        IUserRole userRole = new UserRole();
-        userRole.setUserId("B00103456");//guest
-        when(homeRepository.checkRole(userRole)).thenReturn(true);
-        assertFalse(homeService.checkRole(userRole));
-    }
-
-
-    @Test //when user is Not a guest
-    public void checkRoleTestNotGuest() throws Exception {
-        IUserRole userRole = new UserRole();
-        userRole.setUserId("B00123456");
-        when(homeRepository.checkRole(userRole)).thenReturn(false);
-        assertTrue(homeService.checkRole(userRole));
-    }
+    @Test
+	public void checkRoleOfUserTest() {
+		String bannerID = "B23445678";
+		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(true);
+		assertEquals(false,homeService.checkRoleOfUser(bannerID));
+        when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
+        assertEquals(true,homeService.checkRoleOfUser(bannerID));
+	}
 }

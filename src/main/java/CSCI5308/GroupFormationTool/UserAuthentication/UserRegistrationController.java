@@ -4,10 +4,17 @@ import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Exceptions.ErrorHelper;
 import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
@@ -23,17 +30,21 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	}
 
 	@PostMapping("/register")
-	public ModelAndView createUser(User user, BindingResult bindingResult) throws Exception {
+	public ModelAndView createUser(@RequestParam("firstName") String firstName,
+								   @RequestParam("lastName") String lastName,
+								   @RequestParam("emailId") String emailId,
+								   @RequestParam("contactNumber") String contactNumber,
+								   @RequestParam("password") String password,
+								   @RequestParam("confirmPassword") String confirmPassword,
+								   @RequestParam("bannerId") String bannerId)
+								   {
 		userService = Injector.instance().getUserService();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("passwordPolicy", UserPasswordPolicy.getInstance());
 		try {
-			if (bindingResult.hasErrors()) {
-
-				mv.setViewName("signup");
-				return mv;
-			}
-			if (userService.createUser(user)) {
+			IUser iUser = userService.setUser(bannerId,firstName,lastName,emailId,password,contactNumber);
+			iUser.setConfirmPassword(confirmPassword);
+			if (userService.createUser(iUser)) {
 				mv.setViewName("redirect:/login");
 				return mv;
 			}
@@ -44,22 +55,23 @@ public class UserRegistrationController implements WebMvcConfigurer {
 					mv.addObject("unfollowedPolicy", errorPassowrd.split(";;"));
 				}
 			}
-			ErrorHelper.rejectErrors(bindingResult, e.getMapErrors());
+			mv.addObject("user",Injector.instance().getUser());
 			mv.setViewName("signup");
 			return mv;
+
 		}
 		mv.setViewName("signup");
 		return mv;
 	}
 
 	@GetMapping("/register")
-	public ModelAndView register(User user) throws Exception {
-		userService = Injector.instance().getUserService();
-		UserPasswordPolicy passwordPolicy = userService.getUserPasswordPolicy();
-		UserPasswordPolicyStatus passwordPolicyStatus = userService.getUserPasswordPolicyStatus();
+	public ModelAndView register() throws Exception {
+		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+		UserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
+		UserPasswordPolicyStatus passwordPolicyStatus = iUserPasswordPolicyService.getUserPasswordPolicyStatus();
 		ModelAndView mv = new ModelAndView();
+		mv.addObject("user",Injector.instance().getUser());
 		mv.addObject("passwordPolicy", passwordPolicy);
-		mv.addObject("userId",user);
 		mv.setViewName("signup");
 		return mv;
 	}

@@ -6,7 +6,8 @@ import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IEmailConfiguration;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.emailHost;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.emailPort;
 
 public class EmailConfiguration implements IEmailConfiguration {
 	
@@ -18,8 +19,8 @@ public class EmailConfiguration implements IEmailConfiguration {
 		Properties properties = new Properties();
 		properties.put("mail.smtp.auth","true");
 		properties.put("mail.smtp.starttls.enable","true");
-		properties.put("mail.smtp.host","smtp.gmail.com");
-		properties.put("mail.smtp.port",587);
+		properties.put("mail.smtp.host",emailHost);
+		properties.put("mail.smtp.port",emailPort);
 		session = Session.getDefaultInstance(properties, new javax.mail.Authenticator() {
 			protected PasswordAuthentication getPasswordAuthentication() {
 				return new PasswordAuthentication(ApplicationConstants.emailSender,ApplicationConstants.emailSenderPassword); 

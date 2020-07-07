@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.AdminPanel;
 
-import CSCI5308.GroupFormationTool.AdminPanel.AdminController;
-import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
 import org.apache.catalina.filters.CorsFilter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -25,12 +23,8 @@ public class AdminControllerTest {
     private WebApplicationContext webApplicationContext;
     private MockMvc mockMvc;
 
-    @Mock
-    private AdminService adminService;
-
     @InjectMocks
     private AdminController adminController;
-
 
     @BeforeEach
     public void init() {

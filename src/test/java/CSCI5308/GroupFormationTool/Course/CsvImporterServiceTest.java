@@ -7,6 +7,7 @@ import static org.mockito.Mockito.when;
 import java.util.ArrayList;
 import java.util.List;
 
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Matchers;
@@ -16,10 +17,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.User;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserRepository;
+import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
+import CSCI5308.GroupFormationTool.UserManager.User;
+import CSCI5308.GroupFormationTool.UserManager.UserRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 
 @SpringBootTest
@@ -39,7 +39,7 @@ public class CsvImporterServiceTest {
 		Injector.instance().setUserRepository(userRepository);
 		Injector.instance().setCourseRepository(courseRepository);
 		Injector.instance().setUserNotification(userNotification);
-		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
+        UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 	}
 
 	@Test

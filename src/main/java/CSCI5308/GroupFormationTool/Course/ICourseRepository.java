@@ -1,12 +1,15 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.UserAuthentication.IUser;
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 public interface ICourseRepository {
 
-    String addTa(String taId, String courseId) throws Exception;
+    boolean assignInstructorForCourse(IInstructor instructor);
+
+    String addTaForCourse(String taId, String courseId) throws Exception;
 
     boolean getUserDetailsOnCourse(IUser user, String courseId) throws Exception;
 

@@ -1,14 +1,14 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.Course.*;
 
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.Instructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -30,57 +30,68 @@ public class CourseServiceTest {
 	}
 
 	@Test
-	public void addTaTestIfAlready() throws Exception {
+	public void addTAForCourseTestIfAlready() throws Exception {
 		String taId, courseId, result;
 		taId = "B00123456";
 		courseId = "CSCI1";
 		result = "Already user is TA of courseId:" + courseId + ".";
-		when(courseRepository.addTa(taId, courseId)).thenReturn(result);
-		String returned = courseService.addTa(taId, courseId);
+		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
+		String returned = courseService.addTAForCourse(taId, courseId);
 		assertEquals(result, returned);
 	}
 
 	@Test
-	public void addTaTest() throws Exception {
+	public void addTAForCourseTest() throws Exception {
 		String taId, courseId, result;
 		taId = "B00123456";
 		courseId = "CSCI2";
 		result = "user with Id:" + taId + " is add as a TA for courseId" + courseId + ".";
-		when(courseRepository.addTa(taId, courseId)).thenReturn(result);
-		String returned = courseService.addTa(taId, courseId);
+		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
+		String returned = courseService.addTAForCourse(taId, courseId);
 		assertEquals(result, returned);
 	}
 
 	@Test
-	public void addTaTestNotUser() throws Exception {
+	public void addTAForCourseTestNotUser() throws Exception {
 		String taId, courseId, result;
 		taId = "B00103456";
 		courseId = "CSCI1";
 		result = "No user exist with Id:" + taId + " present in system.";
-		when(courseRepository.addTa(taId, courseId)).thenReturn(result);
-		String retruned = courseService.addTa(taId, courseId);
+		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
+		String retruned = courseService.addTAForCourse(taId, courseId);
 		assertEquals(result, retruned);
 	}
 
 	@Test
 	public void CheckRoleTestTAorInstructor() {
-		String userType;
-		userType = "TA";
-		assertTrue(courseService.checkRole(userType));
+		String userRole;
+		userRole = "TA";
+		assertTrue(courseService.roleAllowInstructorAndTA(userRole));
 	}
 
 	@Test
 	public void CheckRoleTestStudentOrGuest() {
-		String userType;
-		userType = "Guest";
-		assertFalse(courseService.checkRole(userType));
+		String userRole;
+		userRole = "Guest";
+		assertFalse(courseService.roleAllowInstructorAndTA(userRole));
 	}
 
 	@Test
-	public void checkUserTypeTestInstrutor() {
-		String userType;
-		userType = "instructor";
-		assertTrue(courseService.checkUserType(userType));
+	public void checkUserRoleTestInstructor() {
+		String userRole;
+		userRole = "instructor";
+		assertTrue(courseService.roleAllowInstructor(userRole));
+	}
+
+	@Test
+	void assignInstructorForCourseTest() throws Exception {
+		IInstructor assignInstructor = new Instructor("test");
+		when(courseRepository.assignInstructorForCourse(assignInstructor)).thenReturn(true);
+		assertTrue(courseService.assignInstructorForCourse(assignInstructor));
+		assertEquals("Instructor assigned",assignInstructor.getInstructorAssignMessage());
+		when(courseRepository.assignInstructorForCourse(assignInstructor)).thenReturn(false);
+		assertFalse(courseService.assignInstructorForCourse(assignInstructor));
+		assertEquals("User does not exist or already an instructor",assignInstructor.getInstructorAssignMessage());
 	}
 
 	@Test
@@ -97,7 +108,7 @@ public class CourseServiceTest {
 		allCoursesArray.add(courseName);
 		when(courseRepository.createCourseRepo(createCourse)).thenReturn(true);
 		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
-		assertTrue(courseService.CreateCourseService(createCourse));
+		assertTrue(courseService.createCourse(createCourse));
 		assertEquals("Course created", createCourse.getCourseCreateMessage());
 	}
 
@@ -115,7 +126,7 @@ public class CourseServiceTest {
 		allCoursesArray.add(courseName);
 		when(courseRepository.createCourseRepo(createCourse)).thenReturn(false);
 		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
-		assertFalse(courseService.CreateCourseService(createCourse));
+		assertFalse(courseService.createCourse(createCourse));
 		assertEquals("Course id exists", createCourse.getCourseCreateMessage());
 	}
 
@@ -134,7 +145,7 @@ public class CourseServiceTest {
 		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
 		when(courseRepository.createCourseRepo(createCourse)).thenReturn(true);
 		assertEquals(courseName, courseRepository.getAllCourses().get(1));
-		assertFalse(courseService.CreateCourseService(createCourse));
+		assertFalse(courseService.createCourse(createCourse));
 		assertEquals("Course name exists", createCourse.getCourseCreateMessage());
 	}
 
@@ -154,10 +165,10 @@ public class CourseServiceTest {
 		allCoursesArray.add(courseName);
 		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
 		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(true);
-		assertTrue(courseService.DeleteCourseService(deleteCourse));
+		assertTrue(courseService.deleteCourse(deleteCourse));
 		assertEquals("Course deleted", deleteCourse.getCourseDeleteMessage());
 		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(false);
-		assertFalse(courseService.DeleteCourseService(deleteCourse));
+		assertFalse(courseService.deleteCourse(deleteCourse));
 		assertEquals("Course does not exist", deleteCourse.getCourseDeleteMessage());
 	}
 
@@ -175,7 +186,8 @@ public class CourseServiceTest {
 		for (int i = 0; i < mainList.get(0).size(); i++) {
 			allCoursesList.put(mainList.get(0).get(i) + " " + mainList.get(1).get(i), mainList.get(0).get(i));
 		}
-		assertEquals(allCoursesList, courseService.CoursesWithIdForDropdown());
-
+		assertEquals(allCoursesList, courseService.coursesWithIdForDropdown());
 	}
+
+
 }

@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.Course.CreateCourse;
-import CSCI5308.GroupFormationTool.Course.ICreateCourse;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -31,7 +29,6 @@ class CreateCourseTest {
          createCourse.setCourseId("B00845449");
          assertEquals("B00845449",createCourse.getCourseId());
     }
-
 
     @Test
     void setCourseId() {

@@ -1,11 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.AdminPanel.AdminService;
-import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
-import CSCI5308.GroupFormationTool.Course.CourseRepository;
-import CSCI5308.GroupFormationTool.Course.CourseService;
-import CSCI5308.GroupFormationTool.Course.DeleteCourse;
-import CSCI5308.GroupFormationTool.Course.IDeleteCourse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -36,7 +30,7 @@ class DeleteCourseTest {
 
         Dictionary testCoursesList = new Hashtable();
         testCoursesList.put("testid testname","testid");
-        when(courseService.CoursesWithIdForDropdown()).thenReturn(testCoursesList);
+        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
         assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
     }
 
@@ -46,7 +40,7 @@ class DeleteCourseTest {
         Dictionary testCoursesList = new Hashtable();
         testCoursesList.put("testid testname","testid");
         deleteCourse.setAllCoursesList(testCoursesList);
-        when(courseService.CoursesWithIdForDropdown()).thenReturn(testCoursesList);
+        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
         assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
     }
 

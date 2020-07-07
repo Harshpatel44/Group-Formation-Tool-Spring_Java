@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.AdminPanel.InstructorAdminRepository;
 import CSCI5308.GroupFormationTool.Injector;
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -40,7 +39,7 @@ public class DeleteCourse implements IDeleteCourse {
 
     @Override
     public Dictionary getAllCoursesList() throws Exception {
-        allCoursesList=Injector.instance().getCourseService().CoursesWithIdForDropdown();
+        allCoursesList=Injector.instance().getCourseService().coursesWithIdForDropdown();
         return allCoursesList;
     }
 

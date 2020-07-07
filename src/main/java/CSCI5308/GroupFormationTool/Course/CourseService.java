@@ -1,9 +1,8 @@
 package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 
-
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
@@ -14,14 +13,14 @@ public class CourseService implements ICourseService {
    private ICourseRepository courseRepository;
 
    public CourseService(){}
-   public CourseService(CourseRepository courseRepository) throws Exception {
-   	Injector.instance().setCourseRepository(courseRepository);
-   }
+	public CourseService(CourseRepository courseRepository) throws Exception {
+	Injector.instance().setCourseRepository(courseRepository);
+	}
 
 	@Override
-	public boolean checkRole(String userType) {
-		boolean roleCheck = true;
-		if(userType.equals(student) || userType.equals(guest)){
+	public boolean roleAllowInstructorAndTA(String userRole) {
+		boolean roleCheck;
+		if(userRole.equals(student) || userRole.equals(guest)){
 			roleCheck=false;
 		}
 		else{
@@ -31,24 +30,44 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public boolean checkUserType(String userType) {
-		boolean user = false;
-		if(userType.equals(instructor))
+	public boolean roleAllowInstructor(String userRole) {
+		boolean flag = false;
+		if(userRole.equals(instructor))
 		{
-			user = true;
+			flag = true;
 		}
-		return user;
-	}
-
-	@Override
-	public String addTa(String taId, String courseId) throws Exception {
-		courseRepository = Injector.instance().getCourseRepository();
-		return courseRepository.addTa(taId,courseId);
+		return flag;
 	}
 
 
 	@Override
-	public Dictionary CoursesWithIdForDropdown() throws Exception {
+	public boolean assignInstructorForCourse(IInstructor instructor){
+		if(Injector.instance().getCourseRepository().assignInstructorForCourse(instructor)){
+			instructor.setInstructorAssignMessage("Instructor assigned");
+			return true;
+		}
+		else{
+			instructor.setInstructorAssignMessage("User does not exist or already an instructor");
+			return false;
+		}
+	}
+
+	@Override
+	public String addTAForCourse(String taId, String courseId) throws Exception {
+		if(Injector.instance().getUserService().checkIfUserExists(taId))
+		{
+			courseRepository = Injector.instance().getCourseRepository();
+			return courseRepository.addTaForCourse(taId,courseId);
+		}
+		else
+		{
+			return "No user exist with Id:"+taId+" present in system.";
+		}
+	}
+
+
+	@Override
+	public Dictionary coursesWithIdForDropdown() throws Exception {
 		ArrayList<ArrayList<String>> tempCourse;
 		ArrayList<String> allCourseIds;
 		ArrayList<String> allCourseNames;
@@ -67,7 +86,7 @@ public class CourseService implements ICourseService {
 	}
 
 	@Override
-	public boolean CreateCourseService(ICreateCourse createCourse) throws Exception {
+	public boolean createCourse(ICreateCourse createCourse) throws Exception {
 		ArrayList<String> allCourseNames = Injector.instance().getCourseRepository().getAllCourses().get(1);
 		for(int i=0;i<allCourseNames.size();i++){
 			if(allCourseNames.get(i).equals(createCourse.getCourseName())){
@@ -86,7 +105,7 @@ public class CourseService implements ICourseService {
 	}
 	
 	@Override
-	public boolean DeleteCourseService(IDeleteCourse deleteCourse) throws Exception {
+	public boolean deleteCourse(IDeleteCourse deleteCourse) throws Exception {
 		if(Injector.instance().getCourseRepository().deleteCourseRepo(deleteCourse)){
 			deleteCourse.setCourseDeleteMessage("Course deleted");
 			deleteCourse.setAllCourseIds(Injector.instance().getCourseRepository().getAllCourses().get(0));

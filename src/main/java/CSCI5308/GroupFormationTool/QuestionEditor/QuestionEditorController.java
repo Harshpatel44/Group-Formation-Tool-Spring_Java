@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,35 +17,21 @@ public class QuestionEditorController{
 
 
 	@RequestMapping("/addQuestion")
-	public ModelAndView addQuestion(@RequestParam(name = "courseId") String courseId,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
-			@RequestParam(name = "courseName") String courseName) {
+	public ModelAndView addQuestion() {
 		ModelAndView mv = new ModelAndView("questionEditorHome");
-		mv.addObject("courseId", courseId);
-		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
-		mv.addObject("courseName", courseName);
 		return mv;
 	}
 
 	@RequestMapping("/createQuestion")
-	public ModelAndView createQuestion(@RequestParam(name = "courseId") String courseId,
-			@RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
-			@RequestParam(name = "courseName") String courseName) throws Exception {
+	public ModelAndView createQuestion() {
 		IQuestionModel questionModel = Injector.instance().getQuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
-		mv.addObject("courseId", courseId);
-		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
-		mv.addObject("courseName", courseName);
 		mv.addObject("questionModel", questionModel);
 		return mv;
 	}
 
 	@RequestMapping("/createOption")
-	public ModelAndView createOption(QuestionModel questionModel, @RequestParam(name = "courseId") String courseId,
-									 @RequestParam(name = "userId") String userId, @RequestParam(name = "userType") String userType,
-									 @RequestParam(name = "courseName") String courseName) {
+	public ModelAndView createOption(QuestionModel questionModel) {
 		ModelAndView mv = new ModelAndView();
 		if (questionModel.getSelectedQuestionType().equals(text)
 				|| questionModel.getSelectedQuestionType().equals(numeric)) {
@@ -54,10 +41,6 @@ public class QuestionEditorController{
 		} else {
 			mv.setViewName("questionEditorOption");
 		}
-		mv.addObject("courseId", courseId);
-		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
-		mv.addObject("courseName", courseName);
 		mv.addObject("questionModel", questionModel);
 		mv.addObject("questionText", questionModel.getQuestionText());
 		mv.addObject("questionTitle", questionModel.getQuestionTitle());
@@ -70,18 +53,11 @@ public class QuestionEditorController{
 										@RequestParam(name = "optionText") String optionText, @RequestParam(name = "rankText") String rankText,
 										@RequestParam(name = "questionText") String questionText,
 										@RequestParam(name = "questionTitle") String questionTitle,
-										@RequestParam(name = "selectedQuestionType") String selectedQuestionType,
-										@RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
-										@RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
-			throws Exception {
-		HashMap<Integer, String> map = QuestionEditorInjector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
+										@RequestParam(name = "selectedQuestionType") String selectedQuestionType) {
+		HashMap<Integer, String> map = Injector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
 		String[] rankList = rankText.split(",");
 		ModelAndView mv = new ModelAndView("questionEditorPreview");
-		mv.addObject("courseId", courseId);
-		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
-		mv.addObject("courseName", courseName);
 		mv.addObject("questionModel", questionModel);
 		mv.addObject("questionText", questionText);
 		mv.addObject("questionTitle", questionTitle);
@@ -96,14 +72,12 @@ public class QuestionEditorController{
 	public ModelAndView questionFinish(QuestionModel questionModel, @RequestParam(name = "ranks") String ranks,
 									   @RequestParam(name = "options") String options, @RequestParam(name = "questionText") String questionText,
 									   @RequestParam(name = "questionTitle") String questionTitle,
-									   @RequestParam(name = "selectedQuestionType") String selectedQuestionType,
-									   @RequestParam(name = "courseId") String courseId, @RequestParam(name = "userId") String userId,
-									   @RequestParam(name = "userType") String userType, @RequestParam(name = "courseName") String courseName)
+									   @RequestParam(name = "selectedQuestionType") String selectedQuestionType)
 			throws Exception {
 		boolean result;
 		String returnMessage = null;
 		if (selectedQuestionType.equals(text) || selectedQuestionType.equals(numeric)) {
-			result = QuestionEditorInjector.instance().getQuestionEditorService().SaveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType, userId);
+			result = Injector.instance().getQuestionEditorService().saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";
@@ -115,7 +89,7 @@ public class QuestionEditorController{
 		}
 		if (selectedQuestionType.equals(MCCM)
 				|| selectedQuestionType.equals(MCCO)) {
-			result = QuestionEditorInjector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks, userId);
+			result = Injector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";
@@ -126,10 +100,6 @@ public class QuestionEditorController{
 			}
 		}
 		ModelAndView mv = new ModelAndView("questionEditorFinish");
-		mv.addObject("courseId", courseId);
-		mv.addObject("userId", userId);
-		mv.addObject("userType", userType);
-		mv.addObject("courseName", courseName);
 		mv.addObject("message", returnMessage);
 		return mv;
 	}
