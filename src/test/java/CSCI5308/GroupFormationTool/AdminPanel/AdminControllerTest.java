@@ -34,13 +34,4 @@ public class AdminControllerTest {
                 .addFilters(new CorsFilter())
                 .build();
     }
-
-
-    @Test
-    void adminPage() throws Exception {
-        mockMvc.perform(
-                get("/admin")
-                        .header("Origin","*")
-                        .accept(MimeTypeUtils.APPLICATION_JSON_VALUE));
-    }
 }
