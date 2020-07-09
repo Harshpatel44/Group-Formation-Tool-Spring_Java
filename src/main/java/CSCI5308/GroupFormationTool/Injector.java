@@ -5,6 +5,10 @@ import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
 
+import CSCI5308.GroupFormationTool.SurveyManager.ISurveyManagerRepository;
+import CSCI5308.GroupFormationTool.SurveyManager.ISurveyManagerService;
+import CSCI5308.GroupFormationTool.SurveyManager.SurveyManagerRepository;
+import CSCI5308.GroupFormationTool.SurveyManager.SurveyManagerService;
 import CSCI5308.GroupFormationTool.UserAuthentication.*;
 
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
@@ -91,6 +95,9 @@ public class Injector {
 	private IUserPasswordPolicyService userPasswordPolicyService;
 	private IUserPasswordPolicyRepository userPasswordPolicyRepository;
 
+	private ISurveyManagerService surveyManagerService;
+	private ISurveyManagerRepository surveyManagerRepository;
+
 	private Injector(){
 
 		dbConfiguration = new DBConfiguration();
@@ -129,6 +136,9 @@ public class Injector {
 		questionEditorService = new QuestionEditorService();
 		questionEditorRepository = new QuestionEditorRepository();
 		rankFunctionsService = new RankFunctionsService();
+
+		surveyManagerService = new SurveyManagerService();
+		surveyManagerRepository = new SurveyManagerRepository();
 	}
 
 	public IRankFunctionsService getRankFunctionsService() {
@@ -360,4 +370,13 @@ public class Injector {
 	public IQuestionModel getQuestionModel() { return questionModel; }
 
 	public void setQuestionModel(IQuestionModel questionModel) { this.questionModel = questionModel; }
+
+	public ISurveyManagerService getSurveyManagerService() { return surveyManagerService; }
+
+	public void setSurveyManagerService(ISurveyManagerService surveyManagerService) { this.surveyManagerService = surveyManagerService; }
+
+	public ISurveyManagerRepository getSurveyManagerRepository() { return surveyManagerRepository; }
+
+	public void setSurveyManagerRepository(ISurveyManagerRepository surveyManagerRepository) { this.surveyManagerRepository = surveyManagerRepository; }
+
 }

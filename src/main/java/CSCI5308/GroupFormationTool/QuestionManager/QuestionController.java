@@ -13,7 +13,9 @@ public class QuestionController {
     String sortType = "unsorted";
     @RequestMapping("/questionManager")
     public ModelAndView questionManager(){
+        String bannerID = CurrentUser.instance().getBannerId();
         ModelAndView model=new ModelAndView("questionManager");
+        model.addObject("userId",bannerID);
         model.setViewName("questionManager");
         return model;
     }

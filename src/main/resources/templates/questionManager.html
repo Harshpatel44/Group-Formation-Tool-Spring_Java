@@ -39,6 +39,11 @@
                         <button type="submit" class="submit-button" name="save">Course Home</button>
                     </div>
                 </form>
+                <form class="nav-bar-element" th:action="@{/surveyQuestion}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Survey</button>
+                    </div>
+                </form>
             </div>
         </li>
     </ul>
@@ -54,5 +59,6 @@
             <button type="submit" name="save" class="submit-button">Add Question</button>
         </form>
     </li>
+</ul>
 </body>
 </html>

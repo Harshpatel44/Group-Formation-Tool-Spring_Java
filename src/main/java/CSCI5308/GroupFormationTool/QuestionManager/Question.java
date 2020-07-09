@@ -7,6 +7,8 @@ public class Question implements IQuestion {
     private Integer questionId;
     private String questionDescription;
     private Date date;
+    private Integer flag;
+
     @Override
     public String getQuestionDescription() {
         return questionDescription;
@@ -39,6 +41,10 @@ public class Question implements IQuestion {
     public void setDate(Date date) {
         this.date = date;
     }
+    @Override
+    public void setFlag(int flag) { this.flag = flag; }
+    @Override
+    public Integer getFlag() { return flag; }
 }
 
 
