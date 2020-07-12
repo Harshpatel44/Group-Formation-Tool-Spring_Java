@@ -11,6 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
+import java.time.LocalDateTime;
 
 public class SurveyManagerRepository implements ISurveyManagerRepository{
 
@@ -70,12 +72,16 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     @Override
     public void AddQuestionToSurvey(Integer questionId) {
         try{
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime datetime = LocalDateTime.now();
+            System.out.println(dtf.format(datetime));
             String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
-            StoredProcedure sp = new StoredProcedure("AddQuestionToSurvey(?,?,?)");
+            StoredProcedure sp = new StoredProcedure("AddQuestionToSurvey(?,?,?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
             sp.setParameter(3,questionId);
+            sp.setParameter(4,dtf.format(datetime));
             sp.execute();
             sp.cleanup();
         }catch (SQLException throwables) {
