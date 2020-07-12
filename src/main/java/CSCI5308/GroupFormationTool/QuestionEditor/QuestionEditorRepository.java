@@ -85,11 +85,14 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
                     storedProcedure3.setParameter("ranks", rankList[i]);
                     storedProcedure3.setParameter("optionsDesc", optionList[i]);
                     storedProcedure3.execute();
-                    return true;
                 }
+                return true;
             }catch (Exception e){
                 e.printStackTrace();
             }finally {
+                if(storedProcedure!=null){
+                    storedProcedure.cleanup();
+                }
                 if(storedProcedure2!=null){
                     storedProcedure2.cleanup();
                 }

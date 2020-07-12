@@ -1,0 +1,291 @@
+<html><head><title>sql_script - 30-05-20.sql</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body>
+<h3>File: D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\databases\sql_script - 30-05-20.sql</h3>
+<SCRIPT>
+ defaultStatus = "File: D:\\Project Works\\Web\\Github\\Group formation tool\\Git Repo2\\group9\\databases\\sql_script - 30-05-20.sql";
+top.document.title  = "sql_script - 30-05-20.sql";
+</SCRIPT>
+<pre><a name="1"><font size=-1>1     </font></a>-- MySQL dump 10.13  Distrib 8.0.17, for Win64 (x86_64)
+<a name="2"><font size=-1>2     </font></a>--
+<a name="3"><font size=-1>3     </font></a>-- Host: db-5308.cs.dal.ca    Database: CSCI5308_9_DEVINT
+<a name="4"><font size=-1>4     </font></a>-- ------------------------------------------------------
+<a name="5"><font size=-1>5     </font></a>-- Server version	5.5.5-10.3.21-MariaDB
+<a name="6"><font size=-1>6     </font></a>
+<a name="7"><font size=-1>7     </font></a>/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+<a name="8"><font size=-1>8     </font></a>/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+<a name="9"><font size=-1>9     </font></a>/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+<a name="10"><font size=-1>10     </font></a>/*!50503 SET NAMES utf8 */;
+<a name="11"><font size=-1>11     </font></a>/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
+<a name="12"><font size=-1>12     </font></a>/*!40103 SET TIME_ZONE='+00:00' */;
+<a name="13"><font size=-1>13     </font></a>/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
+<a name="14"><font size=-1>14     </font></a>/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+<a name="15"><font size=-1>15     </font></a>/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+<a name="16"><font size=-1>16     </font></a>/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+<a name="17"><font size=-1>17     </font></a>
+<a name="18"><font size=-1>18     </font></a>--
+<a name="19"><font size=-1>19     </font></a>-- Table structure for table `adminUser`
+<a name="20"><font size=-1>20     </font></a>--
+<a name="21"><font size=-1>21     </font></a>
+<a name="22"><font size=-1>22     </font></a>DROP TABLE IF EXISTS `adminUser`;
+<a name="23"><font size=-1>23     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="24"><font size=-1>24     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="25"><font size=-1>25     </font></a>CREATE TABLE `adminUser` (
+<a name="26"><font size=-1>26     </font></a>  `adminId` varchar(10) NOT NULL,
+<a name="27"><font size=-1>27     </font></a>  PRIMARY KEY (`adminId`),
+<a name="28"><font size=-1>28     </font></a>  CONSTRAINT `adminUser_ibfk_1` FOREIGN KEY (`adminId`) REFERENCES `users` (`userId`)
+<a name="29"><font size=-1>29     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="30"><font size=-1>30     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="31"><font size=-1>31     </font></a>
+<a name="32"><font size=-1>32     </font></a>--
+<a name="33"><font size=-1>33     </font></a>-- Dumping data for table `adminUser`
+<a name="34"><font size=-1>34     </font></a>--
+<a name="35"><font size=-1>35     </font></a>
+<a name="36"><font size=-1>36     </font></a>LOCK TABLES `adminUser` WRITE;
+<a name="37"><font size=-1>37     </font></a>/*!40000 ALTER TABLE `adminUser` DISABLE KEYS */;
+<a name="38"><font size=-1>38     </font></a>/*!40000 ALTER TABLE `adminUser` ENABLE KEYS */;
+<a name="39"><font size=-1>39     </font></a>UNLOCK TABLES;
+<a name="40"><font size=-1>40     </font></a>
+<a name="41"><font size=-1>41     </font></a>--
+<a name="42"><font size=-1>42     </font></a>-- Table structure for table `assistantCourse`
+<a name="43"><font size=-1>43     </font></a>--
+<a name="44"><font size=-1>44     </font></a>
+<a name="45"><font size=-1>45     </font></a>DROP TABLE IF EXISTS `assistantCourse`;
+<a name="46"><font size=-1>46     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="47"><font size=-1>47     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="48"><font size=-1>48     </font></a>CREATE TABLE `assistantCourse` (
+<a name="49"><font size=-1>49     </font></a>  `courseId` varchar(10) DEFAULT NULL,
+<a name="50"><font size=-1>50     </font></a>  `assistantId` varchar(10) DEFAULT NULL,
+<a name="51"><font size=-1>51     </font></a>  KEY `assistantId` (`assistantId`),
+<a name="52"><font size=-1>52     </font></a>  KEY `courseId` (`courseId`),
+<a name="53"><font size=-1>53     </font></a>  CONSTRAINT `assistantCourse_ibfk_1` FOREIGN KEY (`assistantId`) REFERENCES `teachingAssistant` (`assistantId`),
+<a name="54"><font size=-1>54     </font></a>  CONSTRAINT `assistantCourse_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`)
+<a name="55"><font size=-1>55     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="56"><font size=-1>56     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="57"><font size=-1>57     </font></a>
+<a name="58"><font size=-1>58     </font></a>--
+<a name="59"><font size=-1>59     </font></a>-- Dumping data for table `assistantCourse`
+<a name="60"><font size=-1>60     </font></a>--
+<a name="61"><font size=-1>61     </font></a>
+<a name="62"><font size=-1>62     </font></a>LOCK TABLES `assistantCourse` WRITE;
+<a name="63"><font size=-1>63     </font></a>/*!40000 ALTER TABLE `assistantCourse` DISABLE KEYS */;
+<a name="64"><font size=-1>64     </font></a>INSERT INTO `assistantCourse` VALUES ('CSCI3','B00234561');
+<a name="65"><font size=-1>65     </font></a>/*!40000 ALTER TABLE `assistantCourse` ENABLE KEYS */;
+<a name="66"><font size=-1>66     </font></a>UNLOCK TABLES;
+<a name="67"><font size=-1>67     </font></a>
+<a name="68"><font size=-1>68     </font></a>--
+<a name="69"><font size=-1>69     </font></a>-- Table structure for table `course`
+<a name="70"><font size=-1>70     </font></a>--
+<a name="71"><font size=-1>71     </font></a>
+<a name="72"><font size=-1>72     </font></a>DROP TABLE IF EXISTS `course`;
+<a name="73"><font size=-1>73     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="74"><font size=-1>74     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="75"><font size=-1>75     </font></a>CREATE TABLE `course` (
+<a name="76"><font size=-1>76     </font></a>  `courseId` varchar(10) NOT NULL,
+<a name="77"><font size=-1>77     </font></a>  `courseName` varchar(30) DEFAULT NULL,
+<a name="78"><font size=-1>78     </font></a>  PRIMARY KEY (`courseId`)
+<a name="79"><font size=-1>79     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="80"><font size=-1>80     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="81"><font size=-1>81     </font></a>
+<a name="82"><font size=-1>82     </font></a>--
+<a name="83"><font size=-1>83     </font></a>-- Dumping data for table `course`
+<a name="84"><font size=-1>84     </font></a>--
+<a name="85"><font size=-1>85     </font></a>
+<a name="86"><font size=-1>86     </font></a>LOCK TABLES `course` WRITE;
+<a name="87"><font size=-1>87     </font></a>/*!40000 ALTER TABLE `course` DISABLE KEYS */;
+<a name="88"><font size=-1>88     </font></a>INSERT INTO `course` VALUES ('123','Data'),('231','Mobile'),('CSCI1','course1'),('CSCI2','course2'),('CSCI3','course3');
+<a name="89"><font size=-1>89     </font></a>/*!40000 ALTER TABLE `course` ENABLE KEYS */;
+<a name="90"><font size=-1>90     </font></a>UNLOCK TABLES;
+<a name="91"><font size=-1>91     </font></a>
+<a name="92"><font size=-1>92     </font></a>--
+<a name="93"><font size=-1>93     </font></a>-- Table structure for table `instructor`
+<a name="94"><font size=-1>94     </font></a>--
+<a name="95"><font size=-1>95     </font></a>
+<a name="96"><font size=-1>96     </font></a>DROP TABLE IF EXISTS `instructor`;
+<a name="97"><font size=-1>97     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="98"><font size=-1>98     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="99"><font size=-1>99     </font></a>CREATE TABLE `instructor` (
+<a name="100"><font size=-1>100     </font></a>  `instructorId` varchar(10) NOT NULL,
+<a name="101"><font size=-1>101     </font></a>  PRIMARY KEY (`instructorId`),
+<a name="102"><font size=-1>102     </font></a>  CONSTRAINT `instructor_ibfk_1` FOREIGN KEY (`instructorId`) REFERENCES `users` (`userId`)
+<a name="103"><font size=-1>103     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="104"><font size=-1>104     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="105"><font size=-1>105     </font></a>
+<a name="106"><font size=-1>106     </font></a>--
+<a name="107"><font size=-1>107     </font></a>-- Dumping data for table `instructor`
+<a name="108"><font size=-1>108     </font></a>--
+<a name="109"><font size=-1>109     </font></a>
+<a name="110"><font size=-1>110     </font></a>LOCK TABLES `instructor` WRITE;
+<a name="111"><font size=-1>111     </font></a>/*!40000 ALTER TABLE `instructor` DISABLE KEYS */;
+<a name="112"><font size=-1>112     </font></a>INSERT INTO `instructor` VALUES ('B00123456');
+<a name="113"><font size=-1>113     </font></a>/*!40000 ALTER TABLE `instructor` ENABLE KEYS */;
+<a name="114"><font size=-1>114     </font></a>UNLOCK TABLES;
+<a name="115"><font size=-1>115     </font></a>
+<a name="116"><font size=-1>116     </font></a>--
+<a name="117"><font size=-1>117     </font></a>-- Table structure for table `instructorCourse`
+<a name="118"><font size=-1>118     </font></a>--
+<a name="119"><font size=-1>119     </font></a>
+<a name="120"><font size=-1>120     </font></a>DROP TABLE IF EXISTS `instructorCourse`;
+<a name="121"><font size=-1>121     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="122"><font size=-1>122     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="123"><font size=-1>123     </font></a>CREATE TABLE `instructorCourse` (
+<a name="124"><font size=-1>124     </font></a>  `courseId` varchar(10) DEFAULT NULL,
+<a name="125"><font size=-1>125     </font></a>  `instructorId` varchar(10) DEFAULT NULL,
+<a name="126"><font size=-1>126     </font></a>  KEY `instructorId` (`instructorId`),
+<a name="127"><font size=-1>127     </font></a>  KEY `courseId` (`courseId`),
+<a name="128"><font size=-1>128     </font></a>  CONSTRAINT `instructorCourse_ibfk_1` FOREIGN KEY (`instructorId`) REFERENCES `instructor` (`instructorId`),
+<a name="129"><font size=-1>129     </font></a>  CONSTRAINT `instructorCourse_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`)
+<a name="130"><font size=-1>130     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="131"><font size=-1>131     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="132"><font size=-1>132     </font></a>
+<a name="133"><font size=-1>133     </font></a>--
+<a name="134"><font size=-1>134     </font></a>-- Dumping data for table `instructorCourse`
+<a name="135"><font size=-1>135     </font></a>--
+<a name="136"><font size=-1>136     </font></a>
+<a name="137"><font size=-1>137     </font></a>LOCK TABLES `instructorCourse` WRITE;
+<a name="138"><font size=-1>138     </font></a>/*!40000 ALTER TABLE `instructorCourse` DISABLE KEYS */;
+<a name="139"><font size=-1>139     </font></a>INSERT INTO `instructorCourse` VALUES ('CSCI2','B00123456');
+<a name="140"><font size=-1>140     </font></a>/*!40000 ALTER TABLE `instructorCourse` ENABLE KEYS */;
+<a name="141"><font size=-1>141     </font></a>UNLOCK TABLES;
+<a name="142"><font size=-1>142     </font></a>
+<a name="143"><font size=-1>143     </font></a>--
+<a name="144"><font size=-1>144     </font></a>-- Table structure for table `student`
+<a name="145"><font size=-1>145     </font></a>--
+<a name="146"><font size=-1>146     </font></a>
+<a name="147"><font size=-1>147     </font></a>DROP TABLE IF EXISTS `student`;
+<a name="148"><font size=-1>148     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="149"><font size=-1>149     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="150"><font size=-1>150     </font></a>CREATE TABLE `student` (
+<a name="151"><font size=-1>151     </font></a>  `studentId` varchar(10) NOT NULL,
+<a name="152"><font size=-1>152     </font></a>  `programName` varchar(100) DEFAULT NULL,
+<a name="153"><font size=-1>153     </font></a>  PRIMARY KEY (`studentId`),
+<a name="154"><font size=-1>154     </font></a>  CONSTRAINT `student_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `users` (`userId`)
+<a name="155"><font size=-1>155     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="156"><font size=-1>156     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="157"><font size=-1>157     </font></a>
+<a name="158"><font size=-1>158     </font></a>--
+<a name="159"><font size=-1>159     </font></a>-- Dumping data for table `student`
+<a name="160"><font size=-1>160     </font></a>--
+<a name="161"><font size=-1>161     </font></a>
+<a name="162"><font size=-1>162     </font></a>LOCK TABLES `student` WRITE;
+<a name="163"><font size=-1>163     </font></a>/*!40000 ALTER TABLE `student` DISABLE KEYS */;
+<a name="164"><font size=-1>164     </font></a>INSERT INTO `student` VALUES ('123','data'),('B00123456','MACS'),('B00234561','MEC'),('B00345612','MCS');
+<a name="165"><font size=-1>165     </font></a>/*!40000 ALTER TABLE `student` ENABLE KEYS */;
+<a name="166"><font size=-1>166     </font></a>UNLOCK TABLES;
+<a name="167"><font size=-1>167     </font></a>
+<a name="168"><font size=-1>168     </font></a>--
+<a name="169"><font size=-1>169     </font></a>-- Table structure for table `studentCourse`
+<a name="170"><font size=-1>170     </font></a>--
+<a name="171"><font size=-1>171     </font></a>
+<a name="172"><font size=-1>172     </font></a>DROP TABLE IF EXISTS `studentCourse`;
+<a name="173"><font size=-1>173     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="174"><font size=-1>174     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="175"><font size=-1>175     </font></a>CREATE TABLE `studentCourse` (
+<a name="176"><font size=-1>176     </font></a>  `courseId` varchar(10) DEFAULT NULL,
+<a name="177"><font size=-1>177     </font></a>  `studentId` varchar(10) DEFAULT NULL,
+<a name="178"><font size=-1>178     </font></a>  KEY `studentId` (`studentId`),
+<a name="179"><font size=-1>179     </font></a>  KEY `courseId` (`courseId`),
+<a name="180"><font size=-1>180     </font></a>  CONSTRAINT `studentCourse_ibfk_1` FOREIGN KEY (`studentId`) REFERENCES `student` (`studentId`),
+<a name="181"><font size=-1>181     </font></a>  CONSTRAINT `studentCourse_ibfk_2` FOREIGN KEY (`courseId`) REFERENCES `course` (`courseId`)
+<a name="182"><font size=-1>182     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="183"><font size=-1>183     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="184"><font size=-1>184     </font></a>
+<a name="185"><font size=-1>185     </font></a>--
+<a name="186"><font size=-1>186     </font></a>-- Dumping data for table `studentCourse`
+<a name="187"><font size=-1>187     </font></a>--
+<a name="188"><font size=-1>188     </font></a>
+<a name="189"><font size=-1>189     </font></a>LOCK TABLES `studentCourse` WRITE;
+<a name="190"><font size=-1>190     </font></a>/*!40000 ALTER TABLE `studentCourse` DISABLE KEYS */;
+<a name="191"><font size=-1>191     </font></a>INSERT INTO `studentCourse` VALUES ('CSCI1','B00123456'),('CSCI2','B00234561'),('CSCI3','B00345612');
+<a name="192"><font size=-1>192     </font></a>/*!40000 ALTER TABLE `studentCourse` ENABLE KEYS */;
+<a name="193"><font size=-1>193     </font></a>UNLOCK TABLES;
+<a name="194"><font size=-1>194     </font></a>
+<a name="195"><font size=-1>195     </font></a>--
+<a name="196"><font size=-1>196     </font></a>-- Table structure for table `teachingAssistant`
+<a name="197"><font size=-1>197     </font></a>--
+<a name="198"><font size=-1>198     </font></a>
+<a name="199"><font size=-1>199     </font></a>DROP TABLE IF EXISTS `teachingAssistant`;
+<a name="200"><font size=-1>200     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="201"><font size=-1>201     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="202"><font size=-1>202     </font></a>CREATE TABLE `teachingAssistant` (
+<a name="203"><font size=-1>203     </font></a>  `assistantId` varchar(10) NOT NULL,
+<a name="204"><font size=-1>204     </font></a>  PRIMARY KEY (`assistantId`),
+<a name="205"><font size=-1>205     </font></a>  CONSTRAINT `teachingAssistant_ibfk_1` FOREIGN KEY (`assistantId`) REFERENCES `users` (`userId`)
+<a name="206"><font size=-1>206     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="207"><font size=-1>207     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="208"><font size=-1>208     </font></a>
+<a name="209"><font size=-1>209     </font></a>--
+<a name="210"><font size=-1>210     </font></a>-- Dumping data for table `teachingAssistant`
+<a name="211"><font size=-1>211     </font></a>--
+<a name="212"><font size=-1>212     </font></a>
+<a name="213"><font size=-1>213     </font></a>LOCK TABLES `teachingAssistant` WRITE;
+<a name="214"><font size=-1>214     </font></a>/*!40000 ALTER TABLE `teachingAssistant` DISABLE KEYS */;
+<a name="215"><font size=-1>215     </font></a>INSERT INTO `teachingAssistant` VALUES ('B00234561');
+<a name="216"><font size=-1>216     </font></a>/*!40000 ALTER TABLE `teachingAssistant` ENABLE KEYS */;
+<a name="217"><font size=-1>217     </font></a>UNLOCK TABLES;
+<a name="218"><font size=-1>218     </font></a>
+<a name="219"><font size=-1>219     </font></a>--
+<a name="220"><font size=-1>220     </font></a>-- Table structure for table `userRoles`
+<a name="221"><font size=-1>221     </font></a>--
+<a name="222"><font size=-1>222     </font></a>
+<a name="223"><font size=-1>223     </font></a>DROP TABLE IF EXISTS `userRoles`;
+<a name="224"><font size=-1>224     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="225"><font size=-1>225     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="226"><font size=-1>226     </font></a>CREATE TABLE `userRoles` (
+<a name="227"><font size=-1>227     </font></a>  `userId` varchar(10) DEFAULT NULL,
+<a name="228"><font size=-1>228     </font></a>  `userRole` varchar(20) DEFAULT NULL,
+<a name="229"><font size=-1>229     </font></a>  KEY `userId` (`userId`),
+<a name="230"><font size=-1>230     </font></a>  CONSTRAINT `userRoles_ibfk_1` FOREIGN KEY (`userId`) REFERENCES `users` (`userId`)
+<a name="231"><font size=-1>231     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="232"><font size=-1>232     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="233"><font size=-1>233     </font></a>
+<a name="234"><font size=-1>234     </font></a>--
+<a name="235"><font size=-1>235     </font></a>-- Dumping data for table `userRoles`
+<a name="236"><font size=-1>236     </font></a>--
+<a name="237"><font size=-1>237     </font></a>
+<a name="238"><font size=-1>238     </font></a>LOCK TABLES `userRoles` WRITE;
+<a name="239"><font size=-1>239     </font></a>/*!40000 ALTER TABLE `userRoles` DISABLE KEYS */;
+<a name="240"><font size=-1>240     </font></a>INSERT INTO `userRoles` VALUES ('B00123456','instructor'),('B00123456','student'),('B00234561','TA'),('B00234561','student'),('B00345612','student');
+<a name="241"><font size=-1>241     </font></a>/*!40000 ALTER TABLE `userRoles` ENABLE KEYS */;
+<a name="242"><font size=-1>242     </font></a>UNLOCK TABLES;
+<a name="243"><font size=-1>243     </font></a>
+<a name="244"><font size=-1>244     </font></a>--
+<a name="245"><font size=-1>245     </font></a>-- Table structure for table `users`
+<a name="246"><font size=-1>246     </font></a>--
+<a name="247"><font size=-1>247     </font></a>
+<a name="248"><font size=-1>248     </font></a>DROP TABLE IF EXISTS `users`;
+<a name="249"><font size=-1>249     </font></a>/*!40101 SET @saved_cs_client     = @@character_set_client */;
+<a name="250"><font size=-1>250     </font></a>/*!50503 SET character_set_client = utf8mb4 */;
+<a name="251"><font size=-1>251     </font></a>CREATE TABLE `users` (
+<a name="252"><font size=-1>252     </font></a>  `userId` varchar(10) NOT NULL,
+<a name="253"><font size=-1>253     </font></a>  `passwd` varchar(10) DEFAULT NULL,
+<a name="254"><font size=-1>254     </font></a>  `firstName` varchar(50) DEFAULT NULL,
+<a name="255"><font size=-1>255     </font></a>  `lastName` varchar(50) DEFAULT NULL,
+<a name="256"><font size=-1>256     </font></a>  `email` varchar(50) DEFAULT NULL,
+<a name="257"><font size=-1>257     </font></a>  `contactNo` int(12) DEFAULT NULL,
+<a name="258"><font size=-1>258     </font></a>  PRIMARY KEY (`userId`)
+<a name="259"><font size=-1>259     </font></a>) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+<a name="260"><font size=-1>260     </font></a>/*!40101 SET character_set_client = @saved_cs_client */;
+<a name="261"><font size=-1>261     </font></a>
+<a name="262"><font size=-1>262     </font></a>--
+<a name="263"><font size=-1>263     </font></a>-- Dumping data for table `users`
+<a name="264"><font size=-1>264     </font></a>--
+<a name="265"><font size=-1>265     </font></a>
+<a name="266"><font size=-1>266     </font></a>LOCK TABLES `users` WRITE;
+<a name="267"><font size=-1>267     </font></a>/*!40000 ALTER TABLE `users` DISABLE KEYS */;
+<a name="268"><font size=-1>268     </font></a>INSERT INTO `users` VALUES ('123','123','dhruvesh','patel','dhruvesh@gmail.com',1234567890),('B00123456','pass1','f1','l1','f1@dal.ca',1234567890),('B00234561','pass2','f2','l2','f2@dal.ca',1223646890),('B00345612','pass3','f3','l3','f3@dal.ca',1832453590);
+<a name="269"><font size=-1>269     </font></a>/*!40000 ALTER TABLE `users` ENABLE KEYS */;
+<a name="270"><font size=-1>270     </font></a>UNLOCK TABLES;
+<a name="271"><font size=-1>271     </font></a>/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+<a name="272"><font size=-1>272     </font></a>
+<a name="273"><font size=-1>273     </font></a>/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+<a name="274"><font size=-1>274     </font></a>/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+<a name="275"><font size=-1>275     </font></a>/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+<a name="276"><font size=-1>276     </font></a>/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+<a name="277"><font size=-1>277     </font></a>/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+<a name="278"><font size=-1>278     </font></a>/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+<a name="279"><font size=-1>279     </font></a>/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+<a name="280"><font size=-1>280     </font></a>
+<a name="281"><font size=-1>281     </font></a>-- Dump completed on 2020-05-31  0:54:33
+</pre></body></html>

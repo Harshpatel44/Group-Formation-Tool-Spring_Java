@@ -76,6 +76,7 @@ public class QuestionEditorController{
 			throws Exception {
 		boolean result;
 		String returnMessage = null;
+		System.out.println(options);
 		if (selectedQuestionType.equals(text) || selectedQuestionType.equals(numeric)) {
 			result = Injector.instance().getQuestionEditorService().saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
 			if(result)

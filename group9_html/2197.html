@@ -1,0 +1,40 @@
+<html><head><title>QuestionResponsesRepo.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="sourcestyles.css" />
+</head><body link="blue" vlink="blue">
+<h3>File: D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\src\main\java\CSCI5308\GroupFormationTool\QuestionManager\QuestionResponsesRepo.java</h3>
+<SCRIPT>
+defaultStatus = "File: D:\\Project Works\\Web\\Github\\Group formation tool\\Git Repo2\\group9\\src\\main\\java\\CSCI5308\\GroupFormationTool\\QuestionManager\\QuestionResponsesRepo.java";
+top.document.title  = "QuestionResponsesRepo.java";
+</SCRIPT>
+<pre><span class="default"></span><a name="1"><font size=-1>1     </font></a><span class="default"></span><span class="keyword">package </span><span class="default">CSCI5308.GroupFormationTool.<a href="dictionary_C.html#612">QuestionManager</a>;</span>
+<a name="2"><font size=-1>2     </font></a><span class="default"></span>
+<a name="3"><font size=-1>3     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">CSCI5308.GroupFormationTool.<a href="dictionary_C.html#551">Database</a>.<a href="dictionary_C.html#675">StoredProcedure</a>;</span>
+<a name="4"><font size=-1>4     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">CSCI5308.GroupFormationTool.<a href="dictionary_C.html#612">QuestionManager</a>.<a href="dictionary_C.html#1249">IQuestionResponsesRepo</a>;</span>
+<a name="5"><font size=-1>5     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#42">sql</a>.<a href="dictionary_J.html#549">ResultSet</a>;</span>
+<a name="6"><font size=-1>6     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#42">sql</a>.<a href="dictionary_J.html#32">SQLException</a>;</span>
+<a name="7"><font size=-1>7     </font></a><span class="default"></span><span class="keyword">import </span><span class="default">java.<a href="dictionary_J.html#97">util</a>.<a href="dictionary_J.html#110">ArrayList</a>;</span>
+<a name="8"><font size=-1>8     </font></a><span class="default"></span>
+<a name="9"><font size=-1>9     </font></a><span class="default"></span><span class="keyword">public class <a href="dictionary_C.html#1254">QuestionResponsesRepo</a> implements <a href="dictionary_C.html#1249">IQuestionResponsesRepo</a> </span><span class="default">{</span>
+<a name="10"><font size=-1>10     </font></a><span class="default">    @<a href="dictionary_O.html#174">Override</a></span>
+<a name="11"><font size=-1>11     </font></a><span class="default">    </span><span class="keyword">public <a href="dictionary_J.html#110">ArrayList</a></span><span class="default">&lt;<a href="dictionary_S.html#34">String</a>&gt; <a href="dictionary_C.html#2196">getResponsesOfQuestionIdRepo</a>(<a href="dictionary_I.html#155">Integer</a> <a href="dictionary_C.html#2199">questionId</a>) </span><span class="keyword">throws <a href="dictionary_E.html#29">Exception</a> </span><span class="default">{</span>
+<a name="12"><font size=-1>12     </font></a><span class="default">        <a href="dictionary_J.html#110">ArrayList</a>&lt;<a href="dictionary_S.html#34">String</a>&gt; <a href="dictionary_C.html#2200">responses</a> = </span><span class="keyword">new <a href="dictionary_J.html#110">ArrayList</a></span><span class="default">&lt;&gt;();</span>
+<a name="13"><font size=-1>13     </font></a><span class="default">        <a href="dictionary_C.html#675">StoredProcedure</a> <a href="dictionary_C.html#2202">sp</a> = </span><span class="keyword">new <a href="dictionary_C.html#677">StoredProcedure</a></span><span class="default">(</span><span class="string">&quot;getResponsesByQuestionId(?)&quot;</span><span class="default">);</span>
+<a name="14"><font size=-1>14     </font></a><span class="default">        </span><span class="keyword">try</span><span class="default">{</span>
+<a name="15"><font size=-1>15     </font></a><span class="default">            <a href="dictionary_C.html#2202">sp</a>.<a href="dictionary_S.html#756">setParameter</a>(</span><span class="number">1</span><span class="default">,<a href="dictionary_C.html#2199">questionId</a>);</span>
+<a name="16"><font size=-1>16     </font></a><span class="default">            <a href="dictionary_J.html#549">ResultSet</a> <a href="dictionary_C.html#2201">rs</a>= <a href="dictionary_C.html#2202">sp</a>.<a href="dictionary_C.html#679">executeWithResults</a>();</span>
+<a name="17"><font size=-1>17     </font></a><span class="default">            </span><span class="keyword">while</span><span class="default">(<a href="dictionary_C.html#2201">rs</a>.<a href="dictionary_N.html#502">next</a>()){</span>
+<a name="18"><font size=-1>18     </font></a><span class="default">                <a href="dictionary_C.html#2200">responses</a>.<a href="dictionary_A.html#295">add</a>(<a href="dictionary_C.html#2201">rs</a>.<a href="dictionary_G.html#501">getString</a>(</span><span class="string">&quot;responses&quot;</span><span class="default">));</span>
+<a name="19"><font size=-1>19     </font></a><span class="default">            }</span>
+<a name="20"><font size=-1>20     </font></a><span class="default">        }</span><span class="keyword">catch </span><span class="default">(<a href="dictionary_J.html#32">SQLException</a> <a href="dictionary_C.html#2198">throwables</a>) {</span>
+<a name="21"><font size=-1>21     </font></a><span class="default">            <a href="dictionary_C.html#2198">throwables</a>.<a href="dictionary_P.html#505">printStackTrace</a>();</span>
+<a name="22"><font size=-1>22     </font></a><span class="default">            <a href="dictionary_C.html#2202">sp</a>.<a href="dictionary_C.html#680">cleanup</a>();</span>
+<a name="23"><font size=-1>23     </font></a><span class="default">        }</span>
+<a name="24"><font size=-1>24     </font></a><span class="default">        </span><span class="keyword">finally </span><span class="default">{</span>
+<a name="25"><font size=-1>25     </font></a><span class="default">            <a href="dictionary_C.html#2202">sp</a>.<a href="dictionary_C.html#680">cleanup</a>();</span>
+<a name="26"><font size=-1>26     </font></a><span class="default">        }</span>
+<a name="27"><font size=-1>27     </font></a><span class="default">        </span><span class="keyword">return <a href="dictionary_C.html#2200">responses</a></span><span class="default">;</span>
+<a name="28"><font size=-1>28     </font></a><span class="default">    }</span>
+<a name="29"><font size=-1>29     </font></a><span class="default">}</span>
+<a name="30"><font size=-1>30     </font></a><span class="default"></span>
+</pre></body></html>
