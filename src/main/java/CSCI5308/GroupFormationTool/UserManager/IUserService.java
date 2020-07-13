@@ -13,8 +13,6 @@ public interface IUserService {
 
 	IUser setUserByBannerId(String bannerId, IUser iUser);
 
-	String getCurrentUserBannerID();
-
 	List<String> getAllBannerIds();
 
 	String checkUserRoleForCourse(String bannerID, String courseID);
