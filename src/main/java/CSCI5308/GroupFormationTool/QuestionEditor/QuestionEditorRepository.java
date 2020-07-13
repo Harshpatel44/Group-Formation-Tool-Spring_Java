@@ -11,10 +11,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import static CSCI5308.GroupFormationTool.ApplicationConstants.numeric;
-import static CSCI5308.GroupFormationTool.ApplicationConstants.text;
-import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCO;
-import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCM;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 import static CSCI5308.GroupFormationTool.Injector.instance;
 
 public class QuestionEditorRepository implements IQuestionEditorRepository {
@@ -74,7 +71,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
 
     private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
         try {
-            int roleId = Injector.instance().getUserRepository().getUserRoleIdFromRoleType("instructor");
+            int roleId = Injector.instance().getUserRepository().getUserRoleIdFromRoleType(instructor);
             ArrayList<String> courseIdList = Injector.instance().getCourseRepository().getCoursesOfSpecificUserRole(userId, roleId);
             for(int i = 0;i<courseIdList.size();i++){
                 addQuestionToSurveyTable(userId, qId, questionTitle, courseIdList.get(i), time);
@@ -163,7 +160,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
                     storedProcedure3.cleanup();
                 }
             }
-
         }
         catch (Exception e){
             e.printStackTrace();
