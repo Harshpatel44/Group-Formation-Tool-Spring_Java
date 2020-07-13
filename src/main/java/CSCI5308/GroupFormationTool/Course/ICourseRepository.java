@@ -21,4 +21,5 @@ public interface ICourseRepository {
 
     boolean deleteCourseRepo(IDeleteCourse deleteCourse);
 
+    ArrayList<String> getCoursesOfSpecificUserRole(String userId, int roleId);
 }

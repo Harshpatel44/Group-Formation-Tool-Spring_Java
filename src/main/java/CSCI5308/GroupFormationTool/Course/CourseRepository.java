@@ -198,4 +198,27 @@ public class CourseRepository implements ICourseRepository {
 			return false;
 		}
 	}
+
+	@Override
+	public ArrayList<String> getCoursesOfSpecificUserRole(String userId, int roleId){
+		ArrayList<String> courseIdList = new ArrayList<>();
+		StoredProcedure storedProcedure = null;
+		try{
+			storedProcedure = new StoredProcedure("GetCoursesOfSpecificRole(?,?)");
+			storedProcedure.setParameter("uId",userId);
+			storedProcedure.setParameter("rId",String.valueOf(roleId));
+			ResultSet result = storedProcedure.executeWithResults();
+			while(result.next()){
+				courseIdList.add(result.getString("courseId"));
+			}
+			return courseIdList;
+		}catch (Exception e){
+			e.printStackTrace();
+		}finally {
+			if(storedProcedure!=null){
+				storedProcedure.cleanup();
+			}
+		}
+		return courseIdList;
+	}
 }

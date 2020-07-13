@@ -1,8 +1,11 @@
 package CSCI5308.GroupFormationTool.SurveyManager;
 
+import CSCI5308.GroupFormationTool.Course.CurrentCourse;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 public class SurveyManagerService implements ISurveyManagerService{
@@ -29,13 +32,17 @@ public class SurveyManagerService implements ISurveyManagerService{
     @Override
     public void AddQuestionToSurvey(Integer questionId) {
         surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-        surveyManagerRepository.AddQuestionToSurvey(questionId);
+        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+        LocalDateTime datetime = LocalDateTime.now();
+        String courseId = CurrentCourse.instance().getCurrentCourseId();
+        surveyManagerRepository.AddQuestionToSurvey(questionId,courseId,dtf.format(datetime));
     }
 
     @Override
     public void RemoveQuestionFromSurvey(Integer questionId) {
         surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-        surveyManagerRepository.RemoveQuestionFromSurvey(questionId);
+        String courseId = CurrentCourse.instance().getCurrentCourseId();
+        surveyManagerRepository.RemoveQuestionFromSurvey(questionId,courseId);
     }
 
     @Override
