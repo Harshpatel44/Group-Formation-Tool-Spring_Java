@@ -6,6 +6,7 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -70,18 +71,15 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void AddQuestionToSurvey(Integer questionId) {
+    public void AddQuestionToSurvey(Integer questionId, String courseId,String time) {
         try{
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-            LocalDateTime datetime = LocalDateTime.now();
-            System.out.println(dtf.format(datetime));
-            String courseId = CurrentCourse.instance().getCurrentCourseId();
+            System.out.println(time);
             String userId = CurrentUser.instance().getBannerId();
             StoredProcedure sp = new StoredProcedure("AddQuestionToSurvey(?,?,?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
             sp.setParameter(3,questionId);
-            sp.setParameter(4,dtf.format(datetime));
+            sp.setParameter(4,time);
             sp.execute();
             sp.cleanup();
         }catch (SQLException throwables) {
@@ -92,9 +90,8 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void RemoveQuestionFromSurvey(Integer questionId) {
+    public void RemoveQuestionFromSurvey(Integer questionId,String courseId) {
         try{
-            String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
             StoredProcedure sp = new StoredProcedure("RemoveQuestionFromSurvey(?,?,?)");
             sp.setParameter(1,userId);
