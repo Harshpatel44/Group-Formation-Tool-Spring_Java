@@ -1,5 +1,10 @@
 package CSCI5308.GroupFormationTool;
 
+import CSCI5308.GroupFormationTool.AnswerSurvey.*;
+import CSCI5308.GroupFormationTool.AnswerSurvey.DisplaySurveyResponseRepository;
+import CSCI5308.GroupFormationTool.AnswerSurvey.DisplaySurveyResponseService;
+import CSCI5308.GroupFormationTool.AnswerSurvey.IDisplaySurveyResponseRepository;
+import CSCI5308.GroupFormationTool.AnswerSurvey.IDisplaySurveyResponseService;
 import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
@@ -98,6 +103,28 @@ public class Injector {
 	private ISurveyManagerService surveyManagerService;
 	private ISurveyManagerRepository surveyManagerRepository;
 
+	private IAnswerSurveyService answerSurveyService;
+	private IAnswerSurveyRepository answerSurveyRepository;
+
+	private IDisplaySurveyResponseService displaySurveyResponseService;
+	private IDisplaySurveyResponseRepository displaySurveyResponseRepository;
+
+	public IDisplaySurveyResponseService getDisplaySurveyResponseService() {
+		return displaySurveyResponseService;
+	}
+
+	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
+		this.displaySurveyResponseService = displaySurveyResponseService;
+	}
+
+	public IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository() {
+		return displaySurveyResponseRepository;
+	}
+
+	public void setDisplaySurveyResponseRepository(IDisplaySurveyResponseRepository displaySurveyResponseRepository) {
+		this.displaySurveyResponseRepository = displaySurveyResponseRepository;
+	}
+
 	private Injector(){
 
 		dbConfiguration = new DBConfiguration();
@@ -119,6 +146,8 @@ public class Injector {
 		questionManagerService = new QuestionManagerService();
 		questionResponsesRepo = new QuestionResponsesRepo();
 		questionResponsesService = new QuestionResponsesService();
+		displaySurveyResponseService = new DisplaySurveyResponseService();
+		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
 		user = new User();
 
 		instructor = new Instructor();
@@ -139,6 +168,9 @@ public class Injector {
 
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();
+
+		answerSurveyService = (IAnswerSurveyService) new AnswerSurveyService();
+		answerSurveyRepository = new AnswerSurveyRepository();
 	}
 
 	public IRankFunctionsService getRankFunctionsService() {
@@ -379,4 +411,19 @@ public class Injector {
 
 	public void setSurveyManagerRepository(ISurveyManagerRepository surveyManagerRepository) { this.surveyManagerRepository = surveyManagerRepository; }
 
+	public IAnswerSurveyService getAnswerSurveyService() {
+		return answerSurveyService;
+	}
+
+	public void setAnswerSurveyService(IAnswerSurveyService answerSurveyService) {
+		this.answerSurveyService = answerSurveyService;
+	}
+
+	public IAnswerSurveyRepository getAnswerSurveyRepository() {
+		return answerSurveyRepository;
+	}
+
+	public void setAnswerSurveyRepository(IAnswerSurveyRepository answerSurveyRepository) {
+		this.answerSurveyRepository = answerSurveyRepository;
+	}
 }
