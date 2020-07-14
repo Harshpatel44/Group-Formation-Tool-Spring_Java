@@ -211,3 +211,7 @@ th{
 .homepage_table td{
     border-right:1px solid #05386b;
 }
+.card{
+    border: 1px solid black;
+    margin: 20px;
+}

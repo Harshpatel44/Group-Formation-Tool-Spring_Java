@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Student Response</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+</head>
+<body>
+    <h3>In student Response page</h3>
+    <div th:each="user : ${bannerIds}">
+        <a th:href="'displayResponse/'+${user}"><p th:text="${user}" th:name="bannerId"></p></a>
+    </div>
+
+    <div th:each="question: ${response}">
+        <h3 th:text="${question.getSurveyQuestionDescription()}"></h3>
+        <p th:text="${question.getSurveyAnswers()}"></p>
+    </div>
+
+</body>
+</html>

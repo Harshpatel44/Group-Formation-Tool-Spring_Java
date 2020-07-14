@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+</head>
+<body>
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div th:text="${courseId}">
+                Course Admin panel
+            </div>
+        </li>
+    </ul>
+</div>
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, <span th:text="${bannerId}" />
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/home}" method="post">
+                    <button type="submit" name="questionmanager" class="submit-button">Home page</button>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+<div>
+    <h2 align="center">Survey Form</h2>
+    <form th:action ="@{/survey}" th:object = "${surveyAnswer}" method="post">
+        <div th:each="question : ${questions}">
+            <p th:text = "${question.surveyQuestionTopic}" th:for="${question.surveyQuestionId}"/>
+            <label  th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
+            <br/><br/>
+            <div th:switch = "${question.surveyQuestionType}">
+
+                <div th:case="'txt'">
+                    <input th:id="${question.surveyQuestionId}" type="text" placeholder="Enter Your Answer" required/>
+                </div>
+
+                <div th:case="'numeric'">
+                    <input th:id="${question.surveyQuestionId}" type="number" placeholder="Enter Number" required/>
+                </div>
+
+                <div th:case="'mcqm'">
+                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                        <input th:id="${option}" th:text="${option}"  type="checkbox"  th:name="option" />
+                    </div>
+                </div>
+
+                <div th:case="'mcqs'">
+                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                        <input th:id="${option}"  th:text="${option}" th:name="option" type="radio" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>
