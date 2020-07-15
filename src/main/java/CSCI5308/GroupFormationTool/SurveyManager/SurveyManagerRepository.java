@@ -8,14 +8,15 @@ import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.springframework.format.annotation.DateTimeFormat;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.logging.FileHandler;
 
 public class SurveyManagerRepository implements ISurveyManagerRepository{
 
@@ -86,7 +87,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void RemoveQuestionFromSurvey(Integer questionId) {
+    public void RemoveQuestionFromSurvey(Integer questionId){
         try{
             String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
@@ -104,7 +105,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void PublishSurvey() {
+    public void PublishSurvey(){
         try{
             String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
@@ -121,7 +122,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public boolean checkPublish() {
+    public boolean checkPublish(){
         boolean isPublished = false;
         try {
             String courseId = CurrentCourse.instance().getCurrentCourseId();
@@ -137,9 +138,9 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
             LOG.info("Operation = CheckPublish, Status = Success ");
         }
         catch (SQLException throwables) {
-            LOG.error("Status = Failed, Error Message="+throwables.getMessage());
+            LOG.error("Operation = CheckPublish, Status = Failed, Error Message="+throwables.getMessage());
         } catch (Exception e) {
-            LOG.error("Status = Failed, Error Message="+e.getMessage());
+            LOG.error("Operation = CheckPublish, Status = Failed, Error Message="+e.getMessage());
         }
         return isPublished;
     }
