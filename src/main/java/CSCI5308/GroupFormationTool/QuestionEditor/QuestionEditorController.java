@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -15,6 +14,9 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCM;
 @Controller
 public class QuestionEditorController{
 
+	private IQuestionEditorAbstractFactory questionEditorAbstractFactory = Injector.instance().getQuestionEditorAbstractFactory();
+	private IRankFunctionsService rankFunctionsService = Injector.instance().getRankFunctionsService();
+	private IQuestionEditorService questionEditorService = Injector.instance().getQuestionEditorService();
 
 	@RequestMapping("/addQuestion")
 	public ModelAndView addQuestion() {
@@ -24,7 +26,7 @@ public class QuestionEditorController{
 
 	@RequestMapping("/createQuestion")
 	public ModelAndView createQuestion() {
-		IQuestionModel questionModel = Injector.instance().getQuestionModel();
+		IQuestionModel questionModel = questionEditorAbstractFactory.getQuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
 		mv.addObject("questionModel", questionModel);
 		return mv;
@@ -54,7 +56,7 @@ public class QuestionEditorController{
 										@RequestParam(name = "questionText") String questionText,
 										@RequestParam(name = "questionTitle") String questionTitle,
 										@RequestParam(name = "selectedQuestionType") String selectedQuestionType) {
-		HashMap<Integer, String> map = Injector.instance().getRankFunctionsService().arrangeOptionsBasedOnRank(optionText, rankText);
+		HashMap<Integer, String> map = rankFunctionsService.arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
 		String[] rankList = rankText.split(",");
 		ModelAndView mv = new ModelAndView("questionEditorPreview");
@@ -77,7 +79,7 @@ public class QuestionEditorController{
 		boolean result;
 		String returnMessage = null;
 		if (selectedQuestionType.equals(text) || selectedQuestionType.equals(numeric)) {
-			result = Injector.instance().getQuestionEditorService().saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
+			result =questionEditorService.saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";
@@ -89,7 +91,7 @@ public class QuestionEditorController{
 		}
 		if (selectedQuestionType.equals(MCCM)
 				|| selectedQuestionType.equals(MCCO)) {
-			result = Injector.instance().getQuestionEditorService().saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks);
+			result = questionEditorService.saveQuestionForMultipleChoiceService(questionText, questionTitle, selectedQuestionType, options, ranks);
 			if(result)
 			{
 				returnMessage="Question submitted successfully";

@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,10 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 @Service
 public class UserService implements IUserService {
 	private Pattern pattern;
-	private IUserRepository userRepository;
-	private IPasswordEncryptor iPasswordEncryptor;
 	private Matcher matcher;
-
+	private IUserRepository userRepository = Injector.instance().getUserRepository();
+	private IPasswordEncryptor iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
+	private IUserPasswordPolicyService passwordPolicyService = Injector.instance().getUserPasswordPolicyService();
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
@@ -33,8 +34,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean createUser(IUser user) throws ServiceLayerException{
 		Boolean success;
-		userRepository = Injector.instance().getUserRepository();
-		iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
+
 		boolean bannerIdExists = userRepository.checkIfUserExists(user.getBannerId());
 
 		Map<String, String> validationErrors = checkAllValidations(user);
@@ -95,7 +95,7 @@ public class UserService implements IUserService {
 			if (!user.getPassword().equals(user.getConfirmPassword())) {
 				errors.put("confirmPassword", "Passwords and confirm password Does not match");
 			} else {
-				Injector.instance().getUserPasswordPolicyService().checkPasswordValidation(user.getPassword(), errors);
+				passwordPolicyService.checkPasswordValidation(user.getPassword(), errors);
 			}
 		}
 		return errors;
@@ -121,7 +121,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public boolean checkIfUserExists(String bannerID){
-		if(Injector.instance().getUserRepository().checkIfUserExists(bannerID)){
+		if(userRepository.checkIfUserExists(bannerID)){
 			return true;
 		}
 		else{
@@ -131,22 +131,22 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
-		return Injector.instance().getUserRepository().setUserByBannerId(bannerId,iUser);
+		return userRepository.setUserByBannerId(bannerId,iUser);
 	}
 
 	@Override
 	public List<String> getAllBannerIds(){
-		return Injector.instance().getUserRepository().getAllBannerIds();
+		return userRepository.getAllBannerIds();
 	}
 
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
-		return Injector.instance().getUserRepository().checkUserRoleForCourse(bannerID,courseID);
+		return userRepository.checkUserRoleForCourse(bannerID,courseID);
 	}
 
 	@Override
 	public boolean checkIfUserIsGuest(String bannerID){
-		return Injector.instance().getUserRepository().checkIfUserIsGuest(bannerID);
+		return userRepository.checkIfUserIsGuest(bannerID);
 	}
 
 	@Override
@@ -157,7 +157,7 @@ public class UserService implements IUserService {
 			CurrentUser.instance().setLastName(admin);
 		}else{
 				IUser iUser = new User();
-				iUser = Injector.instance().getUserRepository().setUserByBannerId(bannerID,iUser);
+				iUser = userRepository.setUserByBannerId(bannerID,iUser);
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());

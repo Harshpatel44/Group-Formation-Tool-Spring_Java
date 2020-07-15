@@ -22,8 +22,8 @@ import java.util.Map;
 @Controller
 public class AdminController{
 
-	@GetMapping("/admin")
 
+	@GetMapping("/admin")
 	public ModelAndView adminPage(HttpServletRequest request) throws Exception {
 		ICreateCourse createCourse = Injector.instance().getCreateCourse();
 		IDeleteCourse deleteCourse = Injector.instance().getDeleteCourse();

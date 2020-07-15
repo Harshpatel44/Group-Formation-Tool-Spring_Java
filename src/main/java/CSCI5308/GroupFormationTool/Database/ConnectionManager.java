@@ -15,7 +15,7 @@ public class ConnectionManager
 	private String password;
 
 	private ConnectionManager() throws Exception {
-		dbConfiguration = Injector.instance().getDbConfiguration();	
+		dbConfiguration = Injector.instance().getDatabaseAbstractFactory().createDBConfiguration();
 		url = dbConfiguration.getDBURL();
 		userName = dbConfiguration.getDBUserName();
 		password = dbConfiguration.getDBPassword();
