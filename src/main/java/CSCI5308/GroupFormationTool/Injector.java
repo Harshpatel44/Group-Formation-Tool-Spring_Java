@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
+import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
@@ -107,6 +108,14 @@ public class Injector {
 
 	public void setQuestionEditorAbstractFactory(IQuestionEditorAbstractFactory questionEditorAbstractFactory) {
 		this.questionEditorAbstractFactory = questionEditorAbstractFactory;
+	}
+
+	public IDatabaseAbstractFactory getDatabaseAbstractFactory() {
+		return databaseAbstractFactory;
+	}
+
+	public void setDatabaseAbstractFactory(IDatabaseAbstractFactory databaseAbstractFactory) {
+		this.databaseAbstractFactory = databaseAbstractFactory;
 	}
 
 	private Injector(){

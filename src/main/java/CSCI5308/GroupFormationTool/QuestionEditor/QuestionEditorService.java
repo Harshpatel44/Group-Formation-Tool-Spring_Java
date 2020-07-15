@@ -12,11 +12,13 @@ public class QuestionEditorService implements IQuestionEditorService {
         CurrentUser.instance().setInstance(currentUser);
     }
 
+    private IQuestionEditorRepository questionEditorRepository = new QuestionEditorRepository();
+
     @Override
     public Boolean saveQuestionServiceForTextAndNumeric(String questionText,String questionTitle,String selectedQuestionType){
         String bannerID = CurrentUser.instance().getBannerId();
         try {
-            if(Injector.instance().getQuestionEditorRepository().SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,bannerID)){
+            if(questionEditorRepository.SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,bannerID)){
                 return true;
             }
             else{
@@ -31,7 +33,7 @@ public class QuestionEditorService implements IQuestionEditorService {
     @Override
     public Boolean saveQuestionForMultipleChoiceService(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks) throws Exception {
         String bannerID = CurrentUser.instance().getBannerId();
-        if(Injector.instance().getQuestionEditorRepository().SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,bannerID)){
+        if(questionEditorRepository.SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,bannerID)){
             return true;
         }
         else{
