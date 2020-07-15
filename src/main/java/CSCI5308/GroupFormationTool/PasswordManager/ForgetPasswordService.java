@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.PasswordManager;
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
+import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -54,7 +55,7 @@ public class ForgetPasswordService implements IForgetPasswordService {
 
     @Override
     public boolean updatePassword(String bannerID, String newPassword) throws Exception {
-        BCryptEncryption encryption = new BCryptEncryption();
+        IPasswordEncryptor encryption = ;
         return Injector.instance().getForgetPasswordRepository().updatePassword(bannerID, encryption.encoder(newPassword));
     }
 

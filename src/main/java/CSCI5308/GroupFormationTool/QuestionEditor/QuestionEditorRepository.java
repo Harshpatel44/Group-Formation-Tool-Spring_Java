@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 
-
 public class QuestionEditorRepository implements IQuestionEditorRepository {
 
     private IDatabaseAbstractFactory databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
@@ -27,7 +26,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         String questionType = changeQuestionTypeName(selectedQuestionType);
         StoredProcedure storedProcedure = null;
         try {
-            DateTimeFormatter dtf = questionEditorAbstractFactory.getDateTimeFormat();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime datetime = LocalDateTime.now();
             String time = dtf.format(datetime);
             storedProcedure = databaseAbstractFactory.createStoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
@@ -135,7 +134,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         StoredProcedure storedProcedure3 = null;
         String questionType = changeQuestionTypeName(selectedQuestionType);
         try {
-            DateTimeFormatter dtf = questionEditorAbstractFactory.getDateTimeFormat();
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime datetime = LocalDateTime.now();
             String time = dtf.format(datetime);
             storedProcedure = databaseAbstractFactory.createStoredProcedure("SaveQuestionToDB(?,?,?,?,?)");

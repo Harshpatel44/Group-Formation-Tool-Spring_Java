@@ -23,6 +23,7 @@ public class UserService implements IUserService {
 	private IUserRepository userRepository = Injector.instance().getUserRepository();
 	private IPasswordEncryptor iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
 	private IUserPasswordPolicyService passwordPolicyService = Injector.instance().getUserPasswordPolicyService();
+	private IUserManagerAbstractFactory userManagerAbstractFactory = Injector.instance().getUserManagerAbstractFactory();
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
@@ -109,7 +110,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
-		IUser iUser = new User();
+		IUser iUser = userManagerAbstractFactory.getUser();
 		iUser.setFirstName(firstName);
 		iUser.setLastName(lastName);
 		iUser.setPassword(password);
