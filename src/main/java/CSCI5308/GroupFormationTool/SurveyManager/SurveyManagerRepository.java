@@ -6,6 +6,8 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.ResultSet;
@@ -19,7 +21,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
     private List<IQuestion> AlreadyQuestionList = new ArrayList<IQuestion>();
     private List<IQuestion> NotAddedQuestionList = new ArrayList<IQuestion>();
-
+    private static final Logger LOG = LogManager.getLogger();
 
     @Override
     public void getSurveyQuestions() throws Exception {
@@ -31,19 +33,12 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
             StoredProcedure sp = new StoredProcedure("SurveyQuestions(?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
-            System.out.println(userId);
-            System.out.println(courseId);
             ResultSet rs = sp.executeWithResults();
-            System.out.println("in repo general after result set");
             while(rs.next()){
-                System.out.println("in repo general in while");
                 IQuestion temp = new Question();
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionId(rs.getInt("questionId"));
                 temp.setFlag(rs.getInt("flag"));
-                System.out.println(temp.getFlag());
-                System.out.println(temp.getQuestionId());
-                System.out.println(temp.getQuestionTopic());
                 if(temp.getFlag()==0){
                     NotAddedQuestionList.add(temp);
                 }
@@ -61,13 +56,11 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
     @Override
     public List<IQuestion> AlreadyAddedSurveyQuestions() throws Exception {
-        System.out.println(AlreadyQuestionList);
         return AlreadyQuestionList;
     }
 
     @Override
     public List<IQuestion> NotAddedSurveyQuestions() throws Exception {
-        System.out.println(NotAddedQuestionList);
         return NotAddedQuestionList;
     }
 
@@ -141,11 +134,12 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
             {
                 isPublished = true;
             }
+            LOG.info("Operation = CheckPublish, Status = Success ");
         }
         catch (SQLException throwables) {
-            throwables.printStackTrace();
+            LOG.error("Status = Failed, Error Message="+throwables.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Status = Failed, Error Message="+e.getMessage());
         }
         return isPublished;
     }
