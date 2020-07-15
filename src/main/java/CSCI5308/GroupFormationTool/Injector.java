@@ -44,41 +44,89 @@ public class Injector {
 	private static Injector instance = null;
 	private IDatabaseAbstractFactory databaseAbstractFactory;
 	private IDBConfiguration dbConfiguration;
+
+	private IUser user;
+	private IInstructor instructor;
 	private IUserRepository userRepository;
-	private IPasswordEncryptor passwordEncryptor;
 	private IUserService userService;
+	private UserManagerAbstractFactory userManagerAbstractFactory;
+
+	private IPasswordEncryptor passwordEncryptor;
 	private IEmailConfiguration emailConfiguration;
 	private IUserNotification userNotification;
+	private ILoginRepository loginRepository;
+	private ILoginService loginService;
 
+	private ICourse course;
+	private ICreateCourse createCourse;
+	private IDeleteCourse deleteCourse;
 	private IHomeRepository homeRepository;
 	private IHomeService homeService;
 	private ICourseService courseService;
 	private ICsvImporter csvImporter;
 	private ICourseRepository courseRepository;
 
-	private ILoginService loginService;
 	private IForgetPasswordService forgetPasswordService;
-	private ILoginRepository loginRepository;
 	private IForgetPasswordRepository forgetPasswordRepository;
 
 	private IQuestion question;
-	private IQuestionModel questionModel;
 	private IQuestionManagerService questionManagerService;
 	private IQuestionManagerRepository questionManagerRepository;
 	private IQuestionResponsesService questionResponsesService;
 	private IQuestionResponsesRepo questionResponsesRepo;
 
-	private IInstructor instructor;
-
-	private ICourse course;
-	private ICreateCourse createCourse;
-	private IDeleteCourse deleteCourse;
-	private IUser user;
-
+	private IQuestionModel questionModel;
 	private IQuestionEditorService questionEditorService;
 	private IQuestionEditorRepository questionEditorRepository;
 	private IRankFunctionsService rankFunctionsService;
 	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
+
+	private Injector(){
+		databaseAbstractFactory = new DatabaseAbstractFactory();
+		dbConfiguration = new DBConfiguration();
+
+		user = new User();
+		instructor = new Instructor();
+		userRepository = new UserRepository();
+		userService = new UserService();
+		passwordEncryptor = new BCryptEncryption();
+		userManagerAbstractFactory = new UserManagerAbstractFactory();
+
+		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
+		userPasswordPolicyService = new UserPasswordPolicyService();
+
+		loginRepository = new UserLoginRepository();
+		loginService = new UserLoginService();
+		emailConfiguration = new EmailConfiguration();
+		userNotification = new UserNotification();
+
+		forgetPasswordRepository =new ForgetPasswordRepository();
+		forgetPasswordService = new ForgetPasswordService();
+
+		course = new Course();
+		createCourse = new CreateCourse();
+		deleteCourse = new DeleteCourse();
+		courseService = new CourseService();
+		courseRepository = new CourseRepository();
+		homeRepository = new HomeRepository();
+		homeService = new HomeService();
+		csvImporter = new CsvImporterService();
+
+		question = new Question();
+		questionManagerRepository = new QuestionManagerRepository();
+		questionManagerService = new QuestionManagerService();
+		questionResponsesRepo = new QuestionResponsesRepo();
+		questionResponsesService = new QuestionResponsesService();
+
+		questionModel = new QuestionModel();
+		questionEditorService = new QuestionEditorService();
+		questionEditorRepository = new QuestionEditorRepository();
+		rankFunctionsService = new RankFunctionsService();
+		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
+
+		surveyManagerService = new SurveyManagerService();
+		surveyManagerRepository = new SurveyManagerRepository();
+	}
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
 		return userPasswordPolicyService;
@@ -118,49 +166,6 @@ public class Injector {
 		this.databaseAbstractFactory = databaseAbstractFactory;
 	}
 
-	private Injector(){
-		databaseAbstractFactory = new DatabaseAbstractFactory();
-		dbConfiguration = new DBConfiguration();
-		userRepository = new UserRepository();
-		passwordEncryptor = new BCryptEncryption();
-		userService = new UserService();
-		csvImporter = new CsvImporterService();
-		emailConfiguration = new EmailConfiguration();
-		userNotification = new UserNotification();
-		loginService = new UserLoginService();
-		forgetPasswordService = new ForgetPasswordService();
-		homeRepository = new HomeRepository();
-		homeService = new HomeService();
-		courseService = new CourseService();
-		courseRepository = new CourseRepository();
-		loginRepository = new UserLoginRepository();
-		forgetPasswordRepository =new ForgetPasswordRepository();
-		questionManagerRepository = new QuestionManagerRepository();
-		questionManagerService = new QuestionManagerService();
-		questionResponsesRepo = new QuestionResponsesRepo();
-		questionResponsesService = new QuestionResponsesService();
-		user = new User();
-
-		instructor = new Instructor();
-
-		course = new Course();
-		createCourse = new CreateCourse();
-		deleteCourse = new DeleteCourse();
-		
-		question = new Question();
-		questionModel = new QuestionModel();
-
-		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
-		userPasswordPolicyService = new UserPasswordPolicyService();
-
-		questionEditorService = new QuestionEditorService();
-		questionEditorRepository = new QuestionEditorRepository();
-		rankFunctionsService = new RankFunctionsService();
-		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
-
-		surveyManagerService = new SurveyManagerService();
-		surveyManagerRepository = new SurveyManagerRepository();
-	}
 
 	public IRankFunctionsService getRankFunctionsService() {
 		return rankFunctionsService;
