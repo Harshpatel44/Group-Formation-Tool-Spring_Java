@@ -1,5 +1,8 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
+import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.HashMap;
 import java.util.List;
 
 public class SurveyQuestionOptionsModel implements ISurveyQuestionOptionsModel {
@@ -8,9 +11,20 @@ public class SurveyQuestionOptionsModel implements ISurveyQuestionOptionsModel {
     private String surveyQuestionDescription;
     private String surveyQuestionType;
     private String surveyCourseId;
-    private List<String> surveyQuestionsOptions;
+    private HashMap<Integer,String> surveyQuestionsOptions;
     private List<String> surveyAnswer;
     private String bannerId;
+    private ArrayList<String> responses;
+
+    @Override
+    public ArrayList<String> getResponses() {
+        return responses;
+    }
+
+    @Override
+    public void setResponses(ArrayList<String> responses) {
+        this.responses = responses;
+    }
 
     public SurveyQuestionOptionsModel() {
     }
@@ -67,12 +81,12 @@ public class SurveyQuestionOptionsModel implements ISurveyQuestionOptionsModel {
     }
 
     @Override
-    public List<String> getSurveyQuestionsOptions() {
-        return this.surveyQuestionsOptions;
+    public HashMap<Integer,String> getSurveyQuestionsOptions() {
+        return surveyQuestionsOptions;
     }
 
     @Override
-    public void setSurveyQuestionsOptions(List<String> surveyQuestionsOptions) {
+    public void setSurveyQuestionsOptions(HashMap<Integer,String> surveyQuestionsOptions) {
         this.surveyQuestionsOptions = surveyQuestionsOptions;
     }
 

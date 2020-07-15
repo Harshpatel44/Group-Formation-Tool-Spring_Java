@@ -3,8 +3,7 @@ package CSCI5308.GroupFormationTool.AnswerSurvey;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AnswerSurveyRepository implements IAnswerSurveyRepository {
 
@@ -51,7 +50,7 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             System.out.println("Inside Rutika Repo");
             while(rs.next())
             {
-                List<String> options = new ArrayList<>();
+                HashMap<Integer,String> options = new HashMap<>();
                 if(rs.getString(6).equals("mcqs") || rs.getString(6).equals("mcqm"))
                 {
                     int questionId = rs.getInt(2);
@@ -60,7 +59,7 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                     ResultSet ors = getOptions.executeWithResults();
                     while(ors.next())
                     {
-                        options.add(ors.getString(1));
+                        options.put(ors.getInt("optionRank"),ors.getString("optionDesc"));
                     }
                 }
                 ISurveyQuestionOptionsModel question = new SurveyQuestionOptionsModel();
