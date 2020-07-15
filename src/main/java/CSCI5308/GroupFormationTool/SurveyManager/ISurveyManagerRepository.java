@@ -9,8 +9,8 @@ public interface ISurveyManagerRepository {
     public List<IQuestion> AlreadyAddedSurveyQuestions() throws Exception;
     public List<IQuestion> NotAddedSurveyQuestions() throws Exception;
 
-    void AddQuestionToSurvey(Integer questionId,String courseId,String dateTime);
-    void RemoveQuestionFromSurvey(Integer questionId,String courseId);
+    void AddQuestionToSurvey(Integer questionId);
+    void RemoveQuestionFromSurvey(Integer questionId);
     void PublishSurvey();
 
     boolean checkPublish();
