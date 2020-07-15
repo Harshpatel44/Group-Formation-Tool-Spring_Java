@@ -75,6 +75,7 @@ public class Injector {
 	private IQuestionEditorService questionEditorService;
 	private IQuestionEditorRepository questionEditorRepository;
 	private IRankFunctionsService rankFunctionsService;
+	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
 		return userPasswordPolicyService;
@@ -97,6 +98,14 @@ public class Injector {
 
 	private ISurveyManagerService surveyManagerService;
 	private ISurveyManagerRepository surveyManagerRepository;
+
+	public IQuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
+		return questionEditorAbstractFactory;
+	}
+
+	public void setQuestionEditorAbstractFactory(IQuestionEditorAbstractFactory questionEditorAbstractFactory) {
+		this.questionEditorAbstractFactory = questionEditorAbstractFactory;
+	}
 
 	private Injector(){
 
@@ -136,6 +145,7 @@ public class Injector {
 		questionEditorService = new QuestionEditorService();
 		questionEditorRepository = new QuestionEditorRepository();
 		rankFunctionsService = new RankFunctionsService();
+		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
 
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();

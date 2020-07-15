@@ -24,7 +24,7 @@ public class QuestionEditorController{
 
 	@RequestMapping("/createQuestion")
 	public ModelAndView createQuestion() {
-		IQuestionModel questionModel = Injector.instance().getQuestionModel();
+		IQuestionModel questionModel = Injector.instance().getQuestionEditorAbstractFactory().getQuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
 		mv.addObject("questionModel", questionModel);
 		return mv;

@@ -21,7 +21,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         String questionType = changeQuestionTypeName(selectedQuestionType);
         StoredProcedure storedProcedure = null;
         try {
-            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            DateTimeFormatter dtf = Injector.instance().getQuestionEditorAbstractFactory().getDateTimeFormat();
             LocalDateTime datetime = LocalDateTime.now();
             String time = dtf.format(datetime);
             storedProcedure = new StoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
