@@ -24,7 +24,7 @@ public class SurveyController {
             return model;
         }
         else{
-            surveyManagerService.getSurveyQuestions(courseId);
+            surveyManagerService.getSurveyQuestions();
             ModelAndView model=new ModelAndView("surveyQuestion");
             model.addObject("userId",bannerId);
             model.addObject("courseId",courseId);

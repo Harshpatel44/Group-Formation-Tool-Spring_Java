@@ -22,11 +22,12 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
 
     @Override
-    public void getSurveyQuestions(String courseId) throws Exception {
+    public void getSurveyQuestions() throws Exception {
         try{
             AlreadyQuestionList.clear();
             NotAddedQuestionList.clear();
             String userId = CurrentUser.instance().getBannerId();
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
             StoredProcedure sp = new StoredProcedure("SurveyQuestions(?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
@@ -71,15 +72,17 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void AddQuestionToSurvey(Integer questionId, String courseId,String time) {
+    public void AddQuestionToSurvey(Integer questionId) {
         try{
-            System.out.println(time);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime datetime = LocalDateTime.now();
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
             StoredProcedure sp = new StoredProcedure("AddQuestionToSurvey(?,?,?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
             sp.setParameter(3,questionId);
-            sp.setParameter(4,time);
+            sp.setParameter(4,dtf.format(datetime));
             sp.execute();
             sp.cleanup();
         }catch (SQLException throwables) {
@@ -90,8 +93,9 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void RemoveQuestionFromSurvey(Integer questionId,String courseId) {
+    public void RemoveQuestionFromSurvey(Integer questionId) {
         try{
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
             StoredProcedure sp = new StoredProcedure("RemoveQuestionFromSurvey(?,?,?)");
             sp.setParameter(1,userId);

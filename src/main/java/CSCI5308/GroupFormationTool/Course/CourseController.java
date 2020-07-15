@@ -22,7 +22,6 @@ public class CourseController {
 		currentCourse.setCurrentCourseId(courseId);
 		currentCourse.setCurrentCourseName(courseName);
 		currentCourse.setCurrentCourseUserRole(userRole);
-
 		ModelAndView model=new ModelAndView("course");
 		model.addObject("courseId",courseId);
 		model.addObject("userId", CurrentUser.instance().getBannerId());
