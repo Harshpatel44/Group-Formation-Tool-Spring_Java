@@ -166,6 +166,13 @@ public class Injector {
 		this.databaseAbstractFactory = databaseAbstractFactory;
 	}
 
+	public UserManagerAbstractFactory getUserManagerAbstractFactory() {
+		return userManagerAbstractFactory;
+	}
+
+	public void setUserManagerAbstractFactory(UserManagerAbstractFactory userManagerAbstractFactory) {
+		this.userManagerAbstractFactory = userManagerAbstractFactory;
+	}
 
 	public IRankFunctionsService getRankFunctionsService() {
 		return rankFunctionsService;

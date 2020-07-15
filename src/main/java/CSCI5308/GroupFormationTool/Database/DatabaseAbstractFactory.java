@@ -8,7 +8,7 @@ public class DatabaseAbstractFactory implements IDatabaseAbstractFactory {
     }
 
     @Override
-    public DBConfiguration createDBConfiguration(){
+    public IDBConfiguration createDBConfiguration(){
         return new DBConfiguration();
     }
 }

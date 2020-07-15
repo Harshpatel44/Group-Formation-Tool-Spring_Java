@@ -23,7 +23,6 @@ import java.util.Map;
 public class AdminController{
 
 
-
 	@GetMapping("/admin")
 	public ModelAndView adminPage(HttpServletRequest request) throws Exception {
 		ICreateCourse createCourse = Injector.instance().getCreateCourse();

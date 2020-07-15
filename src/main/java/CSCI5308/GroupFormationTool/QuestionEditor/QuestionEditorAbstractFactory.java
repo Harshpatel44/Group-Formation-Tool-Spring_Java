@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class QuestionEditorAbstractFactory implements IQuestionEditorAbstractFactory {
 
     @Override
-    public QuestionModel getQuestionModel(){
+    public IQuestionModel getQuestionModel(){
         return new QuestionModel();
     }
 
