@@ -31,8 +31,6 @@ public class StoredProcedure
 	}
 
 	public void cleanup(){
-//		connection.close();
-//		System.out.println("Connection closed");
 		try
 		{
 			if (null != statement)

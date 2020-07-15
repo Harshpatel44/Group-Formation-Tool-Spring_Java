@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.Course.*;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
@@ -40,6 +41,7 @@ import CSCI5308.GroupFormationTool.UserManager.*;
 public class Injector {
 
 	private static Injector instance = null;
+	private IDatabaseAbstractFactory databaseAbstractFactory;
 	private IDBConfiguration dbConfiguration;
 	private IUserRepository userRepository;
 	private IPasswordEncryptor passwordEncryptor;
@@ -108,7 +110,7 @@ public class Injector {
 	}
 
 	private Injector(){
-
+		databaseAbstractFactory = new DatabaseAbstractFactory();
 		dbConfiguration = new DBConfiguration();
 		userRepository = new UserRepository();
 		passwordEncryptor = new BCryptEncryption();
