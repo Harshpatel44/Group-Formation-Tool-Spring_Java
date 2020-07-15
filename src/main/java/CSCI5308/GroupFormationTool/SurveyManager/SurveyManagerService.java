@@ -17,9 +17,9 @@ public class SurveyManagerService implements ISurveyManagerService{
     }
 
     @Override
-    public void getSurveyQuestions(String courseId) throws Exception {
+    public void getSurveyQuestions() throws Exception {
       surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-      surveyManagerRepository.getSurveyQuestions(courseId);
+      surveyManagerRepository.getSurveyQuestions();
     }
 
     @Override

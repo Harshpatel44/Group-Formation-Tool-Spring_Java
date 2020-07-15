@@ -22,11 +22,12 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
 
     @Override
-    public void getSurveyQuestions(String courseId) throws Exception {
+    public void getSurveyQuestions() throws Exception {
         try{
             AlreadyQuestionList.clear();
             NotAddedQuestionList.clear();
             String userId = CurrentUser.instance().getBannerId();
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
             StoredProcedure sp = new StoredProcedure("SurveyQuestions(?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);

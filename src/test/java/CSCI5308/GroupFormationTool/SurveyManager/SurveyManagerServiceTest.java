@@ -20,6 +20,8 @@ public class SurveyManagerServiceTest {
     }
 @Test
     public void getSurveyQuestionsTest() throws Exception {
+    Integer questionId;
+
 
 }
 
