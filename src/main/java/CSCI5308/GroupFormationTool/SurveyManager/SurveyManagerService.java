@@ -7,9 +7,14 @@ import java.util.List;
 
 public class SurveyManagerService implements ISurveyManagerService{
     private ISurveyManagerRepository surveyManagerRepository;
+
+    public SurveyManagerService(){}
+    public SurveyManagerService(SurveyManagerRepository surveyManagerRepository){
+        Injector.instance().setSurveyManagerRepository(surveyManagerRepository);
+    }
+
     @Override
     public void getSurveyQuestions(String courseId) throws Exception {
-        System.out.println("in service general");
       surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
       surveyManagerRepository.getSurveyQuestions(courseId);
     }

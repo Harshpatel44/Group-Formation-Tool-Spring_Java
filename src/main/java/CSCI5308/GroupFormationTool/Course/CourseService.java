@@ -39,7 +39,6 @@ public class CourseService implements ICourseService {
 		return flag;
 	}
 
-
 	@Override
 	public boolean assignInstructorForCourse(IInstructor instructor){
 		if(Injector.instance().getCourseRepository().assignInstructorForCourse(instructor)){
