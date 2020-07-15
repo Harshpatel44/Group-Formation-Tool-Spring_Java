@@ -37,17 +37,13 @@ public class SurveyManagerService implements ISurveyManagerService{
     @Override
     public void AddQuestionToSurvey(Integer questionId) {
         surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime datetime = LocalDateTime.now();
-        String courseId = CurrentCourse.instance().getCurrentCourseId();
-        surveyManagerRepository.AddQuestionToSurvey(questionId,courseId,dtf.format(datetime));
+        surveyManagerRepository.AddQuestionToSurvey(questionId);
     }
 
     @Override
     public void RemoveQuestionFromSurvey(Integer questionId) {
         surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-        String courseId = CurrentCourse.instance().getCurrentCourseId();
-        surveyManagerRepository.RemoveQuestionFromSurvey(questionId,courseId);
+        surveyManagerRepository.RemoveQuestionFromSurvey(questionId);
     }
 
     @Override
