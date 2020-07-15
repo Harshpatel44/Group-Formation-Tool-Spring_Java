@@ -13,6 +13,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @Repository
 public class UserRepository implements IUserRepository {
@@ -162,5 +163,25 @@ public class UserRepository implements IUserRepository {
 			}
 		}
 		return result;
+	}
+
+	public int getUserRoleIdFromRoleType(String userType){
+		StoredProcedure storedProcedure = null;
+		try{
+			storedProcedure = new StoredProcedure("getRoleIdFromRoleType(?)");
+			storedProcedure.setParameter("rType",userType.toLowerCase());
+			ResultSet rs = storedProcedure.executeWithResults();
+			while(rs.next()){
+				return rs.getInt("roleId");
+			}
+		}catch (Exception e){
+			e.printStackTrace();
+			return 0;
+		}finally {
+			if(storedProcedure!=null){
+				storedProcedure.cleanup();
+			}
+		}
+		return 0;
 	}
 }

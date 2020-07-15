@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
 
+import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -30,7 +31,7 @@ public class HomeController {
 		homeService = Injector.instance().getHomeService();
 		iUserService = Injector.instance().getUserService();
 		iUserService.setCurrentUserByBannerID(authentication.getPrincipal().toString());
-		String bannerID = iUserService.getCurrentUserBannerID();
+		String bannerID = CurrentUser.instance().getBannerId();
 
 		model.addObject("userId", bannerID);
 		model.addObject("courses", homeService.getCourseFromBannerID(bannerID));

@@ -25,9 +25,9 @@ public class UserService implements IUserService {
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
-	public UserService(UserRepository userRepository,CurrentUser currentUser){
+	public UserService(IUserRepository userRepository,CurrentUser currentUser){
 		Injector.instance().setUserRepository(userRepository);
-		CurrentUser.instance().setInstance(currentUser);
+		CurrentUser.setInstance(currentUser);
 	}
 
 	@Override
@@ -135,11 +135,6 @@ public class UserService implements IUserService {
 	}
 
 	@Override
-	public String getCurrentUserBannerID(){
-		return CurrentUser.instance().getBannerId();
-	}
-
-	@Override
 	public List<String> getAllBannerIds(){
 		return Injector.instance().getUserRepository().getAllBannerIds();
 	}
@@ -156,17 +151,13 @@ public class UserService implements IUserService {
 
 	@Override
 	public void setCurrentUserByBannerID(String bannerID){
-		System.out.println(bannerID);
 		if(bannerID.equals(admin)){
 			CurrentUser.instance().setBannerId(admin);
 			CurrentUser.instance().setFirstName(admin);
 			CurrentUser.instance().setLastName(admin);
 		}else{
-				System.out.println(bannerID);
 				IUser iUser = new User();
-				System.out.println(bannerID);
 				iUser = Injector.instance().getUserRepository().setUserByBannerId(bannerID,iUser);
-				System.out.println(CurrentUser.instance().getBannerId());
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());

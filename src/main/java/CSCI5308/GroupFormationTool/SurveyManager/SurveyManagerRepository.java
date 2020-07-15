@@ -6,6 +6,7 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -15,6 +16,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
 public class SurveyManagerRepository implements ISurveyManagerRepository{
+
     private List<IQuestion> AlreadyQuestionList = new ArrayList<IQuestion>();
     private List<IQuestion> NotAddedQuestionList = new ArrayList<IQuestion>();
 
@@ -28,8 +30,12 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
             StoredProcedure sp = new StoredProcedure("SurveyQuestions(?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
+            System.out.println(userId);
+            System.out.println(courseId);
             ResultSet rs = sp.executeWithResults();
+            System.out.println("in repo general after result set");
             while(rs.next()){
+                System.out.println("in repo general in while");
                 IQuestion temp = new Question();
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionId(rs.getInt("questionId"));
@@ -54,11 +60,13 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
     @Override
     public List<IQuestion> AlreadyAddedSurveyQuestions() throws Exception {
+        System.out.println(AlreadyQuestionList);
         return AlreadyQuestionList;
     }
 
     @Override
     public List<IQuestion> NotAddedSurveyQuestions() throws Exception {
+        System.out.println(NotAddedQuestionList);
         return NotAddedQuestionList;
     }
 
