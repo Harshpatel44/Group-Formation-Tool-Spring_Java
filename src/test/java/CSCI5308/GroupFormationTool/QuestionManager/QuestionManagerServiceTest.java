@@ -43,6 +43,7 @@ public class QuestionManagerServiceTest {
         List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
         assertEquals(returnedList, iQuestionList);
     }
+
     @Test
     public void getquestionsTestByDate() throws Exception {
         String userId;
