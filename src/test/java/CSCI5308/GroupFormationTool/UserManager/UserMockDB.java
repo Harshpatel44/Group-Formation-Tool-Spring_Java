@@ -2,8 +2,8 @@ package CSCI5308.GroupFormationTool.UserManager;
 
 public class UserMockDB {
 
-	public static User setDefault() {
-		User user = new User() {
+	public static IUser setDefault() {
+		IUser user = new User() {
 			{
 				setFirstName("Arjun");
 				setLastName("Suresh");
