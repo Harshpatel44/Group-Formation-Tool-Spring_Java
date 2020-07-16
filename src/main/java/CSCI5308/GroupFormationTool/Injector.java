@@ -92,6 +92,30 @@ public class Injector {
 	private IRankFunctionsService rankFunctionsService;
 	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
 
+	private IAnswerSurveyRepository answerSurveyRepository;
+	private IAnswerSurveyService answerSurveyService;
+	private IDisplaySurveyResponseRepository displaySurveyResponseRepository;
+	private IDisplaySurveyResponseService displaySurveyResponseService;
+
+	private IGroupFilter groupFilter;
+	private IGroupFormmerRepo grFormmerRepo;
+	private IGroupFormmerService groupFormmerService;
+
+	public IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository() {
+		return displaySurveyResponseRepository;
+	}
+
+	public void setDisplaySurveyResponseRepository(IDisplaySurveyResponseRepository displaySurveyResponseRepository) {
+		this.displaySurveyResponseRepository = displaySurveyResponseRepository;
+	}
+
+	public IDisplaySurveyResponseService getDisplaySurveyResponseService() {
+		return displaySurveyResponseService;
+	}
+
+	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
+		this.displaySurveyResponseService = displaySurveyResponseService;
+	}
 
 	private Injector(){
 		databaseAbstractFactory = new DatabaseAbstractFactory();
@@ -139,6 +163,15 @@ public class Injector {
 
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();
+
+		answerSurveyRepository = new AnswerSurveyRepository();
+		answerSurveyService = new AnswerSurveyService();
+		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
+		displaySurveyResponseService = new DisplaySurveyResponseService();
+
+		groupFilter = new GroupFilter();
+		groupFormmerService = new GroupFormmerService();
+		grFormmerRepo = new GroupFormmerRepo();
 	}
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {

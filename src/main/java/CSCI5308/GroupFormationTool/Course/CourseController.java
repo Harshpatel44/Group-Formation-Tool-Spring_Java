@@ -31,23 +31,21 @@ public class CourseController {
 	}
 
 	@RequestMapping("/course/admin")
-	public ModelAndView courseAdmin(@RequestParam(name="checkRole") String checkRole){
+	public ModelAndView courseAdmin(){
 		ModelAndView mv = new ModelAndView("courseadmin");
 		mv.addObject("userId",CurrentUser.instance().getBannerId());
 		mv.addObject("courseId",CurrentCourse.instance().getCurrentCourseId());
-		mv.addObject("checkRole",checkRole);
 		mv.setViewName("courseadmin");
 		return mv;
 	}
 
 	@RequestMapping("/course/admin/addta")
-	public ModelAndView addta( @RequestParam(name="taId") String taId,
-							   @RequestParam(name="checkRole") String checkRole) throws Exception {
+	public ModelAndView addta( @RequestParam(name="taId") String taId
+							   ) throws Exception {
 		courseService = Injector.instance().getCourseService();
 		String courseId = CurrentCourse.instance().getCurrentCourseId();
 		ModelAndView model=new ModelAndView("courseadmin");
 		model.addObject("userId",CurrentUser.instance().getBannerId());
-		model.addObject("checkRole",checkRole);
 		model.addObject("userRole",CurrentCourse.instance().getCurrentCourseUserRole());
 		model.addObject("courseName",CurrentCourse.instance().getCurrentCourseName());
 		model.addObject("result",courseService.addTAForCourse(taId,courseId));

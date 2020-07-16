@@ -16,15 +16,15 @@ public class GroupFormmerService implements IGroupFormmerService {
 	public HashMap<Integer,ArrayList<String>> FormGroups(String courseID, int teamSize) {
 
 		List<ISurveyQuestionOptionsModel> questions = Injector.instance().getAnswerSurveyRepository()
-				.getSurveyQuestionsAndOptions("CSCI1");
+				.getSurveyQuestionsAndOptions(courseID);
 
 		List<String> userAnsweredSurveyBasedOnCourseId = Injector.instance().getDisplaySurveyResponseRepository()
-				.getUsersWhoAnsweredSurvey("CSCI1");
+				.getUsersWhoAnsweredSurvey(courseID);
 
 		HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>> studentWithQuestionAndAnswer = Injector
-				.instance().getDisplaySurveyResponseRepository().getSurveyResponse_2("CSCI1");
+				.instance().getDisplaySurveyResponseRepository().getSurveyResponse_2(courseID);
 
-		IGroupFilter groupFilter = Injector.instance().getGrFormmerRepo().getGroupFormula("CSCI1");
+		IGroupFilter groupFilter = Injector.instance().getGrFormmerRepo().getGroupFormula(courseID);
 
 		HashMap<String, Integer> indexUserBannerIdToIndex = new HashMap<String, Integer>();
 		HashMap<Integer, String> indexUserIndexToBannerID = new HashMap<Integer, String>();

@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
+import CSCI5308.GroupFormationTool.Course.CurrentCourse;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
@@ -17,6 +18,9 @@ public class QuestionController {
         ModelAndView model=new ModelAndView("questionManager");
         model.addObject("userId",bannerID);
         model.setViewName("questionManager");
+        model.addObject("courseId", CurrentCourse.instance().getCurrentCourseId());
+        model.addObject("courseName", CurrentCourse.instance().getCurrentCourseName());
+        model.addObject("userRole", CurrentCourse.instance().getCurrentCourseUserRole());
         return model;
     }
 

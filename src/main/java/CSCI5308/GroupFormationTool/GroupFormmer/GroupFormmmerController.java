@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.GroupFormmer;
 
 import CSCI5308.GroupFormationTool.Course.Course;
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
+import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,36 +28,45 @@ public class GroupFormmmerController {
 		IGroupFilter groupFilter = groupFormmerService.createGroupFilterHashMap(req);
         groupFormmerService.saveGroupFormula(groupFilter, CurrentCourse.instance().getCurrentCourseId());
         ModelAndView mv = new ModelAndView("course");
-        mv.addObject("courseName",CurrentCourse.instance().getCurrentCourseName());
-        mv.addObject("courseId",CurrentCourse.instance().getCurrentCourseId());
-        mv.addObject("userRole",CurrentCourse.instance().getCurrentCourseUserRole());
+		mv.addObject("courseId", CurrentCourse.instance().getCurrentCourseId());
+		mv.addObject("courseName", CurrentCourse.instance().getCurrentCourseName());
+		mv.addObject("userRole", CurrentCourse.instance().getCurrentCourseUserRole());
         mv.addObject("checkRole",true);
         return mv;
     }
 	@PostMapping("/formgroups/getFormulaQuestions")
-	public ModelAndView getFormulaQuestions(@RequestParam(name="checkRole") String checkRole)
+	public ModelAndView getFormulaQuestions()
 	{
 		ModelAndView mv = new ModelAndView("formgroups");
-		mv.addObject("checkRole",checkRole);
 		groupFormmerService = Injector.instance().getGroupFormmerService();
 		List<ISurveyQuestionOptionsModel> surveyQuestions = groupFormmerService.getSurveyQuestionsForGroupFormula(CurrentCourse.instance().getCurrentCourseId());
-		mv.addObject("surveyQuestions",surveyQuestions);
+		mv.addObject("surveyGroupQuestions",surveyQuestions);
+		mv.addObject("courseId", CurrentCourse.instance().getCurrentCourseId());
+		mv.addObject("courseName", CurrentCourse.instance().getCurrentCourseName());
+		mv.addObject("userRole", CurrentCourse.instance().getCurrentCourseUserRole());
 		return mv;
 	}
 
 	@RequestMapping("/formgroups/runalgorithm")
 	public ModelAndView runAlgorithm() {
 		ModelAndView mv = new ModelAndView("formationalgorithm");
+		mv.addObject("courseId", CurrentCourse.instance().getCurrentCourseId());
+		mv.addObject("courseName", CurrentCourse.instance().getCurrentCourseName());
+		mv.addObject("userRole", CurrentCourse.instance().getCurrentCourseUserRole());
 		return mv;
 	}
 
 	@PostMapping("/formgroups/algorithmresults")
 	public ModelAndView algorithmResults(@RequestParam("teamSize") int teamSize) {
 		groupFormmerService = Injector.instance().getGroupFormmerService();
-		String CourseId = CurrentCourse.instance().getCurrentCourseId();
-		HashMap<Integer, ArrayList<String>> teamsWithBannerId = groupFormmerService.FormGroups(CourseId, teamSize);
+		String courseId = CurrentCourse.instance().getCurrentCourseId();
+		System.out.println(teamSize+courseId);
+		HashMap<Integer, ArrayList<String>> teamsWithBannerId = groupFormmerService.FormGroups(courseId, teamSize);
 		ModelAndView mv = new ModelAndView("algorithmresults");
 		mv.addObject("teamsresults",teamsWithBannerId);
+		mv.addObject("courseId", courseId);
+		mv.addObject("courseName", CurrentCourse.instance().getCurrentCourseName());
+		mv.addObject("userRole", CurrentCourse.instance().getCurrentCourseUserRole());
 		return mv;
 	}
 }
