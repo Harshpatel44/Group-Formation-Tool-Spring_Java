@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
-import CSCI5308.GroupFormationTool.AnswerSurvey.ISurveyQuestionOptionsModel;
-
 import java.util.HashMap;
 import java.util.List;
 

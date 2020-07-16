@@ -37,6 +37,11 @@ public class CourseAbstractConcrete extends CourseAbstractFactory {
     }
 
     @Override
+    public void setCourseService(ICourseService courseService){
+        this.courseService = courseService;
+    }
+
+    @Override
     public ICsvImporter getCsvImporter() {
         if (csvImporter == null) {
             csvImporter = new CsvImporterService();
@@ -58,5 +63,15 @@ public class CourseAbstractConcrete extends CourseAbstractFactory {
             homeService = new HomeService();
         }
         return homeService;
+    }
+
+    @Override
+    public void setCourseRepository(ICourseRepository courseRepository){
+        this.courseRepository = courseRepository;
+    }
+
+    @Override
+    public void setHomeRepository(IHomeRepository homeRepository){
+        this.homeRepository = homeRepository;
     }
 }

@@ -17,6 +17,11 @@ public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFact
     }
 
     @Override
+    public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){
+        this.questionManagerRepository = questionManagerRepository;
+    }
+
+    @Override
     public IQuestionManagerService getQuestionManagerService() {
         if (questionManagerService == null) {
             questionManagerService = new QuestionManagerService();
@@ -30,6 +35,11 @@ public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFact
             questionResponsesRepo = new QuestionResponsesRepo();
         }
         return questionResponsesRepo;
+    }
+
+    @Override
+    public void setQuestionResponsesRepo(IQuestionResponsesRepo questionResponsesRepo){
+        this.questionResponsesRepo = questionResponsesRepo;
     }
 
     @Override

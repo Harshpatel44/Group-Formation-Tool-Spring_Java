@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,6 +87,7 @@ public class ForgetPasswordController {
         boolean addUser;
         boolean mailSend;
         String email;
+
         service = UserPasswordManagerAbstractFactory.instance().getForgetPasswordService();
         userNotification = UserAuthenticationAbstractFactory.instance().getUserNotification();
         isUser = UserManagerAbstractFactory.instance().getUserService().checkIfUserExists(bannerID);

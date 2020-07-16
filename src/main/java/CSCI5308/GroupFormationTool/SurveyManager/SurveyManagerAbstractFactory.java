@@ -16,4 +16,5 @@ public abstract class SurveyManagerAbstractFactory {
 
     public abstract ISurveyManagerRepository getSurveyManagerRepository();
     public abstract ISurveyManagerService getSurveyManagerService();
+    public abstract void setSurveyManagerRepository(ISurveyManagerRepository surveyManagerRepository);
 }

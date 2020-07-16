@@ -3,8 +3,8 @@ package CSCI5308.GroupFormationTool.AdminPanel;
 import CSCI5308.GroupFormationTool.Course.CourseAbstractFactory;
 import CSCI5308.GroupFormationTool.Course.ICreateCourse;
 import CSCI5308.GroupFormationTool.Course.IDeleteCourse;
-import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
@@ -16,6 +16,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
+import static CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory.instance;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
@@ -25,14 +26,14 @@ public class AdminController {
 
 	@GetMapping("/admin")
 	public ModelAndView adminPage(HttpServletRequest request) throws Exception {
-		ICreateCourse createCourse = Injector.instance().getCreateCourse();
-		IDeleteCourse deleteCourse = Injector.instance().getDeleteCourse();
-		IInstructor instructor = Injector.instance().getInstructor();
+		ICreateCourse createCourse = CourseAbstractFactory.instance().getCreateCourse();
+		IDeleteCourse deleteCourse = CourseAbstractFactory.instance().getDeleteCourse();
+		IInstructor instructor = instance().getInstructor();
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		ModelAndView mv = new ModelAndView();
 		if (authentication.getPrincipal().toString().equals(admin)) {
 			try {
-				Injector.instance().getUserService().setCurrentUserByBannerID(authentication.getPrincipal().toString());
+				UserManagerAbstractFactory.instance().getUserService().setCurrentUserByBannerID(authentication.getPrincipal().toString());
 				Map<String, ?> flashAttribute = RequestContextUtils.getInputFlashMap(request);
 				String createMessage = (String) flashAttribute.get("courseCreateMessage");
 				String deleteMessage = (String) flashAttribute.get("courseDeleteMessage");
@@ -95,7 +96,7 @@ public class AdminController {
 	@PostMapping("/assignInstructor")
 	public String assignInstructor(@RequestParam(name = "selectedInstructorCourseId") String selectedInstructorCourseId,
 			RedirectAttributes redirectAttributes, @RequestParam(name = "InstructorId") String InstructorId) {
-		IInstructor instructor = Injector.instance().getInstructor();
+		IInstructor instructor = UserManagerAbstractFactory.instance().getInstructor();
 		instructor.setSelectedInstructorCourseId(selectedInstructorCourseId);
 		instructor.setInstructorId(InstructorId);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

@@ -13,7 +13,7 @@ public class SurveyManagerService implements ISurveyManagerService{
 
     public SurveyManagerService(){}
     public SurveyManagerService(SurveyManagerRepository surveyManagerRepository){
-        Injector.instance().setSurveyManagerRepository(surveyManagerRepository);
+        SurveyManagerAbstractFactory.instance().setSurveyManagerRepository(surveyManagerRepository);
     }
 
     @Override

@@ -4,6 +4,7 @@ import CSCI5308.GroupFormationTool.Injector;
 
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -28,8 +29,8 @@ public class HomeController {
 			model.setViewName("redirect:/login");
 			return model;
 		}
-		homeService = Injector.instance().getHomeService();
-		iUserService = Injector.instance().getUserService();
+		homeService = CourseAbstractFactory.instance().getHomeService();
+		iUserService = UserManagerAbstractFactory.instance().getUserService();
 		iUserService.setCurrentUserByBannerID(authentication.getPrincipal().toString());
 		String bannerID = CurrentUser.instance().getBannerId();
 

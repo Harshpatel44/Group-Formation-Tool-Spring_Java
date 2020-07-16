@@ -13,7 +13,7 @@ public class QuestionResponsesService implements IQuestionResponsesService {
     private static final Logger LOG = LogManager.getLogger();
     public QuestionResponsesService(){}
     public QuestionResponsesService(QuestionResponsesRepo questionResponsesRepo) throws Exception {
-        Injector.instance().setQuestionResponsesRepo(questionResponsesRepo);
+        QuestionManagerAbstractFactory.instance().setQuestionResponsesRepo(questionResponsesRepo);
     }
 
     @Override

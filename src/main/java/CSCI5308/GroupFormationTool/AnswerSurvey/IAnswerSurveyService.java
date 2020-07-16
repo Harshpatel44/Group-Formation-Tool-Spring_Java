@@ -1,7 +1,12 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface IAnswerSurveyService {
-    public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId);
+    List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId);
+    boolean surveyResponses(HashMap<Integer,ArrayList<String>> surveyResponses,String bannerId,String courseID);
+    public boolean checkSurveyAvailableForUser(String bannerId);
+
 }
