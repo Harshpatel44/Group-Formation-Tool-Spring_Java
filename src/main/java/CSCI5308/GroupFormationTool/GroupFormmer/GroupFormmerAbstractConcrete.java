@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.GroupFormmer;
 
-public class GroupFormmerAbstractConcrete extends GroupFormmerAbstractFactory{
+public class GroupFormmerAbstractConcrete extends GroupFormmerAbstractFactory {
 
     private IGroupFilter groupFilter;
     private IGroupFormmerRepo groupFormmerRepo;
@@ -8,7 +8,7 @@ public class GroupFormmerAbstractConcrete extends GroupFormmerAbstractFactory{
 
 
     @Override
-    public IGroupFilter getGroupFilter(){
+    public IGroupFilter getGroupFilter() {
         if (groupFilter == null) {
             groupFilter = new GroupFilter();
         }
@@ -16,7 +16,7 @@ public class GroupFormmerAbstractConcrete extends GroupFormmerAbstractFactory{
     }
 
     @Override
-    public IGroupFormmerRepo getGroupFormmerRepo(){
+    public IGroupFormmerRepo getGroupFormmerRepo() {
         if (groupFormmerRepo == null) {
             groupFormmerRepo = new GroupFormmerRepo();
         }
@@ -24,7 +24,7 @@ public class GroupFormmerAbstractConcrete extends GroupFormmerAbstractFactory{
     }
 
     @Override
-    public IGroupFormmerService getGroupFormmerService(){
+    public IGroupFormmerService getGroupFormmerService() {
         if (groupFormmerService == null) {
             groupFormmerService = new GroupFormmerService();
         }

@@ -5,94 +5,77 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class StoredProcedure
-{
-	private String storedProcedureName;
-	private Connection connection;
-	private CallableStatement statement;
-	public StoredProcedure(String storedProcedureName) throws Exception
-	{
-		this.storedProcedureName = storedProcedureName;
-		connection = null;
-		statement = null;
-		openConnection();
-		createStatement();
-	}
+public class StoredProcedure {
+    private final String storedProcedureName;
+    private Connection connection;
+    private CallableStatement statement;
 
-	private void createStatement() throws SQLException
-	{
-		statement = connection.prepareCall("{call " + storedProcedureName + "}");
-	}
+    public StoredProcedure(String storedProcedureName) throws Exception {
+        this.storedProcedureName = storedProcedureName;
+        connection = null;
+        statement = null;
+        openConnection();
+        createStatement();
+    }
 
-	private void openConnection() throws Exception
-	{
-		connection = ConnectionManager.instance().getDBConnection();
-	}
+    private void createStatement() throws SQLException {
+        statement = connection.prepareCall("{call " + storedProcedureName + "}");
+    }
 
-	public void cleanup(){
-		try
-		{
-			if (null != statement)
-			{
-				statement.close();
-			}
-			if (null != connection)
-			{
-				if (!connection.isClosed())
-				{
-					connection.close();
-				}
-			}
-		}
-		catch (Exception e)
-		{
-			e.printStackTrace();
-		}
-		finally {
-			try {
-				connection.close();
-			} catch (SQLException throwables) {
-				throwables.printStackTrace();
-			}
-		}
-	}
+    private void openConnection() throws Exception {
+        connection = ConnectionManager.instance().getDBConnection();
+    }
 
-	public void setParameter(int paramIndex, String value) throws SQLException
-	{
-		statement.setString(paramIndex, value);
-	}
+    public void cleanup() {
+        try {
+            if (null != statement) {
+                statement.close();
+            }
+            if (null != connection) {
+                if (!connection.isClosed()) {
+                    connection.close();
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                connection.close();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
+    }
 
-	public void setParameter(String paramIndex, String value) throws SQLException
-	{
-		statement.setString(paramIndex, value);
+    public void setParameter(int paramIndex, String value) throws SQLException {
+        statement.setString(paramIndex, value);
+    }
 
-	}
-	public void registerOutputParameterString(int paramIndex) throws SQLException
-	{
-		statement.registerOutParameter(paramIndex, java.sql.Types.VARCHAR);
-	}
+    public void setParameter(String paramIndex, String value) throws SQLException {
+        statement.setString(paramIndex, value);
 
-	public void setParameter(int paramIndex, long value) throws SQLException
-	{
-		statement.setLong(paramIndex, value);
-	}
+    }
 
-	public void registerOutputParameterLong(int paramIndex) throws SQLException
-	{
-		statement.registerOutParameter(paramIndex, java.sql.Types.BIGINT);
-	}
+    public void registerOutputParameterString(int paramIndex) throws SQLException {
+        statement.registerOutParameter(paramIndex, java.sql.Types.VARCHAR);
+    }
 
-	public ResultSet executeWithResults() throws SQLException
-	{
-		if (statement.execute())
-		{
-			return statement.getResultSet();
-		}
-		return null;
-	}
+    public void setParameter(int paramIndex, long value) throws SQLException {
+        statement.setLong(paramIndex, value);
+    }
 
-	public void execute() throws SQLException
-	{
-		statement.execute();
-	}
+    public void registerOutputParameterLong(int paramIndex) throws SQLException {
+        statement.registerOutParameter(paramIndex, java.sql.Types.BIGINT);
+    }
+
+    public ResultSet executeWithResults() throws SQLException {
+        if (statement.execute()) {
+            return statement.getResultSet();
+        }
+        return null;
+    }
+
+    public void execute() throws SQLException {
+        statement.execute();
+    }
 }

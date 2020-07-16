@@ -23,8 +23,8 @@ class LoginServiceTest {
 
     @Test
     void checkLoginTest() throws Exception {
-        when(userLoginRepository.checkIfUserIsAuthenticated("B00835088","123")).thenReturn(true);
-        assertTrue(userLoginService.checkIfUserIsAuthenticated("B00835088","123"));
+        when(userLoginRepository.checkIfUserIsAuthenticated("B00835088", "123")).thenReturn(true);
+        assertTrue(userLoginService.checkIfUserIsAuthenticated("B00835088", "123"));
     }
 
 }

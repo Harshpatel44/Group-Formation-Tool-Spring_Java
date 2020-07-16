@@ -8,8 +8,8 @@ public class DatabaseAbstractConcrete extends DatabaseAbstractFactory {
         return new StoredProcedure(procedureName);
     }
 
-    public IDBConfiguration createDBConfiguration(){
-        if(null == dbConfiguration){
+    public IDBConfiguration createDBConfiguration() {
+        if (null == dbConfiguration) {
             dbConfiguration = new DBConfiguration();
         }
         return dbConfiguration;

@@ -4,7 +4,8 @@ package CSCI5308.GroupFormationTool.AnswerSurvey;
 import java.util.List;
 
 public class DisplaySurveyResponseService implements IDisplaySurveyResponseService {
-    public DisplaySurveyResponseService(){}
+    public DisplaySurveyResponseService() {
+    }
 
 
     @Override
@@ -14,6 +15,6 @@ public class DisplaySurveyResponseService implements IDisplaySurveyResponseServi
 
     @Override
     public List<ISurveyQuestionOptionsModel> getSurveyResponse(List<String> users, String courseId) {
-        return DisplaySurveyResponseAbstractFactory.instance().getDisplaySurveyResponseRepository().getSurveyResponse(users,courseId);
+        return DisplaySurveyResponseAbstractFactory.instance().getDisplaySurveyResponseRepository().getSurveyResponse(users, courseId);
     }
 }

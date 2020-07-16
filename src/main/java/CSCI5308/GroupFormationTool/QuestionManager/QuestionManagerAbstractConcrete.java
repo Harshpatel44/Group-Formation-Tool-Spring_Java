@@ -1,12 +1,15 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
-public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFactory{
+public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFactory {
     private IQuestionResponsesService questionResponsesService;
     private IQuestionResponsesRepo questionResponsesRepo;
     private IQuestionManagerRepository questionManagerRepository;
     private IQuestionManagerService questionManagerService;
+
     @Override
-    public IQuestion getQuestion() { return new Question(); }
+    public IQuestion getQuestion() {
+        return new Question();
+    }
 
     @Override
     public IQuestionManagerRepository getQuestionManagerRepository() {
@@ -17,7 +20,7 @@ public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFact
     }
 
     @Override
-    public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository){
+    public void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository) {
         this.questionManagerRepository = questionManagerRepository;
     }
 
@@ -38,7 +41,7 @@ public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFact
     }
 
     @Override
-    public void setQuestionResponsesRepo(IQuestionResponsesRepo questionResponsesRepo){
+    public void setQuestionResponsesRepo(IQuestionResponsesRepo questionResponsesRepo) {
         this.questionResponsesRepo = questionResponsesRepo;
     }
 

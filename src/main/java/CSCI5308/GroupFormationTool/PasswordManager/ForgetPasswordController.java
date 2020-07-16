@@ -1,22 +1,16 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserAuthenticationAbstractFactory;
 import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ForgetPasswordController {
@@ -37,7 +31,7 @@ public class ForgetPasswordController {
         boolean update;
         String bannerID;
         int passNumber;
-        
+
         Map<String, String> errors = new HashMap<>();
         List<String> oldPasswords;
         service = UserPasswordManagerAbstractFactory.instance().getForgetPasswordService();
@@ -49,10 +43,10 @@ public class ForgetPasswordController {
             return "newPassword";
         }
         iUserPasswordPolicyService = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyService();
-		// Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
-		UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicy();
+        // Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
+        UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicy();
         UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
-        
+
         List<String> validationErrors = iUserPasswordPolicyService.checkPasswordValidation(newPassword, errors);
         if (validationErrors.size() > 0) {
             model.addAttribute("isError", true);
@@ -61,7 +55,7 @@ public class ForgetPasswordController {
         }
         bannerID = service.getBannerIDByPassKey(passKey);
         passNumber = service.getPasswordPolicyNumber();
-        oldPasswords = service.getPasswordByBannerID(bannerID,passNumber);
+        oldPasswords = service.getPasswordByBannerID(bannerID, passNumber);
         for (String password : oldPasswords) {
             if (encryption.passwordMatch(newPassword, password)) {
                 model.addAttribute("Error", "New password cannot be same as the old password");
@@ -97,7 +91,7 @@ public class ForgetPasswordController {
         }
         String passKey = service.generatePassKey();
         addUser = service.insertToForgetPassword(bannerID, passKey);
-        if (addUser==false) {
+        if (addUser == false) {
             model.addAttribute("Error", "Error adding the user");
             return "forgetPassword";
         }

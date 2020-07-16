@@ -1,22 +1,22 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import java.util.List;
-import javax.validation.constraints.NotNull;
-
 import CSCI5308.GroupFormationTool.ApplicationConstants;
 import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
+
+import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public class ForgetPasswordService implements IForgetPasswordService {
 
     public ForgetPasswordService() {
     }
 
-    public ForgetPasswordService(ForgetPasswordRepository forgetPasswordRepository){
+    public ForgetPasswordService(ForgetPasswordRepository forgetPasswordRepository) {
         UserPasswordManagerAbstractFactory.instance().setForgetPasswordRepository(forgetPasswordRepository);
     }
 
     @Override
-    public String getEmailByBannerID(String bannerID){
+    public String getEmailByBannerID(String bannerID) {
         return UserPasswordManagerAbstractFactory.instance().getForgetPasswordRepository().getEmailByBannerID(bannerID);
     }
 
@@ -38,11 +38,7 @@ public class ForgetPasswordService implements IForgetPasswordService {
 
     @Override
     public boolean comparePassword(@NotNull String newPassword, String confirmPassword) {
-        if(newPassword.equals(confirmPassword)) {
-            return true;
-        } else {
-            return false;
-        }
+        return newPassword.equals(confirmPassword);
     }
 
     @Override
@@ -57,12 +53,12 @@ public class ForgetPasswordService implements IForgetPasswordService {
     }
 
     @Override
-    public int getPasswordPolicyNumber(){
+    public int getPasswordPolicyNumber() {
         return UserPasswordManagerAbstractFactory.instance().getForgetPasswordRepository().getPasswordPolicyNumber();
     }
 
     @Override
     public List<String> getPasswordByBannerID(String bannerID, int passNumber) throws Exception {
-        return UserPasswordManagerAbstractFactory.instance().getForgetPasswordRepository().getPasswordByBannerID(bannerID,passNumber);
+        return UserPasswordManagerAbstractFactory.instance().getForgetPasswordRepository().getPasswordByBannerID(bannerID, passNumber);
     }
 }

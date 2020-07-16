@@ -7,7 +7,7 @@ public class QuestionEditorAbstractConcrete extends QuestionEditorAbstractFactor
     private IQuestionEditorRepository questionEditorRepository;
     private IRankFunctionsService rankFunctionsService;
 
-    public IQuestionModel getQuestionModel(){
+    public IQuestionModel getQuestionModel() {
         return new QuestionModel();
     }
 
@@ -25,7 +25,7 @@ public class QuestionEditorAbstractConcrete extends QuestionEditorAbstractFactor
         return questionEditorRepository;
     }
 
-    public void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository){
+    public void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository) {
         this.questionEditorRepository = questionEditorRepository;
     }
 

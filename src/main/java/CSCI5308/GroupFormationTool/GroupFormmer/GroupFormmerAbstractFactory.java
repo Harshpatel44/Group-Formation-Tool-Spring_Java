@@ -4,7 +4,7 @@ public abstract class GroupFormmerAbstractFactory {
 
     private static GroupFormmerAbstractFactory instance = null;
 
-    public static GroupFormmerAbstractFactory instance(){
+    public static GroupFormmerAbstractFactory instance() {
         if (instance == null) {
             instance = new GroupFormmerAbstractConcrete();
         }
@@ -12,7 +12,9 @@ public abstract class GroupFormmerAbstractFactory {
     }
 
     public abstract IGroupFormmerService getGroupFormmerService();
+
     public abstract IGroupFormmerRepo getGroupFormmerRepo();
+
     public abstract IGroupFilter getGroupFilter();
 
 }

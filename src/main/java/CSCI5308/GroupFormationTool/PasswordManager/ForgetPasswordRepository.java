@@ -34,7 +34,6 @@ public class ForgetPasswordRepository implements IForgetPasswordRepository {
 
     @Override
     public boolean updatePassword(String bannerid, String newPassword) throws Exception {
-        System.out.print("inside update password");
         try {
             Connection connection = ConnectionManager.instance().getDBConnection();
             CallableStatement st = connection.prepareCall("{CALL updatePassword(?,?)}");

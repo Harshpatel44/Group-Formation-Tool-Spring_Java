@@ -1,13 +1,13 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-public class CurrentUser{
+public class CurrentUser {
     private static CurrentUser instance = null;
     private String firstName;
     private String lastName;
     private String bannerId;
 
-    public static CurrentUser instance(){
-        if(instance==null){
+    public static CurrentUser instance() {
+        if (instance == null) {
             instance = new CurrentUser();
         }
         return instance;

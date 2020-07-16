@@ -6,12 +6,12 @@ public class UserManagerAbstractConcrete extends UserManagerAbstractFactory {
     private IUserService userService;
 
     @Override
-    public IInstructor getInstructor(){
+    public IInstructor getInstructor() {
         return new Instructor();
     }
 
     @Override
-    public IUser getUser(){
+    public IUser getUser() {
         return new User();
     }
 
@@ -24,7 +24,7 @@ public class UserManagerAbstractConcrete extends UserManagerAbstractFactory {
     }
 
     @Override
-    public void setUserRepository(IUserRepository userRepository){
+    public void setUserRepository(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -37,7 +37,7 @@ public class UserManagerAbstractConcrete extends UserManagerAbstractFactory {
     }
 
     @Override
-    public void setUserService(IUserService userService){
+    public void setUserService(IUserService userService) {
         this.userService = userService;
     }
 

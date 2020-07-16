@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class SurveyManagerServiceTest {
     }
 
     @Test
-    public void AlreadyAddedSurveyQuestionsTest() throws Exception{
+    public void AlreadyAddedSurveyQuestionsTest() throws Exception {
         List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
         IQuestion iQuestion = new Question();
         iQuestion.setQuestionId(1);
@@ -41,7 +40,7 @@ public class SurveyManagerServiceTest {
     }
 
     @Test
-    public void NotAddedSurveyQuestionsTest() throws Exception{
+    public void NotAddedSurveyQuestionsTest() throws Exception {
         List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
         IQuestion iQuestion = new Question();
         iQuestion.setQuestionId(1);
@@ -54,7 +53,7 @@ public class SurveyManagerServiceTest {
     }
 
     @Test
-    public void checkPublishTestIfPublished() throws Exception{
+    public void checkPublishTestIfPublished() throws Exception {
         boolean publish = true;
         when(surveyManagerRepository.checkPublish()).thenReturn(true);
         boolean returned = surveyManagerRepository.checkPublish();
@@ -62,7 +61,7 @@ public class SurveyManagerServiceTest {
     }
 
     @Test
-    public void checkPublishTestIfNotPublished() throws Exception{
+    public void checkPublishTestIfNotPublished() throws Exception {
         boolean publish = false;
         when(surveyManagerRepository.checkPublish()).thenReturn(false);
         boolean returned = surveyManagerRepository.checkPublish();
@@ -71,8 +70,9 @@ public class SurveyManagerServiceTest {
 
     @Test
     public void getSurveyQuestionsTest() throws Exception {
-    surveyManagerService.getSurveyQuestions();
-}
+        surveyManagerService.getSurveyQuestions();
+    }
+
     @Test
     public void AddQuestionToSurveyTest() throws Exception {
         Integer questionId = 1;

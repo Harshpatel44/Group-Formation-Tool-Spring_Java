@@ -6,7 +6,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class AnswerSurveyRepository implements IAnswerSurveyRepository {
 
@@ -19,17 +21,17 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
         List<ISurveyQuestionOptionsModel> questionsAndOptions = new ArrayList<ISurveyQuestionOptionsModel>();
         try {
             getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
-            getSurveyQuestions.setParameter(1,courseId);
+            getSurveyQuestions.setParameter(1, courseId);
             ResultSet rs = getSurveyQuestions.executeWithResults();
-            while(rs.next()) {
-                HashMap<Integer,String> options = new HashMap<>();
-                if(rs.getString("questionType").equals("mcqs") || rs.getString("questionType").equals("mcqm")) {
+            while (rs.next()) {
+                HashMap<Integer, String> options = new HashMap<>();
+                if (rs.getString("questionType").equals("mcqs") || rs.getString("questionType").equals("mcqm")) {
                     int questionId = rs.getInt(2);
                     getOptions = new StoredProcedure("GetSurveyQuestionOptions(?)");
-                    getOptions.setParameter(1,questionId);
+                    getOptions.setParameter(1, questionId);
                     ResultSet ors = getOptions.executeWithResults();
-                    while(ors.next()) {
-                        options.put(ors.getInt("optionRank"),ors.getString("optionsDesc"));
+                    while (ors.next()) {
+                        options.put(ors.getInt("optionRank"), ors.getString("optionsDesc"));
                     }
                 }
                 ISurveyQuestionOptionsModel question = new SurveyQuestionOptionsModel();
@@ -42,17 +44,14 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 questionsAndOptions.add(question);
             }
             LOG.info("Operation = getSurveyQuestionsAndOptions, Status = Success ");
-        }
-        catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+throwables.getMessage());
-        }
-        catch (Exception e) {
+            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message=" + throwables.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+e.getMessage());
-        }
-        finally {
-            if(null != getOptions) {
+            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (null != getOptions) {
                 getOptions.cleanup();
             }
             getSurveyQuestions.cleanup();
@@ -63,24 +62,21 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
     @Override
     public void storeSurveyResponses(String bannerId, String courseID, int questionId, String answer) {
         StoredProcedure storeAnswers = null;
-        try{
+        try {
             storeAnswers = new StoredProcedure("InsertIntoSurveyAnswers(?,?,?,?)");
-            storeAnswers.setParameter(1,bannerId);
-            storeAnswers.setParameter(2,courseID);
-            storeAnswers.setParameter(3,questionId);
-            storeAnswers.setParameter(4,answer);
+            storeAnswers.setParameter(1, bannerId);
+            storeAnswers.setParameter(2, courseID);
+            storeAnswers.setParameter(3, questionId);
+            storeAnswers.setParameter(4, answer);
             ResultSet rs = storeAnswers.executeWithResults();
             LOG.info("Operation = storeSurveyResponses, Status = Success");
-        }
-        catch(SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+throwables.getMessage());
-        }
-        catch (Exception e){
+            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message=" + throwables.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+e.getMessage());
-        }
-        finally {
+            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message=" + e.getMessage());
+        } finally {
             storeAnswers.cleanup();
         }
     }
@@ -88,23 +84,21 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
     @Override
     public boolean checkSurveyAvailableForUser(String bannerId) {
         StoredProcedure checkSurveyAvailableForUser = null;
-        try{
+        try {
             checkSurveyAvailableForUser = new StoredProcedure("SurveyAvailableForTheUser(?)");
-            checkSurveyAvailableForUser.setParameter(1,bannerId);
+            checkSurveyAvailableForUser.setParameter(1, bannerId);
             ResultSet rs = checkSurveyAvailableForUser.executeWithResults();
-            if(rs.next()){
+            if (rs.next()) {
                 return false;
             }
             LOG.info("Operation = checkSurveyAvailableForUser, Status = Success");
-        }
-        catch (SQLException throwables){
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+throwables.getMessage());
-        }
-        catch (Exception e){
+            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message=" + throwables.getMessage());
+        } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+e.getMessage());        }
-        finally {
+            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message=" + e.getMessage());
+        } finally {
             checkSurveyAvailableForUser.cleanup();
         }
         return true;
@@ -116,10 +110,9 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
         List<ISurveyQuestionOptionsModel> questionsAndOptions = new ArrayList<ISurveyQuestionOptionsModel>();
         try {
             StoredProcedure getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
-            getSurveyQuestions.setParameter(1,courseId);
+            getSurveyQuestions.setParameter(1, courseId);
             ResultSet rs = getSurveyQuestions.executeWithResults();
-            while(rs.next())
-            {
+            while (rs.next()) {
                 List<String> options = new ArrayList<>();
                 options.add("Similar");
                 options.add("Dissimilar");
@@ -128,12 +121,11 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 question.setSurveyQuestionDescription(rs.getString("questionDesc"));
                 question.setSurveyQuestionId(rs.getInt("questionId"));
                 question.setSurveyQuestionType(rs.getString("questionType"));
-//                question.setSurveyQuestionsOptions(options);
+                question.setGroupFormationOptions(options);
                 question.setSurveyQuestionTopic(rs.getString("questionTopic"));
                 questionsAndOptions.add(question);
 
-                if(rs.getString("questionType").equals("numeric"))
-                {
+                if (rs.getString("questionType").equals("numeric")) {
                     ISurveyQuestionOptionsModel question1 = new SurveyQuestionOptionsModel();
                     question1.setSurveyCourseId(rs.getString("courseId"));
                     question1.setSurveyQuestionDescription(" Enter the value of lessThanValue of X to be included in team");
@@ -152,11 +144,9 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 }
             }
             getSurveyQuestions.cleanup();
-        }
-        catch (SQLException e){
+        } catch (SQLException e) {
             e.printStackTrace();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
         return questionsAndOptions;

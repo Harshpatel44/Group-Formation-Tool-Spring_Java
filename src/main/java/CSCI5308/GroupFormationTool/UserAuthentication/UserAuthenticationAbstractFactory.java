@@ -1,30 +1,31 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
 public abstract class UserAuthenticationAbstractFactory {
-	private static UserAuthenticationAbstractFactory instance = null;
+    private static UserAuthenticationAbstractFactory instance = null;
 
-    public static UserAuthenticationAbstractFactory instance(){
+    public static UserAuthenticationAbstractFactory instance() {
 
         if (instance == null) {
             instance = new UserAuthenticationAbstractConcrete();
         }
         return instance;
     }
-	public abstract ILoginRepository getLoginRepository();
 
-	public abstract void setLoginRepository(ILoginRepository loginRepository);
+    public abstract ILoginRepository getLoginRepository();
 
-	public abstract ILoginService getLoginService();
+    public abstract void setLoginRepository(ILoginRepository loginRepository);
 
-	public abstract void setLoginService(ILoginService loginService);
+    public abstract ILoginService getLoginService();
 
-	public abstract IEmailConfiguration getEmailConfiguration();
+    public abstract void setLoginService(ILoginService loginService);
 
-	public abstract void setEmailConfiguration(IEmailConfiguration emailConfiguration);
+    public abstract IEmailConfiguration getEmailConfiguration();
 
-	public abstract IUserNotification getUserNotification();
+    public abstract void setEmailConfiguration(IEmailConfiguration emailConfiguration);
 
-	public abstract void setUserNotification(IUserNotification userNotification);
+    public abstract IUserNotification getUserNotification();
 
-	public abstract IPasswordEncryptor getBCryptEncryption();
+    public abstract void setUserNotification(IUserNotification userNotification);
+
+    public abstract IPasswordEncryptor getBCryptEncryption();
 }

@@ -48,19 +48,18 @@
     <h2 align="center">Group Configure</h2>
     <form th:action ="@{/formgroups/saveGroupFormula}" method="post">
         <div th:each="question : ${surveyGroupQuestions}">
-            <p th:text = "${question.surveyQuestionTopic}" th:for="${question.surveyQuestionId}"/>
             <label style="width: auto" th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
             <br/><br/>
             <div th:switch = "${question.surveyQuestionType}">
 
                 <div th:case="'txt'">
-                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                    <div th:each="option : ${question.groupFormationOptions}">
                         <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
                     </div>
                 </div>
 
                 <div th:case="'numeric'">
-                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                    <div th:each="option : ${question.groupFormationOptions}">
                         <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
                     </div>
                 </div>
@@ -70,13 +69,13 @@
                 </div>
 
                 <div th:case="'mcqm'">
-                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                    <div th:each="option : ${question.groupFormationOptions}">
                         <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
                     </div>
                 </div>
 
                 <div th:case="'mcqs'">
-                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                    <div th:each="option : ${question.groupFormationOptions}">
                         <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
                     </div>
                 </div>

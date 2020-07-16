@@ -4,7 +4,7 @@ public abstract class DatabaseAbstractFactory {
 
     public static DatabaseAbstractFactory instance = null;
 
-    public static DatabaseAbstractFactory instance(){
+    public static DatabaseAbstractFactory instance() {
         if (instance == null) {
             instance = new DatabaseAbstractConcrete();
         }

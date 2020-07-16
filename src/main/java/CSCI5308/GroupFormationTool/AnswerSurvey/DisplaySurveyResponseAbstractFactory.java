@@ -4,17 +4,17 @@ public abstract class DisplaySurveyResponseAbstractFactory {
 
     private static DisplaySurveyResponseAbstractFactory instance = null;
 
-    public static DisplaySurveyResponseAbstractFactory instance(){
+    public static DisplaySurveyResponseAbstractFactory instance() {
 
         if (instance == null) {
-            instance = new DisplaySurveyResponseAbstractConcrete(){};
+            instance = new DisplaySurveyResponseAbstractConcrete();
         }
         return instance;
     }
 
     public abstract IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository();
 
-    public abstract IDisplaySurveyResponseService getDisplaySurveyResponseService();
-
     public abstract void setDisplaySurveyResponseRepository(IDisplaySurveyResponseRepository displaySurveyResponseRepository);
+
+    public abstract IDisplaySurveyResponseService getDisplaySurveyResponseService();
 }

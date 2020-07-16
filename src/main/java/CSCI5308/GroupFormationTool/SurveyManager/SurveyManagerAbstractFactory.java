@@ -1,12 +1,9 @@
 package CSCI5308.GroupFormationTool.SurveyManager;
 
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractConcrete;
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
-
 public abstract class SurveyManagerAbstractFactory {
     private static SurveyManagerAbstractFactory instance = null;
 
-    public static SurveyManagerAbstractFactory instance(){
+    public static SurveyManagerAbstractFactory instance() {
 
         if (instance == null) {
             instance = new SurveyManagerAbstractConcrete();
@@ -15,6 +12,8 @@ public abstract class SurveyManagerAbstractFactory {
     }
 
     public abstract ISurveyManagerRepository getSurveyManagerRepository();
-    public abstract ISurveyManagerService getSurveyManagerService();
+
     public abstract void setSurveyManagerRepository(ISurveyManagerRepository surveyManagerRepository);
+
+    public abstract ISurveyManagerService getSurveyManagerService();
 }

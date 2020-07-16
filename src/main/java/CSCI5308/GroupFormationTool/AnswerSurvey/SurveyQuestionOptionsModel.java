@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 import java.util.ArrayList;
-import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,10 +10,24 @@ public class SurveyQuestionOptionsModel implements ISurveyQuestionOptionsModel {
     private String surveyQuestionDescription;
     private String surveyQuestionType;
     private String surveyCourseId;
-    private HashMap<Integer,String> surveyQuestionsOptions;
+    private HashMap<Integer, String> surveyQuestionsOptions;
     private List<String> surveyAnswer;
     private String bannerId;
     private ArrayList<String> responses;
+    private List<String> groupFormationOptions;
+
+    public SurveyQuestionOptionsModel() {
+    }
+
+    @Override
+    public List<String> getGroupFormationOptions() {
+        return groupFormationOptions;
+    }
+
+    @Override
+    public void setGroupFormationOptions(List<String> groupFormationOptions) {
+        this.groupFormationOptions = groupFormationOptions;
+    }
 
     @Override
     public ArrayList<String> getResponses() {
@@ -24,9 +37,6 @@ public class SurveyQuestionOptionsModel implements ISurveyQuestionOptionsModel {
     @Override
     public void setResponses(ArrayList<String> responses) {
         this.responses = responses;
-    }
-
-    public SurveyQuestionOptionsModel() {
     }
 
     @Override
@@ -81,12 +91,12 @@ public class SurveyQuestionOptionsModel implements ISurveyQuestionOptionsModel {
     }
 
     @Override
-    public HashMap<Integer,String> getSurveyQuestionsOptions() {
+    public HashMap<Integer, String> getSurveyQuestionsOptions() {
         return surveyQuestionsOptions;
     }
 
     @Override
-    public void setSurveyQuestionsOptions(HashMap<Integer,String> surveyQuestionsOptions) {
+    public void setSurveyQuestionsOptions(HashMap<Integer, String> surveyQuestionsOptions) {
         this.surveyQuestionsOptions = surveyQuestionsOptions;
     }
 

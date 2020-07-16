@@ -7,30 +7,30 @@ import org.apache.logging.log4j.Logger;
 
 public class QuestionEditorService implements IQuestionEditorService {
 
-    public QuestionEditorService(){}
-    public QuestionEditorService(QuestionEditorRepository questionEditorRepository,CurrentUser currentUser){
+    private static final Logger LOG = LogManager.getLogger();
+    private IQuestionEditorRepository questionEditorRepository;
+
+    public QuestionEditorService() {
+    }
+    public QuestionEditorService(QuestionEditorRepository questionEditorRepository, CurrentUser currentUser) {
         QuestionEditorAbstractFactory.instance().setQuestionEditorRepository(questionEditorRepository);
         CurrentUser.instance().setInstance(currentUser);
     }
 
-    private IQuestionEditorRepository questionEditorRepository;
-    private static final Logger LOG = LogManager.getLogger();
-
     @Override
-    public Boolean saveQuestionServiceForTextAndNumeric(String questionText,String questionTitle,String selectedQuestionType){
+    public Boolean saveQuestionServiceForTextAndNumeric(String questionText, String questionTitle, String selectedQuestionType) {
         String bannerID = CurrentUser.instance().getBannerId();
         questionEditorRepository = QuestionEditorAbstractFactory.instance().getQuestionEditorRepository();
         try {
-            if(questionEditorRepository.SaveTextAndNumericTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,bannerID)){
-                LOG.info("Operation = Save text and numeric questions function for question: "+questionTitle+", Status = Success");
+            if (questionEditorRepository.SaveTextAndNumericTypeQuestionRepo(questionText, questionTitle, selectedQuestionType, bannerID)) {
+                LOG.info("Operation = Save text and numeric questions function for question: " + questionTitle + ", Status = Success");
                 return true;
-            }
-            else{
-                LOG.warn("Operation = Save text and numeric questions function for question: "+questionTitle+", Status = Fail, Warning Message = question not saved");
+            } else {
+                LOG.warn("Operation = Save text and numeric questions function for question: " + questionTitle + ", Status = Fail, Warning Message = question not saved");
                 return false;
             }
         } catch (Exception e) {
-            LOG.error("Operation = Save text and numeric questions function for question: "+questionTitle+", Status = Fail, Error ="+e.getMessage());
+            LOG.error("Operation = Save text and numeric questions function for question: " + questionTitle + ", Status = Fail, Error =" + e.getMessage());
             e.printStackTrace();
             return false;
         }
@@ -40,12 +40,11 @@ public class QuestionEditorService implements IQuestionEditorService {
     public Boolean saveQuestionForMultipleChoiceService(String questionText, String questionTitle, String selectedQuestionType, String options, String ranks) throws Exception {
         String bannerID = CurrentUser.instance().getBannerId();
         questionEditorRepository = QuestionEditorAbstractFactory.instance().getQuestionEditorRepository();
-        if(questionEditorRepository.SaveMcqTypeQuestionRepo(questionText,questionTitle,selectedQuestionType,options,ranks,bannerID)){
-            LOG.info("Operation = Save mcq type questions function for question: "+questionTitle+", Status = Success");
+        if (questionEditorRepository.SaveMcqTypeQuestionRepo(questionText, questionTitle, selectedQuestionType, options, ranks, bannerID)) {
+            LOG.info("Operation = Save mcq type questions function for question: " + questionTitle + ", Status = Success");
             return true;
-        }
-        else{
-            LOG.warn("Operation = Save mcq type questions function for question: "+questionTitle+", Status = Fail");
+        } else {
+            LOG.warn("Operation = Save mcq type questions function for question: " + questionTitle + ", Status = Fail");
             return false;
         }
     }

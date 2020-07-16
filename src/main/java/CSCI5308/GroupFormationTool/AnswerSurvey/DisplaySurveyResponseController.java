@@ -12,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class DisplaySurveyResponseController {
-    private IDisplaySurveyResponseService service = DisplaySurveyResponseAbstractFactory.instance().getDisplaySurveyResponseService();
+    private final IDisplaySurveyResponseService service = DisplaySurveyResponseAbstractFactory.instance().getDisplaySurveyResponseService();
 
     @GetMapping("/displayResponse")
     public ModelAndView displayResponse() {
@@ -20,21 +20,20 @@ public class DisplaySurveyResponseController {
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         List<String> users = service.getUsersWhoAnsweredSurvey(courseId);
         ModelAndView model = new ModelAndView("displayResponse");
-        model.addObject("userID",userId);
-        model.addObject("courseId",courseId);
-        model.addObject("bannerIds",users);
-        model.addObject("userResponse",service.getSurveyResponse(users,courseId));
+        model.addObject("userID", userId);
+        model.addObject("courseId", courseId);
+        model.addObject("bannerIds", users);
+        model.addObject("userResponse", service.getSurveyResponse(users, courseId));
         return model;
     }
 
     @GetMapping("/displayResponse/{bannerId}")
-    public ModelAndView displayIndividualResponse(@PathVariable ("bannerId") String bannerId)
-    {
+    public ModelAndView displayIndividualResponse(@PathVariable("bannerId") String bannerId) {
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         List<String> users = new ArrayList<>();
         users.add(bannerId);
         ModelAndView model = new ModelAndView("displayResponse");
-        model.addObject("response",service.getSurveyResponse(users,courseId));
+        model.addObject("response", service.getSurveyResponse(users, courseId));
         return model;
     }
 }

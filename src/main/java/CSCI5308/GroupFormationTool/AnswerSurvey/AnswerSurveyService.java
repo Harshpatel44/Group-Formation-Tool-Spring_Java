@@ -1,9 +1,15 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
-import java.util.*;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class AnswerSurveyService implements IAnswerSurveyService {
-    public AnswerSurveyService(){}
-    public AnswerSurveyService(AnswerSurveyRepository answerSurveyRepository) throws Exception{
+    public AnswerSurveyService() {
+    }
+
+    public AnswerSurveyService(AnswerSurveyRepository answerSurveyRepository) throws Exception {
         AnswerSurveyAbstractFactory.instance().setAnswerSurveyRepository(answerSurveyRepository);
     }
 
@@ -13,13 +19,13 @@ public class AnswerSurveyService implements IAnswerSurveyService {
     }
 
     @Override
-    public boolean surveyResponses(HashMap<Integer,ArrayList<String>> surveyResponses, String bannerId, String courseId) {
-        for(Map.Entry mapElements : surveyResponses.entrySet()){
-            Integer questionId = (Integer)mapElements.getKey();
+    public boolean surveyResponses(HashMap<Integer, ArrayList<String>> surveyResponses, String bannerId, String courseId) {
+        for (Map.Entry mapElements : surveyResponses.entrySet()) {
+            Integer questionId = (Integer) mapElements.getKey();
             ArrayList<String> value = (ArrayList<String>) mapElements.getValue();
-           for(String answer : value){
-               AnswerSurveyAbstractFactory.instance().getAnswerSurveyRepository().storeSurveyResponses(bannerId,courseId,questionId,answer);
-           }
+            for (String answer : value) {
+                AnswerSurveyAbstractFactory.instance().getAnswerSurveyRepository().storeSurveyResponses(bannerId, courseId, questionId, answer);
+            }
         }
         return true;
     }

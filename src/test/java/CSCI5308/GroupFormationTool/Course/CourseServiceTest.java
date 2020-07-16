@@ -1,6 +1,8 @@
 package CSCI5308.GroupFormationTool.Course;
 
 
+import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.UserManager.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -84,34 +86,34 @@ public class CourseServiceTest {
         assertTrue(courseService.roleAllowInstructor(userRole));
     }
 
-//	@Test
-//	void assignInstructorForCourseTest() throws Exception {
-//		IInstructor assignInstructor = new Instructor("test");
-//		when(courseRepository.assignInstructorForCourse(assignInstructor)).thenReturn(true);
-//		assertTrue(courseService.assignInstructorForCourse(assignInstructor));
-//		assertEquals("Instructor assigned",assignInstructor.getInstructorAssignMessage());
-//		when(courseRepository.assignInstructorForCourse(assignInstructor)).thenReturn(false);
-//		assertFalse(courseService.assignInstructorForCourse(assignInstructor));
-//		assertEquals("User does not exist or already an instructor",assignInstructor.getInstructorAssignMessage());
-//	}
+	@Test
+	void assignInstructorForCourseTest() throws Exception {
+		IInstructor assignInstructor = UserManagerAbstractFactory.instance().getInstructor();
+		when(courseRepository.assignInstructorForCourse(assignInstructor)).thenReturn(true);
+		assertTrue(courseService.assignInstructorForCourse(assignInstructor));
+		assertEquals("Instructor assigned",assignInstructor.getInstructorAssignMessage());
+		when(courseRepository.assignInstructorForCourse(assignInstructor)).thenReturn(false);
+		assertFalse(courseService.assignInstructorForCourse(assignInstructor));
+		assertEquals("User does not exist or already an instructor",assignInstructor.getInstructorAssignMessage());
+	}
 
-//	@Test
-//	void createCourseService1() throws Exception {
-//		ICreateCourse createCourse = new CreateCourse();
-//		createCourse.setCourseName("testname");
-//		createCourse.setCourseId("testid");
-//		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
-//		ArrayList<String> courseName = new ArrayList<>();
-//		ArrayList<String> courseId = new ArrayList<>();
-//		courseId.add("couseid1");
-//		courseName.add("course1");
-//		allCoursesArray.add(courseId);
-//		allCoursesArray.add(courseName);
-//		when(courseRepository.createCourseRepo(createCourse)).thenReturn(true);
-//		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
-//		assertTrue(courseService.createCourse(createCourse));
-//		assertEquals("Course created", createCourse.getCourseCreateMessage());
-//	}
+	@Test
+	void createCourseService1() throws Exception {
+		ICreateCourse createCourse = CourseAbstractFactory.instance().getCreateCourse();
+		createCourse.setCourseName("testname");
+		createCourse.setCourseId("testid");
+		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
+		ArrayList<String> courseName = new ArrayList<>();
+		ArrayList<String> courseId = new ArrayList<>();
+		courseId.add("couseid1");
+		courseName.add("course1");
+		allCoursesArray.add(courseId);
+		allCoursesArray.add(courseName);
+		when(courseRepository.createCourseRepo(createCourse)).thenReturn(true);
+		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
+		assertTrue(courseService.createCourse(createCourse));
+		assertEquals("Course created", createCourse.getCourseCreateMessage());
+	}
 
     @Test
     void createCourseService2() throws Exception {

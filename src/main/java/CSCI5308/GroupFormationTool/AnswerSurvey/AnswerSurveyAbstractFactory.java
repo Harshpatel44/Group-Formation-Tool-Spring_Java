@@ -4,19 +4,20 @@ public abstract class AnswerSurveyAbstractFactory {
 
     private static AnswerSurveyAbstractFactory instance = null;
 
-    public static AnswerSurveyAbstractFactory instance(){
+    public static AnswerSurveyAbstractFactory instance() {
 
         if (instance == null) {
-            instance = new AnswerSurveyAbstractConcrete() {};
+            instance = new AnswerSurveyAbstractConcrete() {
+            };
         }
         return instance;
     }
 
     public abstract IAnswerSurveyRepository getAnswerSurveyRepository();
 
+    public abstract void setAnswerSurveyRepository(IAnswerSurveyRepository answerSurveyRepository);
+
     public abstract IAnswerSurveyService getAnswerSurveyService();
 
     public abstract ISurveyQuestionOptionsModel getSurveyQuestionOptionsModel();
-
-    public abstract void setAnswerSurveyRepository(IAnswerSurveyRepository answerSurveyRepository);
 }

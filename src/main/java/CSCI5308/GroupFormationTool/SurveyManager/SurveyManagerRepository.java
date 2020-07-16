@@ -3,29 +3,24 @@ package CSCI5308.GroupFormationTool.SurveyManager;
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
-import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.SQLOutput;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.time.format.DateTimeFormatter;
-import java.time.LocalDateTime;
-import java.util.logging.FileHandler;
 
-public class SurveyManagerRepository implements ISurveyManagerRepository{
-    private DatabaseAbstractFactory databaseAbstractFactory;
-    private List<IQuestion> AlreadyQuestionList = new ArrayList<IQuestion>();
-    private List<IQuestion> NotAddedQuestionList = new ArrayList<IQuestion>();
+public class SurveyManagerRepository implements ISurveyManagerRepository {
     private static final Logger LOG = LogManager.getLogger();
+    private DatabaseAbstractFactory databaseAbstractFactory;
+    private final List<IQuestion> AlreadyQuestionList = new ArrayList<IQuestion>();
+    private final List<IQuestion> NotAddedQuestionList = new ArrayList<IQuestion>();
 
     @Override
     public void getSurveyQuestions() throws Exception {
@@ -33,35 +28,34 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String userId = CurrentUser.instance().getBannerId();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
-        try{
+        try {
             AlreadyQuestionList.clear();
             NotAddedQuestionList.clear();
-            sp =  databaseAbstractFactory.createStoredProcedure("SurveyQuestions(?,?)");
-            sp.setParameter(1,userId);
-            sp.setParameter(2,courseId);
+            sp = databaseAbstractFactory.createStoredProcedure("SurveyQuestions(?,?)");
+            sp.setParameter(1, userId);
+            sp.setParameter(2, courseId);
             ResultSet rs = sp.executeWithResults();
-            while(rs.next()){
+            while (rs.next()) {
                 IQuestion temp = QuestionManagerAbstractFactory.instance().getQuestion();
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionId(rs.getInt("questionId"));
                 temp.setFlag(rs.getInt("flag"));
-                if(temp.getFlag()==0){
+                if (temp.getFlag() == 0) {
                     NotAddedQuestionList.add(temp);
                     LOG.info("Operation = adding question to NotInSurvey list , Status = Success ");
-                }
-                else{
+                } else {
                     AlreadyQuestionList.add(temp);
                     LOG.info("Operation = adding question to InSurvey list , Status = Success ");
                 }
             }
-        }catch (SQLException throwables) {
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = survey question list, Status = Failed, Error Message="+throwables.getMessage());
+            LOG.error("Operation = survey question list, Status = Failed, Error Message=" + throwables.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = survey question list, Status = Failed, Error Message="+e.getMessage());
-        }finally {
-            if(sp!=null){
+            LOG.error("Operation = survey question list, Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (sp != null) {
                 sp.cleanup();
             }
         }
@@ -85,107 +79,102 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String userId = CurrentUser.instance().getBannerId();
-        try{
+        try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime datetime = LocalDateTime.now();
             sp = databaseAbstractFactory.createStoredProcedure("AddQuestionToSurvey(?,?,?,?)");
-            sp.setParameter(1,userId);
-            sp.setParameter(2,courseId);
-            sp.setParameter(3,questionId);
-            sp.setParameter(4,dtf.format(datetime));
+            sp.setParameter(1, userId);
+            sp.setParameter(2, courseId);
+            sp.setParameter(3, questionId);
+            sp.setParameter(4, dtf.format(datetime));
             sp.execute();
-            LOG.info("Operation = add question QuestionId:"+questionId+" for CourseID:"+courseId+" and userID:"+userId+", Status = Success ");
-        }catch (SQLException throwables) {
+            LOG.info("Operation = add question QuestionId:" + questionId + " for CourseID:" + courseId + " and userID:" + userId + ", Status = Success ");
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = add question QuestionId:"+questionId+" for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+throwables.getMessage());
+            LOG.error("Operation = add question QuestionId:" + questionId + " for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + throwables.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = add question QuestionId:"+questionId+" for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+e.getMessage());
-        }finally {
-            if(sp!=null){
+            LOG.error("Operation = add question QuestionId:" + questionId + " for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (sp != null) {
                 sp.cleanup();
             }
         }
     }
 
     @Override
-    public void RemoveQuestionFromSurvey(Integer questionId){
+    public void RemoveQuestionFromSurvey(Integer questionId) {
         StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String userId = CurrentUser.instance().getBannerId();
-        try{
-            sp =databaseAbstractFactory.createStoredProcedure("RemoveQuestionFromSurvey(?,?,?)");
-            sp.setParameter(1,userId);
-            sp.setParameter(2,courseId);
-            sp.setParameter(3,questionId);
+        try {
+            sp = databaseAbstractFactory.createStoredProcedure("RemoveQuestionFromSurvey(?,?,?)");
+            sp.setParameter(1, userId);
+            sp.setParameter(2, courseId);
+            sp.setParameter(3, questionId);
             sp.execute();
-            LOG.info("Operation = Remove QuestionId:"+questionId+" for CourseID:"+courseId+" and userID:"+userId+", Status = Success ");
-        }catch (SQLException throwables) {
+            LOG.info("Operation = Remove QuestionId:" + questionId + " for CourseID:" + courseId + " and userID:" + userId + ", Status = Success ");
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = Remove QuestionId:"+questionId+" for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+throwables.getMessage());
+            LOG.error("Operation = Remove QuestionId:" + questionId + " for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + throwables.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = Remove QuestionId:"+questionId+" for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+e.getMessage());
-        }
-        finally {
-            if(sp!=null){
+            LOG.error("Operation = Remove QuestionId:" + questionId + " for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (sp != null) {
                 sp.cleanup();
             }
         }
     }
 
     @Override
-    public void PublishSurvey(){
+    public void PublishSurvey() {
         StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String userId = CurrentUser.instance().getBannerId();
-        try{
+        try {
             sp = databaseAbstractFactory.createStoredProcedure("AddSurveyToPublish(?,?)");
-            sp.setParameter(1,userId);
-            sp.setParameter(2,courseId);
+            sp.setParameter(1, userId);
+            sp.setParameter(2, courseId);
             sp.execute();
-            LOG.info("Operation = Publish Survey for CourseID:"+courseId+" and userID:"+userId+", Status = Success ");
-        }catch (SQLException throwables) {
+            LOG.info("Operation = Publish Survey for CourseID:" + courseId + " and userID:" + userId + ", Status = Success ");
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = Publish Survey for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+throwables.getMessage());
+            LOG.error("Operation = Publish Survey for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + throwables.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = Publish Survey for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+e.getMessage());
-        }
-        finally {
-            if(sp!=null){
+            LOG.error("Operation = Publish Survey for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (sp != null) {
                 sp.cleanup();
             }
         }
     }
 
     @Override
-    public boolean checkPublish(){
+    public boolean checkPublish() {
         boolean isPublished = false;
         StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String userId = CurrentUser.instance().getBannerId();
         try {
-            sp =databaseAbstractFactory.createStoredProcedure("IsSurveyPublished(?,?)");
+            sp = databaseAbstractFactory.createStoredProcedure("IsSurveyPublished(?,?)");
             sp.setParameter(1, userId);
             sp.setParameter(2, courseId);
             ResultSet rs = sp.executeWithResults();
-            if(rs.next())
-            {
+            if (rs.next()) {
                 isPublished = true;
             }
-            LOG.info("Operation = CheckPublish for CourseID:"+courseId+" and userID:"+userId+", Status = Success ");
-        }
-        catch (SQLException throwables) {
-            LOG.error("Operation = CheckPublish for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+throwables.getMessage());
+            LOG.info("Operation = CheckPublish for CourseID:" + courseId + " and userID:" + userId + ", Status = Success ");
+        } catch (SQLException throwables) {
+            LOG.error("Operation = CheckPublish for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + throwables.getMessage());
         } catch (Exception e) {
-            LOG.error("Operation = CheckPublish for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+e.getMessage());
-        }
-        finally {
-            if(sp!=null){
+            LOG.error("Operation = CheckPublish for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (sp != null) {
                 sp.cleanup();
             }
         }
@@ -194,25 +183,24 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
     @Override
     public void UnpublishSurvey() {
-        StoredProcedure sp=null;
+        StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String userId = CurrentUser.instance().getBannerId();
-        try{
-            sp =databaseAbstractFactory.createStoredProcedure("RemoveSurveyFromoPublish(?,?)");
-            sp.setParameter(1,userId);
-            sp.setParameter(2,courseId);
+        try {
+            sp = databaseAbstractFactory.createStoredProcedure("RemoveSurveyFromoPublish(?,?)");
+            sp.setParameter(1, userId);
+            sp.setParameter(2, courseId);
             sp.execute();
-            LOG.info("Operation = UnPublish for CourseID:"+courseId+" and userID:"+userId+", Status = Success ");
-        }catch (SQLException throwables) {
+            LOG.info("Operation = UnPublish for CourseID:" + courseId + " and userID:" + userId + ", Status = Success ");
+        } catch (SQLException throwables) {
             throwables.printStackTrace();
-            LOG.error("Operation = UnPublish for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+throwables.getMessage());
+            LOG.error("Operation = UnPublish for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + throwables.getMessage());
         } catch (Exception e) {
             e.printStackTrace();
-            LOG.error("Operation = UnPublish for CourseID:"+courseId+" and userID:"+userId+", Status = Failed, Error Message="+e.getMessage());
-        }
-        finally {
-            if(sp!=null){
+            LOG.error("Operation = UnPublish for CourseID:" + courseId + " and userID:" + userId + ", Status = Failed, Error Message=" + e.getMessage());
+        } finally {
+            if (sp != null) {
                 sp.cleanup();
             }
         }

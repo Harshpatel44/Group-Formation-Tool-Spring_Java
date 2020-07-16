@@ -1,13 +1,12 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.Injector;
 import java.util.ArrayList;
 import java.util.Dictionary;
 import java.util.Hashtable;
 
 public class DeleteCourse implements IDeleteCourse {
     private String selectedCourseId;
-    private String courseDeleteMessage="status here";
+    private String courseDeleteMessage = "status here";
     private Dictionary allCoursesList = new Hashtable();
     private ArrayList<String> allCourseIds;
     private ArrayList<String> allCourseNames;
@@ -16,7 +15,8 @@ public class DeleteCourse implements IDeleteCourse {
         CourseAbstractFactory.instance().setCourseService(courseService);
     }
 
-    public DeleteCourse(){ }
+    public DeleteCourse() {
+    }
 
     @Override
     public ArrayList<String> getAllCourseIds() {
@@ -40,7 +40,7 @@ public class DeleteCourse implements IDeleteCourse {
 
     @Override
     public Dictionary getAllCoursesList() throws Exception {
-        allCoursesList=CourseAbstractFactory.instance().getCourseService().coursesWithIdForDropdown();
+        allCoursesList = CourseAbstractFactory.instance().getCourseService().coursesWithIdForDropdown();
         return allCoursesList;
     }
 

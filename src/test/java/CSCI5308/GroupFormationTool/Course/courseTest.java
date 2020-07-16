@@ -9,24 +9,23 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class courseTest {
 
     @Test
-    public void setCourseIdTest(){
-        ICourse course=new Course();
+    public void setCourseIdTest() {
+        ICourse course = new Course();
         course.setCourseId("CSCI9");
         assertEquals("CSCI9", course.getCourseId());
     }
 
     @Test
-    public void setCourseNameTest(){
-        ICourse course=new Course();
+    public void setCourseNameTest() {
+        ICourse course = new Course();
         course.setCourseName("Cloud");
         assertEquals("Cloud", course.getCourseName());
     }
 
     @Test
-    public void setRoleTest(){
-        ICourse course=new Course();
+    public void setRoleTest() {
+        ICourse course = new Course();
         course.setRole("Guest");
         assertEquals("Guest", course.getRole());
     }
-
 }

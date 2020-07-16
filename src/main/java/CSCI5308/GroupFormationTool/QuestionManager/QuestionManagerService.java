@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorAbstractFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -11,10 +9,12 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.sortByDate;
 import static CSCI5308.GroupFormationTool.ApplicationConstants.sortByTopic;
 
 public class QuestionManagerService implements IQuestionManagerService {
-    private IQuestionManagerRepository questionManagerRepository;
     private static final Logger LOG = LogManager.getLogger();
+    private IQuestionManagerRepository questionManagerRepository;
 
-    public QuestionManagerService(){}
+    public QuestionManagerService() {
+    }
+
     public QuestionManagerService(QuestionManagerRepository questionManagerRepository) throws Exception {
         QuestionManagerAbstractFactory.instance().setQuestionManagerRepository(questionManagerRepository);
     }
@@ -22,18 +22,13 @@ public class QuestionManagerService implements IQuestionManagerService {
     @Override
     public List<IQuestion> getQuestions(String userId, String sortType) throws Exception {
         questionManagerRepository = QuestionManagerAbstractFactory.instance().getQuestionManagerRepository();
-        if (sortType.equals(sortByTopic))
-        {
+        if (sortType.equals(sortByTopic)) {
             LOG.info("Operation = sorted question by Topic , Status = Success ");
             return questionManagerRepository.getQuestionsByTopic(userId);
-        }
-        else if (sortType.equals(sortByDate))
-        {
+        } else if (sortType.equals(sortByDate)) {
             LOG.info("Operation = sorted question by Date , Status = Success ");
             return questionManagerRepository.getQuestionsByDate(userId);
-        }
-        else
-        {
+        } else {
             LOG.info("Operation = unsorted question , Status = Success ");
             return questionManagerRepository.getQuestions(userId);
         }

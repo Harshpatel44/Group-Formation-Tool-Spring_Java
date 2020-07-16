@@ -55,7 +55,6 @@ public class GroupFormmmerController {
     public ModelAndView algorithmResults(@RequestParam("teamSize") int teamSize) {
         groupFormmerService = GroupFormmerAbstractFactory.instance().getGroupFormmerService();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
-        System.out.println(teamSize + courseId);
         HashMap<Integer, ArrayList<String>> teamsWithBannerId = groupFormmerService.FormGroups(courseId, teamSize);
         ModelAndView mv = new ModelAndView("algorithmresults");
         mv.addObject("teamsresults", teamsWithBannerId);

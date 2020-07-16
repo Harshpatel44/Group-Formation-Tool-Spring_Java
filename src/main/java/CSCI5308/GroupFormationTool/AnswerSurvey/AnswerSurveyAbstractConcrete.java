@@ -2,10 +2,10 @@ package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 public class AnswerSurveyAbstractConcrete extends AnswerSurveyAbstractFactory {
     private ISurveyQuestionOptionsModel surveyQuestionOptionsModel;
-    private IAnswerSurveyService answerSurveyService ;
+    private IAnswerSurveyService answerSurveyService;
     private IAnswerSurveyRepository answerSurveyRepository;
 
-    public ISurveyQuestionOptionsModel getSurveyQuestionOptionsModel(){
+    public ISurveyQuestionOptionsModel getSurveyQuestionOptionsModel() {
         return new SurveyQuestionOptionsModel();
     }
 
@@ -16,14 +16,14 @@ public class AnswerSurveyAbstractConcrete extends AnswerSurveyAbstractFactory {
         return answerSurveyRepository;
     }
 
+    public void setAnswerSurveyRepository(IAnswerSurveyRepository answerSurveyRepository) {
+        this.answerSurveyRepository = answerSurveyRepository;
+    }
+
     public IAnswerSurveyService getAnswerSurveyService() {
-        if (answerSurveyService == null){
+        if (answerSurveyService == null) {
             answerSurveyService = new AnswerSurveyService();
         }
         return answerSurveyService;
-    }
-
-    public void setAnswerSurveyRepository(IAnswerSurveyRepository answerSurveyRepository) {
-        this.answerSurveyRepository = answerSurveyRepository;
     }
 }

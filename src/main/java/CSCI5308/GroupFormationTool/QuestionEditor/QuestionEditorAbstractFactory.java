@@ -4,7 +4,7 @@ public abstract class QuestionEditorAbstractFactory {
 
     private static QuestionEditorAbstractFactory instance = null;
 
-    public static QuestionEditorAbstractFactory instance(){
+    public static QuestionEditorAbstractFactory instance() {
 
         if (instance == null) {
             instance = new QuestionEditorAbstractConcrete();
@@ -18,7 +18,7 @@ public abstract class QuestionEditorAbstractFactory {
 
     public abstract IQuestionEditorRepository getQuestionEditorRepository();
 
-    public abstract IRankFunctionsService getRankFunctionsService();
-
     public abstract void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository);
+
+    public abstract IRankFunctionsService getRankFunctionsService();
 }

@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.Injector;
-
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
@@ -16,28 +14,29 @@ import org.springframework.web.servlet.ModelAndView;
 @RequestMapping
 public class HomeController {
 
-	private IHomeService homeService;
-	private IUserService iUserService;
-	public HomeController(){
-	}
+    private IHomeService homeService;
+    private IUserService iUserService;
 
-	@RequestMapping("/home")
-	public ModelAndView home() throws Exception {
-		ModelAndView model = new ModelAndView();
-		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		if ((authentication instanceof AnonymousAuthenticationToken)) {
-			model.setViewName("redirect:/login");
-			return model;
-		}
-		homeService = CourseAbstractFactory.instance().getHomeService();
-		iUserService = UserManagerAbstractFactory.instance().getUserService();
-		iUserService.setCurrentUserByBannerID(authentication.getPrincipal().toString());
-		String bannerID = CurrentUser.instance().getBannerId();
+    public HomeController() {
+    }
 
-		model.addObject("userId", bannerID);
-		model.addObject("courses", homeService.getCourseFromBannerID(bannerID));
-		model.addObject("checkRole", homeService.checkRoleOfUser(bannerID));
-		model.setViewName("home");
-		return model;
-	}
+    @RequestMapping("/home")
+    public ModelAndView home() throws Exception {
+        ModelAndView model = new ModelAndView();
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if ((authentication instanceof AnonymousAuthenticationToken)) {
+            model.setViewName("redirect:/login");
+            return model;
+        }
+        homeService = CourseAbstractFactory.instance().getHomeService();
+        iUserService = UserManagerAbstractFactory.instance().getUserService();
+        iUserService.setCurrentUserByBannerID(authentication.getPrincipal().toString());
+        String bannerID = CurrentUser.instance().getBannerId();
+
+        model.addObject("userId", bannerID);
+        model.addObject("courses", homeService.getCourseFromBannerID(bannerID));
+        model.addObject("checkRole", homeService.checkRoleOfUser(bannerID));
+        model.setViewName("home");
+        return model;
+    }
 }
