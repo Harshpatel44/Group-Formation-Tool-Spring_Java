@@ -14,9 +14,6 @@ import CSCI5308.GroupFormationTool.SurveyManager.ISurveyManagerService;
 import CSCI5308.GroupFormationTool.SurveyManager.SurveyManagerRepository;
 import CSCI5308.GroupFormationTool.SurveyManager.SurveyManagerService;
 import CSCI5308.GroupFormationTool.UserAuthentication.*;
-
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import CSCI5308.GroupFormationTool.Course.ICourseRepository;
@@ -32,12 +29,18 @@ import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
+
 import CSCI5308.GroupFormationTool.UserAuthentication.ILoginRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.ILoginService;
+
+import CSCI5308.GroupFormationTool.GroupFormmer.GroupFilter;
+import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerRepo;
+import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerService;
+import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFilter;
+import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerRepo;
+import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerService;
+
 import CSCI5308.GroupFormationTool.UserManager.UserRepository;
-import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
-import CSCI5308.GroupFormationTool.UserAuthentication.EmailConfiguration;
-import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
 import CSCI5308.GroupFormationTool.UserManager.UserService;
 import CSCI5308.GroupFormationTool.UserManager.*;
 
@@ -91,6 +94,10 @@ public class Injector {
 	private IGroupFilter groupFilter;
 	private IGroupFormmerRepo grFormmerRepo;
 	private IGroupFormmerService groupFormmerService;
+	
+	
+	private IPasswordManagerAbstractFactory passwordManagerAbstractFactory;
+	private IUserAuthenticationAbstractFactory authenticationAbstractFactory;
 
 	private Injector(){
 		answerSurveyRepository = new AnswerSurveyRepository();
@@ -147,6 +154,28 @@ public class Injector {
 
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();
+
+		answerSurveyRepository = new AnswerSurveyRepository();
+		answerSurveyService = new AnswerSurveyService();
+		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
+		displaySurveyResponseService = new DisplaySurveyResponseService();
+
+		groupFilter = new GroupFilter();
+		groupFormmerService = new GroupFormmerService();
+		grFormmerRepo = new GroupFormmerRepo();
+
+		
+		answerSurveyService = new AnswerSurveyService();
+		answerSurveyRepository = new AnswerSurveyRepository();
+		
+		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
+		displaySurveyResponseService = new DisplaySurveyResponseService();
+		
+		
+		setPasswordManagerAbstractFactory(new PasswordManagerAbstractFactory());
+		setAuthenticationAbstractFactory(new UserAuthenticationAbstractFactory());
+
+
 	}
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
@@ -486,5 +515,21 @@ public class Injector {
 
 	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
 		this.displaySurveyResponseService = displaySurveyResponseService;
+
+	public IPasswordManagerAbstractFactory getPasswordManagerAbstractFactory() {
+		return passwordManagerAbstractFactory;
+	}
+
+	public void setPasswordManagerAbstractFactory(IPasswordManagerAbstractFactory passwordManagerAbstractFactory) {
+		this.passwordManagerAbstractFactory = passwordManagerAbstractFactory;
+	}
+
+	public IUserAuthenticationAbstractFactory getAuthenticationAbstractFactory() {
+		return authenticationAbstractFactory;
+	}
+
+	public void setAuthenticationAbstractFactory(IUserAuthenticationAbstractFactory authenticationAbstractFactory) {
+		this.authenticationAbstractFactory = authenticationAbstractFactory;
+
 	}
 }

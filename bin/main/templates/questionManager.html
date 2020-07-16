@@ -33,7 +33,7 @@
                 </form>
                 <form class="nav-bar-element" th:action="@{/course}" method="post">
                     <div class="entity">
-                        <input  type="hidden" th:value="${userRole}" name="userRole" />
+                        <input  type="hidden" th:value="${true}" name="userRole" />
                         <input  type="hidden" th:value="${courseId}" name="courseId" />
                         <input  type="hidden" th:value="${courseName}" name="courseName" />
                         <button type="submit" class="submit-button" name="save">Course Home</button>

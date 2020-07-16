@@ -70,7 +70,10 @@ public class UserRegistrationController implements WebMvcConfigurer {
 
 	@GetMapping("/register")
 	public ModelAndView register() throws Exception {
-		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+		// Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
+		Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository().getUserPasswordPolicy();
+        Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
+		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyService();
 		IUserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user",Injector.instance().getUser());

@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
+import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.PasswordManager.ForgetPasswordRepository;
 import CSCI5308.GroupFormationTool.PasswordManager.ForgetPasswordService;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,23 +15,21 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class ForgetPasswordServiceTest {
-    public ForgetPasswordRepository forgetPasswordRepository;
-    public ForgetPasswordService forgetPasswordService;
+    public IForgetPasswordRepository forgetPasswordRepository;
+    public IForgetPasswordService forgetPasswordService;
 
     @BeforeEach
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         forgetPasswordRepository = mock(ForgetPasswordRepository.class);
-        forgetPasswordService = new ForgetPasswordService(forgetPasswordRepository);
+        Injector.instance().getPasswordManagerAbstractFactory().setForgetPasswordRepository(forgetPasswordRepository);
+        forgetPasswordService = Injector.instance().getPasswordManagerAbstractFactory().getForgetPasswordService();
     }
 
-        @Test
-        void generatePassKeyTest(){
-
-        }
 
         @Test
         void getEmailByBanneridTest() throws Exception {
+        	
             when(forgetPasswordRepository.getEmailByBannerID("B00835088")).thenReturn("rutikapatel09@gmail.com");
             assertEquals("rutikapatel09@gmail.com",forgetPasswordService.getEmailByBannerID("B00835088"));
         }

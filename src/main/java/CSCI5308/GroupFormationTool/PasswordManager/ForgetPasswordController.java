@@ -33,15 +33,18 @@ public class ForgetPasswordController {
         
         Map<String, String> errors = new HashMap<>();
         List<String> oldPasswords;
-        service = Injector.instance().getForgetPasswordService();
-        IPasswordEncryptor encryption = Injector.instance().getPasswordEncryptor();
+        service = Injector.instance().getPasswordManagerAbstractFactory().getForgetPasswordService();
+        IPasswordEncryptor encryption = Injector.instance().getAuthenticationAbstractFactory().getBCryptEncryption();
         matchPassword = service.comparePassword(newPassword, confirmPassword);
         if (matchPassword == false) {
             model.addAttribute("passKey", passKey);
             model.addAttribute("Error", "Passwords do not match");
             return "newPassword";
         }
-        iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+        iUserPasswordPolicyService = Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyService();
+		// Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
+		Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository().getUserPasswordPolicy();
+        Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
         
         List<String> validationErrors = iUserPasswordPolicyService.checkPasswordValidation(newPassword, errors);
         if (validationErrors.size() > 0) {
@@ -77,8 +80,8 @@ public class ForgetPasswordController {
         boolean addUser;
         boolean mailSend;
         String email;
-        service = Injector.instance().getForgetPasswordService();
-        userNotification = Injector.instance().getUserNotification();
+        service = Injector.instance().getPasswordManagerAbstractFactory().getForgetPasswordService();
+        userNotification = Injector.instance().getAuthenticationAbstractFactory().getUserNotification();
         isUser = Injector.instance().getUserService().checkIfUserExists(bannerID);
         if (isUser == false) {
             model.addAttribute("Error", "Not a valid user");

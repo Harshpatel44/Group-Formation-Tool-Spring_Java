@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 2020-07-16 15:04:15,385 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-7I9OO8Q with PID 2808 (C:\Users\dhruv\sdc\milestone 3\final_changes\group9\build\classes\java\main started by dhruv in C:\Users\dhruv\sdc\milestone 3\final_changes\group9)
 2020-07-16 15:04:15,393 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
 2020-07-16 15:04:16,693 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
@@ -12,3 +13,5 @@
 2020-07-16 15:04:17,542 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
 2020-07-16 15:04:17,576 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
 2020-07-16 15:04:17,579 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 2.529 seconds (JVM running for 3.805)
+=======
+>>>>>>> Stashed changes

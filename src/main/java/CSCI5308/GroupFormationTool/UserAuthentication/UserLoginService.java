@@ -8,11 +8,11 @@ public class UserLoginService implements ILoginService {
 	}
 
 	public UserLoginService(UserLoginRepository loginRepository){
-		Injector.instance().setLoginRepository(loginRepository);
+		Injector.instance().getAuthenticationAbstractFactory().setLoginRepository(loginRepository);
 	}
 
 	public boolean checkIfUserIsAuthenticated(String bannerid, String password){
-		return Injector.instance().getLoginRepository().checkIfUserIsAuthenticated(bannerid, password);
+		return Injector.instance().getAuthenticationAbstractFactory().getLoginRepository().checkIfUserIsAuthenticated(bannerid, password);
 	}
 
 }
