@@ -97,26 +97,6 @@ public class Injector {
 	private IGroupFormmerRepo grFormmerRepo;
 	private IGroupFormmerService groupFormmerService;
 
-	private IDisplaySurveyResponseService displaySurveyResponseService;
-	private IDisplaySurveyResponseRepository displaySurveyResponseRepository;
-
-	public IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository() {
-		return displaySurveyResponseRepository;
-	}
-
-	public void setDisplaySurveyResponseRepository(IDisplaySurveyResponseRepository displaySurveyResponseRepository) {
-		this.displaySurveyResponseRepository = displaySurveyResponseRepository;
-	}
-
-	public IDisplaySurveyResponseService getDisplaySurveyResponseService() {
-		return displaySurveyResponseService;
-	}
-
-	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
-		this.displaySurveyResponseService = displaySurveyResponseService;
-	}
-	
-
 	private Injector(){
 		databaseAbstractFactory = new DatabaseAbstractFactory();
 		dbConfiguration = new DBConfiguration();
@@ -165,7 +145,7 @@ public class Injector {
 		grFormmerRepo = new GroupFormmerRepo();
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();
-<<<<<<< HEAD
+
 
 		answerSurveyRepository = new AnswerSurveyRepository();
 		answerSurveyService = new AnswerSurveyService();
@@ -175,14 +155,14 @@ public class Injector {
 		groupFilter = new GroupFilter();
 		groupFormmerService = new GroupFormmerService();
 		grFormmerRepo = new GroupFormmerRepo();
-=======
+
 		
 		answerSurveyService = new AnswerSurveyService();
 		answerSurveyRepository = new AnswerSurveyRepository();
 		
 		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
 		displaySurveyResponseService = new DisplaySurveyResponseService();
->>>>>>> c8cc536b111989e2b061889ab94e69bb09e229ba
+
 	}
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {

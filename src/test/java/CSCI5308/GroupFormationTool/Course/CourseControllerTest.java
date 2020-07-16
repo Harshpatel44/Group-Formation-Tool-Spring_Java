@@ -25,6 +25,5 @@ public class CourseControllerTest {
                 .param("courseName","dcbkN"))
                 .andDo(print())
                 .andExpect(status().isOk());
-
     }
 }
