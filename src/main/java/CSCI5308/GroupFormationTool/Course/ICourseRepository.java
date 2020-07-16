@@ -20,6 +20,4 @@ public interface ICourseRepository {
     boolean createCourseRepo(ICreateCourse createCourse) throws SQLException;
 
     boolean deleteCourseRepo(IDeleteCourse deleteCourse);
-
-    boolean checkSurveyAvailableForUser(String bannerId);
 }

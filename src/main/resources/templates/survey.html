@@ -44,30 +44,29 @@
             <p th:text = "${question.surveyQuestionTopic}" th:for="${question.surveyQuestionId}"/>
             <label  th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
             <br/><br/>
-            <div th:switch = "${question.surveyQuestionType}">
+            <div th:switch = "${question.getSurveyQuestionType()}">
 
                 <div th:case="'txt'">
-                    <input th:id="${question.surveyQuestionId}" type="text"  th:name="${question.surveyQuestionId}" placeholder="Enter Your Answer" required/>
+                    <input th:id="${question.getSurveyQuestionId()}" type="text"  th:name="${question.surveyQuestionId}" placeholder="Enter Your Answer" required/>
                 </div>
 
                 <div th:case="'numeric'">
-                    <input th:id="${question.surveyQuestionId}" type="number" th:name="${question.surveyQuestionId}" placeholder="Enter Number" required/>
+                    <input th:id="${question.getSurveyQuestionId()}" type="number" th:name="${question.surveyQuestionId}" placeholder="Enter Number" required/>
                 </div>
 
                 <div th:case="'mcqm'">
-                    <div th:each="option : ${question.surveyQuestionsOptions}">
-                        <input th:id="${option.key}" th:text="${option.value}" th:value="${option.key}" type="checkbox" th:name="${question.surveyQuestionId}" value="option" />
+                    <div th:each="option : ${question.getSurveyQuestionsOptions()}">
+                        <input type="checkbox" th:id="${option.getKey()}" th:text="${option.getValue()}" th:value="${option.getValue()}"  th:name="${question.getSurveyQuestionId()}" value="option" />
                     </div>
                 </div>
 
                 <div th:case="'mcqs'">
-                    <div th:each="option : ${question.surveyQuestionsOptions}">
-                        <input th:id="${option.key}"  th:text="${option.value}" th:value="${option.key}" value="option" th:name="${question.surveyQuestionId}" type="radio" required/>
+                    <div th:each="option : ${question.getSurveyQuestionsOptions()}">
+                        <input type="radio"  th:id="${option.getKey()}"  th:text="${option.getKey()}" th:value="${option.getValue()}" value="option" th:name="${question.getSurveyQuestionId()}" required/>
                     </div>
                 </div>
             </div>
         </div>
-<!--        <input type="hidden"  th:value="${questions}" name="questions"/>-->
         <button type="submit">Submit</button>
     </form>
 </div>

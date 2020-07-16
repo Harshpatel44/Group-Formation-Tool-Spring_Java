@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class AnswerSurveyRepositoryMock {
+public class AnswerSurveyRepositoryMock{
 
-    public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId) {
+    public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptionsTest(String courseId) {
         List<ISurveyQuestionOptionsModel> questionsWithOptions = new ArrayList<>();
         ISurveyQuestionOptionsModel question = new SurveyQuestionOptionsModel();
         HashMap<Integer,String> options = new HashMap<>();
@@ -21,5 +21,12 @@ public class AnswerSurveyRepositoryMock {
         questionsWithOptions.add(question);
 
         return questionsWithOptions;
+    }
+
+    public boolean checkSurveyAvailableForUserTest(String bannerId) {
+        if(bannerId=="b00835088"){
+            return false;
+        }
+        return true;
     }
 }

@@ -1,31 +1,15 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.*;
 
 public class AnswerSurveyRepository implements IAnswerSurveyRepository {
-
-//    @Override
-//    public boolean isSurveyPublished(String courseId) {
-//        StoredProcedure surveyAvailable = null;
-//        try{
-//            surveyAvailable = new StoredProcedure("isSurveyAvailable(?)");
-//            surveyAvailable.setParameter(1,courseId);
-//            ResultSet rs = surveyAvailable.executeWithResults();
-//            if(rs.next()){
-//                return true;
-//            }
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//        }
-//        finally {
-//            surveyAvailable.cleanup();
-//        }
-//        return false;
-//    }
-
+    private static final Logger LOG = LogManager.getLogger();
     @Override
     public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId) {
         StoredProcedure getOptions = null;
@@ -37,13 +21,13 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             ResultSet rs = getSurveyQuestions.executeWithResults();
             while(rs.next()) {
                 HashMap<Integer,String> options = new HashMap<>();
-                if(rs.getString(6).equals("mcqs") || rs.getString(6).equals("mcqm")) {
+                if(rs.getString("questionType").equals("mcqs") || rs.getString("questionType").equals("mcqm")) {
                     int questionId = rs.getInt(2);
                     getOptions = new StoredProcedure("GetSurveyQuestionOptions(?)");
                     getOptions.setParameter(1,questionId);
                     ResultSet ors = getOptions.executeWithResults();
                     while(ors.next()) {
-                        options.put(ors.getInt("optionRank"),ors.getString("optionDesc"));
+                        options.put(ors.getInt("optionRank"),ors.getString("optionsDesc"));
                     }
                 }
                 ISurveyQuestionOptionsModel question = new SurveyQuestionOptionsModel();
@@ -55,12 +39,18 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 question.setSurveyQuestionTopic(rs.getString("questionTopic"));
                 questionsAndOptions.add(question);
             }
+            LOG.info("Operation = getSurveyQuestionsAndOptions, Status = Success ");
+        }
+        catch(SQLException throwables){
+            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+e.getMessage());
         }
         finally {
-            getOptions.cleanup();
+            if(null != getOptions) {
+                getOptions.cleanup();
+            }
             getSurveyQuestions.cleanup();
         }
         return questionsAndOptions;
@@ -76,13 +66,39 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             storeAnswers.setParameter(3,questionId);
             storeAnswers.setParameter(4,answer);
             ResultSet rs = storeAnswers.executeWithResults();
+            LOG.info("Operation = storeSurveyResponses, Status = Success");
+        }
+        catch(SQLException throwables){
+            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e){
-            e.printStackTrace();
+            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+e.getMessage());
         }
         finally {
             storeAnswers.cleanup();
         }
+    }
+    @Override
+    public boolean checkSurveyAvailableForUser(String bannerId) {
+        StoredProcedure checkSurveyAvailableForUser = null;
+        try{
+            checkSurveyAvailableForUser = new StoredProcedure("SurveyAvailableForTheUser(?)");
+            checkSurveyAvailableForUser.setParameter(1,bannerId);
+            ResultSet rs = checkSurveyAvailableForUser.executeWithResults();
+            if(rs.next()){
+                return false;
+            }
+            LOG.info("Operation = checkSurveyAvailableForUser, Status = Success");
+        }
+        catch (SQLException throwables){
+            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+throwables.getMessage());
+        }
+        catch (Exception e){
+            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+e.getMessage());        }
+        finally {
+            checkSurveyAvailableForUser.cleanup();
+        }
+        return true;
     }
 }
 

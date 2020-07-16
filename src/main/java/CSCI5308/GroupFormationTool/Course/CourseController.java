@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.Course;
 
+import CSCI5308.GroupFormationTool.AnswerSurvey.IAnswerSurveyAbstractFactory;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.SurveyManager.SurveyManagerRepository;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
@@ -29,7 +30,7 @@ public class CourseController {
 		model.addObject("courseId",courseId);
 		model.addObject("userId", userId);
 		model.addObject("checkRole",courseService.roleAllowInstructorAndTA(userRole));
-		model.addObject("surveyAvailable",Injector.instance().getCourseRepository().checkSurveyAvailableForUser(userId));
+		model.addObject("surveyAvailable", IAnswerSurveyAbstractFactory.instance().getAnswerSurveyService().checkSurveyAvailableForUser(userId));
 		model.addObject("surveyPublished", Injector.instance().getSurveyManagerRepository().checkPublish());
 		model.setViewName("course");
 		return model;

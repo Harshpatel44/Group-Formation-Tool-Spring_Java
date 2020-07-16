@@ -1,30 +1,25 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
-import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
-import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
-//import java.util.logging.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 @Controller
 public class AnswerSurveyController {
-//    private Logger log = (Logger) LoggerFactory.getLogger(AnswerSurveyController.class);
-    private IAnswerSurveyService service = Injector.instance().getAnswerSurveyService();
+    private static final Logger LOG = LogManager.getLogger();
+    private IAnswerSurveyService service = IAnswerSurveyAbstractFactory.instance().getAnswerSurveyService();
     private List<ISurveyQuestionOptionsModel> questionsAndOptions = null;
     @GetMapping("/survey")
     public ModelAndView displaySurvey() {
@@ -35,7 +30,6 @@ public class AnswerSurveyController {
         model.addObject("bannerId",bannerId);
         questionsAndOptions = service.getSurveyQuestionsAndOptions(courseId);
         model.addObject("questions",questionsAndOptions);
-//        log.info("Survey started for "+bannerId+" for the course "+courseId);
         return model;
     }
 
@@ -63,7 +57,7 @@ public class AnswerSurveyController {
                 }
             }
         }
-        answerStored =  Injector.instance().getAnswerSurveyService().surveyResponses(surveyResponses,bannerId,courseId);
+        answerStored =  IAnswerSurveyAbstractFactory.instance().getAnswerSurveyService().surveyResponses(surveyResponses,bannerId,courseId);
         if(answerStored == true){
             return "redirect:/home?userId="+bannerId;
         }

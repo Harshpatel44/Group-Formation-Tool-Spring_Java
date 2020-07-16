@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
-import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,7 +12,7 @@ import java.util.List;
 
 @Controller
 public class DisplaySurveyResponseController {
-    private IDisplaySurveyResponseService service = Injector.instance().getDisplaySurveyResponseService();
+    private IDisplaySurveyResponseService service = IDisplaySurveyResponseAbstractFactory.instance().getDisplaySurveyResponseService();
 
     @GetMapping("/displayResponse")
     public ModelAndView displayResponse() {
