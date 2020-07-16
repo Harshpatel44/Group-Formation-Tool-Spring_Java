@@ -1,15 +1,13 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
-
-import CSCI5308.GroupFormationTool.Injector;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
 
 class UserPasswordPolicyServiceTest {
 
@@ -20,9 +18,8 @@ class UserPasswordPolicyServiceTest {
 	public void init() {
 		MockitoAnnotations.initMocks(this);
 		userPasswordPolicyRepository = mock(UserPasswordPolicyRepository.class);
-		Injector.instance().getPasswordManagerAbstractFactory()
-				.setPasswordPolicyRepository(userPasswordPolicyRepository);
-		userPasswordPolicyService = Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyService();
+		UserPasswordManagerAbstractFactory.instance().setPasswordPolicyRepository(userPasswordPolicyRepository);
+		userPasswordPolicyService = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyService();
 	}
 
 	@Test

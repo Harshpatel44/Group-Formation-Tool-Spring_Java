@@ -1,13 +1,13 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Database.ConnectionManager;
-
 import java.sql.CallableStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import CSCI5308.GroupFormationTool.Database.ConnectionManager;
 
 public class ForgetPasswordRepository implements IForgetPasswordRepository {
     @Override

@@ -3,6 +3,8 @@ package CSCI5308.GroupFormationTool.Course;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import CSCI5308.GroupFormationTool.UserManager.UserService;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -18,15 +20,18 @@ public class CourseService implements ICourseService {
 	Injector.instance().setCourseRepository(courseRepository);
 	Injector.instance().setUserService(userService);
 	}
+	private static final Logger LOG = LogManager.getLogger();
 
 	@Override
 	public boolean roleAllowInstructorAndTA(String userRole) {
 		boolean roleCheck;
 		if(userRole.equals(student) || userRole.equals(guest)){
 			roleCheck=false;
+			LOG.info("Operation = Instructor and TA user check, Status = false");
 		}
 		else{
 			roleCheck = true;
+			LOG.info("Operation = Instructor and TA user check, Status = true");
 		}
 		return roleCheck;
 	}
@@ -37,6 +42,7 @@ public class CourseService implements ICourseService {
 		if(userRole.equals(instructor))
 		{
 			flag = true;
+			LOG.info("Operation = Instructor check, Status = true");
 		}
 		return flag;
 	}
@@ -81,6 +87,7 @@ public class CourseService implements ICourseService {
 			for (int i = 0; i < allCourseIds.size(); i++) {
 				allCoursesList.put(allCourseIds.get(i) + " " + allCourseNames.get(i), allCourseIds.get(i));
 			}
+			LOG.warn("Operation = Creating courses for dropdown, Status = Fail, Warning =  Course list not generated");
 		}
 		catch (Exception e){}
 		return allCoursesList;
@@ -92,15 +99,18 @@ public class CourseService implements ICourseService {
 		for(int i=0;i<allCourseNames.size();i++){
 			if(allCourseNames.get(i).equals(createCourse.getCourseName())){
 				createCourse.setCourseCreateMessage("Course name exists");
+				LOG.warn("Operation = Create new course with id "+createCourse.getCourseId()+", Status = Fail, Warning = Course name exists");
 				return false;
 			}
 		}
 		if(CourseAbstractFactory.instance().getCourseRepository().createCourseRepo(createCourse)){
 			createCourse.setCourseCreateMessage("Course created");
+			LOG.info("Operation = Create new course with id"+createCourse.getCourseId()+", Status = Fail");
 			return true;
 		}
 		else{
 			createCourse.setCourseCreateMessage("Course id exists");
+			LOG.warn("Operation = Create new course with id "+createCourse.getCourseId()+", Status = Fail, Warning = Course Id exists");
 			return false;
 		}
 	}
@@ -115,6 +125,7 @@ public class CourseService implements ICourseService {
 		}
 		else{
 			deleteCourse.setCourseDeleteMessage("Course does not exist");
+			LOG.warn("Operation = Delete course with id"+deleteCourse.getSelectedCourseId()+", Status = Fail, Warning = Course name does not exist");
 			return false;
 		}
 	}

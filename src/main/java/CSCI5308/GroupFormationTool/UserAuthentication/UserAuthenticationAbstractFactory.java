@@ -1,67 +1,30 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-public class UserAuthenticationAbstractFactory implements IUserAuthenticationAbstractFactory {
+public abstract class UserAuthenticationAbstractFactory {
+	private static UserAuthenticationAbstractFactory instance = null;
 
-	private ILoginRepository loginRepository;
-	private ILoginService loginService;
-	private IEmailConfiguration emailConfiguration;
-	private IUserNotification userNotification;
+    public static UserAuthenticationAbstractFactory instance(){
 
-	@Override
-	public ILoginRepository getLoginRepository() {
-		if (null == loginRepository) {
-			loginRepository = new UserLoginRepository();
-		}
-		return loginRepository;
-	}
+        if (instance == null) {
+            instance = new UserAuthenticationAbstractConcrete();
+        }
+        return instance;
+    }
+	public abstract ILoginRepository getLoginRepository();
 
-	@Override
-	public void setLoginRepository(ILoginRepository loginRepository) {
-		this.loginRepository = loginRepository;
-	}
+	public abstract void setLoginRepository(ILoginRepository loginRepository);
 
-	@Override
-	public ILoginService getLoginService() {
-		if (null == loginService) {
-			loginService = new UserLoginService();
-		}
-		return loginService;
-	}
+	public abstract ILoginService getLoginService();
 
-	@Override
-	public void setLoginService(ILoginService loginService) {
-		this.loginService = loginService;
-	}
+	public abstract void setLoginService(ILoginService loginService);
 
-	@Override
-	public IEmailConfiguration getEmailConfiguration() {
-		if(null == emailConfiguration)
-    	{
-			emailConfiguration = new EmailConfiguration();
-    	}
-		return emailConfiguration;
-	}
+	public abstract IEmailConfiguration getEmailConfiguration();
 
-	@Override
-	public void setEmailConfiguration(IEmailConfiguration emailConfiguration) {
-		this.emailConfiguration = emailConfiguration;
-	}
+	public abstract void setEmailConfiguration(IEmailConfiguration emailConfiguration);
 
-	@Override
-	public IUserNotification getUserNotification() {
-		if (null == userNotification) {
-			userNotification = new UserNotification();
-		}
-		return userNotification;
-	}
+	public abstract IUserNotification getUserNotification();
 
-	@Override
-	public void setUserNotification(IUserNotification userNotification) {
-		this.userNotification = userNotification;
-	}
+	public abstract void setUserNotification(IUserNotification userNotification);
 
-	@Override
-	public IPasswordEncryptor getBCryptEncryption() {
-		return new BCryptEncryption();
-	}
+	public abstract IPasswordEncryptor getBCryptEncryption();
 }

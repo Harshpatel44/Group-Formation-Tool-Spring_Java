@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
-import CSCI5308.GroupFormationTool.Course.*;
-
 public class QuestionManagerAbstractConcrete extends QuestionManagerAbstractFactory{
     private IQuestionResponsesService questionResponsesService;
     private IQuestionResponsesRepo questionResponsesRepo;

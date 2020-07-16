@@ -95,11 +95,11 @@ public class Injector {
 	private IGroupFormmerRepo grFormmerRepo;
 	private IGroupFormmerService groupFormmerService;
 	
-	
-	private IPasswordManagerAbstractFactory passwordManagerAbstractFactory;
-	private IUserAuthenticationAbstractFactory authenticationAbstractFactory;
+
 
 	private Injector(){
+//		databaseAbstractFactory = new DatabaseAbstractFactory();
+//		dbConfiguration = new DBConfiguration();
 		answerSurveyRepository = new AnswerSurveyRepository();
 		answerSurveyService = new AnswerSurveyService();
 		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
@@ -117,6 +117,7 @@ public class Injector {
 		userRepository = new UserRepository();
 		userService = new UserService();
 		passwordEncryptor = new BCryptEncryption();
+//		userManagerAbstractFactory = new UserManagerAbstractFactory();
 		userManagerAbstractConcrete = new UserManagerAbstractConcrete();
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
@@ -171,9 +172,7 @@ public class Injector {
 		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
 		displaySurveyResponseService = new DisplaySurveyResponseService();
 		
-		
-		setPasswordManagerAbstractFactory(new PasswordManagerAbstractFactory());
-		setAuthenticationAbstractFactory(new UserAuthenticationAbstractFactory());
+
 
 
 	}
@@ -514,22 +513,7 @@ public class Injector {
 	}
 
 	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
-		this.displaySurveyResponseService = displaySurveyResponseService;
+		this.displaySurveyResponseService = displaySurveyResponseService;}
 
-	public IPasswordManagerAbstractFactory getPasswordManagerAbstractFactory() {
-		return passwordManagerAbstractFactory;
-	}
 
-	public void setPasswordManagerAbstractFactory(IPasswordManagerAbstractFactory passwordManagerAbstractFactory) {
-		this.passwordManagerAbstractFactory = passwordManagerAbstractFactory;
-	}
-
-	public IUserAuthenticationAbstractFactory getAuthenticationAbstractFactory() {
-		return authenticationAbstractFactory;
-	}
-
-	public void setAuthenticationAbstractFactory(IUserAuthenticationAbstractFactory authenticationAbstractFactory) {
-		this.authenticationAbstractFactory = authenticationAbstractFactory;
-
-	}
 }

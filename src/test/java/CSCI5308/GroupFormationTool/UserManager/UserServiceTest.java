@@ -1,22 +1,25 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
 
 @SpringBootTest
 public class UserServiceTest {
@@ -29,10 +32,11 @@ public class UserServiceTest {
 		MockitoAnnotations.initMocks(this);
 		userRepository = mock(UserRepository.class);
 		currentUser = mock(CurrentUser.class);
-		Injector.instance().setUserRepository(userRepository);
+		UserManagerAbstractFactory.instance().setUserRepository(userRepository);
 		CurrentUser.setInstance(currentUser);
 		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 		UserPasswordPolicyStatus.setInstance(1, 1, 1, 1, 1, 1);
+		userService = UserManagerAbstractFactory.instance().getUserService();
 
 	}
 
@@ -40,7 +44,7 @@ public class UserServiceTest {
 	public void createExistingUserCorrectDetails() {
 		IUser user = UserMockDB.setDefault();
 		user.setBannerId("123456789");
-		userService = Injector.instance().getUserService();
+
 		when(userRepository.checkIfUserExists(user.getBannerId())).thenReturn(true);
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
@@ -53,7 +57,7 @@ public class UserServiceTest {
 	public void createWithEmptyLastname() throws Exception {
 		IUser user = UserMockDB.setDefault();
 		user.setLastName("");
-		userService = Injector.instance().getUserService();
+
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -64,7 +68,7 @@ public class UserServiceTest {
 	@Test
 	public void createWithInvalidEmail() throws Exception {
 		IUser user = UserMockDB.setDefault();
-		userService = Injector.instance().getUserService();
+		
 		user.setEmailId("neofvno");
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
@@ -78,7 +82,7 @@ public class UserServiceTest {
 		IUser user = UserMockDB.setDefault();
 		user.setPassword("qwert");
 		user.setConfirmPassword("qwerty");
-		userService = Injector.instance().getUserService();
+		
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -91,7 +95,7 @@ public class UserServiceTest {
 		IUser user = UserMockDB.setDefault();
 		user.setPassword("qwerty!");
 		user.setConfirmPassword("qwerty!");
-		userService = Injector.instance().getUserService();
+		
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -105,7 +109,7 @@ public class UserServiceTest {
 		IUser user = UserMockDB.setDefault();
 		user.setPassword("QWERTY!");
 		user.setConfirmPassword("QWERTY!");
-		userService = Injector.instance().getUserService();
+		
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -117,7 +121,7 @@ public class UserServiceTest {
 	@Test
 	public void createInvalidPassword3() throws Exception {
 		IUser user = UserMockDB.setDefault();
-		userService = Injector.instance().getUserService();
+		
 		user.setPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
 		user.setConfirmPassword("Qwertnefnvnawjvnonwvonaownvonawonvoawnvonaownvonawovnoasnvojnasvdonoandsvo!");
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
@@ -132,7 +136,7 @@ public class UserServiceTest {
 		IUser user = UserMockDB.setDefault();
 		user.setPassword("");
 		user.setConfirmPassword("");
-		userService = Injector.instance().getUserService();
+		
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -144,7 +148,7 @@ public class UserServiceTest {
 		IUser user = UserMockDB.setDefault();
 		user.setPassword("Qwertyuiop");
 		user.setConfirmPassword("Qwertyuiop");
-		userService = Injector.instance().getUserService();
+		
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -157,7 +161,7 @@ public class UserServiceTest {
 		IUser user = UserMockDB.setDefault();
 		user.setPassword("Qwertyuiop@");
 		user.setConfirmPassword("Qwertyuiop@");
-		userService = Injector.instance().getUserService();
+		
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
@@ -169,7 +173,7 @@ public class UserServiceTest {
 	@Test
 	public void creaUserCorrectDetails() throws Exception {
 		IUser user = UserMockDB.setDefault();
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.createUser(user)).thenReturn(true);
 		assertEquals(true, userService.createUser(user));
 	}
@@ -177,7 +181,7 @@ public class UserServiceTest {
 	@Test
 	public void createUserWithExceptions() {
 		IUser iUser = UserMockDB.setDefault();
-		userService = Injector.instance().getUserService();
+		
 		iUser.setBannerId("");
 		iUser.setFirstName("");
 		iUser.setLastName("");
@@ -200,7 +204,7 @@ public class UserServiceTest {
 		iUser.setBannerId("bannerId");
 		iUser.setContactNumber("contactNumber");
 		iUser.setEmailId("emailId");
-		userService = Injector.instance().getUserService();
+		
 		IUser iUser1 = userService.setUser("bannerId", "firstName", "lastName", "emailId", "password", "contactNumber");
 		assertEquals("firstName", iUser1.getFirstName());
 		assertEquals("lastName", iUser1.getLastName());
@@ -212,7 +216,7 @@ public class UserServiceTest {
 
 	@Test
 	public void checkIfUserExistsTest() {
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.checkIfUserExists("123456789")).thenReturn(true);
 		assertEquals(true, userService.checkIfUserExists("123456789"));
 		when(userRepository.checkIfUserExists("123456789")).thenReturn(false);
@@ -228,7 +232,7 @@ public class UserServiceTest {
 		iUser.setBannerId("bannerId");
 		iUser.setContactNumber("contactNumber");
 		iUser.setEmailId("emailId");
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.setUserByBannerId("bannerId", iUser)).thenReturn(iUser);
 		assertEquals(iUser, userService.setUserByBannerId("bannerId", iUser));
 	}
@@ -238,7 +242,7 @@ public class UserServiceTest {
 		List<String> bannerIDs = new ArrayList<>();
 		bannerIDs.add("banner1");
 		bannerIDs.add("banner2");
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.getAllBannerIds()).thenReturn(bannerIDs);
 		assertEquals(bannerIDs, userService.getAllBannerIds());
 	}
@@ -247,7 +251,7 @@ public class UserServiceTest {
 	public void checkUserRoleForCourseTest() {
 		String bannerID = "bannerId";
 		String courseID = "courseID";
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.checkUserRoleForCourse(bannerID, courseID)).thenReturn("Instructor");
 		assertEquals("Instructor", userService.checkUserRoleForCourse(bannerID, courseID));
 	}
@@ -255,7 +259,7 @@ public class UserServiceTest {
 	@Test // when user is guest
 	public void checkRoleTestGuest() {
 		String bannerID = "B23456789";
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(true);
 		assertTrue(userService.checkIfUserIsGuest(bannerID));
 	}
@@ -263,14 +267,14 @@ public class UserServiceTest {
 	@Test // when user is Not a guest
 	public void checkRoleTestNotGuest() throws Exception {
 		String bannerID = "B23456789";
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
 		assertFalse(userService.checkIfUserIsGuest(bannerID));
 	}
 
 	@Test
 	public void setCurrentUserByBannerIDTest1() {
-		userService = Injector.instance().getUserService();
+		
 		userService.setCurrentUserByBannerID(admin);
 		when(CurrentUser.instance().getBannerId()).thenReturn(admin);
 		when(CurrentUser.instance().getLastName()).thenReturn(admin);
@@ -290,7 +294,7 @@ public class UserServiceTest {
 		iUser.setBannerId("B23456789");
 		iUser.setContactNumber("contactNumber");
 		iUser.setEmailId("emailId");
-		userService = Injector.instance().getUserService();
+		
 		when(userRepository.setUserByBannerId("B23456789", iUser1)).thenReturn(iUser);
 		when(CurrentUser.instance().getBannerId()).thenReturn(iUser.getBannerId());
 		when(CurrentUser.instance().getLastName()).thenReturn(iUser.getLastName());

@@ -7,15 +7,18 @@ import java.util.Map;
 
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class GroupFormmerRepo implements IGroupFormmerRepo {
+
+	private static final Logger LOG = LogManager.getLogger();
 
 	@Override
 	public boolean saveGroupFormula(IGroupFilter groupFilter, String courseID) {
 		StoredProcedure storedProcedure = null;
 		if (this.deleteGroupFormula(courseID)) {
 			try {
-
 				for (Map.Entry<Integer, Boolean> question : groupFilter.getquestionSimilarOrDissimilar().entrySet()) {
 					int similarity = 0;
 					int hasLessThanX = 0;
@@ -42,10 +45,11 @@ public class GroupFormmerRepo implements IGroupFormmerRepo {
 					storedProcedure.setParameter(6, lessthanXValue);
 					storedProcedure.setParameter(7, greaterThanXValue);
 					storedProcedure.execute();
-					storedProcedure.cleanup();
+					LOG.info("Operation = Save group formula for course "+courseID+", Status = Success");
 				}
 
 			} catch (Exception e) {
+				LOG.error("Operation = Save group formula for course "+courseID+", Status = Fail, Error Message="+e.getMessage());
 				e.printStackTrace();
 			} finally {
 				if (storedProcedure != null) {
@@ -63,9 +67,10 @@ public class GroupFormmerRepo implements IGroupFormmerRepo {
 			storedProcedure = new StoredProcedure("spDeleteGroupFormula(?)");
 			storedProcedure.setParameter(1, courseID);
 			storedProcedure.execute();
+			LOG.info("Operation = Delete group formula for course "+courseID+", Status = Success");
 			return true;
-
 		} catch (Exception e) {
+			LOG.error("Operation = Delete group formula for course "+courseID+", Status = Fail, Error Message="+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			if (storedProcedure != null) {
@@ -104,7 +109,9 @@ public class GroupFormmerRepo implements IGroupFormmerRepo {
 
 				}
 			}
+			LOG.info("Operation = Get group formula for course "+courseID+", Status = Success");
 		} catch (Exception e) {
+			LOG.error("Operation = Get group formula for course "+courseID+", Status = Fail, Error Message="+e.getMessage());
 			e.printStackTrace();
 		} finally {
 			if (storedProcedure != null) {

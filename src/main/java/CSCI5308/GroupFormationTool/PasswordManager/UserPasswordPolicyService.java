@@ -1,11 +1,10 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Injector;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     private IUserPasswordPolicyRepository iUserPasswordPolicyRepository;
@@ -13,7 +12,7 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     public UserPasswordPolicyService(){}
 
     public UserPasswordPolicyService(UserPasswordPolicyRepository userPasswordPolicyRepository){
-        Injector.instance().getPasswordManagerAbstractFactory().setPasswordPolicyRepository(userPasswordPolicyRepository);
+        UserPasswordManagerAbstractFactory.instance().setPasswordPolicyRepository(userPasswordPolicyRepository);
     }
 
     @Override
@@ -65,14 +64,14 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
 
     @Override
     public IUserPasswordPolicy getUserPasswordPolicy(){
-        iUserPasswordPolicyRepository = Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository();
+        iUserPasswordPolicyRepository = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicy();
     }
 
 
     @Override
     public IUserPasswordPolicyStatus getUserPasswordPolicyStatus(){
-        iUserPasswordPolicyRepository =  Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository();
+        iUserPasswordPolicyRepository =  UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicyStatus();
     }
 }

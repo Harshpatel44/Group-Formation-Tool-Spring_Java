@@ -1,27 +1,21 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Exceptions.ErrorHelper;
-import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFilter;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerService;
-import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerService;
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.UserManager.IUser;
-import CSCI5308.GroupFormationTool.UserManager.IUserService;
-import CSCI5308.GroupFormationTool.UserManager.User;
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicy;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordManagerAbstractFactory;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 
 @Controller
 public class UserRegistrationController implements WebMvcConfigurer {
@@ -42,7 +36,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 								   @RequestParam("confirmPassword") String confirmPassword,
 								   @RequestParam("bannerId") String bannerId)
 								   {
-		userService = Injector.instance().getUserService();
+		userService = UserManagerAbstractFactory.instance().getUserService();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("passwordPolicy", UserPasswordPolicy.getInstance());
 		try {
@@ -59,7 +53,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 					mv.addObject("unfollowedPolicy", errorPassowrd.split(";;"));
 				}
 			}
-			mv.addObject("user",Injector.instance().getUser());
+			mv.addObject("user",UserManagerAbstractFactory.instance().getUser());
 			mv.setViewName("signup");
 			return mv;
 
@@ -71,12 +65,12 @@ public class UserRegistrationController implements WebMvcConfigurer {
 	@GetMapping("/register")
 	public ModelAndView register() throws Exception {
 		// Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
-		Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository().getUserPasswordPolicy();
-        Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
-		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getPasswordManagerAbstractFactory().getPasswordPolicyService();
+		UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicy();
+		UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
+		IUserPasswordPolicyService iUserPasswordPolicyService = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyService();
 		IUserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user",Injector.instance().getUser());
+		mv.addObject("user",UserManagerAbstractFactory.instance().getUser());
 		mv.addObject("passwordPolicy", passwordPolicy);
 		mv.setViewName("signup");
 		return mv;

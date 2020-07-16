@@ -7,10 +7,14 @@ import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.AnswerSurvey.ISurveyQuestionOptionsModel;
 import org.apache.commons.text.similarity.LevenshteinDetailedDistance;
 import org.apache.commons.text.similarity.LevenshteinResults;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 
 public class GroupFormmerService implements IGroupFormmerService {
+
+	private static final Logger LOG = LogManager.getLogger();
 
 	@Override
 	public HashMap<Integer,ArrayList<String>> FormGroups(String courseID, int teamSize) {
@@ -86,22 +90,17 @@ public class GroupFormmerService implements IGroupFormmerService {
 		ArrayList<ArrayList<Double>> finalTotalMatrices = AddMatrices(finalMatrices, false,
 				userAnsweredSurveyBasedOnCourseId.size());
 
-		for (int i = 0; i < finalTotalMatrices.size(); i++) {
-			for (int j = 0; j < finalTotalMatrices.get(i).size(); j++) {
-				System.out.print(finalTotalMatrices.get(i).get(j));
-				System.out.print(" ");
-			}
-			System.out.println();
-		}
 		HashMap<Integer, ArrayList<String>> teamsWithBannerID = groupFormationAlgorithm(finalTotalMatrices, additionalMappings, teamSize,
 				userAnsweredSurveyBasedOnCourseId.size(), indexUserIndexToBannerID);
+
+		LOG.info("Operation = Formation algorithm, get teams with bannerID, Status = Success");
 		return teamsWithBannerID;
 	}
 
 	private HashMap<Integer, ArrayList<String>> groupFormationAlgorithm(ArrayList<ArrayList<Double>> finalTotalMatrices,
 										 HashMap<String, HashMap<Integer, Integer>> additionalMappings, Integer teamSize, int students,
 			HashMap<Integer, String> indexUserIndexToBannerID) {
-		// TODO Auto-generated method stub
+
 		HashMap<Integer, ArrayList<Integer>> teams = new HashMap();
 		HashMap<Integer, ArrayList<String>> teamsWithBannerID = new HashMap();
 
@@ -116,12 +115,7 @@ public class GroupFormmerService implements IGroupFormmerService {
 			studentGreaterthanX = additionalMappings.get("greaterThanX");
 		}
 
-		System.out.println("number less than  value");
-		studentLessThanX.entrySet().forEach(entry -> {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		});
 
-		System.out.println("Team formation");
 		// Team Formation
 		ArrayList<Integer> selected_students = new ArrayList<>();
 		for (int x = 0; x < finalTotalMatrices.size(); x++) {
@@ -134,9 +128,7 @@ public class GroupFormmerService implements IGroupFormmerService {
 					for (int row = 0; row < finalTotalMatrices.get(i).size(); row++) {
 						finalTotalMatrices.get(i).set(row, 999.0);
 						finalTotalMatrices.get(row).set(i, 999.0);
-
 					}
-
 				}
 				selected_students.addAll(selected_students_1);
 				teams.put(count, selected_students_1);
@@ -151,7 +143,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 			}
 			teamsWithBannerID.put(team.getKey(), listTeam);
 		}
-		System.out.println(Arrays.asList(teamsWithBannerID));
 		return teamsWithBannerID;
 	}
 
@@ -233,13 +224,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 			for (int row = 0; row < students; row++)
 				for (int column = 0; column < students; column++)
 					totalMatrix.get(row).set(column, totalMatrix.get(row).get(column) / (double) typeMatrices.size());
-		}
-		for (int i = 0; i < totalMatrix.size(); i++) {
-			for (int j = 0; j < totalMatrix.get(i).size(); j++) {
-				System.out.print(totalMatrix.get(i).get(j));
-				System.out.print(" ");
-			}
-			System.out.println();
 		}
 		return totalMatrix;
 	}
@@ -374,11 +358,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 			HashMap<Integer, Integer> studentLessThanX, HashMap<Integer, Integer> studentGreaterthanX,
 			Boolean useLessthanX, Boolean useGreaterthanX) {
 
-		System.out.println("new less dictionary");
-		studentLessThanX.entrySet().forEach(entry -> {
-			System.out.println(entry.getKey() + " " + entry.getValue());
-		});
-
 		HashMap<Integer, Double> map = new HashMap<Integer, Double>();
 
 //		Map<Double, Integer> map = new TreeMap<Double, Integer>();
@@ -387,7 +366,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 			map.put(i, arrayList.get(i));
 
 		}
-		System.out.println("arjun");
 		HashMap<Integer, Double> sortedValues = sortByValue(map);
 		Set<Integer> indices = sortedValues.keySet();
 
@@ -401,8 +379,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 				if (studentGreaterthanX.containsKey(i)) {
 					if (studentGreaterthanX.get(i) == 0) {
 						top3.add(i);
-						System.out.print(i);
-						System.out.print("-");
 						notUsedgreaterthanX = false;
 					}
 
@@ -413,8 +389,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 				if (studentLessThanX.containsKey(i)) {
 					if (studentLessThanX.get(i) == 1) {
 						top3.add(i);
-						System.out.print(i);
-						System.out.print("-");
 						notUsedLessthanX = false;
 					}
 
@@ -434,14 +408,10 @@ public class GroupFormmerService implements IGroupFormmerService {
 			if (top3.size() == team_size) {
 				break;
 			} else if (!top3.contains(i) && sortedValues.get(i) != 999.0) {
-				System.out.print(i);
-				System.out.print("-");
 				top3.add(i);
 			}
 
 		}
-
-		System.out.println();
 		return top3;
 	}
 
@@ -459,8 +429,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 		// put data from sorted list to hashmap
 		HashMap<Integer, Double> temp = new LinkedHashMap<Integer, Double>();
 		for (Map.Entry<Integer, Double> aa : list) {
-			System.out.println(aa.getKey() + "-" + aa.getValue());
-
 			temp.put(aa.getKey(), aa.getValue());
 		}
 		return temp;
@@ -468,7 +436,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 
 	@Override
 	public boolean saveGroupFormula(IGroupFilter groupFilter, String courseID) {
-
 		return Injector.instance().getGrFormmerRepo().saveGroupFormula(groupFilter, courseID);
 	}
 

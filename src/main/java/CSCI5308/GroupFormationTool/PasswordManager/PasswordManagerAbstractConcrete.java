@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-public class PasswordManagerAbstractFactory implements IPasswordManagerAbstractFactory {
+public class PasswordManagerAbstractConcrete extends UserPasswordManagerAbstractFactory {
 	private IForgetPasswordRepository forgetPasswordRepository;
 	private IForgetPasswordService forgetPasswordService;
 	private IUserPasswordPolicyRepository passwordPolicyRepository;

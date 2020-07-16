@@ -1,7 +1,8 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import java.sql.ResultSet;
+
+import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 
 public class UserLoginRepository implements ILoginRepository {
 

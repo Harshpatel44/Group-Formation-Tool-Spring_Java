@@ -5,6 +5,8 @@ import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 
 import java.sql.ResultSet;
@@ -20,6 +22,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     private IQuestionEditorRepository questionEditorRepository;
     private IUserRepository userRepository;
     private ICourseRepository courseRepository;
+    private static final Logger LOG = LogManager.getLogger();
 
     @Override
     public boolean SaveTextAndNumericTypeQuestionRepo(String questionText, String questionTitle, String selectedQuestionType,String userId){
@@ -40,10 +43,12 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             storedProcedure.execute();
 
             int qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
-            saveQuestionToSurveyQuestions(userId, qID, questionTitle, time);
+            saveQuestionToSurveyQuestions(userId, qID, questionTitle, questionText, time);
+            LOG.info("Operation = Save text and numeric questions for userId "+userId+", Status = Success");
             return true;
         }
         catch (Exception e){
+            LOG.error("Operation = Save text and numeric questions for userId "+userId+", Status = Fail, Error Message="+e.getMessage());
             e.printStackTrace();
             return false;
         }finally {
@@ -66,7 +71,9 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             while(rs.next()){
                 return rs.getInt("questionId");
             }
+            LOG.info("Operation = Save text and numeric questions, get QuestionID for topic function, Status = Success");
         }catch (Exception e){
+            LOG.error("Operation = Save text and numeric questions, get QuestionID for topic function, Status = Fail, Error Message="+e.getMessage());
             e.printStackTrace();
         }finally {
             if(storedProcedure!=null){
@@ -76,25 +83,27 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         return 0;
     }
 
-    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
+    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String questionText, String time){
         userRepository = UserManagerAbstractFactory.instance().getUserRepository();
         courseRepository = CourseAbstractFactory.instance().getCourseRepository();
         try {
             int roleId = userRepository.getUserRoleIdFromRoleType(instructor);
             ArrayList<String> courseIdList = courseRepository.getCoursesOfSpecificUserRole(userId, roleId);
             for(int i = 0;i<courseIdList.size();i++){
-                addQuestionToSurveyTable(userId, qId, questionTitle, courseIdList.get(i), time);
+                addQuestionToSurveyTable(userId, qId, questionTitle,questionText, courseIdList.get(i), time);
             }
+            LOG.info("Operation = Save questions to survey questions function, Status = Success");
             return true;
         }
         catch (Exception e){
+            LOG.error("Operation = Save questions to survey questions function, Status = Fail, Error Message="+e.getMessage());
             e.printStackTrace();
             return false;
         }
     }
 
     @Override
-    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String courseId,String time){
+    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle,String questionText, String courseId,String time){
         StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         try{
@@ -105,8 +114,10 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             sp.setParameter("cId",courseId);
             sp.setParameter("tm",time);
             sp.execute();
+            LOG.info("Operation = Save questions to survey table, Status = Success");
             return true;
         }catch (Exception e){
+            LOG.error("Operation = Save questions to survey table, Status = Fail, Error Message="+e.getMessage());
             e.printStackTrace();
         }finally {
             if(sp!=null){
@@ -155,7 +166,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
 
             try{
                 qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
-                saveQuestionToSurveyQuestions(userId, qID, questionTitle, time);
+                saveQuestionToSurveyQuestions(userId, qID, questionTitle,questionText, time);
                 for(int i=0;i<optionList.length;i++){
                     storedProcedure3 = databaseAbstractFactory.createStoredProcedure("SaveMcqOptionsToDB(?,?,?)");
                     storedProcedure3.setParameter("qId",qID.toString());
@@ -163,8 +174,10 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
                     storedProcedure3.setParameter("optionsDesc", optionList[i]);
                     storedProcedure3.execute();
                 }
+                LOG.info("Operation = Save MCQ type question: "+questionTitle+" options, Status = Success");
                 return true;
             }catch (Exception e){
+                LOG.error("Operation = Save MCQ type question: "+questionTitle+" options, Status = Fail, Error Message="+e.getMessage());
                 e.printStackTrace();
             }finally {
                 if(storedProcedure3!=null){
@@ -173,6 +186,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             }
         }
         catch (Exception e){
+            LOG.error("Operation = Save MCQ type question: "+questionTitle+", Status = Fail, Error Message="+e.getMessage());
             e.printStackTrace();
             return false;
         }finally {

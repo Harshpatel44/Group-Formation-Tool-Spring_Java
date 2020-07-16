@@ -6,10 +6,15 @@ import java.util.List;
 
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 public class HomeRepository implements IHomeRepository {
 	private List<ICourse> CourseList = new ArrayList<>();
+
+	private static final Logger LOG = LogManager.getLogger();
 
 	@Override
 	public List<ICourse> getCourseFromBannerID(String bannerID, boolean GuestOrNot){
@@ -27,8 +32,10 @@ public class HomeRepository implements IHomeRepository {
 						course.setCourseName(rs.getString("courseName"));
 						course.setRole(guest);
 						CourseList.add(course);
+						LOG.info("Operation = Get courses from banner id "+bannerID+" when guest function, Status = Success");
 					}
 				} catch (Exception e) {
+					LOG.error("Operation = Get courses from banner id "+bannerID+" when guest function, Status = Fail, Error Message="+e.getMessage());
 					e.printStackTrace();
 				} finally {
 					if (storedProcedure != null) {
@@ -57,7 +64,9 @@ public class HomeRepository implements IHomeRepository {
 							CourseList.add(course);
 						}
 					}
+					LOG.info("Operation = Get courses from banner id "+bannerID+" when not guest function, Status = Success");
 				} catch (Exception e) {
+					LOG.error("Operation = Get courses from banner id "+bannerID+" when not guest function, Status = Fail, Error Message="+e.getMessage());
 					e.printStackTrace();
 				} finally {
 					if (storedProcedure != null) {
@@ -65,8 +74,11 @@ public class HomeRepository implements IHomeRepository {
 					}
 				}
 			}
+
+			LOG.info("Operation = Get courses from banner id "+bannerID+", Status = Success");
 			return CourseList;
 		} catch (Exception e) {
+			LOG.error("Operation = Get courses from banner id "+bannerID+", Status = Fail, Error Message="+e.getMessage());
 			e.printStackTrace();
 		}
 		return CourseList;

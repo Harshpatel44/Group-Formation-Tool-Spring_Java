@@ -30,4 +30,10 @@ public class UserManagerAbstractConcrete extends UserManagerAbstractFactory {
         }
         return userService;
     }
+
+	@Override
+	public void setUserRepository(IUserRepository userRepository) {
+		this.userRepository = userRepository;
+		
+	}
 }

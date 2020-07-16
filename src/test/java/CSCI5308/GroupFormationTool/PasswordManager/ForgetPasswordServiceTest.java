@@ -1,18 +1,18 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.PasswordManager.ForgetPasswordRepository;
-import CSCI5308.GroupFormationTool.PasswordManager.ForgetPasswordService;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.MockitoAnnotations;
 
 public class ForgetPasswordServiceTest {
     public IForgetPasswordRepository forgetPasswordRepository;
@@ -22,8 +22,8 @@ public class ForgetPasswordServiceTest {
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         forgetPasswordRepository = mock(ForgetPasswordRepository.class);
-        Injector.instance().getPasswordManagerAbstractFactory().setForgetPasswordRepository(forgetPasswordRepository);
-        forgetPasswordService = Injector.instance().getPasswordManagerAbstractFactory().getForgetPasswordService();
+        UserPasswordManagerAbstractFactory.instance().setForgetPasswordRepository(forgetPasswordRepository);
+        forgetPasswordService = UserPasswordManagerAbstractFactory.instance().getForgetPasswordService();
     }
 
 

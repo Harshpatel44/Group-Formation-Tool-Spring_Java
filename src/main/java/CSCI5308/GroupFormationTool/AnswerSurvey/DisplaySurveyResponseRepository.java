@@ -79,7 +79,6 @@ public class DisplaySurveyResponseRepository implements IDisplaySurveyResponseRe
 				questionAnswer.setSurveyQuestionTopic(question_rs.getString("questionTopic"));
 				questionMapper.put(question_rs.getInt("questionId"), questionAnswer);
 			}
-//			getSurveyQuestion.cleanup();
 			StoredProcedure getAnswers = new StoredProcedure("GetSurveyAnswers(?)");
 			getAnswers.setParameter(1, courseId);
 			ResultSet rs = getAnswers.executeWithResults();
@@ -100,13 +99,12 @@ public class DisplaySurveyResponseRepository implements IDisplaySurveyResponseRe
 						questionAnswer.setBannerId(rs.getString("userId"));
 						studentWithQuestionAndAnswer.get(rs.getString("userId")).put(rs.getInt("questionId"),
 								questionAnswer);
-
 					}
 				} else {
 
 					ISurveyQuestionOptionsModel questionAnswer = questionMapper.get(rs.getInt("questionId"));
 					List<String> answers = new ArrayList<>();
-					answers.add(rs.getString("optionRank"));
+					answers.add(rs.getString("answers"));
 					questionAnswer.setSurveyAnswers(answers);
 					questionAnswer.setBannerId(rs.getString("userId"));
 
