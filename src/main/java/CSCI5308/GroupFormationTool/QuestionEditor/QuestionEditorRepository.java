@@ -1,12 +1,13 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
+import CSCI5308.GroupFormationTool.Course.CourseAbstractFactory;
 import CSCI5308.GroupFormationTool.Course.ICourseRepository;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 
 import java.sql.ResultSet;
 import java.time.LocalDateTime;
@@ -82,15 +83,14 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         return 0;
     }
 
-    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle,String questionText ,String time){
-
-        userRepository = Injector.instance().getUserRepository();
-        courseRepository = Injector.instance().getCourseRepository();
+    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
+        userRepository = UserManagerAbstractFactory.instance().getUserRepository();
+        courseRepository = CourseAbstractFactory.instance().getCourseRepository();
         try {
             int roleId = userRepository.getUserRoleIdFromRoleType(instructor);
             ArrayList<String> courseIdList = courseRepository.getCoursesOfSpecificUserRole(userId, roleId);
             for(int i = 0;i<courseIdList.size();i++){
-                addQuestionToSurveyTable(userId, qId, questionTitle, questionText, courseIdList.get(i), time);
+                addQuestionToSurveyTable(userId, qId, questionTitle, courseIdList.get(i), time);
             }
             LOG.info("Operation = Save questions to survey questions function, Status = Success");
             return true;
@@ -103,7 +103,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     }
 
     @Override
-    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String questionText, String courseId,String time){
+    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String courseId,String time){
         StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         try{
@@ -111,7 +111,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             sp.setParameter("uId",userId);
             sp.setParameter("qId",String.valueOf(qId));
             sp.setParameter("qTopic",questionTitle);
-            sp.setParameter("qdesc",questionText);
             sp.setParameter("cId",courseId);
             sp.setParameter("tm",time);
             sp.execute();
@@ -167,9 +166,9 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
 
             try{
                 qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
-                saveQuestionToSurveyQuestions(userId, qID, questionTitle,questionText, time);
+                saveQuestionToSurveyQuestions(userId, qID, questionTitle, time);
                 for(int i=0;i<optionList.length;i++){
-                    storedProcedure3 = new StoredProcedure("SaveMcqOptionsToDB(?,?,?)");
+                    storedProcedure3 = databaseAbstractFactory.createStoredProcedure("SaveMcqOptionsToDB(?,?,?)");
                     storedProcedure3.setParameter("qId",qID.toString());
                     storedProcedure3.setParameter("ranks", rankList[i]);
                     storedProcedure3.setParameter("optionsDesc", optionList[i]);

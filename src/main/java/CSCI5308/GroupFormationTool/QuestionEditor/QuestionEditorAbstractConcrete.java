@@ -15,7 +15,7 @@ public class QuestionEditorAbstractConcrete extends QuestionEditorAbstractFactor
         if (questionEditorService == null) {
             questionEditorService = new QuestionEditorService();
         }
-            return questionEditorService;
+        return questionEditorService;
     }
 
     public IQuestionEditorRepository getQuestionEditorRepository() {
@@ -35,4 +35,9 @@ public class QuestionEditorAbstractConcrete extends QuestionEditorAbstractFactor
         }
         return rankFunctionsService;
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 9f62c23bc56809bcac760be3dd1a007eaf6095ed
 }

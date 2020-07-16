@@ -20,7 +20,7 @@ public class UserRepository implements IUserRepository {
 
 	private DatabaseAbstractFactory databaseAbstractFactory;
 	private static final Logger LOG = LogManager.getLogger();
-
+	
 	@Override
 	public boolean createUser(IUser user) {
 		Boolean success = false;
