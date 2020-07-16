@@ -1,2 +1,0 @@
-2020-07-16 17:48:11,665 INFO C.G.A.DisplaySurveyResponseRepository [main] Operation = getSurveyResponse, Status = Success 
-2020-07-16 17:48:11,842 INFO C.G.A.DisplaySurveyResponseRepository [main] Operation = getUsersWhoAnsweredSurvey, Status = Success 
