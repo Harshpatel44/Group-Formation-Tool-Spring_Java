@@ -6,7 +6,9 @@ import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
 import CSCI5308.GroupFormationTool.GroupFormmer.GroupFilter;
 import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerService;
 import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerService;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicy;
 import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyStatus;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
 import CSCI5308.GroupFormationTool.UserManager.IUser;
@@ -68,11 +70,8 @@ public class UserRegistrationController implements WebMvcConfigurer {
 
 	@GetMapping("/register")
 	public ModelAndView register() throws Exception {
-		IGroupFormmerService groupFormmerService = Injector.instance().getGroupFormmerService();
-		groupFormmerService.FormGroups("CSCI1",3);
 		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
-		UserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
-		UserPasswordPolicyStatus passwordPolicyStatus = iUserPasswordPolicyService.getUserPasswordPolicyStatus();
+		IUserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user",Injector.instance().getUser());
 		mv.addObject("passwordPolicy", passwordPolicy);

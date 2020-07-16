@@ -1,10 +1,6 @@
 package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.AnswerSurvey.*;
-import CSCI5308.GroupFormationTool.AnswerSurvey.DisplaySurveyResponseRepository;
-import CSCI5308.GroupFormationTool.AnswerSurvey.DisplaySurveyResponseService;
-import CSCI5308.GroupFormationTool.AnswerSurvey.IDisplaySurveyResponseRepository;
-import CSCI5308.GroupFormationTool.AnswerSurvey.IDisplaySurveyResponseService;
 import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
@@ -101,6 +97,9 @@ public class Injector {
 	private IGroupFormmerRepo grFormmerRepo;
 	private IGroupFormmerService groupFormmerService;
 
+	private IDisplaySurveyResponseService displaySurveyResponseService;
+	private IDisplaySurveyResponseRepository displaySurveyResponseRepository;
+
 	public IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository() {
 		return displaySurveyResponseRepository;
 	}
@@ -116,6 +115,7 @@ public class Injector {
 	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
 		this.displaySurveyResponseService = displaySurveyResponseService;
 	}
+	
 
 	private Injector(){
 		databaseAbstractFactory = new DatabaseAbstractFactory();
@@ -160,9 +160,12 @@ public class Injector {
 		questionEditorRepository = new QuestionEditorRepository();
 		rankFunctionsService = new RankFunctionsService();
 //		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
-
+		groupFormmerService = new GroupFormmerService();
+		groupFilter = new GroupFilter();
+		grFormmerRepo = new GroupFormmerRepo();
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();
+<<<<<<< HEAD
 
 		answerSurveyRepository = new AnswerSurveyRepository();
 		answerSurveyService = new AnswerSurveyService();
@@ -172,6 +175,14 @@ public class Injector {
 		groupFilter = new GroupFilter();
 		groupFormmerService = new GroupFormmerService();
 		grFormmerRepo = new GroupFormmerRepo();
+=======
+		
+		answerSurveyService = new AnswerSurveyService();
+		answerSurveyRepository = new AnswerSurveyRepository();
+		
+		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
+		displaySurveyResponseService = new DisplaySurveyResponseService();
+>>>>>>> c8cc536b111989e2b061889ab94e69bb09e229ba
 	}
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
@@ -496,5 +507,21 @@ public class Injector {
 
 	public void setGrFormmerRepo(IGroupFormmerRepo grFormmerRepo) {
 		this.grFormmerRepo = grFormmerRepo;
+	}
+
+	public IDisplaySurveyResponseService getDisplaySurveyResponseService() {
+		return displaySurveyResponseService;
+	}
+
+	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
+		this.displaySurveyResponseService = displaySurveyResponseService;
+	}
+
+	public IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository() {
+		return displaySurveyResponseRepository;
+	}
+
+	public void setDisplaySurveyResponseRepository(IDisplaySurveyResponseRepository displaySurveyResponseRepository) {
+		this.displaySurveyResponseRepository = displaySurveyResponseRepository;
 	}
 }
