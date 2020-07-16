@@ -12,6 +12,7 @@ import org.apache.logging.log4j.Logger;
 import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
@@ -31,6 +32,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
             NotAddedQuestionList.clear();
             String userId = CurrentUser.instance().getBannerId();
             String courseId = CurrentCourse.instance().getCurrentCourseId();
+
             StoredProcedure sp = new StoredProcedure("SurveyQuestions(?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);

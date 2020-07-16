@@ -22,7 +22,7 @@ public class HomeRepository implements IHomeRepository {
 					storedProcedure = new StoredProcedure("AllCourses");
 					ResultSet rs = storedProcedure.executeWithResults();
 					while (rs.next()) {
-						ICourse course = Injector.instance().getCourse();
+						ICourse course = new Course();
 						course.setCourseId(rs.getString("courseId"));
 						course.setCourseName(rs.getString("courseName"));
 						course.setRole(guest);
@@ -43,7 +43,7 @@ public class HomeRepository implements IHomeRepository {
 					storedProcedure.setParameter(1, bannerID);
 					ResultSet rs = storedProcedure.executeWithResults();
 					while (rs.next()) {
-						ICourse course = Injector.instance().getCourse();
+						ICourse course = new Course();
 						storedProcedure = new StoredProcedure("courseName(?)");
 						storedProcedure.setParameter(1, rs.getString("courseId"));
 						ResultSet rs1 = storedProcedure.executeWithResults();

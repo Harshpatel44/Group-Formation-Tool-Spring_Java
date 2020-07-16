@@ -43,7 +43,7 @@ public class CourseService implements ICourseService {
 
 	@Override
 	public boolean assignInstructorForCourse(IInstructor instructor){
-		if(Injector.instance().getCourseRepository().assignInstructorForCourse(instructor)){
+		if(CourseAbstractFactory.instance().getCourseRepository().assignInstructorForCourse(instructor)){
 			instructor.setInstructorAssignMessage("Instructor assigned");
 			return true;
 		}
@@ -74,7 +74,7 @@ public class CourseService implements ICourseService {
 		ArrayList<String> allCourseNames;
 		Dictionary allCoursesList = new Hashtable();
 
-		tempCourse = Injector.instance().getCourseRepository().getAllCourses();
+		tempCourse = CourseAbstractFactory.instance().getCourseRepository().getAllCourses();
 		allCourseIds = tempCourse.get(0);
 		allCourseNames = tempCourse.get(1);
 		try {
@@ -88,14 +88,14 @@ public class CourseService implements ICourseService {
 
 	@Override
 	public boolean createCourse(ICreateCourse createCourse) throws Exception {
-		ArrayList<String> allCourseNames = Injector.instance().getCourseRepository().getAllCourses().get(1);
+		ArrayList<String> allCourseNames = CourseAbstractFactory.instance().getCourseRepository().getAllCourses().get(1);
 		for(int i=0;i<allCourseNames.size();i++){
 			if(allCourseNames.get(i).equals(createCourse.getCourseName())){
 				createCourse.setCourseCreateMessage("Course name exists");
 				return false;
 			}
 		}
-		if(Injector.instance().getCourseRepository().createCourseRepo(createCourse)){
+		if(CourseAbstractFactory.instance().getCourseRepository().createCourseRepo(createCourse)){
 			createCourse.setCourseCreateMessage("Course created");
 			return true;
 		}
@@ -107,10 +107,10 @@ public class CourseService implements ICourseService {
 	
 	@Override
 	public boolean deleteCourse(IDeleteCourse deleteCourse) throws Exception {
-		if(Injector.instance().getCourseRepository().deleteCourseRepo(deleteCourse)){
+		if(CourseAbstractFactory.instance().getCourseRepository().deleteCourseRepo(deleteCourse)){
 			deleteCourse.setCourseDeleteMessage("Course deleted");
-			deleteCourse.setAllCourseIds(Injector.instance().getCourseRepository().getAllCourses().get(0));
-			deleteCourse.setAllCourseNames(Injector.instance().getCourseRepository().getAllCourses().get(1));
+			deleteCourse.setAllCourseIds(CourseAbstractFactory.instance().getCourseRepository().getAllCourses().get(0));
+			deleteCourse.setAllCourseNames(CourseAbstractFactory.instance().getCourseRepository().getAllCourses().get(1));
 			return true;
 		}
 		else{

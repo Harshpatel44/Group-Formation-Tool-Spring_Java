@@ -81,6 +81,7 @@ public class Injector {
 	private IRankFunctionsService rankFunctionsService;
 	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
 
+
 	private Injector(){
 		databaseAbstractFactory = new DatabaseAbstractFactory();
 		dbConfiguration = new DBConfiguration();

@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import CSCI5308.GroupFormationTool.Injector;
 
 @Controller
 public class CsvController {
@@ -22,7 +21,7 @@ public class CsvController {
     public String upload(@RequestParam(name = "file") MultipartFile file,
 						 Model model)
     {
-		csvImporter = Injector.instance().getCsvImporter();
+		csvImporter = CourseAbstractFactory.instance().getCsvImporter();
 		String courseID = CurrentCourse.instance().getCurrentCourseId();
 		Map<Integer,List<String>> results = csvImporter.StudentsEnrolledForCourse(courseID, file);
 		model.addAttribute("success", results.get(1));

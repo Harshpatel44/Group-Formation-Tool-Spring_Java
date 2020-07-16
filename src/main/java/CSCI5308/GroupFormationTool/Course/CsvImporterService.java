@@ -38,7 +38,7 @@ public class CsvImporterService implements ICsvImporter {
 			failureResults = new ArrayList<>();
 			successfulResults = new ArrayList<>();
 			results = new HashMap<>();
-			courseRepository = Injector.instance().getCourseRepository();
+			courseRepository = CourseAbstractFactory.instance().getCourseRepository();
 			userRepository = Injector.instance().getUserRepository();
 			List<String> bannerIds = userRepository.getAllBannerIds();
 			Reader reader = new InputStreamReader(file.getInputStream());
