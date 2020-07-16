@@ -1,6 +1,6 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
-import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.Course.CurrentCourse;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +14,10 @@ public class QuestionController {
     @RequestMapping("/questionManager")
     public ModelAndView questionManager(){
         String bannerID = CurrentUser.instance().getBannerId();
+        String courseId = CurrentCourse.instance().getCurrentCourseId();
         ModelAndView model=new ModelAndView("questionManager");
         model.addObject("userId",bannerID);
+        model.addObject("courseId",courseId);
         model.setViewName("questionManager");
         return model;
     }
@@ -23,7 +25,7 @@ public class QuestionController {
     @RequestMapping("/questionList")
     public ModelAndView questionList() throws Exception {
         ModelAndView model=new ModelAndView("questionList");
-        questionManagerService = Injector.instance().getQuestionManagerService();
+        questionManagerService = QuestionManagerAbstractFactory.instance().getQuestionManagerService();
         String bannerID = CurrentUser.instance().getBannerId();
         model.addObject("prompt",false);
         model.addObject("questions",questionManagerService.getQuestions(bannerID,sortType));
@@ -51,7 +53,7 @@ public class QuestionController {
     @RequestMapping("/deleteQuestion")
     public ModelAndView deleteQuestion(@RequestParam(name="selectedQuestionId") Integer questionId) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
-        questionManagerService = Injector.instance().getQuestionManagerService();
+        questionManagerService = QuestionManagerAbstractFactory.instance().getQuestionManagerService();
         String bannerID = CurrentUser.instance().getBannerId();
         questionManagerService.deleteQuestion(questionId,bannerID);
         model.addObject("questions",questionManagerService.getQuestions(bannerID, sortType));
@@ -64,7 +66,7 @@ public class QuestionController {
         String bannerID = CurrentUser.instance().getBannerId();
         ModelAndView model=new ModelAndView("questionList");
         model.addObject("selectedQuestionId",questionId);
-        boolean prompt = Injector.instance().getQuestionResponsesService().checkIfResponsesPresentService(questionId);
+        boolean prompt = QuestionManagerAbstractFactory.instance().getQuestionResponsesService().checkIfResponsesPresentService(questionId);
         if(prompt==false){
             model.setViewName("redirect:/deleteQuestion");
         }

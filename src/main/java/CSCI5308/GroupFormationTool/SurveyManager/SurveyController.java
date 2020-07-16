@@ -1,7 +1,6 @@
 package CSCI5308.GroupFormationTool.SurveyManager;
 
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
-import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +15,7 @@ public class SurveyController {
     public ModelAndView surveyManager() throws Exception {
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String bannerId = CurrentUser.instance().getBannerId();
-        surveyManagerService = Injector.instance().getSurveyManagerService();
+        surveyManagerService = SurveyManagerAbstractFactory.instance().getSurveyManagerService();
         if(surveyManagerService.checkPublish())
         {
             ModelAndView model=new ModelAndView("alreadyPublished");
@@ -39,7 +38,7 @@ public class SurveyController {
     public ModelAndView AddQuestionToSurvey(@RequestParam(name="questionId") Integer questionId) throws Exception{
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String bannerId = CurrentUser.instance().getBannerId();
-        surveyManagerService = Injector.instance().getSurveyManagerService();
+        surveyManagerService = SurveyManagerAbstractFactory.instance().getSurveyManagerService();
         surveyManagerService.AddQuestionToSurvey(questionId);
         ModelAndView model=new ModelAndView("surveyQuestion");
         model.addObject("userId",bannerId);
@@ -54,7 +53,7 @@ public class SurveyController {
     public ModelAndView RemoveQuestionFromSurvey(@RequestParam(name="questionId") Integer questionId) throws Exception{
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         String bannerId = CurrentUser.instance().getBannerId();
-        surveyManagerService = Injector.instance().getSurveyManagerService();
+        surveyManagerService = SurveyManagerAbstractFactory.instance().getSurveyManagerService();
         surveyManagerService.RemoveQuestionFromSurvey(questionId);
         ModelAndView model=new ModelAndView("surveyQuestion");
         model.addObject("userId",bannerId);
@@ -67,7 +66,7 @@ public class SurveyController {
 
     @RequestMapping("/publishSurvey")
     public ModelAndView PublishSurvey() throws Exception{
-        surveyManagerService = Injector.instance().getSurveyManagerService();
+        surveyManagerService = SurveyManagerAbstractFactory.instance().getSurveyManagerService();
         surveyManagerService.PublishSurvey();
         String userId = CurrentUser.instance().getBannerId();
         ModelAndView model=new ModelAndView("questionManager");
@@ -78,7 +77,7 @@ public class SurveyController {
 
     @RequestMapping("/unpublishSurvey")
     public ModelAndView UnpublishSurvey() throws Exception{
-        surveyManagerService = Injector.instance().getSurveyManagerService();
+        surveyManagerService = SurveyManagerAbstractFactory.instance().getSurveyManagerService();
         surveyManagerService.UnpublishSurvey();
         ModelAndView model=new ModelAndView("surveyQuestion");
         model.setViewName("redirect:/surveyQuestion");

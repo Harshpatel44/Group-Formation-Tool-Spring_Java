@@ -1,8 +1,9 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.Injector;
+
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -11,8 +12,8 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class CourseController {
   
-	private ICourseService courseService = Injector.instance().getCourseService();
-	private IUserService userService = Injector.instance().getUserService();
+	private ICourseService courseService = CourseAbstractFactory.instance().getCourseService();
+	private IUserService userService = UserManagerAbstractFactory.instance().getUserService();
 	private CurrentCourse currentCourse = CurrentCourse.instance();
 
 	@RequestMapping("/course")
@@ -43,7 +44,7 @@ public class CourseController {
 	@RequestMapping("/course/admin/addta")
 	public ModelAndView addta( @RequestParam(name="taId") String taId,
 							   @RequestParam(name="checkRole") String checkRole) throws Exception {
-		courseService = Injector.instance().getCourseService();
+		courseService = CourseAbstractFactory.instance().getCourseService();
 		String courseId = CurrentCourse.instance().getCurrentCourseId();
 		ModelAndView model=new ModelAndView("courseadmin");
 		model.addObject("userId",CurrentUser.instance().getBannerId());

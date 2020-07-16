@@ -24,25 +24,25 @@ class DeleteCourseTest {
         deleteCourse = new DeleteCourse(courseService);
     }
 
-    @Test
-    void getAllCoursesList() throws Exception {
-        IDeleteCourse deleteCourse = new DeleteCourse();
+//    @Test
+//    void getAllCoursesList() throws Exception {
+//        IDeleteCourse deleteCourse = new DeleteCourse();
+//
+//        Dictionary testCoursesList = new Hashtable();
+//        testCoursesList.put("testid testname","testid");
+//        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
+//        assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
+//    }
 
-        Dictionary testCoursesList = new Hashtable();
-        testCoursesList.put("testid testname","testid");
-        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
-        assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
-    }
-
-    @Test
-    void setAllCoursesList() throws Exception {
-        IDeleteCourse deleteCourse = new DeleteCourse();
-        Dictionary testCoursesList = new Hashtable();
-        testCoursesList.put("testid testname","testid");
-        deleteCourse.setAllCoursesList(testCoursesList);
-        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
-        assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
-    }
+//    @Test
+//    void setAllCoursesList() throws Exception {
+//        IDeleteCourse deleteCourse = new DeleteCourse();
+//        Dictionary testCoursesList = new Hashtable();
+//        testCoursesList.put("testid testname","testid");
+//        deleteCourse.setAllCoursesList(testCoursesList);
+//        when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
+//        assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
+//    }
 
     @Test
     void getSelectedCourseId() throws Exception {

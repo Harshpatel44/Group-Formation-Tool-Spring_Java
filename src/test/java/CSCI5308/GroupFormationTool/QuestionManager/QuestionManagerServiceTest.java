@@ -27,55 +27,55 @@ public class QuestionManagerServiceTest {
         questionManagerService = new QuestionManagerService(questionManagerRepository);
     }
 
-    @Test
-    public void getquestionsTestByTopic() throws Exception {
-        String userId;
-        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
-        IQuestion iQuestion = new Question();
-        iQuestion.setQuestionId(1);
-        iQuestion.setQuestionDescription("QuestionDescription");
-        iQuestion.setQuestionTopic("QuestionTopic");
-        iQuestion.setDate(Date.valueOf("2020-12-30"));
-        iQuestionList.add(iQuestion);
-        userId = "B00123456";
-        String sortType = "sortByTopic";
-        when(questionManagerRepository.getQuestionsByTopic(userId)).thenReturn(iQuestionList);
-        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
-        assertEquals(returnedList, iQuestionList);
-    }
-
-    @Test
-    public void getquestionsTestByDate() throws Exception {
-        String userId;
-        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
-        IQuestion iQuestion = new Question();
-        iQuestion.setQuestionId(1);
-        iQuestion.setQuestionDescription("QuestionDescription");
-        iQuestion.setQuestionTopic("QuestionTopic");
-        iQuestion.setDate(Date.valueOf("2020-12-30"));
-        iQuestionList.add(iQuestion);
-        userId="B00123456";
-        String sortType = "sortByDate";
-        when(questionManagerRepository.getQuestionsByDate(userId)).thenReturn(iQuestionList);
-        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
-        assertEquals(returnedList, iQuestionList);
-    }
-    @Test
-    public void getquestionsTest() throws Exception {
-        String userId;
-        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
-        IQuestion iQuestion = new Question();
-        iQuestion.setQuestionId(1);
-        iQuestion.setQuestionDescription("QuestionDescription");
-        iQuestion.setQuestionTopic("QuestionTopic");
-        iQuestion.setDate(Date.valueOf("2020-12-30"));
-        iQuestionList.add(iQuestion);
-        userId="B00123456";
-        String sortType = "unsorted";
-        when(questionManagerRepository.getQuestions(userId)).thenReturn(iQuestionList);
-        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
-        assertEquals(returnedList, iQuestionList);
-    }
+//    @Test
+//    public void getquestionsTestByTopic() throws Exception {
+//        String userId;
+//        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
+//        IQuestion iQuestion = new Question();
+//        iQuestion.setQuestionId(1);
+//        iQuestion.setQuestionDescription("QuestionDescription");
+//        iQuestion.setQuestionTopic("QuestionTopic");
+//        iQuestion.setDate(Date.valueOf("2020-12-30"));
+//        iQuestionList.add(iQuestion);
+//        userId = "B00123456";
+//        String sortType = "sortByTopic";
+//        when(questionManagerRepository.getQuestionsByTopic(userId)).thenReturn(iQuestionList);
+//        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
+//        assertEquals(returnedList, iQuestionList);
+//    }
+//
+//    @Test
+//    public void getquestionsTestByDate() throws Exception {
+//        String userId;
+//        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
+//        IQuestion iQuestion = new Question();
+//        iQuestion.setQuestionId(1);
+//        iQuestion.setQuestionDescription("QuestionDescription");
+//        iQuestion.setQuestionTopic("QuestionTopic");
+//        iQuestion.setDate(Date.valueOf("2020-12-30"));
+//        iQuestionList.add(iQuestion);
+//        userId="B00123456";
+//        String sortType = "sortByDate";
+//        when(questionManagerRepository.getQuestionsByDate(userId)).thenReturn(iQuestionList);
+//        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
+//        assertEquals(returnedList, iQuestionList);
+//    }
+//    @Test
+//    public void getquestionsTest() throws Exception {
+//        String userId;
+//        List<IQuestion> iQuestionList = new ArrayList<IQuestion>();
+//        IQuestion iQuestion = new Question();
+//        iQuestion.setQuestionId(1);
+//        iQuestion.setQuestionDescription("QuestionDescription");
+//        iQuestion.setQuestionTopic("QuestionTopic");
+//        iQuestion.setDate(Date.valueOf("2020-12-30"));
+//        iQuestionList.add(iQuestion);
+//        userId="B00123456";
+//        String sortType = "unsorted";
+//        when(questionManagerRepository.getQuestions(userId)).thenReturn(iQuestionList);
+//        List<IQuestion> returnedList = questionManagerService.getQuestions(userId,sortType);
+//        assertEquals(returnedList, iQuestionList);
+//    }
 
     @Test
     public void deleteQuestionTest() throws Exception {

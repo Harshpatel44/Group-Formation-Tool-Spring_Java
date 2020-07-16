@@ -1,17 +1,17 @@
 package CSCI5308.GroupFormationTool.Database;
 
-public class DatabaseAbstractFactory extends IDatabaseAbstractFactory {
+public abstract class DatabaseAbstractFactory {
 
-    private DBConfiguration dbConfiguration;
+    public static DatabaseAbstractFactory instance = null;
 
-    public StoredProcedure createStoredProcedure(String procedureName) throws Exception {
-        return new StoredProcedure(procedureName);
-    }
-
-    public IDBConfiguration createDBConfiguration(){
-        if(null == dbConfiguration){
-            dbConfiguration = new DBConfiguration();
+    public static DatabaseAbstractFactory instance(){
+        if (instance == null) {
+            instance = new DatabaseAbstractConcrete();
         }
-        return dbConfiguration;
+        return instance;
     }
+
+    public abstract StoredProcedure createStoredProcedure(String procedureName) throws Exception;
+
+    public abstract IDBConfiguration createDBConfiguration();
 }

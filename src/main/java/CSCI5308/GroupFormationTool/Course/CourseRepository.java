@@ -3,17 +3,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import CSCI5308.GroupFormationTool.UserManager.IUser;
 
 public class CourseRepository implements ICourseRepository {
-
+	private DatabaseAbstractFactory databaseAbstractFactory;
 	private boolean checkIfAlreadyTaInCourse(String taId, String courseId) {
 		boolean result = false;
+
 		StoredProcedure checkPresence = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try {
-			checkPresence = new StoredProcedure("AlreadyTa(?,?)");
+			checkPresence = databaseAbstractFactory.createStoredProcedure("AlreadyTa(?,?)");
 			checkPresence.setParameter(1, courseId);
 			checkPresence.setParameter(2, taId);
 			ResultSet rs = checkPresence.executeWithResults();
@@ -35,8 +38,9 @@ public class CourseRepository implements ICourseRepository {
 	public boolean assignInstructorForCourse(IInstructor instructor){
 		StoredProcedure storedProcedure = null;
 		StoredProcedure storedProcedure1 = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try {
-			storedProcedure = new StoredProcedure("GetInstructorRole");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("GetInstructorRole");
 			ResultSet resultSet = storedProcedure.executeWithResults();
 			resultSet.next();
 			int instructorRoleId = resultSet.getInt("roleId");
@@ -72,12 +76,13 @@ public class CourseRepository implements ICourseRepository {
 	public String addTaForCourse(String taId, String courseId){
 		String result=null;
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		if(checkIfAlreadyTaInCourse(taId,courseId)){
 			result = "Already user has different role for courseId:"+courseId+".";
 		}
 		else{
 				try {
-					storedProcedure = new StoredProcedure("InsertTa(?,?)");
+					storedProcedure = databaseAbstractFactory.createStoredProcedure("InsertTa(?,?)");
 					storedProcedure.setParameter(1, courseId);
 					storedProcedure.setParameter(2, taId);
 					storedProcedure.execute();
@@ -98,8 +103,9 @@ public class CourseRepository implements ICourseRepository {
 	@Override
 	public boolean getUserDetailsOnCourse(IUser iUser, String courseId){
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try {
-			storedProcedure = new StoredProcedure("userByCourse(?,?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("userByCourse(?,?)");
 			storedProcedure.setParameter(1, iUser.getBannerId());
 			storedProcedure.setParameter(2, courseId);
 			ResultSet results = storedProcedure.executeWithResults();
@@ -122,8 +128,9 @@ public class CourseRepository implements ICourseRepository {
 	public boolean enrollStudentForCourse(IUser user, String courseId) {
 		Boolean success = false;
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try {
-			storedProcedure = new StoredProcedure("spEnrollStudentForCourse(?, ?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("spEnrollStudentForCourse(?, ?)");
 			storedProcedure.setParameter(1, user.getBannerId());
 			storedProcedure.setParameter(2, courseId);
 			storedProcedure.execute();
@@ -144,8 +151,9 @@ public class CourseRepository implements ICourseRepository {
 		ArrayList<String> courseIdsList = new ArrayList<>();
 		ArrayList<ArrayList<String>> courseNamesWithIdsList = new ArrayList<>();
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try{
-			storedProcedure = new StoredProcedure("AllCourses");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("AllCourses");
 			ResultSet result = storedProcedure.executeWithResults();
 			while(result.next()){
 				courseNamesList.add(result.getString("courseName"));
@@ -168,9 +176,9 @@ public class CourseRepository implements ICourseRepository {
 
 	@Override
 	public boolean createCourseRepo(ICreateCourse createCourse){
-		System.out.println("inside");
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try {
-			StoredProcedure storedProcedure = new StoredProcedure("CreateCourse(?,?)");
+			StoredProcedure storedProcedure = databaseAbstractFactory.createStoredProcedure("CreateCourse(?,?)");
 			storedProcedure.setParameter("cId", createCourse.getCourseId());
 			storedProcedure.setParameter("cName", createCourse.getCourseName());
 			storedProcedure.execute();
@@ -185,9 +193,9 @@ public class CourseRepository implements ICourseRepository {
 
 	@Override
 	public boolean deleteCourseRepo(IDeleteCourse deleteCourse) {
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try {
-			System.out.println(deleteCourse.getSelectedCourseId());
-			StoredProcedure storedProcedure = new StoredProcedure("DeleteCourse(?)");
+			StoredProcedure storedProcedure =databaseAbstractFactory.createStoredProcedure("DeleteCourse(?)");
 			storedProcedure.setParameter("cId", deleteCourse.getSelectedCourseId());
 			storedProcedure.execute();
 			storedProcedure.cleanup();
@@ -203,8 +211,9 @@ public class CourseRepository implements ICourseRepository {
 	public ArrayList<String> getCoursesOfSpecificUserRole(String userId, int roleId){
 		ArrayList<String> courseIdList = new ArrayList<>();
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = DatabaseAbstractFactory.instance();
 		try{
-			storedProcedure = new StoredProcedure("GetCoursesOfSpecificRole(?,?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("GetCoursesOfSpecificRole(?,?)");
 			storedProcedure.setParameter("uId",userId);
 			storedProcedure.setParameter("rId",String.valueOf(roleId));
 			ResultSet result = storedProcedure.executeWithResults();

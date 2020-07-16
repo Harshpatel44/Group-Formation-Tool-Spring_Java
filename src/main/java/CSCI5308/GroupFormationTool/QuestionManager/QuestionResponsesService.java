@@ -15,7 +15,7 @@ public class QuestionResponsesService implements IQuestionResponsesService {
 
     @Override
     public boolean checkIfResponsesPresentService(Integer questionId) throws Exception {
-        ArrayList<String> responses= Injector.instance().getQuestionResponsesRepo().getResponsesOfQuestionIdRepo(questionId);
+        ArrayList<String> responses= QuestionManagerAbstractFactory.instance().getQuestionResponsesRepo().getResponsesOfQuestionIdRepo(questionId);
         if(responses.size()==0){
             return false;
         }

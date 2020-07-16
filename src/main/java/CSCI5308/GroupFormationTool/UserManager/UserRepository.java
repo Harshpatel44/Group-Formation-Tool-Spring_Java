@@ -1,28 +1,22 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
-import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.UserAuthentication.BCryptEncryption;
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ExecutionException;
 
 import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 
 @Repository
 public class UserRepository implements IUserRepository {
 
-	private IDatabaseAbstractFactory databaseAbstractFactory;
+	private DatabaseAbstractFactory databaseAbstractFactory;
 
 	@Override
 	public boolean createUser(IUser user) {

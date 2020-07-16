@@ -23,7 +23,7 @@ public class UserService implements IUserService {
 	private IUserRepository userRepository;
 	private IPasswordEncryptor iPasswordEncryptor;
 	private IUserPasswordPolicyService passwordPolicyService;
-	private IUserManagerAbstractFactory userManagerAbstractFactory;
+	private UserManagerAbstractFactory userManagerAbstractFactory;
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
@@ -35,7 +35,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean createUser(IUser user) throws ServiceLayerException{
 		Boolean success;
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
 		boolean bannerIdExists = userRepository.checkIfUserExists(user.getBannerId());
 
@@ -112,7 +112,6 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
-		userManagerAbstractFactory = Injector.instance().getUserManagerAbstractFactory();
 		IUser iUser = userManagerAbstractFactory.getUser();
 		iUser.setFirstName(firstName);
 		iUser.setLastName(lastName);
@@ -125,7 +124,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public boolean checkIfUserExists(String bannerID){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		if(userRepository.checkIfUserExists(bannerID)){
 			return true;
 		}
@@ -136,37 +135,37 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.setUserByBannerId(bannerId,iUser);
 	}
 
 	@Override
 	public List<String> getAllBannerIds(){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.getAllBannerIds();
 	}
 
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
-		userRepository= Injector.instance().getUserRepository();
+		userRepository= UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.checkUserRoleForCourse(bannerID,courseID);
 	}
 
 	@Override
 	public boolean checkIfUserIsGuest(String bannerID){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.checkIfUserIsGuest(bannerID);
 	}
 
 	@Override
 	public void setCurrentUserByBannerID(String bannerID){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		if(bannerID.equals(admin)){
 			CurrentUser.instance().setBannerId(admin);
 			CurrentUser.instance().setFirstName(admin);
 			CurrentUser.instance().setLastName(admin);
 		}else{
-				IUser iUser = new User();
+				IUser iUser = UserManagerAbstractFactory.instance().getUser();
 				iUser = userRepository.setUserByBannerId(bannerID,iUser);
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());

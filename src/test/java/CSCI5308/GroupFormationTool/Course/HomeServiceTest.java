@@ -27,19 +27,19 @@ public class HomeServiceTest {
         homeService = new HomeService(homeRepository,userRepository);
     }
 
-    @Test
-    public void getCoursesTest() throws Exception {
-        String bannerID = "B23456789";
-        List<ICourse> courseList = new ArrayList<ICourse>();
-        ICourse course = new Course();
-        course.setCourseId("CSCI1");
-        course.setCourseName("DATA");
-        course.setRole("Student");
-        courseList.add(course);
-        when(homeRepository.getCourseFromBannerID(bannerID,false)).thenReturn(courseList);
-        List<ICourse> returnedList = homeService.getCourseFromBannerID(bannerID);
-        assertEquals(returnedList,courseList);
-    }
+//    @Test
+//    public void getCoursesTest() throws Exception {
+//        String bannerID = "B23456789";
+//        List<ICourse> courseList = new ArrayList<ICourse>();
+//        ICourse course = new Course();
+//        course.setCourseId("CSCI1");
+//        course.setCourseName("DATA");
+//        course.setRole("Student");
+//        courseList.add(course);
+//        when(homeRepository.getCourseFromBannerID(bannerID,false)).thenReturn(courseList);
+//        List<ICourse> returnedList = homeService.getCourseFromBannerID(bannerID);
+//        assertEquals(returnedList,courseList);
+//    }
 
 //    @Test
 //	public void checkRoleOfUserTest() {

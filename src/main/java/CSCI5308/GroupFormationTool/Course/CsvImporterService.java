@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 import CSCI5308.GroupFormationTool.UserManager.IUser;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.opencsv.CSVReader;
@@ -39,7 +40,7 @@ public class CsvImporterService implements ICsvImporter {
 			successfulResults = new ArrayList<>();
 			results = new HashMap<>();
 			courseRepository = CourseAbstractFactory.instance().getCourseRepository();
-			userRepository = Injector.instance().getUserRepository();
+			userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 			List<String> bannerIds = userRepository.getAllBannerIds();
 			Reader reader = new InputStreamReader(file.getInputStream());
 			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();

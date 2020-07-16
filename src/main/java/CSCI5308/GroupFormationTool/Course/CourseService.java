@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import CSCI5308.GroupFormationTool.UserManager.UserService;
 
 import java.util.ArrayList;
@@ -55,9 +56,9 @@ public class CourseService implements ICourseService {
 
 	@Override
 	public String addTAForCourse(String taId, String courseId) throws Exception {
-		if(Injector.instance().getUserService().checkIfUserExists(taId))
+		if(UserManagerAbstractFactory.instance().getUserService().checkIfUserExists(taId))
 		{
-			courseRepository = Injector.instance().getCourseRepository();
+			courseRepository = CourseAbstractFactory.instance().getCourseRepository();
 			return courseRepository.addTaForCourse(taId,courseId);
 		}
 		else

@@ -1,8 +1,8 @@
 package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.Course.*;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractConcrete;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
-import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
@@ -42,14 +42,14 @@ import CSCI5308.GroupFormationTool.UserManager.*;
 public class Injector {
 
 	private static Injector instance = null;
-	private IDatabaseAbstractFactory databaseAbstractFactory;
+	private DatabaseAbstractFactory databaseAbstractFactory;
 	private IDBConfiguration dbConfiguration;
 
 	private IUser user;
 	private IInstructor instructor;
 	private IUserRepository userRepository;
 	private IUserService userService;
-	private UserManagerAbstractFactory userManagerAbstractFactory;
+	private UserManagerAbstractConcrete userManagerAbstractConcrete;
 
 	private IPasswordEncryptor passwordEncryptor;
 	private IEmailConfiguration emailConfiguration;
@@ -79,11 +79,11 @@ public class Injector {
 	private IQuestionEditorService questionEditorService;
 	private IQuestionEditorRepository questionEditorRepository;
 	private IRankFunctionsService rankFunctionsService;
-	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
+	private QuestionEditorAbstractFactory questionEditorAbstractFactory;
 
 
 	private Injector(){
-		databaseAbstractFactory = new DatabaseAbstractFactory();
+		databaseAbstractFactory = new DatabaseAbstractConcrete();
 		dbConfiguration = new DBConfiguration();
 
 		user = new User();
@@ -91,7 +91,7 @@ public class Injector {
 		userRepository = new UserRepository();
 		userService = new UserService();
 		passwordEncryptor = new BCryptEncryption();
-		userManagerAbstractFactory = new UserManagerAbstractFactory();
+		userManagerAbstractConcrete = new UserManagerAbstractConcrete();
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
 		userPasswordPolicyService = new UserPasswordPolicyService();
@@ -152,28 +152,28 @@ public class Injector {
 	private ISurveyManagerService surveyManagerService;
 	private ISurveyManagerRepository surveyManagerRepository;
 
-	public IQuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
+	public QuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
 		return questionEditorAbstractFactory;
 	}
 
-	public void setQuestionEditorAbstractFactory(IQuestionEditorAbstractFactory questionEditorAbstractFactory) {
+	public void setQuestionEditorAbstractFactory(QuestionEditorAbstractFactory questionEditorAbstractFactory) {
 		this.questionEditorAbstractFactory = questionEditorAbstractFactory;
 	}
 
-	public IDatabaseAbstractFactory getDatabaseAbstractFactory() {
+	public DatabaseAbstractFactory getDatabaseAbstractFactory() {
 		return databaseAbstractFactory;
 	}
 
-	public void setDatabaseAbstractFactory(IDatabaseAbstractFactory databaseAbstractFactory) {
+	public void setDatabaseAbstractFactory(DatabaseAbstractFactory databaseAbstractFactory) {
 		this.databaseAbstractFactory = databaseAbstractFactory;
 	}
 
-	public UserManagerAbstractFactory getUserManagerAbstractFactory() {
-		return userManagerAbstractFactory;
+	public UserManagerAbstractConcrete getUserManagerAbstractConcrete() {
+		return userManagerAbstractConcrete;
 	}
 
-	public void setUserManagerAbstractFactory(UserManagerAbstractFactory userManagerAbstractFactory) {
-		this.userManagerAbstractFactory = userManagerAbstractFactory;
+	public void setUserManagerAbstractConcrete(UserManagerAbstractConcrete userManagerAbstractConcrete) {
+		this.userManagerAbstractConcrete = userManagerAbstractConcrete;
 	}
 
 	public IRankFunctionsService getRankFunctionsService() {

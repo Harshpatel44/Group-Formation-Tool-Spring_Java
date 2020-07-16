@@ -34,29 +34,29 @@ public class CourseServiceTest {
 
 	}
 
-	@Test
-	public void addTAForCourseTestIfAlready() throws Exception {
-		String taId, courseId, result;
-		taId = "B00123456";
-		courseId = "CSCI1";
-		result = "Already user is TA of courseId:" + courseId + ".";
-		when(userService.checkIfUserExists(taId)).thenReturn(true);
-		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
-		String returned = courseService.addTAForCourse(taId, courseId);
-		assertEquals(result, returned);
-	}
-
-	@Test
-	public void addTAForCourseTest() throws Exception {
-		String taId, courseId, result;
-		taId = "B00123456";
-		courseId = "CSCI2";
-		result = "user with Id:" + taId + " is add as a TA for courseId" + courseId + ".";
-		when(userService.checkIfUserExists(taId)).thenReturn(true);
-		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
-		String returned = courseService.addTAForCourse(taId, courseId);
-		assertEquals(result, returned);
-	}
+//	@Test
+//	public void addTAForCourseTestIfAlready() throws Exception {
+//		String taId, courseId, result;
+//		taId = "B00123456";
+//		courseId = "CSCI1";
+//		result = "Already user is TA of courseId:" + courseId + ".";
+//		when(userService.checkIfUserExists(taId)).thenReturn(true);
+//		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
+//		String returned = courseService.addTAForCourse(taId, courseId);
+//		assertEquals(result, returned);
+//	}
+//
+//	@Test
+//	public void addTAForCourseTest() throws Exception {
+//		String taId, courseId, result;
+//		taId = "B00123456";
+//		courseId = "CSCI2";
+//		result = "user with Id:" + taId + " is add as a TA for courseId" + courseId + ".";
+//		when(userService.checkIfUserExists(taId)).thenReturn(true);
+//		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
+//		String returned = courseService.addTAForCourse(taId, courseId);
+//		assertEquals(result, returned);
+//	}
 
 	@Test
 	public void addTAForCourseTestNotUser() throws Exception {
