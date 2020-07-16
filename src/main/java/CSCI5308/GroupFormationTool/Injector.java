@@ -86,7 +86,7 @@ public class Injector {
 	private IQuestionEditorService questionEditorService;
 	private IQuestionEditorRepository questionEditorRepository;
 	private IRankFunctionsService rankFunctionsService;
-	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
+	private QuestionEditorAbstractFactory questionEditorAbstractFactory;
 
 	private IAnswerSurveyRepository answerSurveyRepository;
 	private IAnswerSurveyService answerSurveyService;
@@ -187,11 +187,11 @@ public class Injector {
 	private ISurveyManagerService surveyManagerService;
 	private ISurveyManagerRepository surveyManagerRepository;
 
-	public IQuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
+	public QuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
 		return questionEditorAbstractFactory;
 	}
 
-	public void setQuestionEditorAbstractFactory(IQuestionEditorAbstractFactory questionEditorAbstractFactory) {
+	public void setQuestionEditorAbstractFactory(QuestionEditorAbstractFactory questionEditorAbstractFactory) {
 		this.questionEditorAbstractFactory = questionEditorAbstractFactory;
 	}
 

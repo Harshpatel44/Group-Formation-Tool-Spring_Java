@@ -74,6 +74,7 @@ public class HomeRepository implements IHomeRepository {
 					}
 				}
 			}
+
 			LOG.info("Operation = Get courses from banner id "+bannerID+", Status = Success");
 			return CourseList;
 		} catch (Exception e) {
