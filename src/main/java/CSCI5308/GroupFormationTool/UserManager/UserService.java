@@ -12,18 +12,21 @@ import java.util.regex.Pattern;
 
 import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
 import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 
 @Service
 public class UserService implements IUserService {
+	private static final Logger LOG = LogManager.getLogger();
 	private Pattern pattern;
 	private Matcher matcher;
 	private IUserRepository userRepository;
 	private IPasswordEncryptor iPasswordEncryptor;
 	private IUserPasswordPolicyService passwordPolicyService;
-	private IUserManagerAbstractFactory userManagerAbstractFactory;
+	private UserManagerAbstractFactory userManagerAbstractFactory;
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
@@ -35,7 +38,7 @@ public class UserService implements IUserService {
 	@Override
 	public boolean createUser(IUser user) throws ServiceLayerException{
 		Boolean success;
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
 		boolean bannerIdExists = userRepository.checkIfUserExists(user.getBannerId());
 
@@ -43,6 +46,7 @@ public class UserService implements IUserService {
 		if (validationErrors.size() > 0) {
 			throw new ServiceLayerException() {
 				{
+					LOG.warn("Operation = Create user, Status = validation fail ");
 					setMapErrors(validationErrors);
 				}
 			};
@@ -55,6 +59,7 @@ public class UserService implements IUserService {
 			errors.put("bannerId", "Banner ID already exists");
 			throw new ServiceLayerException() {
 				{
+					LOG.warn("Operation = Create user, Status = banner Id exists ");
 					setMapErrors(errors);
 				}
 			};
@@ -80,7 +85,7 @@ public class UserService implements IUserService {
 		}
 		if (user.getEmailId() == null || user.getEmailId().isEmpty()) {
 			errors.put("emailId", "Email cannot be  null or empty");
-		} else if (!validateEmail(user.getEmailId())) {
+		} else if (validateEmail(user.getEmailId())==false) {
 			errors.put("emailId", "Enter valid Email");
 		}
 		if (user.getContactNumber() == null || user.getContactNumber().isEmpty()) {
@@ -95,7 +100,7 @@ public class UserService implements IUserService {
 			errors.put("confirmPassword", "Confirm Password cannot be  null or empty");
 		}
 		if (user.getPassword() != null) {
-			if (!user.getPassword().equals(user.getConfirmPassword())) {
+			if (user.getPassword().equals(user.getConfirmPassword())==false) {
 				errors.put("confirmPassword", "Passwords and confirm password Does not match");
 			} else {
 				passwordPolicyService.checkPasswordValidation(user.getPassword(), errors);
@@ -112,7 +117,6 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
-		userManagerAbstractFactory = Injector.instance().getUserManagerAbstractFactory();
 		IUser iUser = userManagerAbstractFactory.getUser();
 		iUser.setFirstName(firstName);
 		iUser.setLastName(lastName);
@@ -120,12 +124,13 @@ public class UserService implements IUserService {
 		iUser.setBannerId(bannerId);
 		iUser.setContactNumber(contactNumber);
 		iUser.setEmailId(emailId);
+		LOG.info("Operation = Set USer, Status = Success ");
 		return iUser;
 	}
 
 	@Override
 	public boolean checkIfUserExists(String bannerID){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		if(userRepository.checkIfUserExists(bannerID)){
 			return true;
 		}
@@ -136,41 +141,43 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.setUserByBannerId(bannerId,iUser);
 	}
 
 	@Override
 	public List<String> getAllBannerIds(){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.getAllBannerIds();
 	}
 
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
-		userRepository= Injector.instance().getUserRepository();
+		userRepository= UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.checkUserRoleForCourse(bannerID,courseID);
 	}
 
 	@Override
 	public boolean checkIfUserIsGuest(String bannerID){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		return userRepository.checkIfUserIsGuest(bannerID);
 	}
 
 	@Override
 	public void setCurrentUserByBannerID(String bannerID){
-		userRepository = Injector.instance().getUserRepository();
+		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 		if(bannerID.equals(admin)){
 			CurrentUser.instance().setBannerId(admin);
 			CurrentUser.instance().setFirstName(admin);
 			CurrentUser.instance().setLastName(admin);
+			LOG.info("Operation = SetCurrentUser if admin, Status = Success ");
 		}else{
-				IUser iUser = new User();
+				IUser iUser = UserManagerAbstractFactory.instance().getUser();
 				iUser = userRepository.setUserByBannerId(bannerID,iUser);
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());
+			LOG.info("Operation = SetCurrentUser if not admin, Status = Success ");
 		}
 	}
 }

@@ -1,7 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
 import CSCI5308.GroupFormationTool.Course.ICourseRepository;
-import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
@@ -17,7 +17,7 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 
 public class QuestionEditorRepository implements IQuestionEditorRepository {
 
-    private IDatabaseAbstractFactory databaseAbstractFactory;
+    private DatabaseAbstractFactory databaseAbstractFactory;
     private IQuestionEditorRepository questionEditorRepository;
     private IUserRepository userRepository;
     private ICourseRepository courseRepository;
@@ -26,7 +26,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     @Override
     public boolean SaveTextAndNumericTypeQuestionRepo(String questionText, String questionTitle, String selectedQuestionType,String userId){
         String questionType = changeQuestionTypeName(selectedQuestionType);
-        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
+        databaseAbstractFactory = DatabaseAbstractFactory.instance();
         questionEditorRepository = QuestionEditorAbstractFactory.instance().getQuestionEditorRepository();
         StoredProcedure storedProcedure = null;
         try {
@@ -61,7 +61,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     @Override
     public int getQuestionIDFromTopic(String questionTitle,String dStamp){
         StoredProcedure storedProcedure = null;
-        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
+        databaseAbstractFactory = DatabaseAbstractFactory.instance();
         try{
             storedProcedure = databaseAbstractFactory.createStoredProcedure("questionIdFromTopic(?,?)");
             storedProcedure.setParameter("qTopic",questionTitle);
@@ -105,7 +105,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     @Override
     public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String questionText, String courseId,String time){
         StoredProcedure sp = null;
-        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
+        databaseAbstractFactory = DatabaseAbstractFactory.instance();
         try{
             sp = databaseAbstractFactory.createStoredProcedure("AddQuestionToSurveyTable(?,?,?,?,?)");
             sp.setParameter("uId",userId);
@@ -151,7 +151,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         StoredProcedure storedProcedure = null;
         StoredProcedure storedProcedure3 = null;
         questionEditorRepository = QuestionEditorAbstractFactory.instance().getQuestionEditorRepository();
-        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
+        databaseAbstractFactory = DatabaseAbstractFactory.instance();
         String questionType = changeQuestionTypeName(selectedQuestionType);
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");

@@ -18,49 +18,49 @@ public class SurveyManagerService implements ISurveyManagerService{
 
     @Override
     public void getSurveyQuestions() throws Exception {
-      surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+      surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
       surveyManagerRepository.getSurveyQuestions();
     }
 
     @Override
     public List<IQuestion> AlreadyAddedSurveyQuestions() throws Exception {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         return surveyManagerRepository.AlreadyAddedSurveyQuestions();
     }
 
     @Override
     public List<IQuestion> NotAddedSurveyQuestions() throws Exception {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         return surveyManagerRepository.NotAddedSurveyQuestions();
     }
 
     @Override
     public void AddQuestionToSurvey(Integer questionId) {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         surveyManagerRepository.AddQuestionToSurvey(questionId);
     }
 
     @Override
     public void RemoveQuestionFromSurvey(Integer questionId) {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         surveyManagerRepository.RemoveQuestionFromSurvey(questionId);
     }
 
     @Override
     public void PublishSurvey() {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         surveyManagerRepository.PublishSurvey();
     }
 
     @Override
     public boolean checkPublish() {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         return surveyManagerRepository.checkPublish();
     }
 
     @Override
     public void UnpublishSurvey() {
-        surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
+        surveyManagerRepository = SurveyManagerAbstractFactory.instance().getSurveyManagerRepository();
         surveyManagerRepository.UnpublishSurvey();
     }
 }

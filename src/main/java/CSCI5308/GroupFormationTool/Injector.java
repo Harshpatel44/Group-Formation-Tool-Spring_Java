@@ -3,7 +3,6 @@ package CSCI5308.GroupFormationTool;
 import CSCI5308.GroupFormationTool.AnswerSurvey.*;
 import CSCI5308.GroupFormationTool.Course.*;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
-import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
@@ -49,7 +48,7 @@ import CSCI5308.GroupFormationTool.UserManager.*;
 public class Injector {
 
 	private static Injector instance = null;
-	private IDatabaseAbstractFactory databaseAbstractFactory;
+	private DatabaseAbstractFactory databaseAbstractFactory;
 	private IDBConfiguration dbConfiguration;
 
 	private IUser user;
@@ -98,15 +97,15 @@ public class Injector {
 	private IGroupFormmerService groupFormmerService;
 
 	private Injector(){
-		databaseAbstractFactory = new DatabaseAbstractFactory();
-		dbConfiguration = new DBConfiguration();
+//		databaseAbstractFactory = new DatabaseAbstractFactory();
+//		dbConfiguration = new DBConfiguration();
 
 		user = new User();
 		instructor = new Instructor();
 		userRepository = new UserRepository();
 		userService = new UserService();
 		passwordEncryptor = new BCryptEncryption();
-		userManagerAbstractFactory = new UserManagerAbstractFactory();
+//		userManagerAbstractFactory = new UserManagerAbstractFactory();
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
 		userPasswordPolicyService = new UserPasswordPolicyService();
@@ -195,11 +194,11 @@ public class Injector {
 		this.questionEditorAbstractFactory = questionEditorAbstractFactory;
 	}
 
-	public IDatabaseAbstractFactory getDatabaseAbstractFactory() {
+	public DatabaseAbstractFactory getDatabaseAbstractFactory() {
 		return databaseAbstractFactory;
 	}
 
-	public void setDatabaseAbstractFactory(IDatabaseAbstractFactory databaseAbstractFactory) {
+	public void setDatabaseAbstractFactory(DatabaseAbstractFactory databaseAbstractFactory) {
 		this.databaseAbstractFactory = databaseAbstractFactory;
 	}
 
