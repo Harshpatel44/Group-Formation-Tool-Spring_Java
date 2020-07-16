@@ -31,7 +31,7 @@ public class UserServiceTest {
 		currentUser = mock(CurrentUser.class);
         Injector.instance().setUserRepository(userRepository);
         CurrentUser.setInstance(currentUser);
-//      userService = new UserService(userRepository, currentUser);
+//        userService = new UserService(userRepository, currentUser);
 		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 		UserPasswordPolicyStatus.setInstance(1,1,1,1,1,1);
 
@@ -44,12 +44,12 @@ public class UserServiceTest {
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
 		});
-		assertEquals(exception.getMapErrors().size()==7,true);
+		assertEquals(7, exception.getMapErrors().size());
 	}
 
 	@Test
 	public void createExistingUserCorrectDetails(){
-		IUser user = UserMockDB.setDefault();
+		User user = UserMockDB.setDefault();
 		userService = Injector.instance().getUserService();
 		when(userRepository.checkIfUserExists(user.getBannerId())).thenReturn(true);
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
@@ -61,8 +61,8 @@ public class UserServiceTest {
 
 	@Test
 	public void createWithEmptyLastname() throws Exception {
-		IUser user = UserMockDB.setDefault();
 		userService = Injector.instance().getUserService();
+		IUser user = UserMockDB.setDefault();
 		user.setLastName("");
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
@@ -73,8 +73,8 @@ public class UserServiceTest {
 
 	@Test
 	public void createWithInvalidEmail() throws Exception {
-		IUser user = UserMockDB.setDefault();
 		userService = Injector.instance().getUserService();
+		IUser user = UserMockDB.setDefault();
 		user.setEmailId("neofvno");
 		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
 			userService.createUser(user);
@@ -175,7 +175,7 @@ public class UserServiceTest {
 
 	@Test
 	public void creaUserCorrectDetails() throws Exception {
-		IUser user = UserMockDB.setDefault();
+		User user = UserMockDB.setDefault();
 		userService = Injector.instance().getUserService();
 		when(userRepository.createUser(user)).thenReturn(true);
 		assertEquals(true, userService.createUser(user));

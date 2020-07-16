@@ -100,6 +100,7 @@ public class Injector {
 		emailConfiguration = new EmailConfiguration();
 		userNotification = new UserNotification();
 
+
 		forgetPasswordRepository =new ForgetPasswordRepository();
 		forgetPasswordService = new ForgetPasswordService();
 
@@ -122,7 +123,7 @@ public class Injector {
 		questionEditorService = new QuestionEditorService();
 		questionEditorRepository = new QuestionEditorRepository();
 		rankFunctionsService = new RankFunctionsService();
-		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
+//		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
 
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();

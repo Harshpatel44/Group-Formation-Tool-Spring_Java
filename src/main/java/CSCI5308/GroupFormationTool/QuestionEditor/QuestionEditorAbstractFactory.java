@@ -1,16 +1,42 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
-import java.time.format.DateTimeFormatter;
+import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerRepository;
 
-public class QuestionEditorAbstractFactory implements IQuestionEditorAbstractFactory {
+public class QuestionEditorAbstractFactory extends IQuestionEditorAbstractFactory {
 
-    @Override
+    private IQuestionModel questionModel;
+    private IQuestionEditorService questionEditorService;
+    private IQuestionEditorRepository questionEditorRepository;
+    private IRankFunctionsService rankFunctionsService;
+
     public IQuestionModel getQuestionModel(){
         return new QuestionModel();
     }
 
-    @Override
-    public DateTimeFormatter getDateTimeFormat(){
-        return DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+    public IQuestionEditorService getQuestionEditorService() {
+        if (questionEditorService == null) {
+            questionEditorService = new QuestionEditorService();
+        }
+            return questionEditorService;
     }
+
+    public IQuestionEditorRepository getQuestionEditorRepository() {
+        if (questionEditorRepository == null) {
+            questionEditorRepository = new QuestionEditorRepository();
+        }
+        return questionEditorRepository;
+    }
+
+    public void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository){
+        this.questionEditorRepository = questionEditorRepository;
+    }
+
+    public IRankFunctionsService getRankFunctionsService() {
+        if (rankFunctionsService == null) {
+            rankFunctionsService = new RankFunctionsService();
+        }
+        return rankFunctionsService;
+    }
+
+
 }

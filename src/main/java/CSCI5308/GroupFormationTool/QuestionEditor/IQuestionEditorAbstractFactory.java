@@ -1,9 +1,24 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
-import java.time.format.DateTimeFormatter;
+public abstract class IQuestionEditorAbstractFactory {
 
-public interface IQuestionEditorAbstractFactory {
-    IQuestionModel getQuestionModel();
+    private static IQuestionEditorAbstractFactory instance = null;
 
-    DateTimeFormatter getDateTimeFormat();
+    public static IQuestionEditorAbstractFactory instance(){
+
+        if (instance == null) {
+            instance = new QuestionEditorAbstractFactory();
+        }
+        return instance;
+    }
+
+    public abstract IQuestionModel getQuestionModel();
+
+    public abstract IQuestionEditorService getQuestionEditorService();
+
+    public abstract IQuestionEditorRepository getQuestionEditorRepository();
+
+    public abstract IRankFunctionsService getRankFunctionsService();
+
+    public abstract void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository);
 }

@@ -11,4 +11,9 @@ public class UserManagerAbstractFactory implements IUserManagerAbstractFactory {
     public IInstructor getInstructor(){
         return new Instructor();
     }
+
+    @Override
+    public IUser getUser(){
+        return new User();
+    }
 }

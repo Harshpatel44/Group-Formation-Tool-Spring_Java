@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
+import CSCI5308.GroupFormationTool.UserManager.UserService;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -13,8 +14,9 @@ public class CourseService implements ICourseService {
    private ICourseRepository courseRepository;
 
    public CourseService(){}
-	public CourseService(CourseRepository courseRepository) throws Exception {
+	public CourseService(CourseRepository courseRepository, UserService userService) throws Exception {
 	Injector.instance().setCourseRepository(courseRepository);
+	Injector.instance().setUserService(userService);
 	}
 
 	@Override

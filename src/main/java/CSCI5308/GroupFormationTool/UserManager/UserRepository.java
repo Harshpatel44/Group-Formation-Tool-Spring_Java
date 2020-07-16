@@ -1,5 +1,7 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
+import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 
 import CSCI5308.GroupFormationTool.Injector;
@@ -15,15 +17,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 
+import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
+
 @Repository
 public class UserRepository implements IUserRepository {
+
+	private IDatabaseAbstractFactory databaseAbstractFactory;
 
 	@Override
 	public boolean createUser(IUser user) {
 		Boolean success = false;
 		StoredProcedure storedProcedure = null;
 		try {
-			storedProcedure = new StoredProcedure("spCreateUser(?, ?, ?, ?, ?,?)");
+			databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("spCreateUser(?, ?, ?, ?, ?,?)");
 			storedProcedure.setParameter(1, user.getBannerId());
 			storedProcedure.setParameter(2, user.getPassword());
 			storedProcedure.setParameter(3, user.getFirstName());
@@ -33,12 +40,15 @@ public class UserRepository implements IUserRepository {
 			storedProcedure.execute();
 
 			success = true;
-			storedProcedure.cleanup();
-		} catch (SQLException e) {
 
+		} catch (SQLException e) {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally {
+			if(storedProcedure!=null){
+				storedProcedure.cleanup();
+			}
 		}
 		return success;
 	}
@@ -47,8 +57,9 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public boolean checkIfUserExists(String bannerID) {
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
-			storedProcedure = new StoredProcedure("userByBannerID(?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("userByBannerID(?)");
 			storedProcedure.setParameter(1, bannerID);
 			ResultSet results = storedProcedure.executeWithResults();
 			if (results != null) {
@@ -56,7 +67,6 @@ public class UserRepository implements IUserRepository {
 					return true;
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -67,12 +77,12 @@ public class UserRepository implements IUserRepository {
 		return false;
 	}
 
-
 	@Override
 	public IUser setUserByBannerId(String bannerID, IUser iUser) {
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
-			storedProcedure = new StoredProcedure("userByBannerID(?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("userByBannerID(?)");
 			storedProcedure.setParameter(1, bannerID);
 			ResultSet results = storedProcedure.executeWithResults();
 			if (results != null) {
@@ -100,8 +110,9 @@ public class UserRepository implements IUserRepository {
 	public List<String> getAllBannerIds(){
 		List<String> bannerIds = new ArrayList<String>();
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
-			storedProcedure = new StoredProcedure("spGetAllUserIDs");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("spGetAllUserIDs");
 			ResultSet results = storedProcedure.executeWithResults();
 			if (null != results) {
 				while (results.next()) {
@@ -122,8 +133,9 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
-			storedProcedure = new StoredProcedure("CheckGuest(?,?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("CheckGuest(?,?)");
 			storedProcedure.setParameter(1, bannerID);
 			storedProcedure.setParameter(2, courseID);
 			ResultSet rs = storedProcedure.executeWithResults();
@@ -132,7 +144,7 @@ public class UserRepository implements IUserRepository {
 				return rs.getString("roleId");
 			}
 			else{
-				return "guest";
+				return guest;
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -147,8 +159,9 @@ public class UserRepository implements IUserRepository {
 	public boolean checkIfUserIsGuest(String bannerID){
 		boolean result = true;  //Guest
 		StoredProcedure role = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
-			role = new StoredProcedure("CheckGuest(?)");
+			role = databaseAbstractFactory.createStoredProcedure("CheckGuest(?)");
 			role.setParameter(1, bannerID);
 			ResultSet rs = role.executeWithResults();
 			if(rs.next())//if data present, then not guest
@@ -167,8 +180,9 @@ public class UserRepository implements IUserRepository {
 
 	public int getUserRoleIdFromRoleType(String userType){
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try{
-			storedProcedure = new StoredProcedure("getRoleIdFromRoleType(?)");
+			storedProcedure = databaseAbstractFactory.createStoredProcedure("getRoleIdFromRoleType(?)");
 			storedProcedure.setParameter("rType",userType.toLowerCase());
 			ResultSet rs = storedProcedure.executeWithResults();
 			while(rs.next()){

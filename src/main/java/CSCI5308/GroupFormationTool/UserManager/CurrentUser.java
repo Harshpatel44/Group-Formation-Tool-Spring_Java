@@ -6,7 +6,6 @@ public class CurrentUser{
     private String lastName;
     private String bannerId;
 
-
     public static CurrentUser instance(){
         if(instance==null){
             instance = new CurrentUser();
@@ -26,26 +25,21 @@ public class CurrentUser{
         return firstName;
     }
 
-
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
-
 
     public String getLastName() {
         return lastName;
     }
 
-
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-
     public String getBannerId() {
         return bannerId;
     }
-
 
     public void setBannerId(String bannerId) {
         this.bannerId = bannerId;
