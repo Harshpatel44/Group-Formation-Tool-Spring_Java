@@ -21,4 +21,5 @@ public interface ICourseRepository {
 
     boolean deleteCourseRepo(IDeleteCourse deleteCourse);
 
+    boolean checkSurveyAvailableForUser(String bannerId);
 }

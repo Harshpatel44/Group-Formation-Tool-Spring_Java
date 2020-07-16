@@ -46,19 +46,15 @@
     </ul>
 </div>
 <div>
-    <form th:action="@{/survey}" method="post" th:if="${checkRole==false}">
+    <form th:action="@{/survey}" method="post" th:if="${checkRole==false} and ${surveyAvailable}">
         <h3>Survey Available : Title </h3>
         <a th:href="survey">Take Survey</a>
     </form>
 </div>
 
-<div>
-<!--    display survey for instructor and Ta-->
-    <h3 th:if="${checkRole}">Survey Response</h3>
+<div th:if="${checkRole} and ${surveyPublished}">
+    <h3 >Survey Response</h3>
     <a th:href="displayResponse">See Response</a>
-
 </div>
-
-
 </body>
 </html>

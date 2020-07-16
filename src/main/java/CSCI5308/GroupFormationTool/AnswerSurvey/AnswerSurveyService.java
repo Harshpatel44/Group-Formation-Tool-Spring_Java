@@ -16,8 +16,14 @@ public class AnswerSurveyService implements IAnswerSurveyService {
     }
 
     @Override
-    public boolean storeSurveyResponses(HashMap<Integer,ArrayList<String>> surveyResponses) {
-        // Start your code from here. SurveyResponses variable contains all the responses.
-        return false;
+    public boolean surveyResponses(HashMap<Integer,ArrayList<String>> surveyResponses, String bannerId, String courseId) {
+        for(Map.Entry mapElements : surveyResponses.entrySet()){
+            Integer questionId = (Integer)mapElements.getKey();
+            ArrayList<String> value = (ArrayList<String>) mapElements.getValue();
+           for(String answer : value){
+               Injector.instance().getAnswerSurveyRepository().storeSurveyResponses(bannerId,courseId,questionId,answer);
+           }
+        }
+        return true;
     }
 }

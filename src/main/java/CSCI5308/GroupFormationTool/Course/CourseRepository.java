@@ -198,4 +198,24 @@ public class CourseRepository implements ICourseRepository {
 			return false;
 		}
 	}
+
+	@Override
+	public boolean checkSurveyAvailableForUser(String bannerId) {
+		StoredProcedure checkSurveyAvailableForUser = null;
+		try{
+			checkSurveyAvailableForUser = new StoredProcedure("SurveyAvailableForTheUser(?)");
+			checkSurveyAvailableForUser.setParameter(1,bannerId);
+			ResultSet rs = checkSurveyAvailableForUser.executeWithResults();
+			if(rs.next()){
+				return false;
+			}
+		}
+		catch (Exception e){
+			e.printStackTrace();
+		}
+		finally {
+			checkSurveyAvailableForUser.cleanup();
+		}
+		return true;
+	}
 }

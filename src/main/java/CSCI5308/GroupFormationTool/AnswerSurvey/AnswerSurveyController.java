@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.AnswerSurvey;
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,9 +19,11 @@ import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
+//import java.util.logging.Logger;
 
 @Controller
 public class AnswerSurveyController {
+//    private Logger log = (Logger) LoggerFactory.getLogger(AnswerSurveyController.class);
     private IAnswerSurveyService service = Injector.instance().getAnswerSurveyService();
     private List<ISurveyQuestionOptionsModel> questionsAndOptions = null;
     @GetMapping("/survey")
@@ -32,11 +35,15 @@ public class AnswerSurveyController {
         model.addObject("bannerId",bannerId);
         questionsAndOptions = service.getSurveyQuestionsAndOptions(courseId);
         model.addObject("questions",questionsAndOptions);
+//        log.info("Survey started for "+bannerId+" for the course "+courseId);
         return model;
     }
 
     @PostMapping("/survey")
-    public void getSurveyAnswers(HttpServletRequest req, HttpServletResponse res) throws IOException {
+    public String getSurveyAnswers(HttpServletRequest req, HttpServletResponse res) throws IOException {
+        boolean answerStored = false;
+        String bannerId = CurrentUser.instance().getBannerId();
+        String courseId = CurrentCourse.instance().getCurrentCourseId();
         HashMap<Integer,ArrayList<String>> surveyResponses = new HashMap<>();
         Enumeration e = req.getParameterNames();
         while(e.hasMoreElements()){
@@ -56,6 +63,10 @@ public class AnswerSurveyController {
                 }
             }
         }
-        Injector.instance().getAnswerSurveyService().storeSurveyResponses(surveyResponses);
+        answerStored =  Injector.instance().getAnswerSurveyService().surveyResponses(surveyResponses,bannerId,courseId);
+        if(answerStored == true){
+            return "redirect:/home?userId="+bannerId;
+        }
+        return "survey";
     }
 }

@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.SurveyManager.SurveyManagerRepository;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import org.springframework.stereotype.Controller;
@@ -23,10 +24,13 @@ public class CourseController {
 		currentCourse.setCurrentCourseName(courseName);
 		currentCourse.setCurrentCourseUserRole(userRole);
 
+		String userId = CurrentUser.instance().getBannerId();
 		ModelAndView model=new ModelAndView("course");
 		model.addObject("courseId",courseId);
-		model.addObject("userId", CurrentUser.instance().getBannerId());
+		model.addObject("userId", userId);
 		model.addObject("checkRole",courseService.roleAllowInstructorAndTA(userRole));
+		model.addObject("surveyAvailable",Injector.instance().getCourseRepository().checkSurveyAvailableForUser(userId));
+		model.addObject("surveyPublished", Injector.instance().getSurveyManagerRepository().checkPublish());
 		model.setViewName("course");
 		return model;
 	}

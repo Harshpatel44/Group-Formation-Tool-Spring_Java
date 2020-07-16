@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 import CSCI5308.GroupFormationTool.Course.CurrentCourse;
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,14 +17,17 @@ public class DisplaySurveyResponseController {
 
     @GetMapping("/displayResponse")
     public ModelAndView displayResponse() {
+        String userId = CurrentUser.instance().getBannerId();
         String courseId = CurrentCourse.instance().getCurrentCourseId();
         List<String> users = service.getUsersWhoAnsweredSurvey(courseId);
         ModelAndView model = new ModelAndView("displayResponse");
+        model.addObject("userID",userId);
         model.addObject("courseId",courseId);
         model.addObject("bannerIds",users);
         model.addObject("userResponse",service.getSurveyResponse(users,courseId));
         return model;
     }
+
     @GetMapping("/displayResponse/{bannerId}")
     public ModelAndView displayIndividualResponse(@PathVariable ("bannerId") String bannerId)
     {
