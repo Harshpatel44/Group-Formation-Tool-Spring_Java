@@ -6,25 +6,25 @@ import java.util.*;
 
 public class AnswerSurveyRepository implements IAnswerSurveyRepository {
 
-    @Override
-    public boolean isSurveyPublished(String courseId) {
-        StoredProcedure surveyAvailable = null;
-        try{
-            surveyAvailable = new StoredProcedure("isSurveyAvailable(?)");
-            surveyAvailable.setParameter(1,courseId);
-            ResultSet rs = surveyAvailable.executeWithResults();
-            if(rs.next()){
-                return true;
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        finally {
-            surveyAvailable.cleanup();
-        }
-        return false;
-    }
+//    @Override
+//    public boolean isSurveyPublished(String courseId) {
+//        StoredProcedure surveyAvailable = null;
+//        try{
+//            surveyAvailable = new StoredProcedure("isSurveyAvailable(?)");
+//            surveyAvailable.setParameter(1,courseId);
+//            ResultSet rs = surveyAvailable.executeWithResults();
+//            if(rs.next()){
+//                return true;
+//            }
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//        }
+//        finally {
+//            surveyAvailable.cleanup();
+//        }
+//        return false;
+//    }
 
     @Override
     public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId) {
@@ -35,7 +35,6 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
             getSurveyQuestions.setParameter(1,courseId);
             ResultSet rs = getSurveyQuestions.executeWithResults();
-            System.out.println("Inside Rutika Repo");
             while(rs.next()) {
                 HashMap<Integer,String> options = new HashMap<>();
                 if(rs.getString(6).equals("mcqs") || rs.getString(6).equals("mcqm")) {
