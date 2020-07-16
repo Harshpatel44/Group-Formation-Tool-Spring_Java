@@ -4,15 +4,12 @@
 <head>
     <title>Course Admin</title>
     <link rel="stylesheet" type="text/css" href="/css/admin.css" />
-
-
     <script
             src="https://code.jquery.com/jquery-3.4.1.min.js"
             integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
             crossorigin="anonymous"></script>
 </head>
 <body>
-
 <div>
     <ul id="heading-box">
         <li style="margin:auto;">
@@ -22,7 +19,6 @@
         </li>
     </ul>
 </div>
-
 <div>
     <ul id="heading-box2">
         <li>
@@ -55,21 +51,17 @@
         </li>
     </ul>
 </div>
-
 <ul class="functionalities-list" style="width: auto;">
     <li class="list">
         <div class="function-heading">Create Options</div>
         <form th:action="@{/questionPreview}" method="post" name="addOptionForm">
             <ul class="options-ul" id="options-ul-id">
-
             </ul>
             <button onclick="addOption()" class="submit-button">Add Option</button>
-
             <input type="hidden"  th:value="${courseName}" name="courseName"/>
             <input type="hidden" th:value="${userId}" name="userId" />
             <input  type="hidden" th:value="${userRole}" name="userRole" />
             <input type="hidden" th:value="${courseId}" name="courseId" />
-
             <input type="hidden" th:value="${questionText}" name="questionText" />
             <input type="hidden" th:value="${questionTitle}" name="questionTitle" />
             <input type="hidden" th:value="${selectedQuestionType}" name="selectedQuestionType" />
@@ -77,7 +69,6 @@
         </form>
     </li>
 </ul>
-
 <script type="text/javascript">
     var i = 1;
     function addOption(){

@@ -33,6 +33,12 @@ import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
+import CSCI5308.GroupFormationTool.GroupFormmer.GroupFilter;
+import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerRepo;
+import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerService;
+import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFilter;
+import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerRepo;
+import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerService;
 import CSCI5308.GroupFormationTool.UserAuthentication.ILoginRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.ILoginService;
 import CSCI5308.GroupFormationTool.UserManager.UserRepository;
@@ -80,6 +86,10 @@ public class Injector {
 	private IQuestionEditorService questionEditorService;
 	private IQuestionEditorRepository questionEditorRepository;
 	private IRankFunctionsService rankFunctionsService;
+	
+	private IGroupFilter groupFilter;
+	private IGroupFormmerService groupFormmerService;
+	private IGroupFormmerRepo grFormmerRepo;
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
 		return userPasswordPolicyService;
@@ -171,6 +181,10 @@ public class Injector {
 
 		answerSurveyService = (IAnswerSurveyService) new AnswerSurveyService();
 		answerSurveyRepository = new AnswerSurveyRepository();
+		
+		groupFilter= new GroupFilter();
+		groupFormmerService = new GroupFormmerService();
+		grFormmerRepo = new GroupFormmerRepo();
 	}
 
 	public IRankFunctionsService getRankFunctionsService() {
@@ -425,5 +439,29 @@ public class Injector {
 
 	public void setAnswerSurveyRepository(IAnswerSurveyRepository answerSurveyRepository) {
 		this.answerSurveyRepository = answerSurveyRepository;
+	}
+
+	public IGroupFilter getGroupFilter() {
+		return groupFilter;
+	}
+
+	public void setGroupFilter(IGroupFilter groupFilter) {
+		this.groupFilter = groupFilter;
+	}
+
+	public IGroupFormmerService getGroupFormmerService() {
+		return groupFormmerService;
+	}
+
+	public void setGroupFormmerService(IGroupFormmerService groupFormmerService) {
+		this.groupFormmerService = groupFormmerService;
+	}
+
+	public IGroupFormmerRepo getGrFormmerRepo() {
+		return grFormmerRepo;
+	}
+
+	public void setGrFormmerRepo(IGroupFormmerRepo grFormmerRepo) {
+		this.grFormmerRepo = grFormmerRepo;
 	}
 }

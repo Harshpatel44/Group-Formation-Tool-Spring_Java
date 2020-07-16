@@ -1,5 +1,6 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
+import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -71,6 +72,57 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 question.setSurveyQuestionsOptions(options);
                 question.setSurveyQuestionTopic(rs.getString("questionTopic"));
                 questionsAndOptions.add(question);
+            }
+            getSurveyQuestions.cleanup();
+        }
+        catch (SQLException e){
+            e.printStackTrace();
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+        return questionsAndOptions;
+    }
+    @Override
+    public List<ISurveyQuestionOptionsModel> getSurveyQuestionsForGroupFormula(String courseId) {
+
+        List<ISurveyQuestionOptionsModel> questionsAndOptions = new ArrayList<ISurveyQuestionOptionsModel>();
+        try {
+            StoredProcedure getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
+            getSurveyQuestions.setParameter(1,courseId);
+            ResultSet rs = getSurveyQuestions.executeWithResults();            
+            while(rs.next())
+            {
+                List<String> options = new ArrayList<>();
+                options.add("Similar");
+                options.add("Dissimilar");
+                ISurveyQuestionOptionsModel question = new SurveyQuestionOptionsModel();
+                question.setSurveyCourseId(rs.getString("courseId"));
+                question.setSurveyQuestionDescription(rs.getString("questionDesc"));
+                question.setSurveyQuestionId(rs.getInt("questionId"));
+                question.setSurveyQuestionType(rs.getString("questionType"));
+                question.setSurveyQuestionsOptions(options);
+                question.setSurveyQuestionTopic(rs.getString("questionTopic"));
+                questionsAndOptions.add(question);
+                
+                if(rs.getString("questionType").equals("numeric"))
+                {
+                	ISurveyQuestionOptionsModel question1 = new SurveyQuestionOptionsModel();
+                    question1.setSurveyCourseId(rs.getString("courseId"));
+                    question1.setSurveyQuestionDescription(" Enter the value of lessThanValue of X to be included in team");
+                    question1.setSurveyQuestionId(rs.getInt("questionId"));
+                    question1.setSurveyQuestionType("txt");
+                    question1.setSurveyQuestionTopic(rs.getString("questionTopic"));
+                    questionsAndOptions.add(question1);
+                    
+                    ISurveyQuestionOptionsModel question2 = new SurveyQuestionOptionsModel();
+                    question2.setSurveyCourseId(rs.getString("courseId"));
+                    question2.setSurveyQuestionDescription(" Enter the value of greaterThanValue of X to be included in team");
+                    question2.setSurveyQuestionId(rs.getInt("questionId"));
+                    question2.setSurveyQuestionType("txt");
+                    question2.setSurveyQuestionTopic(rs.getString("questionTopic"));
+                    questionsAndOptions.add(question2);
+                }
             }
             getSurveyQuestions.cleanup();
         }

@@ -4,7 +4,6 @@
 <head>
 	<title>Course Admin</title>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css" />
-
 </head>
 <body>
 <div>
@@ -32,10 +31,9 @@
 					</div>
 				</form>
 				<form class="nav-bar-element" th:action="@{/course}" method="post" >
-					<input type="hidden"  th:value="${courseName}" name="courseName"/>
-					<input  type="hidden" th:value="${courseId}" name="courseId" />
 					<input  type="hidden" th:value="${userRole}" name="userRole" />
-					<input  type="hidden" th:value="${userId}" name="userId" />
+					<input  type="hidden" th:value="${courseId}" name="courseId" />
+					<input  type="hidden" th:value="${courseName}" name="courseName" />
 					<button type="submit" class="submit-button" name="save" th:if="${checkRole}" >Course Home</button>
 				</form>
 			</div>
@@ -48,11 +46,6 @@
 		<div class="function-heading">Add students to course</div>
 		<form th:action="@{/course/uploadcsv}" method="post"
 			  enctype="multipart/form-data">
-
-			<input type="hidden" th:value="${courseName}" name="courseName" />
-			<input type="hidden" th:value="${userId}" name="userId" />
-			<input type="hidden" th:value="${courseId}" name="id"/>
-
 			<div class="entity">
 				<label>Select files</label>
 				<div id="uploadfile-block">
@@ -64,21 +57,16 @@
 				<input type="submit"
 					   value="Add Students" class="submit-button">
 			</div>
-
-
-
 		</form>
 	</li>
 	<li class="list">
 		<div class="function-heading">Assign teaching assistant</div>
-		<form th:action="@{/addta}" method="post">
-			<input type="hidden" th:value="${courseName}" name="courseName" />
-			<input type="hidden" th:value="${userId}" name="userId" />
-			<input type="hidden" th:value="${courseId}" name="courseId" />
+		<form th:action="@{/course/admin/addta}" method="post">
 			<div class="entity" style="margin-top: 10px">
 				<label>User id:</label>
-				<input type="text" th:value="${taId}" name="taId" />
+				<input type="text" name="taId" />
 			</div>
+			<input  type="hidden" th:value="${checkRole}" name="checkRole" />
 			<button type="submit" name="save" class="submit-button">Add TA</button>
 		</form>
 	</li>
@@ -91,8 +79,6 @@
 			<tr th:each="user_success: ${success}">
 				<td th:text="*{user_success}"></td>
 		</table>
-
-
 		<table>
 			<tr>
 				<div class="function-heading">Failure results</div>

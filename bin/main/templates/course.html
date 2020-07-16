@@ -31,29 +31,33 @@
                     </div>
                 </form>
                 <form class="nav-bar-element" th:action="@{/home}" method="post">
-
                     <button type="submit" name="questionmanager" class="submit-button">Home page</button>
                 </form>
-                <form class="nav-bar-element" th:action="@{/courseadmin}" method="post">
-                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
-                    <input  type="hidden" th:value="${courseId}" name="courseId" />
-                    <input  type="hidden" th:value="${userRole}" name="userRole" />
-                    <input  type="hidden" th:value="${userId}" name="userId" style="float: none" />
+                <form class="nav-bar-element" th:action="@{/course/admin}" method="post">
                     <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
-                    <button type="submit" class="submit-button" name="courseadmin" th:if="${checkRole}" >Course Admin</button>
+                    <button type="submit" class="submit-button" name="courseadmin" th:if="${checkRole}">Course Admin</button>
                 </form>
                 <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
-                    <input type="hidden"  th:value="${courseName}" name="courseName"/>
-                    <input type="hidden" th:value="${userId}" name="userId" />
-                    <input  type="hidden" th:value="${userRole}" name="userRole" />
-                    <input type="hidden" th:value="${courseId}" name="courseId" />
-                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${userRole}">Question Manager</button>
+                    <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
+                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${checkRole}">Question Manager</button>
                 </form>
             </div>
         </li>
     </ul>
 </div>
+<div>
+    <form th:action="@{/survey}" method="post" th:if="${checkRole==false}">
+        <h3>Survey Available : Title </h3>
+        <a th:href="survey">Take Survey</a>
+    </form>
+</div>
 
+<div>
+<!--    display survey for instructor and Ta-->
+    <h3 th:if="${checkRole}">Survey Response</h3>
+    <a th:href="displayResponse">See Response</a>
+
+</div>
 
 
 </body>

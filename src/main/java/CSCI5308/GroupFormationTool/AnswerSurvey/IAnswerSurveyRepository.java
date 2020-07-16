@@ -8,4 +8,5 @@ public interface IAnswerSurveyRepository {
     public boolean SurveyAvailableForUser(String bannerId);
     public boolean IsSurveyPublished(String courseId);
     public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId);
+    public List<ISurveyQuestionOptionsModel> getSurveyQuestionsForGroupFormula(String courseId);
 }
