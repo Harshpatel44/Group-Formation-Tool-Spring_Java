@@ -27,12 +27,9 @@ public class StoredProcedure
 	private void openConnection() throws Exception
 	{
 		connection = ConnectionManager.instance().getDBConnection();
-		System.out.println(connection);
 	}
 
 	public void cleanup(){
-//		connection.close();
-//		System.out.println("Connection closed");
 		try
 		{
 			if (null != statement)
@@ -43,7 +40,6 @@ public class StoredProcedure
 			{
 				if (!connection.isClosed())
 				{
-					System.out.println("Connection closed");
 					connection.close();
 				}
 			}

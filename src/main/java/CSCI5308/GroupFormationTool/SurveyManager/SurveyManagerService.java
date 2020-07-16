@@ -10,11 +10,16 @@ import java.util.List;
 
 public class SurveyManagerService implements ISurveyManagerService{
     private ISurveyManagerRepository surveyManagerRepository;
+
+    public SurveyManagerService(){}
+    public SurveyManagerService(SurveyManagerRepository surveyManagerRepository){
+        Injector.instance().setSurveyManagerRepository(surveyManagerRepository);
+    }
+
     @Override
-    public void getSurveyQuestions(String courseId) throws Exception {
-        System.out.println("in service general");
+    public void getSurveyQuestions() throws Exception {
       surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-      surveyManagerRepository.getSurveyQuestions(courseId);
+      surveyManagerRepository.getSurveyQuestions();
     }
 
     @Override
@@ -32,17 +37,13 @@ public class SurveyManagerService implements ISurveyManagerService{
     @Override
     public void AddQuestionToSurvey(Integer questionId) {
         surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-        DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
-        LocalDateTime datetime = LocalDateTime.now();
-        String courseId = CurrentCourse.instance().getCurrentCourseId();
-        surveyManagerRepository.AddQuestionToSurvey(questionId,courseId,dtf.format(datetime));
+        surveyManagerRepository.AddQuestionToSurvey(questionId);
     }
 
     @Override
     public void RemoveQuestionFromSurvey(Integer questionId) {
         surveyManagerRepository = Injector.instance().getSurveyManagerRepository();
-        String courseId = CurrentCourse.instance().getCurrentCourseId();
-        surveyManagerRepository.RemoveQuestionFromSurvey(questionId,courseId);
+        surveyManagerRepository.RemoveQuestionFromSurvey(questionId);
     }
 
     @Override

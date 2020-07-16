@@ -1,30 +1,36 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
+import CSCI5308.GroupFormationTool.Course.ICourseRepository;
+import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.QuestionEditor.IQuestionEditorRepository;
-import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
+import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
 
 import java.sql.ResultSet;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
-import static CSCI5308.GroupFormationTool.Injector.instance;
 
 public class QuestionEditorRepository implements IQuestionEditorRepository {
+
+    private IDatabaseAbstractFactory databaseAbstractFactory;
+    private IQuestionEditorRepository questionEditorRepository;
+    private IUserRepository userRepository;
+    private ICourseRepository courseRepository;
 
     @Override
     public boolean SaveTextAndNumericTypeQuestionRepo(String questionText, String questionTitle, String selectedQuestionType,String userId){
         String questionType = changeQuestionTypeName(selectedQuestionType);
+        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
+        questionEditorRepository = IQuestionEditorAbstractFactory.instance().getQuestionEditorRepository();
         StoredProcedure storedProcedure = null;
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime datetime = LocalDateTime.now();
             String time = dtf.format(datetime);
-            storedProcedure = new StoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
+            storedProcedure = databaseAbstractFactory.createStoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
             storedProcedure.setParameter("uId",userId);
             storedProcedure.setParameter("qTopic", questionTitle);
             storedProcedure.setParameter("qDesc", questionText);
@@ -32,7 +38,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             storedProcedure.setParameter("dStamp",time);
             storedProcedure.execute();
 
-            IQuestionEditorRepository questionEditorRepository = Injector.instance().getQuestionEditorRepository();
             int qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
             saveQuestionToSurveyQuestions(userId, qID, questionTitle, questionText, time);
             return true;
@@ -51,8 +56,9 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     @Override
     public int getQuestionIDFromTopic(String questionTitle,String dStamp){
         StoredProcedure storedProcedure = null;
+        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
         try{
-            storedProcedure = new StoredProcedure("questionIdFromTopic(?,?)");
+            storedProcedure = databaseAbstractFactory.createStoredProcedure("questionIdFromTopic(?,?)");
             storedProcedure.setParameter("qTopic",questionTitle);
             storedProcedure.setParameter("tm",dStamp);
             ResultSet rs = storedProcedure.executeWithResults();
@@ -69,10 +75,12 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         return 0;
     }
 
-    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String questionText, String time){
+    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
+        userRepository = Injector.instance().getUserRepository();
+        courseRepository = Injector.instance().getCourseRepository();
         try {
-            int roleId = Injector.instance().getUserRepository().getUserRoleIdFromRoleType(instructor);
-            ArrayList<String> courseIdList = Injector.instance().getCourseRepository().getCoursesOfSpecificUserRole(userId, roleId);
+            int roleId = userRepository.getUserRoleIdFromRoleType(instructor);
+            ArrayList<String> courseIdList = courseRepository.getCoursesOfSpecificUserRole(userId, roleId);
             for(int i = 0;i<courseIdList.size();i++){
                 addQuestionToSurveyTable(userId, qId, questionTitle, questionText, courseIdList.get(i), time);
             }
@@ -87,8 +95,9 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     @Override
     public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String questionText, String courseId,String time){
         StoredProcedure sp = null;
+        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
         try{
-            sp = new StoredProcedure("AddQuestionToSurveyTable(?,?,?,?,?)");
+            sp = databaseAbstractFactory.createStoredProcedure("AddQuestionToSurveyTable(?,?,?,?,?)");
             sp.setParameter("uId",userId);
             sp.setParameter("qId",String.valueOf(qId));
             sp.setParameter("qTopic",questionTitle);
@@ -129,12 +138,14 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         Integer qID = 0;
         StoredProcedure storedProcedure = null;
         StoredProcedure storedProcedure3 = null;
+        questionEditorRepository = IQuestionEditorAbstractFactory.instance().getQuestionEditorRepository();
+        databaseAbstractFactory = IDatabaseAbstractFactory.instance();
         String questionType = changeQuestionTypeName(selectedQuestionType);
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
             LocalDateTime datetime = LocalDateTime.now();
             String time = dtf.format(datetime);
-            storedProcedure = new StoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
+            storedProcedure = databaseAbstractFactory.createStoredProcedure("SaveQuestionToDB(?,?,?,?,?)");
             storedProcedure.setParameter("uId",userId);
             storedProcedure.setParameter("qTopic", questionTitle);
             storedProcedure.setParameter("qDesc", questionText);
@@ -143,7 +154,6 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             storedProcedure.execute();
 
             try{
-                IQuestionEditorRepository questionEditorRepository = Injector.instance().getQuestionEditorRepository();
                 qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
                 saveQuestionToSurveyQuestions(userId, qID, questionTitle,questionText, time);
                 for(int i=0;i<optionList.length;i++){

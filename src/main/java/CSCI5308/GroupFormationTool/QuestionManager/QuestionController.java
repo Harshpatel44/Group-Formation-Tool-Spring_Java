@@ -49,7 +49,7 @@ public class QuestionController {
     }
 
     @RequestMapping("/deleteQuestion")
-    public ModelAndView deleteQuestion(@RequestParam(name="questionId") Integer questionId) throws Exception {
+    public ModelAndView deleteQuestion(@RequestParam(name="selectedQuestionId") Integer questionId) throws Exception {
         ModelAndView model=new ModelAndView("questionList");
         questionManagerService = Injector.instance().getQuestionManagerService();
         String bannerID = CurrentUser.instance().getBannerId();

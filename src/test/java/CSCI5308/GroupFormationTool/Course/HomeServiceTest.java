@@ -41,12 +41,12 @@ public class HomeServiceTest {
         assertEquals(returnedList,courseList);
     }
 
-    @Test
-	public void checkRoleOfUserTest() {
-		String bannerID = "B23445678";
-		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(true);
-		assertEquals(false,homeService.checkRoleOfUser(bannerID));
-        when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
-        assertEquals(true,homeService.checkRoleOfUser(bannerID));
-	}
+//    @Test
+//	public void checkRoleOfUserTest() {
+//		String bannerID = "B23445678";
+//		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(true);
+//		assertEquals(false,homeService.checkRoleOfUser(bannerID));
+//        when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
+//        assertEquals(true,homeService.checkRoleOfUser(bannerID));
+//	}
 }

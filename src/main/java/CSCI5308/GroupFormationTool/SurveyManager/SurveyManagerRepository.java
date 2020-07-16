@@ -6,43 +6,42 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import CSCI5308.GroupFormationTool.QuestionManager.IQuestion;
 import CSCI5308.GroupFormationTool.QuestionManager.Question;
 import CSCI5308.GroupFormationTool.UserManager.CurrentUser;
-import org.springframework.format.annotation.DateTimeFormat;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.util.logging.FileHandler;
 
 public class SurveyManagerRepository implements ISurveyManagerRepository{
 
     private List<IQuestion> AlreadyQuestionList = new ArrayList<IQuestion>();
     private List<IQuestion> NotAddedQuestionList = new ArrayList<IQuestion>();
-
+    private static final Logger LOG = LogManager.getLogger();
 
     @Override
-    public void getSurveyQuestions(String courseId) throws Exception {
+    public void getSurveyQuestions() throws Exception {
         try{
             AlreadyQuestionList.clear();
             NotAddedQuestionList.clear();
             String userId = CurrentUser.instance().getBannerId();
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
+
             StoredProcedure sp = new StoredProcedure("SurveyQuestions(?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
-            System.out.println(userId);
-            System.out.println(courseId);
             ResultSet rs = sp.executeWithResults();
-            System.out.println("in repo general after result set");
             while(rs.next()){
-                System.out.println("in repo general in while");
                 IQuestion temp = new Question();
                 temp.setQuestionTopic(rs.getString("questionTopic"));
                 temp.setQuestionId(rs.getInt("questionId"));
                 temp.setFlag(rs.getInt("flag"));
-                System.out.println(temp.getFlag());
-                System.out.println(temp.getQuestionId());
-                System.out.println(temp.getQuestionTopic());
                 if(temp.getFlag()==0){
                     NotAddedQuestionList.add(temp);
                 }
@@ -60,26 +59,26 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
 
     @Override
     public List<IQuestion> AlreadyAddedSurveyQuestions() throws Exception {
-        System.out.println(AlreadyQuestionList);
         return AlreadyQuestionList;
     }
 
     @Override
     public List<IQuestion> NotAddedSurveyQuestions() throws Exception {
-        System.out.println(NotAddedQuestionList);
         return NotAddedQuestionList;
     }
 
     @Override
-    public void AddQuestionToSurvey(Integer questionId, String courseId,String time) {
+    public void AddQuestionToSurvey(Integer questionId) {
         try{
-            System.out.println(time);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");
+            LocalDateTime datetime = LocalDateTime.now();
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
             StoredProcedure sp = new StoredProcedure("AddQuestionToSurvey(?,?,?,?)");
             sp.setParameter(1,userId);
             sp.setParameter(2,courseId);
             sp.setParameter(3,questionId);
-            sp.setParameter(4,time);
+            sp.setParameter(4,dtf.format(datetime));
             sp.execute();
             sp.cleanup();
         }catch (SQLException throwables) {
@@ -90,8 +89,9 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void RemoveQuestionFromSurvey(Integer questionId,String courseId) {
+    public void RemoveQuestionFromSurvey(Integer questionId){
         try{
+            String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
             StoredProcedure sp = new StoredProcedure("RemoveQuestionFromSurvey(?,?,?)");
             sp.setParameter(1,userId);
@@ -107,7 +107,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public void PublishSurvey() {
+    public void PublishSurvey(){
         try{
             String courseId = CurrentCourse.instance().getCurrentCourseId();
             String userId = CurrentUser.instance().getBannerId();
@@ -124,7 +124,7 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
     }
 
     @Override
-    public boolean checkPublish() {
+    public boolean checkPublish(){
         boolean isPublished = false;
         try {
             String courseId = CurrentCourse.instance().getCurrentCourseId();
@@ -137,11 +137,12 @@ public class SurveyManagerRepository implements ISurveyManagerRepository{
             {
                 isPublished = true;
             }
+            LOG.info("Operation = CheckPublish, Status = Success ");
         }
         catch (SQLException throwables) {
-            throwables.printStackTrace();
+            LOG.error("Operation = CheckPublish, Status = Failed, Error Message="+throwables.getMessage());
         } catch (Exception e) {
-            e.printStackTrace();
+            LOG.error("Operation = CheckPublish, Status = Failed, Error Message="+e.getMessage());
         }
         return isPublished;
     }

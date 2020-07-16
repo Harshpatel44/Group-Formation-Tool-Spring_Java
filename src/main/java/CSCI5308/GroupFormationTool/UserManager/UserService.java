@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.springframework.stereotype.Service;
 
@@ -18,10 +19,11 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 @Service
 public class UserService implements IUserService {
 	private Pattern pattern;
+	private Matcher matcher;
 	private IUserRepository userRepository;
 	private IPasswordEncryptor iPasswordEncryptor;
-	private Matcher matcher;
-
+	private IUserPasswordPolicyService passwordPolicyService;
+	private IUserManagerAbstractFactory userManagerAbstractFactory;
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
@@ -61,6 +63,7 @@ public class UserService implements IUserService {
 	}
 
 	private Map<String, String> checkAllValidations(IUser user) {
+		passwordPolicyService = Injector.instance().getUserPasswordPolicyService();
 		Map<String, String> errors = new HashMap<String, String>();
 		if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
 			errors.put("firstName", "first name cannot be  null or empty");
@@ -95,7 +98,7 @@ public class UserService implements IUserService {
 			if (!user.getPassword().equals(user.getConfirmPassword())) {
 				errors.put("confirmPassword", "Passwords and confirm password Does not match");
 			} else {
-				Injector.instance().getUserPasswordPolicyService().checkPasswordValidation(user.getPassword(), errors);
+				passwordPolicyService.checkPasswordValidation(user.getPassword(), errors);
 			}
 		}
 		return errors;
@@ -109,7 +112,8 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
-		IUser iUser = new User();
+		userManagerAbstractFactory = Injector.instance().getUserManagerAbstractFactory();
+		IUser iUser = userManagerAbstractFactory.getUser();
 		iUser.setFirstName(firstName);
 		iUser.setLastName(lastName);
 		iUser.setPassword(password);
@@ -121,7 +125,8 @@ public class UserService implements IUserService {
 
 	@Override
 	public boolean checkIfUserExists(String bannerID){
-		if(Injector.instance().getUserRepository().checkIfUserExists(bannerID)){
+		userRepository = Injector.instance().getUserRepository();
+		if(userRepository.checkIfUserExists(bannerID)){
 			return true;
 		}
 		else{
@@ -131,33 +136,38 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
-		return Injector.instance().getUserRepository().setUserByBannerId(bannerId,iUser);
+		userRepository = Injector.instance().getUserRepository();
+		return userRepository.setUserByBannerId(bannerId,iUser);
 	}
 
 	@Override
 	public List<String> getAllBannerIds(){
-		return Injector.instance().getUserRepository().getAllBannerIds();
+		userRepository = Injector.instance().getUserRepository();
+		return userRepository.getAllBannerIds();
 	}
 
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
-		return Injector.instance().getUserRepository().checkUserRoleForCourse(bannerID,courseID);
+		userRepository= Injector.instance().getUserRepository();
+		return userRepository.checkUserRoleForCourse(bannerID,courseID);
 	}
 
 	@Override
 	public boolean checkIfUserIsGuest(String bannerID){
-		return Injector.instance().getUserRepository().checkIfUserIsGuest(bannerID);
+		userRepository = Injector.instance().getUserRepository();
+		return userRepository.checkIfUserIsGuest(bannerID);
 	}
 
 	@Override
 	public void setCurrentUserByBannerID(String bannerID){
+		userRepository = Injector.instance().getUserRepository();
 		if(bannerID.equals(admin)){
 			CurrentUser.instance().setBannerId(admin);
 			CurrentUser.instance().setFirstName(admin);
 			CurrentUser.instance().setLastName(admin);
 		}else{
 				IUser iUser = new User();
-				iUser = Injector.instance().getUserRepository().setUserByBannerId(bannerID,iUser);
+				iUser = userRepository.setUserByBannerId(bannerID,iUser);
 				CurrentUser.instance().setBannerId(iUser.getBannerId());
 				CurrentUser.instance().setFirstName(iUser.getFirstName());
 				CurrentUser.instance().setLastName(iUser.getLastName());
