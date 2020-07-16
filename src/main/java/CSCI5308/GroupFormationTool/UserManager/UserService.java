@@ -20,10 +20,10 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
 public class UserService implements IUserService {
 	private Pattern pattern;
 	private Matcher matcher;
-	private IUserRepository userRepository = Injector.instance().getUserRepository();
-	private IPasswordEncryptor iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
-	private IUserPasswordPolicyService passwordPolicyService = Injector.instance().getUserPasswordPolicyService();
-	private IUserManagerAbstractFactory userManagerAbstractFactory = Injector.instance().getUserManagerAbstractFactory();
+	private IUserRepository userRepository;
+	private IPasswordEncryptor iPasswordEncryptor;
+	private IUserPasswordPolicyService passwordPolicyService;
+	private IUserManagerAbstractFactory userManagerAbstractFactory;
 	private static final String EMAIL_PATTERN = ApplicationConstants.emailPattern;
 
 	public UserService(){}
@@ -35,7 +35,8 @@ public class UserService implements IUserService {
 	@Override
 	public boolean createUser(IUser user) throws ServiceLayerException{
 		Boolean success;
-
+		userRepository = Injector.instance().getUserRepository();
+		iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
 		boolean bannerIdExists = userRepository.checkIfUserExists(user.getBannerId());
 
 		Map<String, String> validationErrors = checkAllValidations(user);
@@ -62,6 +63,7 @@ public class UserService implements IUserService {
 	}
 
 	private Map<String, String> checkAllValidations(IUser user) {
+		passwordPolicyService = Injector.instance().getUserPasswordPolicyService();
 		Map<String, String> errors = new HashMap<String, String>();
 		if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
 			errors.put("firstName", "first name cannot be  null or empty");
@@ -110,6 +112,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
+		userManagerAbstractFactory = Injector.instance().getUserManagerAbstractFactory();
 		IUser iUser = userManagerAbstractFactory.getUser();
 		iUser.setFirstName(firstName);
 		iUser.setLastName(lastName);
@@ -122,6 +125,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public boolean checkIfUserExists(String bannerID){
+		userRepository = Injector.instance().getUserRepository();
 		if(userRepository.checkIfUserExists(bannerID)){
 			return true;
 		}
@@ -132,26 +136,31 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUserByBannerId(String bannerId, IUser iUser){
+		userRepository = Injector.instance().getUserRepository();
 		return userRepository.setUserByBannerId(bannerId,iUser);
 	}
 
 	@Override
 	public List<String> getAllBannerIds(){
+		userRepository = Injector.instance().getUserRepository();
 		return userRepository.getAllBannerIds();
 	}
 
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
+		userRepository= Injector.instance().getUserRepository();
 		return userRepository.checkUserRoleForCourse(bannerID,courseID);
 	}
 
 	@Override
 	public boolean checkIfUserIsGuest(String bannerID){
+		userRepository = Injector.instance().getUserRepository();
 		return userRepository.checkIfUserIsGuest(bannerID);
 	}
 
 	@Override
 	public void setCurrentUserByBannerID(String bannerID){
+		userRepository = Injector.instance().getUserRepository();
 		if(bannerID.equals(admin)){
 			CurrentUser.instance().setBannerId(admin);
 			CurrentUser.instance().setFirstName(admin);

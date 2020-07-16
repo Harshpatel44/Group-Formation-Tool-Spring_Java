@@ -22,13 +22,14 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.guest;
 @Repository
 public class UserRepository implements IUserRepository {
 
-	private IDatabaseAbstractFactory databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
+	private IDatabaseAbstractFactory databaseAbstractFactory;
 
 	@Override
 	public boolean createUser(IUser user) {
 		Boolean success = false;
 		StoredProcedure storedProcedure = null;
 		try {
+			databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 			storedProcedure = databaseAbstractFactory.createStoredProcedure("spCreateUser(?, ?, ?, ?, ?,?)");
 			storedProcedure.setParameter(1, user.getBannerId());
 			storedProcedure.setParameter(2, user.getPassword());
@@ -56,6 +57,7 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public boolean checkIfUserExists(String bannerID) {
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
 			storedProcedure = databaseAbstractFactory.createStoredProcedure("userByBannerID(?)");
 			storedProcedure.setParameter(1, bannerID);
@@ -78,6 +80,7 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public IUser setUserByBannerId(String bannerID, IUser iUser) {
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
 			storedProcedure = databaseAbstractFactory.createStoredProcedure("userByBannerID(?)");
 			storedProcedure.setParameter(1, bannerID);
@@ -107,6 +110,7 @@ public class UserRepository implements IUserRepository {
 	public List<String> getAllBannerIds(){
 		List<String> bannerIds = new ArrayList<String>();
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
 			storedProcedure = databaseAbstractFactory.createStoredProcedure("spGetAllUserIDs");
 			ResultSet results = storedProcedure.executeWithResults();
@@ -129,6 +133,7 @@ public class UserRepository implements IUserRepository {
 	@Override
 	public String checkUserRoleForCourse(String bannerID, String courseID){
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
 			storedProcedure = databaseAbstractFactory.createStoredProcedure("CheckGuest(?,?)");
 			storedProcedure.setParameter(1, bannerID);
@@ -154,6 +159,7 @@ public class UserRepository implements IUserRepository {
 	public boolean checkIfUserIsGuest(String bannerID){
 		boolean result = true;  //Guest
 		StoredProcedure role = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try {
 			role = databaseAbstractFactory.createStoredProcedure("CheckGuest(?)");
 			role.setParameter(1, bannerID);
@@ -174,6 +180,7 @@ public class UserRepository implements IUserRepository {
 
 	public int getUserRoleIdFromRoleType(String userType){
 		StoredProcedure storedProcedure = null;
+		databaseAbstractFactory = Injector.instance().getDatabaseAbstractFactory();
 		try{
 			storedProcedure = databaseAbstractFactory.createStoredProcedure("getRoleIdFromRoleType(?)");
 			storedProcedure.setParameter("rType",userType.toLowerCase());

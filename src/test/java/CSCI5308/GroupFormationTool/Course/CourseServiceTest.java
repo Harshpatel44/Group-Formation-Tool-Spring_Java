@@ -1,8 +1,10 @@
 package CSCI5308.GroupFormationTool.Course;
 
 
+import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import CSCI5308.GroupFormationTool.UserManager.Instructor;
+import CSCI5308.GroupFormationTool.UserManager.UserService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -21,12 +23,15 @@ import static org.mockito.Mockito.when;
 public class CourseServiceTest {
 	public CourseService courseService;
 	public CourseRepository courseRepository;
+	public UserService userService;
 
 	@BeforeEach
 	public void init() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		courseRepository = mock(CourseRepository.class);
-		courseService = new CourseService(courseRepository);
+		userService = mock(UserService.class);
+		courseService = new CourseService(courseRepository,userService);
+
 	}
 
 	@Test
@@ -35,6 +40,7 @@ public class CourseServiceTest {
 		taId = "B00123456";
 		courseId = "CSCI1";
 		result = "Already user is TA of courseId:" + courseId + ".";
+		when(userService.checkIfUserExists(taId)).thenReturn(true);
 		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
 		String returned = courseService.addTAForCourse(taId, courseId);
 		assertEquals(result, returned);
@@ -46,6 +52,7 @@ public class CourseServiceTest {
 		taId = "B00123456";
 		courseId = "CSCI2";
 		result = "user with Id:" + taId + " is add as a TA for courseId" + courseId + ".";
+		when(userService.checkIfUserExists(taId)).thenReturn(true);
 		when(courseRepository.addTaForCourse(taId, courseId)).thenReturn(result);
 		String returned = courseService.addTAForCourse(taId, courseId);
 		assertEquals(result, returned);

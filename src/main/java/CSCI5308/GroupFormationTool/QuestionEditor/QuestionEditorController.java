@@ -14,19 +14,20 @@ import static CSCI5308.GroupFormationTool.ApplicationConstants.MCCM;
 @Controller
 public class QuestionEditorController{
 
-	private IQuestionEditorAbstractFactory questionEditorAbstractFactory = Injector.instance().getQuestionEditorAbstractFactory();
-	private IRankFunctionsService rankFunctionsService = Injector.instance().getRankFunctionsService();
-	private IQuestionEditorService questionEditorService = Injector.instance().getQuestionEditorService();
+	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
+	private IRankFunctionsService rankFunctionsService;
+	private IQuestionEditorService questionEditorService;
 
 	@RequestMapping("/addQuestion")
 	public ModelAndView addQuestion() {
 		ModelAndView mv = new ModelAndView("questionEditorHome");
+
 		return mv;
 	}
 
 	@RequestMapping("/createQuestion")
 	public ModelAndView createQuestion() {
-		IQuestionModel questionModel = questionEditorAbstractFactory.getQuestionModel();
+		IQuestionModel questionModel = IQuestionEditorAbstractFactory.instance().getQuestionModel();
 		ModelAndView mv = new ModelAndView("questionEditorCreateQuestion");
 		mv.addObject("questionModel", questionModel);
 		return mv;
@@ -56,6 +57,8 @@ public class QuestionEditorController{
 										@RequestParam(name = "questionText") String questionText,
 										@RequestParam(name = "questionTitle") String questionTitle,
 										@RequestParam(name = "selectedQuestionType") String selectedQuestionType) {
+		questionEditorAbstractFactory = IQuestionEditorAbstractFactory.instance();
+		rankFunctionsService = questionEditorAbstractFactory.getRankFunctionsService();
 		HashMap<Integer, String> map = rankFunctionsService.arrangeOptionsBasedOnRank(optionText, rankText);
 		String[] optionList = optionText.split(",");
 		String[] rankList = rankText.split(",");
@@ -78,6 +81,8 @@ public class QuestionEditorController{
 			throws Exception {
 		boolean result;
 		String returnMessage = null;
+		questionEditorAbstractFactory = IQuestionEditorAbstractFactory.instance();
+		questionEditorService = questionEditorAbstractFactory.getQuestionEditorService();
 		if (selectedQuestionType.equals(text) || selectedQuestionType.equals(numeric)) {
 			result =questionEditorService.saveQuestionServiceForTextAndNumeric(questionText, questionTitle, selectedQuestionType);
 			if(result)

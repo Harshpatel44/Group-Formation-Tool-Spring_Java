@@ -31,54 +31,57 @@ public class UserServiceTest {
 		currentUser = mock(CurrentUser.class);
         Injector.instance().setUserRepository(userRepository);
         CurrentUser.setInstance(currentUser);
-//      userService = new UserService(userRepository, currentUser);
+//        userService = new UserService(userRepository, currentUser);
 		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 		UserPasswordPolicyStatus.setInstance(1,1,1,1,1,1);
 
 	}
 
-//	@Test
-//	public void createUserWithExceptions(){
-//		IUser user = new User();
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(7, exception.getMapErrors().size());
-//	}
+	@Test
+	public void createUserWithExceptions(){
+		IUser user = new User();
+		userService = Injector.instance().getUserService();
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(7, exception.getMapErrors().size());
+	}
 
-//	@Test
-//	public void createExistingUserCorrectDetails(){
-//		User user = UserMockDB.setDefault();
-//		userService = Injector.instance().getUserService();
-//		when(userRepository.createUser(user)).thenReturn(true);
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(exception.getMapErrors().size() == 1, true);
-//		assertEquals(exception.getMapErrors().get("bannerId"), "Banner ID already exists");
-//	}
+	@Test
+	public void createExistingUserCorrectDetails(){
+		User user = UserMockDB.setDefault();
+		userService = Injector.instance().getUserService();
+		when(userRepository.checkIfUserExists(user.getBannerId())).thenReturn(true);
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(exception.getMapErrors().size() == 1, true);
+		assertEquals(exception.getMapErrors().get("bannerId"), "Banner ID already exists");
+	}
 
-//	@Test
-//	public void createWithEmptyLastname() throws Exception {
-//		IUser user = UserMockDB.setDefault();
-//		user.setLastName("");
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(exception.getMapErrors().size() == 1, true);
-//		assertEquals(exception.getMapErrors().get("lastName"), "last name cannot be null or empty");
-//	}
-//
-//	@Test
-//	public void createWithInvalidEmail() throws Exception {
-//		IUser user = UserMockDB.setDefault();
-//		user.setEmailId("neofvno");
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(exception.getMapErrors().size() == 1, true);
-//		assertEquals(exception.getMapErrors().get("emailId"), "Enter valid Email");
-//	}
+	@Test
+	public void createWithEmptyLastname() throws Exception {
+		userService = Injector.instance().getUserService();
+		IUser user = UserMockDB.setDefault();
+		user.setLastName("");
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(exception.getMapErrors().size() == 1, true);
+		assertEquals(exception.getMapErrors().get("lastName"), "last name cannot be null or empty");
+	}
+
+	@Test
+	public void createWithInvalidEmail() throws Exception {
+		userService = Injector.instance().getUserService();
+		IUser user = UserMockDB.setDefault();
+		user.setEmailId("neofvno");
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(exception.getMapErrors().size() == 1, true);
+		assertEquals(exception.getMapErrors().get("emailId"), "Enter valid Email");
+	}
 
 	@Test
 	public void createInvalidPassword() throws Exception {
