@@ -9,8 +9,6 @@ import org.springframework.web.bind.annotation.*;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.AnswerSurvey.ISurveyQuestionOptionsModel;
 import org.springframework.web.servlet.ModelAndView;
-
-import javax.jws.WebParam;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.util.ArrayList;
