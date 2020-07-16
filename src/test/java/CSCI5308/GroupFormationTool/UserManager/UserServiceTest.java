@@ -9,12 +9,15 @@ import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
+import org.mockito.internal.matchers.Any;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -32,53 +35,51 @@ public class UserServiceTest {
         Injector.instance().setUserRepository(userRepository);
         CurrentUser.setInstance(currentUser);
 //      userService = new UserService(userRepository, currentUser);
+//        userService=mock(UserService.class);
+//        Injector.instance().setUserService(userService);
 		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 		UserPasswordPolicyStatus.setInstance(1,1,1,1,1,1);
 
 	}
 
-//	@Test
-//	public void createUserWithExceptions(){
-//		IUser user = new User();
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(7, exception.getMapErrors().size());
-//	}
+	
 
-//	@Test
-//	public void createExistingUserCorrectDetails(){
-//		User user = UserMockDB.setDefault();
-//		userService = Injector.instance().getUserService();
-//		when(userRepository.createUser(user)).thenReturn(true);
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(exception.getMapErrors().size() == 1, true);
-//		assertEquals(exception.getMapErrors().get("bannerId"), "Banner ID already exists");
-//	}
+	@Test
+	public void createExistingUserCorrectDetails(){
+		IUser user = UserMockDB.setDefault();
+		user.setBannerId("123456789");
+		userService = Injector.instance().getUserService();
+		when(userRepository.checkIfUserExists(user.getBannerId())).thenReturn(true);
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(exception.getMapErrors().size() == 1, true);
+		assertEquals(exception.getMapErrors().get("bannerId"), "Banner ID already exists");
+	}
 
-//	@Test
-//	public void createWithEmptyLastname() throws Exception {
-//		IUser user = UserMockDB.setDefault();
-//		user.setLastName("");
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(exception.getMapErrors().size() == 1, true);
-//		assertEquals(exception.getMapErrors().get("lastName"), "last name cannot be null or empty");
-//	}
-//
-//	@Test
-//	public void createWithInvalidEmail() throws Exception {
-//		IUser user = UserMockDB.setDefault();
-//		user.setEmailId("neofvno");
-//		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
-//			userService.createUser(user);
-//		});
-//		assertEquals(exception.getMapErrors().size() == 1, true);
-//		assertEquals(exception.getMapErrors().get("emailId"), "Enter valid Email");
-//	}
+	@Test
+	public void createWithEmptyLastname() throws Exception {
+		IUser user = UserMockDB.setDefault();
+		user.setLastName("");
+		userService = Injector.instance().getUserService();
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(exception.getMapErrors().size() == 1, true);
+		assertEquals(exception.getMapErrors().get("lastName"), "last name cannot be null or empty");
+	}
+
+	@Test
+	public void createWithInvalidEmail() throws Exception {
+		IUser user = UserMockDB.setDefault();
+		userService = Injector.instance().getUserService();
+		user.setEmailId("neofvno");
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(user);
+		});
+		assertEquals(exception.getMapErrors().size() == 1, true);
+		assertEquals(exception.getMapErrors().get("emailId"), "Enter valid Email");
+	}
 
 	@Test
 	public void createInvalidPassword() throws Exception {
@@ -177,7 +178,22 @@ public class UserServiceTest {
 		when(userRepository.createUser(user)).thenReturn(true);
 		assertEquals(true, userService.createUser(user));
 	}
-
+	@Test
+	public void createUserWithExceptions(){
+		IUser iUser = UserMockDB.setDefault();
+		userService = Injector.instance().getUserService();
+		iUser.setBannerId("");
+		iUser.setFirstName("");
+		iUser.setLastName("");
+		iUser.setPassword("");
+		iUser.setContactNumber("");
+		iUser.setEmailId("");
+		iUser.setConfirmPassword("");
+		ServiceLayerException exception = assertThrows(ServiceLayerException.class, () -> {
+			userService.createUser(iUser);
+		});
+		assertEquals(6, exception.getMapErrors().size());
+	}
 
 	@Test
 	public void setUserTest(){

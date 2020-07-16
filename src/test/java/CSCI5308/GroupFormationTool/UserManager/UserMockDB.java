@@ -16,4 +16,8 @@ public class UserMockDB {
 		};
 		return user;
 	}
+	public static User setEmptyDefault() {
+		User user = new User();
+		return user;
+	}
 }
