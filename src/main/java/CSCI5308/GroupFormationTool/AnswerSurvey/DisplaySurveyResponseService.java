@@ -6,9 +6,6 @@ import java.util.List;
 public class DisplaySurveyResponseService implements IDisplaySurveyResponseService {
     public DisplaySurveyResponseService(){}
 
-    public DisplaySurveyResponseService(DisplaySurveyResponseRepository displaySurveyResponseRepository) throws Exception{
-        DisplaySurveyResponseAbstractFactory.instance().setDisplaySurveyResponseRepository(displaySurveyResponseRepository);
-    }
 
     @Override
     public List<String> getUsersWhoAnsweredSurvey(String courseId) {

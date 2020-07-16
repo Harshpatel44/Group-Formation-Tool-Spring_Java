@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DisplaySurveyResponseRepositoryMock implements IDisplaySurveyResponseRepository{
@@ -28,5 +29,11 @@ public class DisplaySurveyResponseRepositoryMock implements IDisplaySurveyRespon
         questionAnswer.setBannerId("b00835088");
         studentResponse.add(questionAnswer);
         return studentResponse;
+    }
+
+    @Override
+    public HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>> getSurveyResponse_2(String courseId){
+        HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>> hashMapHashMap = new HashMap<>();
+        return hashMapHashMap;
     }
 }

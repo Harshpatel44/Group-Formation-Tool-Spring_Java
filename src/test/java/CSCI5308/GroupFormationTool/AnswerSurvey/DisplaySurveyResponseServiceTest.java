@@ -11,14 +11,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 class DisplaySurveyResponseServiceTest {
-    public DisplaySurveyResponseRepository displaySurveyResponseRepository;
-    public DisplaySurveyResponseService displaySurveyResponseService;
+    public IDisplaySurveyResponseRepository displaySurveyResponseRepository;
+    public IDisplaySurveyResponseService displaySurveyResponseService;
 
     @BeforeEach
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         displaySurveyResponseRepository = mock(DisplaySurveyResponseRepository.class);
-        displaySurveyResponseService = new DisplaySurveyResponseService(displaySurveyResponseRepository);
+        displaySurveyResponseService = new DisplaySurveyResponseService();
+        DisplaySurveyResponseAbstractFactory.instance().setDisplaySurveyResponseRepository(displaySurveyResponseRepository);
     }
 
     @Test
