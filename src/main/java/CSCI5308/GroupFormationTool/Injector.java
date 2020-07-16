@@ -2,8 +2,9 @@ package CSCI5308.GroupFormationTool;
 
 import CSCI5308.GroupFormationTool.AnswerSurvey.*;
 import CSCI5308.GroupFormationTool.Course.*;
+import CSCI5308.GroupFormationTool.Database.DatabaseAbstractConcrete;
 import CSCI5308.GroupFormationTool.Database.DatabaseAbstractFactory;
-import CSCI5308.GroupFormationTool.Database.IDatabaseAbstractFactory;
+import CSCI5308.GroupFormationTool.GroupFormmer.*;
 import CSCI5308.GroupFormationTool.PasswordManager.*;
 import CSCI5308.GroupFormationTool.QuestionEditor.*;
 import CSCI5308.GroupFormationTool.QuestionManager.*;
@@ -31,12 +32,6 @@ import CSCI5308.GroupFormationTool.Course.ICsvImporter;
 import CSCI5308.GroupFormationTool.Course.CsvImporterService;
 import CSCI5308.GroupFormationTool.Database.DBConfiguration;
 import CSCI5308.GroupFormationTool.Database.IDBConfiguration;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFilter;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerRepo;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerService;
-import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFilter;
-import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerRepo;
-import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerService;
 import CSCI5308.GroupFormationTool.UserAuthentication.ILoginRepository;
 import CSCI5308.GroupFormationTool.UserAuthentication.ILoginService;
 import CSCI5308.GroupFormationTool.UserManager.UserRepository;
@@ -49,14 +44,14 @@ import CSCI5308.GroupFormationTool.UserManager.*;
 public class Injector {
 
 	private static Injector instance = null;
-	private IDatabaseAbstractFactory databaseAbstractFactory;
+	private DatabaseAbstractFactory databaseAbstractFactory;
 	private IDBConfiguration dbConfiguration;
 
 	private IUser user;
 	private IInstructor instructor;
 	private IUserRepository userRepository;
 	private IUserService userService;
-	private UserManagerAbstractFactory userManagerAbstractFactory;
+	private UserManagerAbstractConcrete userManagerAbstractConcrete;
 
 	private IPasswordEncryptor passwordEncryptor;
 	private IEmailConfiguration emailConfiguration;
@@ -86,7 +81,7 @@ public class Injector {
 	private IQuestionEditorService questionEditorService;
 	private IQuestionEditorRepository questionEditorRepository;
 	private IRankFunctionsService rankFunctionsService;
-	private IQuestionEditorAbstractFactory questionEditorAbstractFactory;
+	private QuestionEditorAbstractFactory questionEditorAbstractFactory;
 
 	private IAnswerSurveyRepository answerSurveyRepository;
 	private IAnswerSurveyService answerSurveyService;
@@ -98,7 +93,16 @@ public class Injector {
 	private IGroupFormmerService groupFormmerService;
 
 	private Injector(){
-		databaseAbstractFactory = new DatabaseAbstractFactory();
+		answerSurveyRepository = new AnswerSurveyRepository();
+		answerSurveyService = new AnswerSurveyService();
+		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
+		displaySurveyResponseService = new DisplaySurveyResponseService();
+
+		groupFilter = new GroupFilter();
+		grFormmerRepo = new GroupFormmerRepo();
+		groupFormmerService = new GroupFormmerService();
+
+		databaseAbstractFactory = new DatabaseAbstractConcrete();
 		dbConfiguration = new DBConfiguration();
 
 		user = new User();
@@ -106,7 +110,7 @@ public class Injector {
 		userRepository = new UserRepository();
 		userService = new UserService();
 		passwordEncryptor = new BCryptEncryption();
-		userManagerAbstractFactory = new UserManagerAbstractFactory();
+		userManagerAbstractConcrete = new UserManagerAbstractConcrete();
 
 		userPasswordPolicyRepository = new UserPasswordPolicyRepository();
 		userPasswordPolicyService = new UserPasswordPolicyService();
@@ -140,29 +144,9 @@ public class Injector {
 		questionEditorRepository = new QuestionEditorRepository();
 		rankFunctionsService = new RankFunctionsService();
 //		questionEditorAbstractFactory = new QuestionEditorAbstractFactory();
-		groupFormmerService = new GroupFormmerService();
-		groupFilter = new GroupFilter();
-		grFormmerRepo = new GroupFormmerRepo();
+
 		surveyManagerService = new SurveyManagerService();
 		surveyManagerRepository = new SurveyManagerRepository();
-
-
-		answerSurveyRepository = new AnswerSurveyRepository();
-		answerSurveyService = new AnswerSurveyService();
-		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
-		displaySurveyResponseService = new DisplaySurveyResponseService();
-
-		groupFilter = new GroupFilter();
-		groupFormmerService = new GroupFormmerService();
-		grFormmerRepo = new GroupFormmerRepo();
-
-		
-		answerSurveyService = new AnswerSurveyService();
-		answerSurveyRepository = new AnswerSurveyRepository();
-		
-		displaySurveyResponseRepository = new DisplaySurveyResponseRepository();
-		displaySurveyResponseService = new DisplaySurveyResponseService();
-
 	}
 
 	public IUserPasswordPolicyService getUserPasswordPolicyService() {
@@ -187,28 +171,28 @@ public class Injector {
 	private ISurveyManagerService surveyManagerService;
 	private ISurveyManagerRepository surveyManagerRepository;
 
-	public IQuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
+	public QuestionEditorAbstractFactory getQuestionEditorAbstractFactory() {
 		return questionEditorAbstractFactory;
 	}
 
-	public void setQuestionEditorAbstractFactory(IQuestionEditorAbstractFactory questionEditorAbstractFactory) {
+	public void setQuestionEditorAbstractFactory(QuestionEditorAbstractFactory questionEditorAbstractFactory) {
 		this.questionEditorAbstractFactory = questionEditorAbstractFactory;
 	}
 
-	public IDatabaseAbstractFactory getDatabaseAbstractFactory() {
+	public DatabaseAbstractFactory getDatabaseAbstractFactory() {
 		return databaseAbstractFactory;
 	}
 
-	public void setDatabaseAbstractFactory(IDatabaseAbstractFactory databaseAbstractFactory) {
+	public void setDatabaseAbstractFactory(DatabaseAbstractFactory databaseAbstractFactory) {
 		this.databaseAbstractFactory = databaseAbstractFactory;
 	}
 
-	public UserManagerAbstractFactory getUserManagerAbstractFactory() {
-		return userManagerAbstractFactory;
+	public UserManagerAbstractConcrete getUserManagerAbstractConcrete() {
+		return userManagerAbstractConcrete;
 	}
 
-	public void setUserManagerAbstractFactory(UserManagerAbstractFactory userManagerAbstractFactory) {
-		this.userManagerAbstractFactory = userManagerAbstractFactory;
+	public void setUserManagerAbstractConcrete(UserManagerAbstractConcrete userManagerAbstractConcrete) {
+		this.userManagerAbstractConcrete = userManagerAbstractConcrete;
 	}
 
 	public IRankFunctionsService getRankFunctionsService() {
@@ -448,7 +432,6 @@ public class Injector {
 	public ISurveyManagerRepository getSurveyManagerRepository() { return surveyManagerRepository; }
 
 	public void setSurveyManagerRepository(ISurveyManagerRepository surveyManagerRepository) { this.surveyManagerRepository = surveyManagerRepository; }
-
 	public IAnswerSurveyService getAnswerSurveyService() {
 		return answerSurveyService;
 	}
@@ -489,19 +472,19 @@ public class Injector {
 		this.grFormmerRepo = grFormmerRepo;
 	}
 
-	public IDisplaySurveyResponseService getDisplaySurveyResponseService() {
-		return displaySurveyResponseService;
-	}
-
-	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
-		this.displaySurveyResponseService = displaySurveyResponseService;
-	}
-
 	public IDisplaySurveyResponseRepository getDisplaySurveyResponseRepository() {
 		return displaySurveyResponseRepository;
 	}
 
 	public void setDisplaySurveyResponseRepository(IDisplaySurveyResponseRepository displaySurveyResponseRepository) {
 		this.displaySurveyResponseRepository = displaySurveyResponseRepository;
+	}
+
+	public IDisplaySurveyResponseService getDisplaySurveyResponseService() {
+		return displaySurveyResponseService;
+	}
+
+	public void setDisplaySurveyResponseService(IDisplaySurveyResponseService displaySurveyResponseService) {
+		this.displaySurveyResponseService = displaySurveyResponseService;
 	}
 }
