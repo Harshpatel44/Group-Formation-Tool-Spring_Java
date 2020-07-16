@@ -83,14 +83,14 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         return 0;
     }
 
-    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
+    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String questionText, String time){
         userRepository = UserManagerAbstractFactory.instance().getUserRepository();
         courseRepository = CourseAbstractFactory.instance().getCourseRepository();
         try {
             int roleId = userRepository.getUserRoleIdFromRoleType(instructor);
             ArrayList<String> courseIdList = courseRepository.getCoursesOfSpecificUserRole(userId, roleId);
             for(int i = 0;i<courseIdList.size();i++){
-                addQuestionToSurveyTable(userId, qId, questionTitle, courseIdList.get(i), time);
+                addQuestionToSurveyTable(userId, qId, questionTitle,questionText, courseIdList.get(i), time);
             }
             LOG.info("Operation = Save questions to survey questions function, Status = Success");
             return true;
@@ -103,7 +103,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     }
 
     @Override
-    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String courseId,String time){
+    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle,String questionText, String courseId,String time){
         StoredProcedure sp = null;
         databaseAbstractFactory = DatabaseAbstractFactory.instance();
         try{
@@ -166,7 +166,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
 
             try{
                 qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
-                saveQuestionToSurveyQuestions(userId, qID, questionTitle, time);
+                saveQuestionToSurveyQuestions(userId, qID, questionTitle,questionText, time);
                 for(int i=0;i<optionList.length;i++){
                     storedProcedure3 = databaseAbstractFactory.createStoredProcedure("SaveMcqOptionsToDB(?,?,?)");
                     storedProcedure3.setParameter("qId",qID.toString());

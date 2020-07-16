@@ -35,9 +35,4 @@ public class QuestionEditorAbstractConcrete extends QuestionEditorAbstractFactor
         }
         return rankFunctionsService;
     }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 9f62c23bc56809bcac760be3dd1a007eaf6095ed
 }
