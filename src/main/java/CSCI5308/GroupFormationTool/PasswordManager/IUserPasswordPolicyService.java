@@ -6,7 +6,7 @@ import java.util.Map;
 public interface IUserPasswordPolicyService {
     List<String> checkPasswordValidation(String password, Map<String, String> errors);
 
-    UserPasswordPolicy getUserPasswordPolicy() throws Exception;
+    IUserPasswordPolicy getUserPasswordPolicy() throws Exception;
 
-    UserPasswordPolicyStatus getUserPasswordPolicyStatus() throws Exception;
+    IUserPasswordPolicyStatus getUserPasswordPolicyStatus() throws Exception;
 }

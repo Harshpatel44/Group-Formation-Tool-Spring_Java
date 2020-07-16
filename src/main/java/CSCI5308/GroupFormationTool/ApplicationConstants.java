@@ -23,7 +23,7 @@ public class ApplicationConstants {
 	public static final String instructor = "instructor";
 	public static final String student = "student";
 	public static final String teachingAssistant = "teachingAssistant";
-	public static final String admin = "ADMIN";
+	public static final String admin = "admin";
 	public static final String user = "USER";
 	public static final String badCredentialsException = "1000";
 	public static final String noUserFoundException = "1001";

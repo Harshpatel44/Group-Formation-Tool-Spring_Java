@@ -21,8 +21,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
 @Controller
-public class AdminController{
-
+public class AdminController {
 
 	@GetMapping("/admin")
 	public ModelAndView adminPage(HttpServletRequest request) throws Exception {
@@ -61,9 +60,8 @@ public class AdminController{
 	}
 
 	@PostMapping("/createCourse")
-	public String createCourse(@RequestParam(name="courseName") String courseName,
-							   @RequestParam(name="courseId") String courseId,
-							   RedirectAttributes redirectAttributes) throws Exception {
+	public String createCourse(@RequestParam(name = "courseName") String courseName,
+			@RequestParam(name = "courseId") String courseId, RedirectAttributes redirectAttributes) throws Exception {
 		ICreateCourse createCourse = CourseAbstractFactory.instance().getCreateCourse();
 		createCourse.setCourseName(courseName);
 		createCourse.setCourseId(courseId);
@@ -79,8 +77,8 @@ public class AdminController{
 	}
 
 	@PostMapping("/deleteCourse")
-	public String deleteCourse(@RequestParam(name="selectedCourseId") String selectedCourseId,
-							   RedirectAttributes redirectAttributes) throws Exception {
+	public String deleteCourse(@RequestParam(name = "selectedCourseId") String selectedCourseId,
+			RedirectAttributes redirectAttributes) throws Exception {
 		IDeleteCourse deleteCourse = CourseAbstractFactory.instance().getDeleteCourse();
 		deleteCourse.setSelectedCourseId(selectedCourseId);
 
@@ -95,17 +93,15 @@ public class AdminController{
 	}
 
 	@PostMapping("/assignInstructor")
-	public String assignInstructor(@RequestParam(name="selectedInstructorCourseId") String selectedInstructorCourseId,
-								   RedirectAttributes redirectAttributes)
-	{
+	public String assignInstructor(@RequestParam(name = "selectedInstructorCourseId") String selectedInstructorCourseId,
+			RedirectAttributes redirectAttributes, @RequestParam(name = "InstructorId") String InstructorId) {
 		IInstructor instructor = Injector.instance().getInstructor();
 		instructor.setSelectedInstructorCourseId(selectedInstructorCourseId);
-
+		instructor.setInstructorId(InstructorId);
 		Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 		if (authentication.getPrincipal().toString().equals(admin)) {
 			CourseAbstractFactory.instance().getCourseService().assignInstructorForCourse(instructor);
-			redirectAttributes.addFlashAttribute("instructorAssignMessage",
-					instructor.getInstructorAssignMessage());
+			redirectAttributes.addFlashAttribute("instructorAssignMessage", instructor.getInstructorAssignMessage());
 			return "redirect:admin";
 		} else {
 			return "redirect:/login";

@@ -30,7 +30,7 @@ public class ForgetPasswordController {
         boolean update;
         String bannerID;
         int passNumber;
-
+        
         Map<String, String> errors = new HashMap<>();
         List<String> oldPasswords;
         service = Injector.instance().getForgetPasswordService();
@@ -42,6 +42,7 @@ public class ForgetPasswordController {
             return "newPassword";
         }
         iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+        
         List<String> validationErrors = iUserPasswordPolicyService.checkPasswordValidation(newPassword, errors);
         if (validationErrors.size() > 0) {
             model.addAttribute("isError", true);

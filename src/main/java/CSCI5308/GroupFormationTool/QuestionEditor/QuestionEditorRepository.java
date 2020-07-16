@@ -75,7 +75,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         return 0;
     }
 
-    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
+    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle,String questionText ,String time){
         userRepository = Injector.instance().getUserRepository();
         courseRepository = Injector.instance().getCourseRepository();
         try {

@@ -1,18 +1,17 @@
-2020-07-16 00:28:34,976 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-7I9OO8Q with PID 22504 (C:\Users\dhruv\sdc\milestone 3\createSurvey\group9\build\classes\java\main started by dhruv in C:\Users\dhruv\sdc\milestone 3\createSurvey\group9)
-2020-07-16 00:28:34,985 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
-2020-07-16 00:28:36,250 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
-2020-07-16 00:28:36,275 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-16 00:28:36,279 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
-2020-07-16 00:28:36,279 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
-2020-07-16 00:28:36,415 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
-2020-07-16 00:28:36,415 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1351 ms
-2020-07-16 00:28:36,740 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-16 00:28:36,769 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@60737b23, org.springframework.security.web.context.SecurityContextPersistenceFilter@4441d567, org.springframework.security.web.header.HeaderWriterFilter@616b241a, org.springframework.security.web.csrf.CsrfFilter@6e0cff20, org.springframework.security.web.authentication.logout.LogoutFilter@cfbc8e8, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@348d18a3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@62b969c4, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@79d743e6, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4d2a1da3, org.springframework.security.web.session.SessionManagementFilter@1f387978, org.springframework.security.web.access.ExceptionTranslationFilter@2116b68b, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@460510aa]
-2020-07-16 00:28:36,875 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-16 00:28:37,054 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
-2020-07-16 00:28:37,087 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-16 00:28:37,089 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 2.536 seconds (JVM running for 4.432)
-2020-07-16 00:28:58,015 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-16 00:28:58,017 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2020-07-16 00:28:58,018 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 1 ms
-2020-07-16 00:29:13,046 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = CheckPublish, Status = Success 
+2020-07-16 12:16:06,378 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on arjun-linux with PID 16505 (/home/arjun/update-group9/group9/bin/main started by arjun in /home/arjun/update-group9/group9)
+2020-07-16 12:16:06,386 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-16 12:16:07,091 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 12:16:07,100 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 12:16:07,101 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-16 12:16:07,101 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
+2020-07-16 12:16:07,139 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-16 12:16:07,140 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 669 ms
+2020-07-16 12:16:07,269 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 12:16:07,285 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@78e89bfe, org.springframework.security.web.context.SecurityContextPersistenceFilter@543e593, org.springframework.security.web.header.HeaderWriterFilter@2c16fadb, org.springframework.security.web.csrf.CsrfFilter@293cde83, org.springframework.security.web.authentication.logout.LogoutFilter@7435a578, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@46d8f407, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@51ec2df1, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@49dbaaf3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@652ce654, org.springframework.security.web.session.SessionManagementFilter@2227a6c1, org.springframework.security.web.access.ExceptionTranslationFilter@72fe8a4f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3c017078]
+2020-07-16 12:16:07,357 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 12:16:07,503 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 12:16:07,515 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 12:16:07,517 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 1.415 seconds (JVM running for 2.053)
+2020-07-16 12:16:12,691 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-16 12:16:12,691 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-16 12:16:12,694 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 3 ms
