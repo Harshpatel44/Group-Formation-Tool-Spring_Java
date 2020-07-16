@@ -1,19 +1,18 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-public class UserManagerAbstractFactory implements IUserManagerAbstractFactory {
+public abstract class UserManagerAbstractFactory {
+    private static UserManagerAbstractFactory instance = null;
 
-    @Override
-    public CurrentUser getCurrentUser(){
-        return new CurrentUser();
+    public static UserManagerAbstractFactory instance(){
+        if (instance == null) {
+            instance = new UserManagerAbstractConcrete();
+        }
+        return instance;
     }
 
-    @Override
-    public IInstructor getInstructor(){
-        return new Instructor();
-    }
+    public abstract IInstructor getInstructor();
+    public abstract IUser getUser();
+    public abstract IUserRepository getUserRepository();
+    public abstract IUserService getUserService();
 
-    @Override
-    public IUser getUser(){
-        return new User();
-    }
 }

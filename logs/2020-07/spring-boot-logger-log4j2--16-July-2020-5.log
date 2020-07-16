@@ -1,17 +1,168 @@
-2020-07-16 12:26:24,682 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-IHKQMUB with PID 12560 (D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\build\classes\java\main started by Harsh in D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9)
-2020-07-16 12:26:24,694 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
-2020-07-16 12:26:26,088 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
-2020-07-16 12:26:26,108 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-16 12:26:26,109 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
-2020-07-16 12:26:26,111 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
-2020-07-16 12:26:26,230 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
-2020-07-16 12:26:26,231 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1424 ms
-2020-07-16 12:26:26,484 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
-2020-07-16 12:26:26,518 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5f13be1, org.springframework.security.web.context.SecurityContextPersistenceFilter@4e4c3a38, org.springframework.security.web.header.HeaderWriterFilter@2b4c3c29, org.springframework.security.web.csrf.CsrfFilter@24097e9b, org.springframework.security.web.authentication.logout.LogoutFilter@51ec2df1, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@47d7bfb3, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@c27d163, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@70abf9b0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@5f303ecd, org.springframework.security.web.session.SessionManagementFilter@4cdd2c73, org.springframework.security.web.access.ExceptionTranslationFilter@3e850122, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@c81fd12]
-2020-07-16 12:26:26,618 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
-2020-07-16 12:26:26,961 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
-2020-07-16 12:26:26,989 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
-2020-07-16 12:26:26,993 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 2.729 seconds (JVM running for 4.968)
-2020-07-16 12:26:32,326 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
-2020-07-16 12:26:32,326 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
-2020-07-16 12:26:32,336 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 10 ms
+2020-07-16 14:48:32,186 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-7I9OO8Q with PID 16700 (C:\Users\dhruv\sdc\milestone 3\final_changes\group9\build\classes\java\main started by dhruv in C:\Users\dhruv\sdc\milestone 3\final_changes\group9)
+2020-07-16 14:48:32,197 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-16 14:48:33,466 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 14:48:33,487 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 14:48:33,489 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-16 14:48:33,489 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
+2020-07-16 14:48:33,601 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-16 14:48:33,602 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1324 ms
+2020-07-16 14:48:33,907 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 14:48:33,938 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@78b41097, org.springframework.security.web.context.SecurityContextPersistenceFilter@256aa5f2, org.springframework.security.web.header.HeaderWriterFilter@7bb35cc6, org.springframework.security.web.csrf.CsrfFilter@4e61e4c2, org.springframework.security.web.authentication.logout.LogoutFilter@6ee8dcd3, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@460510aa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@2116b68b, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@3e1624c7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2c2db130, org.springframework.security.web.session.SessionManagementFilter@2a1debfa, org.springframework.security.web.access.ExceptionTranslationFilter@640dc4c6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@4a05d8ae]
+2020-07-16 14:48:34,046 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 14:48:34,254 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 14:48:34,288 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 14:48:34,292 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 2.402 seconds (JVM running for 4.127)
+2020-07-16 14:48:45,829 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-16 14:48:45,829 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-16 14:48:45,834 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 5 ms
+2020-07-16 14:49:00,901 INFO C.G.U.UserRepository [http-nio-8080-exec-3] Operation = user exists with bannerIdB00100100, Status = success
+2020-07-16 14:49:01,408 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 14:49:01,410 INFO C.G.U.UserService [http-nio-8080-exec-5] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 14:49:01,605 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = check guest , Status = success
+2020-07-16 14:49:02,567 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = check guest , Status = success
+2020-07-16 14:49:16,980 INFO C.G.Q.QuestionManagerService [http-nio-8080-exec-5] Operation = unsorted question , Status = Success 
+2020-07-16 14:49:17,198 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-5] Operation = adding question responses , Status = Success 
+2020-07-16 14:49:19,052 INFO C.G.Q.QuestionManagerService [http-nio-8080-exec-8] Operation = sorted question by Topic , Status = Success 
+2020-07-16 14:49:19,238 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,238 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,239 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,239 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,240 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,240 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,241 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,242 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,243 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,244 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,244 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,245 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,246 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,247 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,247 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,248 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,248 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,249 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,250 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,251 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,253 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,253 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,254 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,255 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,255 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:19,256 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-8] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:20,166 INFO C.G.Q.QuestionManagerService [http-nio-8080-exec-1] Operation = sorted question by Date , Status = Success 
+2020-07-16 14:49:20,347 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-1] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 14:49:33,059 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = CheckPublish for CourseID: and userID:B00100100, Status = Success 
+2020-07-16 14:49:33,251 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:49:33,251 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:49:37,895 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-3] Operation = CheckPublish for CourseID: and userID:B00100100, Status = Success 
+2020-07-16 14:49:38,076 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-3] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:49:38,077 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-3] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:49:42,213 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-7] Operation = CheckPublish for CourseID: and userID:B00100100, Status = Success 
+2020-07-16 14:49:42,438 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-7] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:49:42,440 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-7] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:49:59,161 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = user exists with bannerIdB00100100, Status = success
+2020-07-16 14:49:59,720 INFO C.G.U.UserRepository [http-nio-8080-exec-7] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 14:49:59,722 INFO C.G.U.UserService [http-nio-8080-exec-7] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 14:49:59,920 INFO C.G.U.UserRepository [http-nio-8080-exec-7] Operation = check guest , Status = success
+2020-07-16 14:50:00,704 INFO C.G.U.UserRepository [http-nio-8080-exec-7] Operation = check guest , Status = success
+2020-07-16 14:50:05,105 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-3] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:07,097 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-4] Operation = UnPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:07,325 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:07,540 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,540 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:07,540 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:07,541 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:07,541 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:07,541 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,541 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,542 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,542 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,542 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,543 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,543 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,543 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,543 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,544 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:07,544 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:07,544 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:50:16,125 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:16,307 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,308 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:16,309 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:16,310 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:16,310 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:16,311 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,312 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,313 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,315 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,316 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,317 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,319 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,320 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,321 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,322 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:16,324 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:16,325 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-9] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:50:23,351 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = add question QuestionId:4 for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:23,352 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:23,353 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:50:23,572 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:23,764 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,765 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:23,766 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:23,767 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:23,768 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:23,768 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,769 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,770 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,771 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,772 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,773 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,774 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,775 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,775 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:23,776 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:23,778 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:23,779 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:50:25,281 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-4] Operation = add question QuestionId:0 for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:25,283 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-4] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:25,285 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-4] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:50:25,515 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:25,718 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,719 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:25,720 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:25,721 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:25,722 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:25,722 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,723 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,724 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,725 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,725 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,726 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,727 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,728 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:25,729 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:25,729 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:25,731 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:25,732 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = Return list for not added survey list , Status = Success 
+2020-07-16 14:50:27,212 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-7] Operation = Publish Survey for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:28,671 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-10] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:30,373 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = UnPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:30,580 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 14:50:30,780 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,780 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:30,781 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:30,781 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:30,782 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:30,782 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,783 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,783 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,784 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,784 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,785 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,785 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,785 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to NotInSurvey list , Status = Success 
+2020-07-16 14:50:30,786 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:30,786 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = adding question to InSurvey list , Status = Success 
+2020-07-16 14:50:30,787 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = Return list for already added survey list , Status = Success 
+2020-07-16 14:50:30,788 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = Return list for not added survey list , Status = Success 
