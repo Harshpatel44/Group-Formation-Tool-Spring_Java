@@ -9,7 +9,9 @@ import java.sql.SQLException;
 import java.util.*;
 
 public class AnswerSurveyRepository implements IAnswerSurveyRepository {
+
     private static final Logger LOG = LogManager.getLogger();
+
     @Override
     public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId) {
         StoredProcedure getOptions = null;
@@ -42,9 +44,11 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             LOG.info("Operation = getSurveyQuestionsAndOptions, Status = Success ");
         }
         catch(SQLException throwables){
+            throwables.printStackTrace();
             LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e) {
+            e.printStackTrace();
             LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+e.getMessage());
         }
         finally {
@@ -69,15 +73,18 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             LOG.info("Operation = storeSurveyResponses, Status = Success");
         }
         catch(SQLException throwables){
+            throwables.printStackTrace();
             LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e){
+            e.printStackTrace();
             LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+e.getMessage());
         }
         finally {
             storeAnswers.cleanup();
         }
     }
+
     @Override
     public boolean checkSurveyAvailableForUser(String bannerId) {
         StoredProcedure checkSurveyAvailableForUser = null;
@@ -91,9 +98,11 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
             LOG.info("Operation = checkSurveyAvailableForUser, Status = Success");
         }
         catch (SQLException throwables){
+            throwables.printStackTrace();
             LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e){
+            e.printStackTrace();
             LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+e.getMessage());        }
         finally {
             checkSurveyAvailableForUser.cleanup();

@@ -29,9 +29,11 @@ public class DisplaySurveyResponseRepository implements IDisplaySurveyResponseRe
             LOG.info("Operation = getUsersWhoAnsweredSurvey, Status = Success ");
         }
         catch (SQLException throwables){
+            throwables.printStackTrace();
             LOG.error("Operation = getUsersWhoAnsweredSurvey, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e){
+            e.printStackTrace();
             LOG.error("Operation = getUsersWhoAnsweredSurvey, Status = Failed, Error Message="+e.getMessage());
         }
         finally {
@@ -86,9 +88,11 @@ public class DisplaySurveyResponseRepository implements IDisplaySurveyResponseRe
             LOG.info("Operation = getSurveyResponse, Status = Success ");
         }
         catch (SQLException throwables){
+            throwables.printStackTrace();
             LOG.error("Operation = getSurveyResponse, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e){
+            e.printStackTrace();
             LOG.error("Operation = getSurveyResponse, Status = Failed, Error Message="+e.getMessage());
         }
         finally {

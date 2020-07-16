@@ -59,6 +59,7 @@ public class AnswerSurveyController {
         }
         answerStored =  IAnswerSurveyAbstractFactory.instance().getAnswerSurveyService().surveyResponses(surveyResponses,bannerId,courseId);
         if(answerStored == true){
+            LOG.info("Operation = getSurveyAnswers, Status = Success ");
             return "redirect:/home?userId="+bannerId;
         }
         return "survey";
