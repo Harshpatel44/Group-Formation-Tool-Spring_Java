@@ -111,7 +111,7 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                     question1.setSurveyCourseId(rs.getString("courseId"));
                     question1.setSurveyQuestionDescription(" Enter the value of lessThanValue of X to be included in team");
                     question1.setSurveyQuestionId(rs.getInt("questionId"));
-                    question1.setSurveyQuestionType("txt");
+                    question1.setSurveyQuestionType("numeric_extended");
                     question1.setSurveyQuestionTopic(rs.getString("questionTopic"));
                     questionsAndOptions.add(question1);
                     
@@ -119,7 +119,7 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                     question2.setSurveyCourseId(rs.getString("courseId"));
                     question2.setSurveyQuestionDescription(" Enter the value of greaterThanValue of X to be included in team");
                     question2.setSurveyQuestionId(rs.getInt("questionId"));
-                    question2.setSurveyQuestionType("txt");
+                    question2.setSurveyQuestionType("numeric_extended");
                     question2.setSurveyQuestionTopic(rs.getString("questionTopic"));
                     questionsAndOptions.add(question2);
                 }

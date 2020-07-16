@@ -33,12 +33,12 @@ public class GroupFormmerRepo implements IGroupFormmerRepo {
 								.get(1);
 					}
 
-					storedProcedure = new StoredProcedure("spCreateGroupFormula(?,?,?,?,?,?)");
+					storedProcedure = new StoredProcedure("spCreateGroupFormula(?,?,?,?,?,?,?)");
 					storedProcedure.setParameter(1, courseID);
 					storedProcedure.setParameter(2, question.getKey());
 					storedProcedure.setParameter(3, similarity);
 					storedProcedure.setParameter(4, hasLessThanX);
-					storedProcedure.setParameter(4, hasGreaterThanX);
+					storedProcedure.setParameter(5, hasGreaterThanX);
 					storedProcedure.setParameter(6, lessthanXValue);
 					storedProcedure.setParameter(7, greaterThanXValue);
 					storedProcedure.execute();

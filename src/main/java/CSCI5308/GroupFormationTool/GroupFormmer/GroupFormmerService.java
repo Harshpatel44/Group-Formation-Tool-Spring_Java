@@ -1,15 +1,6 @@
 package CSCI5308.GroupFormationTool.GroupFormmer;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import java.util.stream.Collectors;
 import CSCI5308.GroupFormationTool.Injector;
@@ -17,10 +8,12 @@ import CSCI5308.GroupFormationTool.AnswerSurvey.ISurveyQuestionOptionsModel;
 import org.apache.commons.text.similarity.LevenshteinDetailedDistance;
 import org.apache.commons.text.similarity.LevenshteinResults;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class GroupFormmerService implements IGroupFormmerService {
 
 	@Override
-	public void FormGroups(String courseID, int teamSize) {
+	public HashMap<Integer,ArrayList<String>> FormGroups(String courseID, int teamSize) {
 
 		List<ISurveyQuestionOptionsModel> questions = Injector.instance().getAnswerSurveyRepository()
 				.getSurveyQuestionsAndOptions("CSCI1");
@@ -43,20 +36,6 @@ public class GroupFormmerService implements IGroupFormmerService {
 			index++;
 		}
 
-//			HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>> studentWithQuestionAndAnswer = new HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>>();
-		//
-//			for (ISurveyQuestionOptionsModel eachUser : questionsWithAnswersForAllUsers) {
-//				if (studentWithQuestionAndAnswer.containsKey(eachUser.getBannerId())) {
-//					HashMap<Integer, ISurveyQuestionOptionsModel> eachQuestion = studentWithQuestionAndAnswer
-//							.get(eachUser.getBannerId());
-//					eachQuestion.put(eachUser.getSurveyQuestionId(), eachUser);
-//				} else {
-//					HashMap<Integer, ISurveyQuestionOptionsModel> eachQuestion = new HashMap<Integer, ISurveyQuestionOptionsModel>();
-//					eachQuestion.put(eachUser.getSurveyQuestionId(), eachUser);
-//					studentWithQuestionAndAnswer.put(eachUser.getBannerId(), eachQuestion);
-//				}
-		//
-//			}
 		HashMap<String, List<ISurveyQuestionOptionsModel>> questionsBasedOnType = new HashMap<String, List<ISurveyQuestionOptionsModel>>();
 
 		for (ISurveyQuestionOptionsModel question : questions) {
@@ -114,13 +93,13 @@ public class GroupFormmerService implements IGroupFormmerService {
 			}
 			System.out.println();
 		}
-		groupFormationAlgorithm(finalTotalMatrices, additionalMappings, teamSize,
+		HashMap<Integer, ArrayList<String>> teamsWithBannerID = groupFormationAlgorithm(finalTotalMatrices, additionalMappings, teamSize,
 				userAnsweredSurveyBasedOnCourseId.size(), indexUserIndexToBannerID);
-
+		return teamsWithBannerID;
 	}
 
-	private void groupFormationAlgorithm(ArrayList<ArrayList<Double>> finalTotalMatrices,
-			HashMap<String, HashMap<Integer, Integer>> additionalMappings, Integer teamSize, int students,
+	private HashMap<Integer, ArrayList<String>> groupFormationAlgorithm(ArrayList<ArrayList<Double>> finalTotalMatrices,
+										 HashMap<String, HashMap<Integer, Integer>> additionalMappings, Integer teamSize, int students,
 			HashMap<Integer, String> indexUserIndexToBannerID) {
 		// TODO Auto-generated method stub
 		HashMap<Integer, ArrayList<Integer>> teams = new HashMap();
@@ -173,7 +152,7 @@ public class GroupFormmerService implements IGroupFormmerService {
 			teamsWithBannerID.put(team.getKey(), listTeam);
 		}
 		System.out.println(Arrays.asList(teamsWithBannerID));
-
+		return teamsWithBannerID;
 	}
 
 	private HashMap<String, HashMap<Integer, Integer>> GetAdditonalNumericMappings(
@@ -498,4 +477,36 @@ public class GroupFormmerService implements IGroupFormmerService {
 		return Injector.instance().getAnswerSurveyRepository().getSurveyQuestionsForGroupFormula(courseId);
 	}
 
+	@Override
+	public IGroupFilter createGroupFilterHashMap(HttpServletRequest req){
+		IGroupFilter groupFilter = Injector.instance().getGroupFilter();
+
+		HashMap<Integer, Boolean> groupFormResponses = new HashMap<>();
+		HashMap<Integer, ArrayList<Integer>> considerLessThanOrGreaterThan = new HashMap<>();
+		Enumeration e = req.getParameterNames();
+		while(e.hasMoreElements()){
+			String name = (String) e.nextElement();
+			if(name.equals("_csrf")==false){
+				String[] value = req.getParameterValues(name);
+				ArrayList<Integer> tempList = new ArrayList<>();
+
+				if(value[0].equals("Similar")){
+					groupFormResponses.put(Integer.valueOf(name),true);
+				}
+				if(value[0].equals("Dissimilar")){
+					groupFormResponses.put(Integer.valueOf(name),false);
+				}
+
+				if(value.length>1){
+					for(int i=1;i<value.length;i++){
+						tempList.add(Integer.valueOf(value[i]));
+					}
+					considerLessThanOrGreaterThan.put(Integer.valueOf(name),tempList);
+				}
+			}
+		}
+		groupFilter.setquestionSimilarOrDissimilar(groupFormResponses);
+		groupFilter.setConsiderLessThanOrGreaterThanX(considerLessThanOrGreaterThan);
+		return groupFilter;
+	}
 }

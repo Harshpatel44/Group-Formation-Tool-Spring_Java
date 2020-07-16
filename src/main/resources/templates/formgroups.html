@@ -1,0 +1,89 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Survey</title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
+</head>
+<body>
+<div>
+    <ul id="heading-box">
+        <li style="margin:auto;">
+            <div th:text="${courseId}">
+                Course Admin panel
+            </div>
+        </li>
+    </ul>
+</div>
+<div>
+    <ul id="heading-box2">
+        <li>
+            <div>
+                Hello, <span th:text="${bannerId}" />
+            </div>
+        </li>
+        <li>
+            <div class="nav-bar">
+                <form class="nav-bar-element" th:action="@{/logout}" method="post">
+                    <div class="entity">
+                        <button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+                    </div>
+                </form>
+                <form class="nav-bar-element" th:action="@{/home}" method="post">
+                    <button type="submit" name="questionmanager" class="submit-button">Home page</button>
+                </form>
+                <form class="nav-bar-element" th:action="@{/course}" method="post">
+                    <div class="entity">
+                        <input  type="hidden" th:value="${userRole}" name="userRole" />
+                        <input  type="hidden" th:value="${courseId}" name="courseId" />
+                        <input  type="hidden" th:value="${courseName}" name="courseName" />
+                        <button type="submit" class="submit-button" name="save">Course Home</button>
+                    </div>
+                </form>
+            </div>
+        </li>
+    </ul>
+</div>
+<div>
+    <h2 align="center">Survey Form</h2>
+    <form th:action ="@{/formgroups/saveGroupFormula}" th:object = "${surveyQuestions}" method="post">
+        <div th:each="question : ${surveyQuestions}">
+            <p th:text = "${question.surveyQuestionTopic}" th:for="${question.surveyQuestionId}"/>
+            <label style="width: auto" th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
+            <br/><br/>
+            <div th:switch = "${question.surveyQuestionType}">
+
+                <div th:case="'txt'">
+                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                        <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
+                    </div>
+                </div>
+
+                <div th:case="'numeric'">
+                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                        <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
+                    </div>
+                </div>
+
+                <div th:case="'numeric_extended'">
+                        <input type="number" th:text="0" th:id="${question.surveyQuestionId}" th:name="${question.surveyQuestionId}" required>
+                </div>
+
+                <div th:case="'mcqm'">
+                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                        <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
+                    </div>
+                </div>
+
+                <div th:case="'mcqs'">
+                    <div th:each="option : ${question.surveyQuestionsOptions}">
+                        <input th:id="${option}"  th:text="${option}" th:name="${question.surveyQuestionId}" th:value="${option}" type="radio" required/>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit">Submit</button>
+    </form>
+</div>
+</body>
+</html>

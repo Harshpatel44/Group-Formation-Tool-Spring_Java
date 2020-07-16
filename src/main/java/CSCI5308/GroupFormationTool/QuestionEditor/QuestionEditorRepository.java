@@ -34,7 +34,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
 
             IQuestionEditorRepository questionEditorRepository = Injector.instance().getQuestionEditorRepository();
             int qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
-            saveQuestionToSurveyQuestions(userId, qID, questionTitle, time);
+            saveQuestionToSurveyQuestions(userId, qID, questionTitle, questionText, time);
             return true;
         }
         catch (Exception e){
@@ -69,12 +69,12 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
         return 0;
     }
 
-    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String time){
+    private boolean saveQuestionToSurveyQuestions(String userId, int qId, String questionTitle, String questionText, String time){
         try {
             int roleId = Injector.instance().getUserRepository().getUserRoleIdFromRoleType(instructor);
             ArrayList<String> courseIdList = Injector.instance().getCourseRepository().getCoursesOfSpecificUserRole(userId, roleId);
             for(int i = 0;i<courseIdList.size();i++){
-                addQuestionToSurveyTable(userId, qId, questionTitle, courseIdList.get(i), time);
+                addQuestionToSurveyTable(userId, qId, questionTitle, questionText, courseIdList.get(i), time);
             }
             return true;
         }
@@ -85,13 +85,14 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
     }
 
     @Override
-    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String courseId,String time){
+    public boolean addQuestionToSurveyTable(String userId, int qId, String questionTitle, String questionText, String courseId,String time){
         StoredProcedure sp = null;
         try{
             sp = new StoredProcedure("AddQuestionToSurveyTable(?,?,?,?,?)");
             sp.setParameter("uId",userId);
             sp.setParameter("qId",String.valueOf(qId));
             sp.setParameter("qTopic",questionTitle);
+            sp.setParameter("qdesc",questionText);
             sp.setParameter("cId",courseId);
             sp.setParameter("tm",time);
             sp.execute();
@@ -144,7 +145,7 @@ public class QuestionEditorRepository implements IQuestionEditorRepository {
             try{
                 IQuestionEditorRepository questionEditorRepository = Injector.instance().getQuestionEditorRepository();
                 qID = questionEditorRepository.getQuestionIDFromTopic(questionTitle,time);
-                saveQuestionToSurveyQuestions(userId, qID, questionTitle, time);
+                saveQuestionToSurveyQuestions(userId, qID, questionTitle,questionText, time);
                 for(int i=0;i<optionList.length;i++){
                     storedProcedure3 = new StoredProcedure("SaveMcqOptionsToDB(?,?,?)");
                     storedProcedure3.setParameter("qId",qID.toString());
