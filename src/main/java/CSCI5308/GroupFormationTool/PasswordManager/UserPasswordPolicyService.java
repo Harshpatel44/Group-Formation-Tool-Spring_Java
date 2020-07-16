@@ -1,11 +1,10 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Injector;
-import org.apache.commons.lang3.StringUtils;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.lang3.StringUtils;
 
 public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     private IUserPasswordPolicyRepository iUserPasswordPolicyRepository;
@@ -13,21 +12,14 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     public UserPasswordPolicyService(){}
 
     public UserPasswordPolicyService(UserPasswordPolicyRepository userPasswordPolicyRepository){
-        Injector.instance().setUserPasswordPolicyRepository(userPasswordPolicyRepository);
+        UserPasswordManagerAbstractFactory.instance().setPasswordPolicyRepository(userPasswordPolicyRepository);
     }
 
     @Override
     public List<String> checkPasswordValidation(String password, Map<String, String> errors) {
         List<String> policyErrors = new ArrayList<String>();
-        try {
-			Injector.instance().getUserPasswordPolicyService().getUserPasswordPolicy();
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-        
-        IUserPasswordPolicy passwordPolicy = Injector.instance().getUserPasswordPolicyRepository().getUserPasswordPolicy();
-        IUserPasswordPolicyStatus passwordPolicyStatus = Injector.instance().getUserPasswordPolicyRepository().getUserPasswordPolicyStatus();
+        IUserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
+        IUserPasswordPolicyStatus passwordPolicyStatus = UserPasswordPolicyStatus.getInstance();
         if (passwordPolicyStatus.getMinLength() == 1) {
             if (password.length() < passwordPolicy.getMinLength()) {
                 policyErrors.add("Password should have minimum " + +passwordPolicy.getMinLength() + " letters");
@@ -72,14 +64,14 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
 
     @Override
     public IUserPasswordPolicy getUserPasswordPolicy(){
-        iUserPasswordPolicyRepository = Injector.instance().getUserPasswordPolicyRepository();
+        iUserPasswordPolicyRepository = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicy();
     }
 
 
     @Override
     public IUserPasswordPolicyStatus getUserPasswordPolicyStatus(){
-        iUserPasswordPolicyRepository =  Injector.instance().getUserPasswordPolicyRepository();;
+        iUserPasswordPolicyRepository =  UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicyStatus();
     }
 }

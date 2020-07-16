@@ -1,9 +1,9 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Database.StoredProcedure;
-
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 
 public class UserPasswordPolicyRepository implements IUserPasswordPolicyRepository {
 

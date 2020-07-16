@@ -10,14 +10,15 @@ import static org.mockito.Mockito.when;
 
 class LoginServiceTest {
 
-    public UserLoginRepository userLoginRepository;
-    public UserLoginService userLoginService;
+    public ILoginRepository userLoginRepository;
+    public ILoginService userLoginService;
 
     @BeforeEach
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         userLoginRepository = mock(UserLoginRepository.class);
-        userLoginService = new UserLoginService(userLoginRepository);
+        UserAuthenticationAbstractFactory.instance().setLoginRepository(userLoginRepository);
+        userLoginService = UserAuthenticationAbstractFactory.instance().getLoginService();
     }
 
     @Test

@@ -1,8 +1,6 @@
 package CSCI5308.GroupFormationTool.UserManager;
 
-import CSCI5308.GroupFormationTool.ApplicationConstants;
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
 
 import java.util.HashMap;
 import java.util.List;
@@ -10,13 +8,16 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
 
-import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
+import CSCI5308.GroupFormationTool.ApplicationConstants;
+import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordManagerAbstractFactory;
+import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserAuthenticationAbstractFactory;
 
 @Service
 public class UserService implements IUserService {
@@ -39,7 +40,7 @@ public class UserService implements IUserService {
 	public boolean createUser(IUser user) throws ServiceLayerException{
 		Boolean success;
 		userRepository = UserManagerAbstractFactory.instance().getUserRepository();
-		iPasswordEncryptor = Injector.instance().getPasswordEncryptor();
+		iPasswordEncryptor = UserAuthenticationAbstractFactory.instance().getBCryptEncryption();
 		boolean bannerIdExists = userRepository.checkIfUserExists(user.getBannerId());
 
 		Map<String, String> validationErrors = checkAllValidations(user);
@@ -68,7 +69,7 @@ public class UserService implements IUserService {
 	}
 
 	private Map<String, String> checkAllValidations(IUser user) {
-		passwordPolicyService = Injector.instance().getUserPasswordPolicyService();
+		passwordPolicyService = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyService();
 		Map<String, String> errors = new HashMap<String, String>();
 		if (user.getFirstName() == null || user.getFirstName().isEmpty()) {
 			errors.put("firstName", "first name cannot be  null or empty");
@@ -117,7 +118,7 @@ public class UserService implements IUserService {
 
 	@Override
 	public IUser setUser(String bannerId,String firstName,String lastName,String emailId,String password,String contactNumber){
-		IUser iUser = userManagerAbstractFactory.getUser();
+		IUser iUser = UserManagerAbstractFactory.instance().getUser();
 		iUser.setFirstName(firstName);
 		iUser.setLastName(lastName);
 		iUser.setPassword(password);

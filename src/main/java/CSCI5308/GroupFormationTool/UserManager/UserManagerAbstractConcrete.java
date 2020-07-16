@@ -40,4 +40,5 @@ public class UserManagerAbstractConcrete extends UserManagerAbstractFactory {
     public void setUserService(IUserService userService){
         this.userService = userService;
     }
+
 }

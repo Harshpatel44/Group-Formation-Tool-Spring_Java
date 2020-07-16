@@ -1,22 +1,24 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
+import static CSCI5308.GroupFormationTool.ApplicationConstants.admin;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.badCredentialsException;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.noUserFoundException;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.user;
+
 import java.util.ArrayList;
 import java.util.List;
-import CSCI5308.GroupFormationTool.UserManager.IUser;
-import CSCI5308.GroupFormationTool.UserManager.IUserService;
 
-import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.AuthenticationServiceException;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import CSCI5308.GroupFormationTool.Injector;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 
-import static CSCI5308.GroupFormationTool.ApplicationConstants.*;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 
 public class CustomAuthentication implements AuthenticationManager
 {
@@ -43,7 +45,7 @@ public class CustomAuthentication implements AuthenticationManager
 	{
 		String bannerID = authentication.getPrincipal().toString();
 		String password = authentication.getCredentials().toString();
-		ILoginService loginService = Injector.instance().getLoginService();
+		ILoginService loginService = UserAuthenticationAbstractFactory.instance().getLoginService();
 		if(loginService.checkIfUserIsAuthenticated(bannerID, password))
 		{
 			List<GrantedAuthority> rights = new ArrayList<GrantedAuthority>();

@@ -1,28 +1,22 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.Exceptions.ErrorHelper;
-import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFilter;
-import CSCI5308.GroupFormationTool.GroupFormmer.GroupFormmerService;
-import CSCI5308.GroupFormationTool.GroupFormmer.IGroupFormmerService;
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
-import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
-import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
-import CSCI5308.GroupFormationTool.UserManager.IUser;
-import CSCI5308.GroupFormationTool.UserManager.IUserService;
-import CSCI5308.GroupFormationTool.UserManager.User;
-import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
+
 import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+import CSCI5308.GroupFormationTool.Exceptions.ServiceLayerException;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicy;
+import CSCI5308.GroupFormationTool.PasswordManager.IUserPasswordPolicyService;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordManagerAbstractFactory;
+import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
+import CSCI5308.GroupFormationTool.UserManager.IUser;
+import CSCI5308.GroupFormationTool.UserManager.IUserService;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 
 @Controller
 public class UserRegistrationController implements WebMvcConfigurer {
@@ -71,7 +65,10 @@ public class UserRegistrationController implements WebMvcConfigurer {
 
 	@GetMapping("/register")
 	public ModelAndView register() throws Exception {
-		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+		// Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
+		UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicy();
+		UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
+		IUserPasswordPolicyService iUserPasswordPolicyService = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyService();
 		IUserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("user",UserManagerAbstractFactory.instance().getUser());

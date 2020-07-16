@@ -1,16 +1,22 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Injector;
-import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
-import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
-import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
+import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
+import CSCI5308.GroupFormationTool.UserAuthentication.UserAuthenticationAbstractFactory;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 
 @Controller
 public class ForgetPasswordController {
@@ -34,15 +40,18 @@ public class ForgetPasswordController {
         
         Map<String, String> errors = new HashMap<>();
         List<String> oldPasswords;
-        service = Injector.instance().getForgetPasswordService();
-        IPasswordEncryptor encryption = Injector.instance().getPasswordEncryptor();
+        service = UserPasswordManagerAbstractFactory.instance().getForgetPasswordService();
+        IPasswordEncryptor encryption = UserAuthenticationAbstractFactory.instance().getBCryptEncryption();
         matchPassword = service.comparePassword(newPassword, confirmPassword);
         if (matchPassword == false) {
             model.addAttribute("passKey", passKey);
             model.addAttribute("Error", "Passwords do not match");
             return "newPassword";
         }
-        iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
+        iUserPasswordPolicyService = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyService();
+		// Getting data for singletonClasses UserPasswordPolicy and UserPasswordPolicyStatus
+		UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicy();
+        UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository().getUserPasswordPolicyStatus();
         
         List<String> validationErrors = iUserPasswordPolicyService.checkPasswordValidation(newPassword, errors);
         if (validationErrors.size() > 0) {
@@ -78,8 +87,9 @@ public class ForgetPasswordController {
         boolean addUser;
         boolean mailSend;
         String email;
-        service = Injector.instance().getForgetPasswordService();
-        userNotification = Injector.instance().getUserNotification();
+
+        service = UserPasswordManagerAbstractFactory.instance().getForgetPasswordService();
+        userNotification = UserAuthenticationAbstractFactory.instance().getUserNotification();
         isUser = UserManagerAbstractFactory.instance().getUserService().checkIfUserExists(bannerID);
         if (isUser == false) {
             model.addAttribute("Error", "Not a valid user");

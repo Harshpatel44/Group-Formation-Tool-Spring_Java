@@ -1,13 +1,15 @@
 package CSCI5308.GroupFormationTool.UserAuthentication;
 
+import static CSCI5308.GroupFormationTool.ApplicationConstants.emailHost;
+import static CSCI5308.GroupFormationTool.ApplicationConstants.emailPort;
+
 import java.util.Properties;
+
 import javax.mail.PasswordAuthentication;
 import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
-import CSCI5308.GroupFormationTool.ApplicationConstants;
 
-import static CSCI5308.GroupFormationTool.ApplicationConstants.emailHost;
-import static CSCI5308.GroupFormationTool.ApplicationConstants.emailPort;
+import CSCI5308.GroupFormationTool.ApplicationConstants;
 
 public class EmailConfiguration implements IEmailConfiguration {
 	

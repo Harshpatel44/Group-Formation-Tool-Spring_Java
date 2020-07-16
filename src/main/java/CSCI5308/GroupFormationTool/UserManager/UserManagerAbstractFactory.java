@@ -16,4 +16,5 @@ public abstract class UserManagerAbstractFactory {
     public abstract void setUserRepository(IUserRepository userRepository);
     public abstract IUserService getUserService();
     public abstract void setUserService(IUserService userService);
+
 }
