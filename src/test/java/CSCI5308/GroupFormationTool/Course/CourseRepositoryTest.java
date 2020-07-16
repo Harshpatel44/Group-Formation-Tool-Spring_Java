@@ -29,7 +29,7 @@ public class CourseRepositoryTest {
 	public void init() throws Exception {
 		MockitoAnnotations.initMocks(this);
 		courseRepository = mock(CourseRepository.class);
-		Injector.instance().setCourseRepository(courseRepository);
+		CourseAbstractFactory.instance().setCourseRepository(courseRepository);
 	}
 
 	@Test

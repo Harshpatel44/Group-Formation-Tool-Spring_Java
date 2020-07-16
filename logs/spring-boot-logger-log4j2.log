@@ -1,8 +1,0 @@
-2020-07-16 15:57:50,058 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-IHKQMUB with PID 16088 (D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\build\classes\java\main started by Harsh in D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9)
-2020-07-16 15:57:50,069 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
-2020-07-16 15:57:51,269 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
-2020-07-16 15:57:51,347 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
-2020-07-16 15:57:51,349 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
-2020-07-16 15:57:51,352 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
-2020-07-16 15:57:51,494 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
-2020-07-16 15:57:51,495 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1318 ms

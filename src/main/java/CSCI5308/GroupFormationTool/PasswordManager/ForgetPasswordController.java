@@ -3,6 +3,7 @@ package CSCI5308.GroupFormationTool.PasswordManager;
 import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.UserAuthentication.IPasswordEncryptor;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -79,7 +80,7 @@ public class ForgetPasswordController {
         String email;
         service = Injector.instance().getForgetPasswordService();
         userNotification = Injector.instance().getUserNotification();
-        isUser = Injector.instance().getUserService().checkIfUserExists(bannerID);
+        isUser = UserManagerAbstractFactory.instance().getUserService().checkIfUserExists(bannerID);
         if (isUser == false) {
             model.addAttribute("Error", "Not a valid user");
             return "forgetPassword";

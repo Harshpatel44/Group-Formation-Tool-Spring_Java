@@ -82,7 +82,7 @@ public class GroupFormmerRepo implements IGroupFormmerRepo {
 
 	@Override
 	public IGroupFilter getGroupFormula(String courseID) {
-		IGroupFilter groupFilter = Injector.instance().getGroupFilter();
+		IGroupFilter groupFilter = GroupFormmerAbstractFactory.instance().getGroupFilter();
 		HashMap<Integer, Boolean> similaritySetForquestion = new HashMap<Integer, Boolean>();
 		HashMap<Integer, ArrayList<Integer>> considerLessThanOrGreaterThanX = new HashMap<Integer, ArrayList<Integer>>();
 		StoredProcedure storedProcedure = null;

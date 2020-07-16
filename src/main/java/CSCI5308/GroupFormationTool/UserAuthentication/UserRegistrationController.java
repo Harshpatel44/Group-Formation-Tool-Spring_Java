@@ -14,6 +14,7 @@ import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicyStatus;
 import CSCI5308.GroupFormationTool.UserManager.IUser;
 import CSCI5308.GroupFormationTool.UserManager.IUserService;
 import CSCI5308.GroupFormationTool.UserManager.User;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,7 +43,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 								   @RequestParam("confirmPassword") String confirmPassword,
 								   @RequestParam("bannerId") String bannerId)
 								   {
-		userService = Injector.instance().getUserService();
+		userService = UserManagerAbstractFactory.instance().getUserService();
 		ModelAndView mv = new ModelAndView();
 		mv.addObject("passwordPolicy", UserPasswordPolicy.getInstance());
 		try {
@@ -59,7 +60,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 					mv.addObject("unfollowedPolicy", errorPassowrd.split(";;"));
 				}
 			}
-			mv.addObject("user",Injector.instance().getUser());
+			mv.addObject("user",UserManagerAbstractFactory.instance().getUser());
 			mv.setViewName("signup");
 			return mv;
 
@@ -73,7 +74,7 @@ public class UserRegistrationController implements WebMvcConfigurer {
 		IUserPasswordPolicyService iUserPasswordPolicyService = Injector.instance().getUserPasswordPolicyService();
 		IUserPasswordPolicy passwordPolicy = iUserPasswordPolicyService.getUserPasswordPolicy();
 		ModelAndView mv = new ModelAndView();
-		mv.addObject("user",Injector.instance().getUser());
+		mv.addObject("user",UserManagerAbstractFactory.instance().getUser());
 		mv.addObject("passwordPolicy", passwordPolicy);
 		mv.setViewName("signup");
 		return mv;

@@ -26,10 +26,4 @@ class LoginServiceTest {
         assertTrue(userLoginService.checkIfUserIsAuthenticated("B00835088","123"));
     }
 
-//    @Test
-//    void isUser() throws Exception {
-//        when(loginRepository.isUser("B00835088")).thenReturn(true);
-//        assertTrue(loginService.isUser("B00835088"));
-//        assertFalse(loginService.isUser("B11221344"));
-//    }
 }

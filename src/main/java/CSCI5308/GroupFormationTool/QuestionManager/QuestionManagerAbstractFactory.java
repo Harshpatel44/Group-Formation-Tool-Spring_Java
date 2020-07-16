@@ -17,6 +17,8 @@ public abstract class QuestionManagerAbstractFactory {
     public abstract IQuestionManagerRepository getQuestionManagerRepository();
     public abstract IQuestionManagerService getQuestionManagerService();
     public abstract IQuestionResponsesRepo getQuestionResponsesRepo();
+    public abstract void setQuestionResponsesRepo(IQuestionResponsesRepo questionResponsesRepo);
     public abstract IQuestionResponsesService getQuestionResponsesService();
+    public abstract void setQuestionManagerRepository(IQuestionManagerRepository questionManagerRepository);
 }
 

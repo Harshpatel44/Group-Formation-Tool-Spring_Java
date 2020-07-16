@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.SurveyManager;
 
-import CSCI5308.GroupFormationTool.QuestionManager.QuestionManagerRepository;
-
 public class SurveyManagerAbstractConcrete extends SurveyManagerAbstractFactory {
     private ISurveyManagerService surveyManagerService;
     private ISurveyManagerRepository surveyManagerRepository;
@@ -12,6 +10,11 @@ public class SurveyManagerAbstractConcrete extends SurveyManagerAbstractFactory 
             surveyManagerRepository = new SurveyManagerRepository();
         }
         return surveyManagerRepository;
+    }
+
+    @Override
+    public void setSurveyManagerRepository(ISurveyManagerRepository surveyManagerRepository) {
+        this.surveyManagerRepository = surveyManagerRepository;
     }
 
     @Override

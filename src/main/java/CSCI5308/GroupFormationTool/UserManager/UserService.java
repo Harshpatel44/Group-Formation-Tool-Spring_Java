@@ -31,7 +31,7 @@ public class UserService implements IUserService {
 
 	public UserService(){}
 	public UserService(IUserRepository userRepository,CurrentUser currentUser){
-		Injector.instance().setUserRepository(userRepository);
+		UserManagerAbstractFactory.instance().setUserRepository(userRepository);
 		CurrentUser.setInstance(currentUser);
 	}
 

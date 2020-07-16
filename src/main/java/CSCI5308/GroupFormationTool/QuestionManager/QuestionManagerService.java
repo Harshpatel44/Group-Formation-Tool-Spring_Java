@@ -1,6 +1,7 @@
 package CSCI5308.GroupFormationTool.QuestionManager;
 
 import CSCI5308.GroupFormationTool.Injector;
+import CSCI5308.GroupFormationTool.QuestionEditor.QuestionEditorAbstractFactory;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -15,7 +16,7 @@ public class QuestionManagerService implements IQuestionManagerService {
 
     public QuestionManagerService(){}
     public QuestionManagerService(QuestionManagerRepository questionManagerRepository) throws Exception {
-        Injector.instance().setQuestionManagerRepository(questionManagerRepository);
+        QuestionManagerAbstractFactory.instance().setQuestionManagerRepository(questionManagerRepository);
     }
 
     @Override

@@ -29,7 +29,7 @@ public class UserServiceTest {
         MockitoAnnotations.initMocks(this);
         userRepository = mock(UserRepository.class);
 		currentUser = mock(CurrentUser.class);
-        Injector.instance().setUserRepository(userRepository);
+        UserManagerAbstractFactory.instance().setUserRepository(userRepository);
         CurrentUser.setInstance(currentUser);
 //        userService = new UserService(userRepository, currentUser);
 		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
@@ -254,14 +254,14 @@ public class UserServiceTest {
 	@Test //when user is Not a guest
 	public void checkRoleTestNotGuest() throws Exception {
 		String bannerID = "B23456789";
-		userService = Injector.instance().getUserService();
+		userService = UserManagerAbstractFactory.instance().getUserService();
 		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
 		assertFalse(userService.checkIfUserIsGuest(bannerID));
 	}
 
 	@Test
 	public void setCurrentUserByBannerIDTest1(){
-		userService = Injector.instance().getUserService();
+		userService = UserManagerAbstractFactory.instance().getUserService();
 		userService.setCurrentUserByBannerID(admin);
 		when(CurrentUser.instance().getBannerId()).thenReturn(admin);
 		when(CurrentUser.instance().getLastName()).thenReturn(admin);
@@ -281,7 +281,7 @@ public class UserServiceTest {
 		iUser.setBannerId("B23456789");
 		iUser.setContactNumber("contactNumber");
 		iUser.setEmailId("emailId");
-		userService = Injector.instance().getUserService();
+		userService = UserManagerAbstractFactory.instance().getUserService();
 		when(userRepository.setUserByBannerId("B23456789",iUser1)).thenReturn(iUser);
 		when(CurrentUser.instance().getBannerId()).thenReturn(iUser.getBannerId());
 		when(CurrentUser.instance().getLastName()).thenReturn(iUser.getLastName());

@@ -1,67 +1,35 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
-import CSCI5308.GroupFormationTool.Injector;
 import CSCI5308.GroupFormationTool.Database.StoredProcedure;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class AnswerSurveyRepository implements IAnswerSurveyRepository {
 
-    @Override
-    public boolean SurveyAvailableForUser(String bannerId) {
-        try{
-            StoredProcedure surveyAvailableForUser = new StoredProcedure("SurveyAvailableForTheUser(?)");
-            surveyAvailableForUser.setParameter(1,bannerId);
-            ResultSet rs = surveyAvailableForUser.executeWithResults();
-            if(rs.next()){
-                return true;
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return false;
-    }
-
-    @Override
-    public boolean IsSurveyPublished(String courseId) {
-        try{
-            StoredProcedure surveyAvailable = new StoredProcedure("isSurveyAvailable(?)");
-            surveyAvailable.setParameter(1,courseId);
-            ResultSet rs = surveyAvailable.executeWithResults();
-            if(rs.next()){
-                return true;
-            }
-        }
-        catch (Exception e){
-            e.printStackTrace();
-        }
-        return false;
-    }
+    private static final Logger LOG = LogManager.getLogger();
 
     @Override
     public List<ISurveyQuestionOptionsModel> getSurveyQuestionsAndOptions(String courseId) {
-
+        StoredProcedure getOptions = null;
+        StoredProcedure getSurveyQuestions = null;
         List<ISurveyQuestionOptionsModel> questionsAndOptions = new ArrayList<ISurveyQuestionOptionsModel>();
         try {
-            StoredProcedure getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
+            getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
             getSurveyQuestions.setParameter(1,courseId);
             ResultSet rs = getSurveyQuestions.executeWithResults();
-            System.out.println("Inside Rutika Repo");
-            while(rs.next())
-            {
-                List<String> options = new ArrayList<>();
-                if(rs.getString(6).equals("mcqs") || rs.getString(6).equals("mcqm"))
-                {
+            while(rs.next()) {
+                HashMap<Integer,String> options = new HashMap<>();
+                if(rs.getString("questionType").equals("mcqs") || rs.getString("questionType").equals("mcqm")) {
                     int questionId = rs.getInt(2);
-                    StoredProcedure getOptions = new StoredProcedure("GetSurveyQuestionOptions(?)");
+                    getOptions = new StoredProcedure("GetSurveyQuestionOptions(?)");
                     getOptions.setParameter(1,questionId);
                     ResultSet ors = getOptions.executeWithResults();
-                    while(ors.next())
-                    {
-                        options.add(ors.getString(1));
+                    while(ors.next()) {
+                        options.put(ors.getInt("optionRank"),ors.getString("optionsDesc"));
                     }
                 }
                 ISurveyQuestionOptionsModel question = new SurveyQuestionOptionsModel();
@@ -73,16 +41,75 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 question.setSurveyQuestionTopic(rs.getString("questionTopic"));
                 questionsAndOptions.add(question);
             }
-            getSurveyQuestions.cleanup();
+            LOG.info("Operation = getSurveyQuestionsAndOptions, Status = Success ");
         }
-        catch (SQLException e){
-            e.printStackTrace();
+        catch(SQLException throwables){
+            throwables.printStackTrace();
+            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+throwables.getMessage());
         }
         catch (Exception e) {
             e.printStackTrace();
+            LOG.error("Operation = getSurveyQuestionsAndOptions, Status = Failed, Error Message="+e.getMessage());
+        }
+        finally {
+            if(null != getOptions) {
+                getOptions.cleanup();
+            }
+            getSurveyQuestions.cleanup();
         }
         return questionsAndOptions;
     }
+
+    @Override
+    public void storeSurveyResponses(String bannerId, String courseID, int questionId, String answer) {
+        StoredProcedure storeAnswers = null;
+        try{
+            storeAnswers = new StoredProcedure("InsertIntoSurveyAnswers(?,?,?,?)");
+            storeAnswers.setParameter(1,bannerId);
+            storeAnswers.setParameter(2,courseID);
+            storeAnswers.setParameter(3,questionId);
+            storeAnswers.setParameter(4,answer);
+            ResultSet rs = storeAnswers.executeWithResults();
+            LOG.info("Operation = storeSurveyResponses, Status = Success");
+        }
+        catch(SQLException throwables){
+            throwables.printStackTrace();
+            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+throwables.getMessage());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            LOG.error("Operation = storeSurveyResponses, Status = Failed, Error Message="+e.getMessage());
+        }
+        finally {
+            storeAnswers.cleanup();
+        }
+    }
+
+    @Override
+    public boolean checkSurveyAvailableForUser(String bannerId) {
+        StoredProcedure checkSurveyAvailableForUser = null;
+        try{
+            checkSurveyAvailableForUser = new StoredProcedure("SurveyAvailableForTheUser(?)");
+            checkSurveyAvailableForUser.setParameter(1,bannerId);
+            ResultSet rs = checkSurveyAvailableForUser.executeWithResults();
+            if(rs.next()){
+                return false;
+            }
+            LOG.info("Operation = checkSurveyAvailableForUser, Status = Success");
+        }
+        catch (SQLException throwables){
+            throwables.printStackTrace();
+            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+throwables.getMessage());
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            LOG.error("Operation = checkSurveyAvailableForUser, Status = Failed, Error Message="+e.getMessage());        }
+        finally {
+            checkSurveyAvailableForUser.cleanup();
+        }
+        return true;
+    }
+
     @Override
     public List<ISurveyQuestionOptionsModel> getSurveyQuestionsForGroupFormula(String courseId) {
 
@@ -90,7 +117,7 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
         try {
             StoredProcedure getSurveyQuestions = new StoredProcedure("GetSurveyQuestionByCourse(?)");
             getSurveyQuestions.setParameter(1,courseId);
-            ResultSet rs = getSurveyQuestions.executeWithResults();            
+            ResultSet rs = getSurveyQuestions.executeWithResults();
             while(rs.next())
             {
                 List<String> options = new ArrayList<>();
@@ -101,20 +128,20 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
                 question.setSurveyQuestionDescription(rs.getString("questionDesc"));
                 question.setSurveyQuestionId(rs.getInt("questionId"));
                 question.setSurveyQuestionType(rs.getString("questionType"));
-                question.setSurveyQuestionsOptions(options);
+//                question.setSurveyQuestionsOptions(options);
                 question.setSurveyQuestionTopic(rs.getString("questionTopic"));
                 questionsAndOptions.add(question);
-                
+
                 if(rs.getString("questionType").equals("numeric"))
                 {
-                	ISurveyQuestionOptionsModel question1 = new SurveyQuestionOptionsModel();
+                    ISurveyQuestionOptionsModel question1 = new SurveyQuestionOptionsModel();
                     question1.setSurveyCourseId(rs.getString("courseId"));
                     question1.setSurveyQuestionDescription(" Enter the value of lessThanValue of X to be included in team");
                     question1.setSurveyQuestionId(rs.getInt("questionId"));
                     question1.setSurveyQuestionType("numeric_extended");
                     question1.setSurveyQuestionTopic(rs.getString("questionTopic"));
                     questionsAndOptions.add(question1);
-                    
+
                     ISurveyQuestionOptionsModel question2 = new SurveyQuestionOptionsModel();
                     question2.setSurveyCourseId(rs.getString("courseId"));
                     question2.setSurveyQuestionDescription(" Enter the value of greaterThanValue of X to be included in team");
@@ -134,5 +161,6 @@ public class AnswerSurveyRepository implements IAnswerSurveyRepository {
         }
         return questionsAndOptions;
     }
+
 }
 

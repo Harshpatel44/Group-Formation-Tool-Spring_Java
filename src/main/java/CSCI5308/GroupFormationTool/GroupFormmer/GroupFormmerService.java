@@ -3,7 +3,10 @@ package CSCI5308.GroupFormationTool.GroupFormmer;
 import java.util.*;
 
 import java.util.stream.Collectors;
-import CSCI5308.GroupFormationTool.Injector;
+
+
+import CSCI5308.GroupFormationTool.AnswerSurvey.AnswerSurveyAbstractFactory;
+import CSCI5308.GroupFormationTool.AnswerSurvey.DisplaySurveyResponseAbstractFactory;
 import CSCI5308.GroupFormationTool.AnswerSurvey.ISurveyQuestionOptionsModel;
 import org.apache.commons.text.similarity.LevenshteinDetailedDistance;
 import org.apache.commons.text.similarity.LevenshteinResults;
@@ -19,16 +22,16 @@ public class GroupFormmerService implements IGroupFormmerService {
 	@Override
 	public HashMap<Integer,ArrayList<String>> FormGroups(String courseID, int teamSize) {
 
-		List<ISurveyQuestionOptionsModel> questions = Injector.instance().getAnswerSurveyRepository()
+		List<ISurveyQuestionOptionsModel> questions = AnswerSurveyAbstractFactory.instance().getAnswerSurveyRepository()
 				.getSurveyQuestionsAndOptions(courseID);
 
-		List<String> userAnsweredSurveyBasedOnCourseId = Injector.instance().getDisplaySurveyResponseRepository()
+		List<String> userAnsweredSurveyBasedOnCourseId = DisplaySurveyResponseAbstractFactory.instance().getDisplaySurveyResponseRepository()
 				.getUsersWhoAnsweredSurvey(courseID);
 
-		HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>> studentWithQuestionAndAnswer = Injector
+		HashMap<String, HashMap<Integer, ISurveyQuestionOptionsModel>> studentWithQuestionAndAnswer = DisplaySurveyResponseAbstractFactory
 				.instance().getDisplaySurveyResponseRepository().getSurveyResponse_2(courseID);
 
-		IGroupFilter groupFilter = Injector.instance().getGrFormmerRepo().getGroupFormula(courseID);
+		IGroupFilter groupFilter = GroupFormmerAbstractFactory.instance().getGroupFormmerRepo().getGroupFormula(courseID);
 
 		HashMap<String, Integer> indexUserBannerIdToIndex = new HashMap<String, Integer>();
 		HashMap<Integer, String> indexUserIndexToBannerID = new HashMap<Integer, String>();
@@ -436,17 +439,17 @@ public class GroupFormmerService implements IGroupFormmerService {
 
 	@Override
 	public boolean saveGroupFormula(IGroupFilter groupFilter, String courseID) {
-		return Injector.instance().getGrFormmerRepo().saveGroupFormula(groupFilter, courseID);
+		return GroupFormmerAbstractFactory.instance().getGroupFormmerRepo().saveGroupFormula(groupFilter, courseID);
 	}
 
 	@Override
 	public List<ISurveyQuestionOptionsModel> getSurveyQuestionsForGroupFormula(String courseId) {
-		return Injector.instance().getAnswerSurveyRepository().getSurveyQuestionsForGroupFormula(courseId);
+		return AnswerSurveyAbstractFactory.instance().getAnswerSurveyRepository().getSurveyQuestionsForGroupFormula(courseId);
 	}
 
 	@Override
 	public IGroupFilter createGroupFilterHashMap(HttpServletRequest req){
-		IGroupFilter groupFilter = Injector.instance().getGroupFilter();
+		IGroupFilter groupFilter = GroupFormmerAbstractFactory.instance().getGroupFilter();
 
 		HashMap<Integer, Boolean> groupFormResponses = new HashMap<>();
 		HashMap<Integer, ArrayList<Integer>> considerLessThanOrGreaterThan = new HashMap<>();

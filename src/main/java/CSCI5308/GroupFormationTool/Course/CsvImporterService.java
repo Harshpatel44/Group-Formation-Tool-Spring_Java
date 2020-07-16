@@ -13,6 +13,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 import CSCI5308.GroupFormationTool.UserManager.IUser;
+import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.opencsv.CSVReader;
@@ -39,7 +40,7 @@ public class CsvImporterService implements ICsvImporter {
 			successfulResults = new ArrayList<>();
 			results = new HashMap<>();
 			courseRepository = CourseAbstractFactory.instance().getCourseRepository();
-			userRepository = Injector.instance().getUserRepository();
+			userRepository = UserManagerAbstractFactory.instance().getUserRepository();
 			List<String> bannerIds = userRepository.getAllBannerIds();
 			Reader reader = new InputStreamReader(file.getInputStream());
 			CSVReader csvReader = new CSVReaderBuilder(reader).withSkipLines(1).build();
@@ -65,7 +66,7 @@ public class CsvImporterService implements ICsvImporter {
 		List<IUser> successfulUsers = new ArrayList<>();
 		encryptor = Injector.instance().getPasswordEncryptor();
 		userNotification = Injector.instance().getUserNotification();
-		IUser user = Injector.instance().getUserService().setUser(record[0], record[1], record[2], record[3], encryptor.encoder(record[0]), record[4]);
+		IUser user = UserManagerAbstractFactory.instance().getUserService().setUser(record[0], record[1], record[2], record[3], encryptor.encoder(record[0]), record[4]);
 		boolean flag = bannerIds.contains(user.getBannerId());
 		if (flag==false) {
 			boolean success = userRepository.createUser(user);
