@@ -1,2 +1,35 @@
-2020-07-16 18:14:19,307 INFO C.G.A.DisplaySurveyResponseRepository [main] Operation = getSurveyResponse, Status = Success 
-2020-07-16 18:14:19,484 INFO C.G.A.DisplaySurveyResponseRepository [main] Operation = getUsersWhoAnsweredSurvey, Status = Success 
+2020-07-16 18:31:40,080 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-IHKQMUB with PID 14268 (D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\build\classes\java\main started by Harsh in D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9)
+2020-07-16 18:31:40,093 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-16 18:31:41,305 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 18:31:41,325 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 18:31:41,326 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-16 18:31:41,328 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
+2020-07-16 18:31:41,445 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-16 18:31:41,446 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1243 ms
+2020-07-16 18:31:41,676 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 18:31:41,711 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@51dbd6e4, org.springframework.security.web.context.SecurityContextPersistenceFilter@4cdd2c73, org.springframework.security.web.header.HeaderWriterFilter@3e850122, org.springframework.security.web.csrf.CsrfFilter@682bd3c4, org.springframework.security.web.authentication.logout.LogoutFilter@543e593, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@14fc5d40, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@4e4c3a38, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@61799544, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@2b8bd14b, org.springframework.security.web.session.SessionManagementFilter@2b4c3c29, org.springframework.security.web.access.ExceptionTranslationFilter@151335cb, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@3b6c624]
+2020-07-16 18:31:41,823 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 18:31:42,116 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 18:31:42,139 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 18:31:42,142 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 2.49 seconds (JVM running for 4.758)
+2020-07-16 18:31:42,319 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-16 18:31:42,320 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-16 18:31:42,332 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 12 ms
+2020-07-16 18:31:44,671 INFO C.G.U.UserRepository [http-nio-8080-exec-3] Operation = user exists with bannerIdB00100100, Status = success
+2020-07-16 18:31:45,361 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 18:31:45,362 INFO C.G.U.UserService [http-nio-8080-exec-5] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 18:31:45,508 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = check guest , Status = success
+2020-07-16 18:31:46,225 INFO C.G.C.HomeRepository [http-nio-8080-exec-5] Operation = Get courses from banner id B00100100 when not guest function, Status = Success
+2020-07-16 18:31:46,226 INFO C.G.C.HomeRepository [http-nio-8080-exec-5] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 18:31:46,226 INFO C.G.C.HomeService [http-nio-8080-exec-5] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 18:31:46,417 INFO C.G.U.UserRepository [http-nio-8080-exec-5] Operation = check guest , Status = success
+2020-07-16 18:31:46,418 INFO C.G.C.HomeService [http-nio-8080-exec-5] Operation = Check if user B00100100 is a guest, Status = Success
+2020-07-16 18:31:47,579 INFO C.G.C.CourseService [http-nio-8080-exec-7] Operation = Instructor and TA user check, Status = true
+2020-07-16 18:31:47,732 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-7] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 18:31:47,920 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-7] Operation = CheckPublish for CourseID:CSC123 and userID:B00100100, Status = Success 
+2020-07-16 18:31:51,594 INFO C.G.C.CourseService [http-nio-8080-exec-1] Operation = Instructor and TA user check, Status = true
+2020-07-16 18:31:51,740 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-1] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 18:31:51,878 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = CheckPublish for CourseID:CSC123 and userID:B00100100, Status = Success 
+2020-07-16 18:31:55,659 INFO C.G.C.CourseService [http-nio-8080-exec-7] Operation = Instructor and TA user check, Status = true
+2020-07-16 18:31:55,796 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-7] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 18:31:55,934 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-7] Operation = CheckPublish for CourseID:CSC123 and userID:B00100100, Status = Success 

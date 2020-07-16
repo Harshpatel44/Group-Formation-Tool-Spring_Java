@@ -36,7 +36,6 @@ public class UserServiceTest {
 		UserPasswordPolicy.setInstance(2, 23, 1, 1, 1, "@#");
 		UserPasswordPolicyStatus.setInstance(1, 1, 1, 1, 1, 1);
 		userService = UserManagerAbstractFactory.instance().getUserService();
-
 	}
 
 	@Test

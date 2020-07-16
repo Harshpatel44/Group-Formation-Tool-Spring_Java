@@ -1,0 +1,14 @@
+2020-07-16 18:21:44,167 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-IHKQMUB with PID 8672 (D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\build\classes\java\main started by Harsh in D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9)
+2020-07-16 18:21:44,180 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-16 18:21:45,571 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 18:21:45,591 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 18:21:45,592 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-16 18:21:45,594 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
+2020-07-16 18:21:45,726 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-16 18:21:45,727 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 1420 ms
+2020-07-16 18:21:45,992 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 18:21:46,032 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@14fc5d40, org.springframework.security.web.context.SecurityContextPersistenceFilter@4a7761b1, org.springframework.security.web.header.HeaderWriterFilter@4912d525, org.springframework.security.web.csrf.CsrfFilter@55cff952, org.springframework.security.web.authentication.logout.LogoutFilter@43effd89, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@62e6a3ec, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@27fde870, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@78faea5f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@51e0301d, org.springframework.security.web.session.SessionManagementFilter@765df79d, org.springframework.security.web.access.ExceptionTranslationFilter@2bcec6a6, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6124287a]
+2020-07-16 18:21:46,147 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 18:21:46,451 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 18:21:46,474 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 18:21:46,479 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 2.763 seconds (JVM running for 5.123)

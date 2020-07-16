@@ -34,15 +34,20 @@
                     <button type="submit" name="questionmanager" class="submit-button">Home page</button>
                 </form>
                 <form class="nav-bar-element" th:action="@{/course/admin}" method="post">
-                    <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
                     <button type="submit" class="submit-button" name="courseadmin" th:if="${checkRole}">Course Admin</button>
                 </form>
                 <form class="nav-bar-element" th:action="@{/questionManager}" method="post">
-                    <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
-                    <button type="submit" name="questionmanager" class="submit-button"  th:if="${checkRole}">Question Manager</button>
+                    <button type="submit" name="questionmanager" class="submit-button" th:if="${checkRole}">Question Manager</button>
+                </form>
+                <form class="nav-bar-element" th:action="@{/formgroups/getFormulaQuestions}" method="post">
+                    <button type="submit" name="formgroups" class="submit-button" th:if="${checkRole}">Group configure</button>
+                </form>
+                <form class="nav-bar-element" th:action="@{/formgroups/runalgorithm}" method="post">
+                    <button type="submit" name="runalgorithm" class="submit-button" th:if="${checkRole}">Run Formation Algorithm</button>
                 </form>
             </div>
         </li>
+
     </ul>
 </div>
 <div>
