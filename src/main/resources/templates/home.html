@@ -1,73 +1,35 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
 <head>
-<title>Home Page</title>
-<link rel="stylesheet" type="text/css" href="/css/admin.css" />
+    <title> Home Page </title>
+    <link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
+<div>
+	<ul id="heading-box">
+		<li style="margin:auto;">
+			<div>
+				Group Formation Tool
+			</div>
+		</li>
+	</ul>
+</div>
 
-	<div>
-		<ul id="heading-box">
-			<li style="margin: auto;">
-				<div>Group Formation Tool</div>
-			</li>
-		</ul>
-	</div>
-
-
-	<div>
-		<ul id="heading-box2">
-			<li>
-				<div>
-					Hello, <span th:text="${userId}" />
-				</div>
-			</li>
-			<li>
-				<div class="nav-bar">
-					<form class="nav-bar-element" th:action="@{/logout}" method="post">
-						<div class="entity">
-							<button type="submit" class="submit-button" value="Logout"
-								name="Logout">Logout</button>
-						</div>
-					</form>
-				</div>
-			</li>
-		</ul>
-	</div>
-
-	<ul class="functionalities-list" style="width: auto">
-		<li id="home_li" class="list">
-			<table class="homepage_table" style="">
-				<thead class="function-heading">
-					<tr>
-						<th>Course Id</th>
-						<th>Course Name</th>
-						<th>Role</th>
-						<th id="no_border"></th>
-					</tr>
-				</thead>
-				</div>
-
-				<tr>
-				<tr th:each="course: ${courses}">
-					<td th:text="${course.courseId}" />
-					<td th:text="${course.courseName}" />
-					<td th:text="${course.role}" />
-					<td>
-						<form th:action="@{/course}" method="post">
-							<input type="hidden" th:value="${course.courseName}"
-								name="courseName" /> <input type="hidden"
-								th:value="${course.courseId}" name="courseId" /> <input
-								type="hidden" th:value="${course.role}" name="userType" /> <input
-								type="hidden" th:value="${userId}" name="userId" />
-							<button type="submit" class="submit-button" name="save"
-								th:if="${checkRole}">Course Home</button>
-						</form>
-					</td>
-				</tr>
-				</tr>
-			</table>
+<div>
+	<ul id="heading-box2">
+		<li>
+			<div>
+				Hello, <span th:text="${userId}" />
+			</div>
+		</li>
+		<li>
+			<div class="nav-bar">
+				<form class="nav-bar-element" th:action="@{/logout}" method="post">
+					<div class="entity">
+						<button type="submit" class="submit-button" value="Logout" name="Logout">Logout</button>
+					</div>
+				</form>
+			</div>
 		</li>
 	</ul>
 </div>

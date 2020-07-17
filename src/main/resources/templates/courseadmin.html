@@ -1,11 +1,20 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="http://www.thymeleaf.org">
+	  xmlns:th="http://www.thymeleaf.org">
 <head>
 	<title>Course Admin</title>
 	<link rel="stylesheet" type="text/css" href="/css/admin.css" />
 </head>
 <body>
+<div>
+	<ul id="heading-box">
+		<li style="margin:auto;">
+			<div th:text="${courseId}">
+				Course Admin Page
+			</div>
+		</li>
+	</ul>
+</div>
 
 <div>
 	<ul id="heading-box2">
