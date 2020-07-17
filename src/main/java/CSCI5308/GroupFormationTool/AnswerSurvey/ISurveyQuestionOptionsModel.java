@@ -1,8 +1,14 @@
 package CSCI5308.GroupFormationTool.AnswerSurvey;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public interface ISurveyQuestionOptionsModel {
+
+    List<String> getGroupFormationOptions();
+
+    void setGroupFormationOptions(List<String> groupFormationOptions);
 
     Integer getSurveyQuestionId();
 
@@ -22,11 +28,11 @@ public interface ISurveyQuestionOptionsModel {
 
     String getSurveyCourseId();
 
-    void setSurveyCourseId (String courseId);
+    void setSurveyCourseId(String courseId);
 
-    List<String> getSurveyQuestionsOptions();
+    HashMap getSurveyQuestionsOptions();
 
-    void setSurveyQuestionsOptions(List<String> surveyQuestionsOptions);
+    void setSurveyQuestionsOptions(HashMap<Integer, String> surveyQuestionsOptions);
 
     List<String> getSurveyAnswers();
 
@@ -35,4 +41,8 @@ public interface ISurveyQuestionOptionsModel {
     String getBannerId();
 
     void setBannerId(String bannerId);
+
+    ArrayList<String> getResponses();
+
+    void setResponses(ArrayList<String> responses);
 }

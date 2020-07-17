@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.Course;
 
-import CSCI5308.GroupFormationTool.QuestionEditor.*;
-
 public class CourseAbstractConcrete extends CourseAbstractFactory {
 
 
@@ -12,13 +10,19 @@ public class CourseAbstractConcrete extends CourseAbstractFactory {
     private IHomeService homeService;
 
     @Override
-    public ICourse getCourse() { return new Course(); }
+    public ICourse getCourse() {
+        return new Course();
+    }
 
     @Override
-    public ICreateCourse getCreateCourse() { return new CreateCourse(); }
+    public ICreateCourse getCreateCourse() {
+        return new CreateCourse();
+    }
 
     @Override
-    public IDeleteCourse getDeleteCourse() { return new DeleteCourse(); }
+    public IDeleteCourse getDeleteCourse() {
+        return new DeleteCourse();
+    }
 
     @Override
     public ICourseRepository getCourseRepository() {
@@ -29,11 +33,21 @@ public class CourseAbstractConcrete extends CourseAbstractFactory {
     }
 
     @Override
+    public void setCourseRepository(ICourseRepository courseRepository) {
+        this.courseRepository = courseRepository;
+    }
+
+    @Override
     public ICourseService getCourseService() {
         if (courseService == null) {
             courseService = new CourseService();
         }
         return courseService;
+    }
+
+    @Override
+    public void setCourseService(ICourseService courseService) {
+        this.courseService = courseService;
     }
 
     @Override
@@ -50,6 +64,11 @@ public class CourseAbstractConcrete extends CourseAbstractFactory {
             homeRepository = new HomeRepository();
         }
         return homeRepository;
+    }
+
+    @Override
+    public void setHomeRepository(IHomeRepository homeRepository) {
+        this.homeRepository = homeRepository;
     }
 
     @Override

@@ -45,9 +45,9 @@
     </ul>
 </div>
 <div>
-    <h2 align="center">Survey Form</h2>
-    <form th:action ="@{/formgroups/saveGroupFormula}" th:object = "${surveyQuestions}" method="post">
-        <div th:each="question : ${surveyQuestions}">
+    <h2 align="center">Group Configure</h2>
+    <form th:action ="@{/formgroups/saveGroupFormula}" method="post">
+        <div th:each="question : ${surveyGroupQuestions}">
             <p th:text = "${question.surveyQuestionTopic}" th:for="${question.surveyQuestionId}"/>
             <label style="width: auto" th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
             <br/><br/>

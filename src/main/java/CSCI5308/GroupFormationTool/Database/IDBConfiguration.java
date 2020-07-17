@@ -1,10 +1,9 @@
 package CSCI5308.GroupFormationTool.Database;
 
-public interface IDBConfiguration
-{
-	public String getDBUserName();
+public interface IDBConfiguration {
+    String getDBUserName();
 
-	public String getDBPassword();
+    String getDBPassword();
 
-	public String getDBURL();
+    String getDBURL();
 }

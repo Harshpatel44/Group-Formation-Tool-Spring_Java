@@ -2,27 +2,27 @@ package CSCI5308.GroupFormationTool.PasswordManager;
 
 public interface IUserPasswordPolicy {
 
-	public Integer getMinLength();
+    Integer getMinLength();
 
-	public void setMinLength(Integer minLength);
+    void setMinLength(Integer minLength);
 
-	public Integer getMinUpperCaseLetter();
+    Integer getMinUpperCaseLetter();
 
-	public void setMinUpperCaseLetter(Integer minUpperCaseLetter);
+    void setMinUpperCaseLetter(Integer minUpperCaseLetter);
 
-	public Integer getMaxLength();
+    Integer getMaxLength();
 
-	public void setMaxLength(Integer maxLength);
+    void setMaxLength(Integer maxLength);
 
-	public Integer getMinLowerCaseLetter();
+    Integer getMinLowerCaseLetter();
 
-	public void setMinLowerCaseLetter(Integer minLowerCaseLetter);
+    void setMinLowerCaseLetter(Integer minLowerCaseLetter);
 
-	public Integer getMinNoOfSymbols();
+    Integer getMinNoOfSymbols();
 
-	public void setMinNoOfSymbols(Integer minNoOfSymbols);
+    void setMinNoOfSymbols(Integer minNoOfSymbols);
 
-	public String getNotAllowedCharacters();
+    String getNotAllowedCharacters();
 
-	public void setNotAllowedCharacters(String notAllowedCharacters);
+    void setNotAllowedCharacters(String notAllowedCharacters);
 }

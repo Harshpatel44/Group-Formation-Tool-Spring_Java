@@ -9,8 +9,7 @@ public class QuestionManagerRepositoryMock {
 
     public List<IQuestion> getQuestionsTest(String bannerID) {
         List<IQuestion> questionList = new ArrayList<IQuestion>();
-        if(bannerID.equals("B00123456"))
-        {
+        if (bannerID.equals("B00123456")) {
             IQuestion iQuestion = new Question();
             iQuestion.setQuestionId(1);
             iQuestion.setQuestionDescription("QuestionDescription");

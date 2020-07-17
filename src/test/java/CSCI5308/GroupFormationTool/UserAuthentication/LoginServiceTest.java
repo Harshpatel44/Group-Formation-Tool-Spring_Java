@@ -10,26 +10,21 @@ import static org.mockito.Mockito.when;
 
 class LoginServiceTest {
 
-    public UserLoginRepository userLoginRepository;
-    public UserLoginService userLoginService;
+    public ILoginRepository userLoginRepository;
+    public ILoginService userLoginService;
 
     @BeforeEach
     public void init() throws Exception {
         MockitoAnnotations.initMocks(this);
         userLoginRepository = mock(UserLoginRepository.class);
-        userLoginService = new UserLoginService(userLoginRepository);
+        UserAuthenticationAbstractFactory.instance().setLoginRepository(userLoginRepository);
+        userLoginService = UserAuthenticationAbstractFactory.instance().getLoginService();
     }
 
     @Test
     void checkLoginTest() throws Exception {
-        when(userLoginRepository.checkIfUserIsAuthenticated("B00835088","123")).thenReturn(true);
-        assertTrue(userLoginService.checkIfUserIsAuthenticated("B00835088","123"));
+        when(userLoginRepository.checkIfUserIsAuthenticated("B00835088", "123")).thenReturn(true);
+        assertTrue(userLoginService.checkIfUserIsAuthenticated("B00835088", "123"));
     }
 
-//    @Test
-//    void isUser() throws Exception {
-//        when(loginRepository.isUser("B00835088")).thenReturn(true);
-//        assertTrue(loginService.isUser("B00835088"));
-//        assertFalse(loginService.isUser("B11221344"));
-//    }
 }

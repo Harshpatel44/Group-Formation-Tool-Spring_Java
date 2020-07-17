@@ -3,12 +3,13 @@ package CSCI5308.GroupFormationTool.UserManager;
 public class Instructor implements IInstructor {
     private String InstructorId;
     private String selectedInstructorCourseId;
-    private String InstructorAssignMessage="status here";
+    private String InstructorAssignMessage = "status here";
 
-    public Instructor(){
+    public Instructor() {
     }
 
-    public Instructor(String s){}
+    public Instructor(String s) {
+    }
 
     @Override
     public String getInstructorAssignMessage() {

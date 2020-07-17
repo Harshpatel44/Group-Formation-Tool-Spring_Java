@@ -1,7 +1,5 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
-import CSCI5308.GroupFormationTool.QuestionEditor.IRankFunctionsService;
-
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -12,12 +10,12 @@ import static java.util.stream.Collectors.toMap;
 public class RankFunctionsService implements IRankFunctionsService {
 
     @Override
-    public HashMap<Integer, String> arrangeOptionsBasedOnRank(String optionText, String rankText){
+    public HashMap<Integer, String> arrangeOptionsBasedOnRank(String optionText, String rankText) {
         String[] optionList = optionText.split(",");
         String[] rankList = rankText.split(",");
         HashMap<Integer, String> map = new HashMap<Integer, String>();
-        for(int i=0;i<optionList.length;i++){
-            map.put(Integer.valueOf(rankList[i]),optionList[i]);
+        for (int i = 0; i < optionList.length; i++) {
+            map.put(Integer.valueOf(rankList[i]), optionList[i]);
         }
         Map<Integer, String> sorted = map
                 .entrySet()

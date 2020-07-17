@@ -6,7 +6,7 @@ import javax.mail.MessagingException;
 import javax.mail.internet.AddressException;
 
 public interface IUserNotification {
-	Boolean sendUserCredentials(IUser user) throws AddressException, MessagingException;
+    Boolean sendUserCredentials(IUser user) throws MessagingException;
 
-	Boolean sendUserForgetPasswordLink(String email, String passKey) throws Exception;
+    Boolean sendUserForgetPasswordLink(String email, String passKey) throws Exception;
 }

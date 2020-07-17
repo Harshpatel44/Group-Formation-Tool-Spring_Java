@@ -1,42 +1,24 @@
 package CSCI5308.GroupFormationTool.QuestionEditor;
 
-import CSCI5308.GroupFormationTool.QuestionManager.IQuestionManagerRepository;
+public abstract class QuestionEditorAbstractFactory {
 
-public class QuestionEditorAbstractFactory extends IQuestionEditorAbstractFactory {
+    private static QuestionEditorAbstractFactory instance = null;
 
-    private IQuestionModel questionModel;
-    private IQuestionEditorService questionEditorService;
-    private IQuestionEditorRepository questionEditorRepository;
-    private IRankFunctionsService rankFunctionsService;
+    public static QuestionEditorAbstractFactory instance() {
 
-    public IQuestionModel getQuestionModel(){
-        return new QuestionModel();
-    }
-
-    public IQuestionEditorService getQuestionEditorService() {
-        if (questionEditorService == null) {
-            questionEditorService = new QuestionEditorService();
+        if (instance == null) {
+            instance = new QuestionEditorAbstractConcrete();
         }
-            return questionEditorService;
+        return instance;
     }
 
-    public IQuestionEditorRepository getQuestionEditorRepository() {
-        if (questionEditorRepository == null) {
-            questionEditorRepository = new QuestionEditorRepository();
-        }
-        return questionEditorRepository;
-    }
+    public abstract IQuestionModel getQuestionModel();
 
-    public void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository){
-        this.questionEditorRepository = questionEditorRepository;
-    }
+    public abstract IQuestionEditorService getQuestionEditorService();
 
-    public IRankFunctionsService getRankFunctionsService() {
-        if (rankFunctionsService == null) {
-            rankFunctionsService = new RankFunctionsService();
-        }
-        return rankFunctionsService;
-    }
+    public abstract IQuestionEditorRepository getQuestionEditorRepository();
 
+    public abstract void setQuestionEditorRepository(IQuestionEditorRepository questionEditorRepository);
 
+    public abstract IRankFunctionsService getRankFunctionsService();
 }

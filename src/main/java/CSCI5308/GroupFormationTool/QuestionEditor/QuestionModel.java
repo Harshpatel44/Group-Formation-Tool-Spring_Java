@@ -10,15 +10,16 @@ public class QuestionModel implements IQuestionModel {
     private String questionText;
     private Dictionary questionTypeList = new Hashtable();
     private String selectedQuestionType;
-    private String questionSubmitMessage="Question did not submit successfully...";
+    private String questionSubmitMessage = "Question did not submit successfully...";
 
-    public QuestionModel(){
-        this.questionTypeList.put(numeric,numeric);
-        this.questionTypeList.put(MCCO,MCCO);
-        this.questionTypeList.put(MCCM,MCCM);
-        this.questionTypeList.put(text,text);
+    public QuestionModel() {
+        this.questionTypeList.put(numeric, numeric);
+        this.questionTypeList.put(MCCO, MCCO);
+        this.questionTypeList.put(MCCM, MCCM);
+        this.questionTypeList.put(text, text);
     }
-   @Override
+
+    @Override
     public String getQuestionSubmitMessage() {
         return questionSubmitMessage;
     }
@@ -68,4 +69,4 @@ public class QuestionModel implements IQuestionModel {
         this.questionText = questionText;
     }
 
-    }
+}

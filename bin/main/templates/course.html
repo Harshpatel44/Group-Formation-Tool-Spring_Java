@@ -41,32 +41,20 @@
                     <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
                     <button type="submit" name="questionmanager" class="submit-button"  th:if="${checkRole}">Question Manager</button>
                 </form>
-                <form class="nav-bar-element" th:action="@{/formgroups/getFormulaQuestions}" method="post">
-                    <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
-                    <button type="submit" name="formgroups" class="submit-button"  th:if="${checkRole}">Group configure</button>
-                </form>
-                <form class="nav-bar-element" th:action="@{/formgroups/runalgorithm}" method="post">
-                    <input  type="hidden" th:value="${checkRole}" name="checkRole" style="float: none" />
-                    <button type="submit" name="formgroups" class="submit-button"  th:if="${checkRole}">Run Formation Algorithm</button>
-                </form>
             </div>
         </li>
     </ul>
 </div>
 <div>
-    <form th:action="@{/survey}" method="post" th:if="${checkRole==false}">
+    <form th:action="@{/survey}" method="post" th:if="${checkRole==false} and ${surveyAvailable}">
         <h3>Survey Available : Title </h3>
         <a th:href="survey">Take Survey</a>
     </form>
 </div>
 
-<div>
-<!--    display survey for instructor and Ta-->
-    <h3 th:if="${checkRole}">Survey Response</h3>
+<div th:if="${checkRole} and ${surveyPublished}">
+    <h3 >Survey Response</h3>
     <a th:href="displayResponse">See Response</a>
-
 </div>
-
-
 </body>
 </html>
