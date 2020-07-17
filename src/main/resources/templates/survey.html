@@ -41,11 +41,11 @@
     <h2 align="center">Survey Form</h2>
     <form th:action ="@{/survey}" method="post">
         <div th:each="question : ${questions}">
-            <label  th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
+            <label style="width: auto" th:text = "${question.surveyQuestionDescription}" th:for="${question.surveyQuestionId}"/>
             <br/><br/>
             <div th:switch = "${question.getSurveyQuestionType()}">
 
-                <div th:case="'txt'">
+                <div th:case="'text'">
                     <input th:id="${question.getSurveyQuestionId()}" type="text"  th:name="${question.surveyQuestionId}" placeholder="Enter Your Answer" required/>
                 </div>
 
@@ -55,13 +55,13 @@
 
                 <div th:case="'mcqm'">
                     <div th:each="option : ${question.getSurveyQuestionsOptions()}">
-                        <input type="checkbox" th:id="${option.getKey()}" th:text="${option.getValue()}" th:value="${option.getValue()}"  th:name="${question.getSurveyQuestionId()}" value="option" />
+                        <input type="checkbox" th:id="${option.key}" th:text="${option.value}" th:value="${option.key}"  th:name="${question.getSurveyQuestionId()}" value="option" />
                     </div>
                 </div>
 
                 <div th:case="'mcqs'">
                     <div th:each="option : ${question.getSurveyQuestionsOptions()}">
-                        <input type="radio"  th:id="${option.getKey()}"  th:text="${option.getKey()}" th:value="${option.getValue()}" value="option" th:name="${question.getSurveyQuestionId()}" required/>
+                        <input type="radio"  th:id="${option.key}"  th:text="${option.value}" th:value="${option.key}" value="option" th:name="${question.getSurveyQuestionId()}" required/>
                     </div>
                 </div>
             </div>

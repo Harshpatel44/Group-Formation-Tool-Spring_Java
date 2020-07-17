@@ -1,0 +1,125 @@
+2020-07-16 22:13:25,100 INFO o.s.b.StartupInfoLogger [main] Starting GroupFormationToolApplication on DESKTOP-IHKQMUB with PID 18400 (D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9\build\classes\java\main started by Harsh in D:\Project Works\Web\Github\Group formation tool\Git Repo2\group9)
+2020-07-16 22:13:25,118 INFO o.s.b.SpringApplication [main] No active profile set, falling back to default profiles: default
+2020-07-16 22:13:27,379 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat initialized with port(s): 8080 (http)
+2020-07-16 22:13:27,408 INFO o.a.j.l.DirectJDKLog [main] Initializing ProtocolHandler ["http-nio-8080"]
+2020-07-16 22:13:27,410 INFO o.a.j.l.DirectJDKLog [main] Starting service [Tomcat]
+2020-07-16 22:13:27,412 INFO o.a.j.l.DirectJDKLog [main] Starting Servlet engine: [Apache Tomcat/9.0.34]
+2020-07-16 22:13:27,647 INFO o.a.j.l.DirectJDKLog [main] Initializing Spring embedded WebApplicationContext
+2020-07-16 22:13:27,648 INFO o.s.b.w.s.c.ServletWebServerApplicationContext [main] Root WebApplicationContext: initialization completed in 2238 ms
+2020-07-16 22:13:28,139 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: Ant [pattern='/resources/**'], []
+2020-07-16 22:13:28,186 INFO o.s.s.w.DefaultSecurityFilterChain [main] Creating filter chain: any request, [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@19569ebd, org.springframework.security.web.context.SecurityContextPersistenceFilter@68ba310d, org.springframework.security.web.header.HeaderWriterFilter@682bd3c4, org.springframework.security.web.csrf.CsrfFilter@319854f0, org.springframework.security.web.authentication.logout.LogoutFilter@37fdfb05, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@30506c0d, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@7aad3f7d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@151335cb, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@4632cfc, org.springframework.security.web.session.SessionManagementFilter@24097e9b, org.springframework.security.web.access.ExceptionTranslationFilter@8c46918, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@71870da7]
+2020-07-16 22:13:28,347 INFO o.s.s.c.ExecutorConfigurationSupport [main] Initializing ExecutorService 'applicationTaskExecutor'
+2020-07-16 22:13:28,800 INFO o.a.j.l.DirectJDKLog [main] Starting ProtocolHandler ["http-nio-8080"]
+2020-07-16 22:13:28,832 INFO o.s.b.w.e.t.TomcatWebServer [main] Tomcat started on port(s): 8080 (http) with context path ''
+2020-07-16 22:13:28,837 INFO o.s.b.StartupInfoLogger [main] Started GroupFormationToolApplication in 4.473 seconds (JVM running for 9.272)
+2020-07-16 22:13:29,056 INFO o.a.j.l.DirectJDKLog [http-nio-8080-exec-1] Initializing Spring DispatcherServlet 'dispatcherServlet'
+2020-07-16 22:13:29,057 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Initializing Servlet 'dispatcherServlet'
+2020-07-16 22:13:29,070 INFO o.s.w.s.FrameworkServlet [http-nio-8080-exec-1] Completed initialization in 12 ms
+2020-07-16 22:13:34,064 INFO C.G.U.UserRepository [http-nio-8080-exec-4] Operation = user exists with bannerIdB00000000, Status = success
+2020-07-16 22:13:35,048 INFO C.G.U.UserRepository [http-nio-8080-exec-6] Operation = user set with bannerId:B00000000, Status = success
+2020-07-16 22:13:35,050 INFO C.G.U.UserService [http-nio-8080-exec-6] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:13:35,464 INFO C.G.U.UserRepository [http-nio-8080-exec-6] Operation = check guest , Status = success
+2020-07-16 22:13:36,179 INFO C.G.C.HomeRepository [http-nio-8080-exec-6] Operation = Get courses from banner id B00000000 when not guest function, Status = Success
+2020-07-16 22:13:36,183 INFO C.G.C.HomeRepository [http-nio-8080-exec-6] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:13:36,185 INFO C.G.C.HomeService [http-nio-8080-exec-6] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:13:36,351 INFO C.G.U.UserRepository [http-nio-8080-exec-6] Operation = check guest , Status = success
+2020-07-16 22:13:36,354 INFO C.G.C.HomeService [http-nio-8080-exec-6] Operation = Check if user B00000000 is a guest, Status = Success
+2020-07-16 22:13:37,973 INFO C.G.C.CourseService [http-nio-8080-exec-8] Operation = Instructor and TA user check, Status = false
+2020-07-16 22:13:38,317 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-8] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 22:13:38,552 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-8] Operation = CheckPublish for CourseID:CSCI1 and userID:B00000000, Status = Success 
+2020-07-16 22:14:00,032 INFO C.G.U.UserRepository [http-nio-8080-exec-2] Operation = user set with bannerId:B00000000, Status = success
+2020-07-16 22:14:00,034 INFO C.G.U.UserService [http-nio-8080-exec-2] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:14:00,222 INFO C.G.U.UserRepository [http-nio-8080-exec-2] Operation = check guest , Status = success
+2020-07-16 22:14:00,772 INFO C.G.C.HomeRepository [http-nio-8080-exec-2] Operation = Get courses from banner id B00000000 when not guest function, Status = Success
+2020-07-16 22:14:00,776 INFO C.G.C.HomeRepository [http-nio-8080-exec-2] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:14:00,778 INFO C.G.C.HomeService [http-nio-8080-exec-2] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:14:01,019 INFO C.G.U.UserRepository [http-nio-8080-exec-2] Operation = check guest , Status = success
+2020-07-16 22:14:01,021 INFO C.G.C.HomeService [http-nio-8080-exec-2] Operation = Check if user B00000000 is a guest, Status = Success
+2020-07-16 22:14:07,586 INFO C.G.U.UserRepository [http-nio-8080-exec-6] Operation = user exists with bannerIdB00100100, Status = success
+2020-07-16 22:14:08,157 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 22:14:08,159 INFO C.G.U.UserService [http-nio-8080-exec-8] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:14:08,300 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = check guest , Status = success
+2020-07-16 22:14:09,122 INFO C.G.C.HomeRepository [http-nio-8080-exec-8] Operation = Get courses from banner id B00100100 when not guest function, Status = Success
+2020-07-16 22:14:09,123 INFO C.G.C.HomeRepository [http-nio-8080-exec-8] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:14:09,125 INFO C.G.C.HomeService [http-nio-8080-exec-8] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:14:09,333 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = check guest , Status = success
+2020-07-16 22:14:09,334 INFO C.G.C.HomeService [http-nio-8080-exec-8] Operation = Check if user B00100100 is a guest, Status = Success
+2020-07-16 22:14:10,990 INFO C.G.C.CourseService [http-nio-8080-exec-2] Operation = Instructor and TA user check, Status = true
+2020-07-16 22:14:11,131 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-2] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 22:14:11,347 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-2] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 22:14:16,528 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 22:14:29,976 INFO C.G.Q.QuestionManagerService [http-nio-8080-exec-9] Operation = unsorted question , Status = Success 
+2020-07-16 22:14:30,139 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-9] Operation = adding question responses , Status = Success 
+2020-07-16 22:14:49,504 INFO C.G.Q.QuestionManagerService [http-nio-8080-exec-3] Operation = sorted question by Date , Status = Success 
+2020-07-16 22:14:49,668 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-3] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 22:14:50,490 INFO C.G.Q.QuestionManagerService [http-nio-8080-exec-6] Operation = sorted question by Topic , Status = Success 
+2020-07-16 22:14:50,667 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-6] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 22:14:50,669 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-6] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 22:14:50,671 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-6] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 22:14:50,675 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-6] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 22:14:50,680 INFO C.G.Q.QuestionManagerRepository [http-nio-8080-exec-6] Operation = get Question for userId:B00100100 , Status = Success 
+2020-07-16 22:14:53,508 INFO C.G.C.CourseService [http-nio-8080-exec-10] Operation = Instructor and TA user check, Status = true
+2020-07-16 22:14:53,668 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-10] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 22:14:53,849 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-10] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 22:14:56,294 INFO C.G.U.UserRepository [http-nio-8080-exec-1] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 22:14:56,296 INFO C.G.U.UserService [http-nio-8080-exec-1] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:14:56,450 INFO C.G.U.UserRepository [http-nio-8080-exec-1] Operation = check guest , Status = success
+2020-07-16 22:14:57,406 INFO C.G.C.HomeRepository [http-nio-8080-exec-1] Operation = Get courses from banner id B00100100 when not guest function, Status = Success
+2020-07-16 22:14:57,408 INFO C.G.C.HomeRepository [http-nio-8080-exec-1] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:14:57,411 INFO C.G.C.HomeService [http-nio-8080-exec-1] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:14:57,650 INFO C.G.U.UserRepository [http-nio-8080-exec-1] Operation = check guest , Status = success
+2020-07-16 22:14:57,654 INFO C.G.C.HomeService [http-nio-8080-exec-1] Operation = Check if user B00100100 is a guest, Status = Success
+2020-07-16 22:15:02,170 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = user exists with bannerIdB00000000, Status = success
+2020-07-16 22:15:02,958 INFO C.G.U.UserRepository [http-nio-8080-exec-10] Operation = user set with bannerId:B00000000, Status = success
+2020-07-16 22:15:02,963 INFO C.G.U.UserService [http-nio-8080-exec-10] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:15:03,214 INFO C.G.U.UserRepository [http-nio-8080-exec-10] Operation = check guest , Status = success
+2020-07-16 22:15:03,902 INFO C.G.C.HomeRepository [http-nio-8080-exec-10] Operation = Get courses from banner id B00000000 when not guest function, Status = Success
+2020-07-16 22:15:03,904 INFO C.G.C.HomeRepository [http-nio-8080-exec-10] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:15:03,905 INFO C.G.C.HomeService [http-nio-8080-exec-10] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:15:04,118 INFO C.G.U.UserRepository [http-nio-8080-exec-10] Operation = check guest , Status = success
+2020-07-16 22:15:04,120 INFO C.G.C.HomeService [http-nio-8080-exec-10] Operation = Check if user B00000000 is a guest, Status = Success
+2020-07-16 22:15:05,340 INFO C.G.C.CourseService [http-nio-8080-exec-1] Operation = Instructor and TA user check, Status = false
+2020-07-16 22:15:05,557 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-1] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 22:15:05,820 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-1] Operation = CheckPublish for CourseID:CSCI1 and userID:B00000000, Status = Success 
+2020-07-16 22:15:09,978 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-4] Operation = getSurveyQuestionsAndOptions, Status = Success 
+2020-07-16 22:17:33,652 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = user set with bannerId:B00000000, Status = success
+2020-07-16 22:17:33,654 INFO C.G.U.UserService [http-nio-8080-exec-8] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:17:33,798 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = check guest , Status = success
+2020-07-16 22:17:34,233 INFO C.G.C.HomeRepository [http-nio-8080-exec-8] Operation = Get courses from banner id B00000000 when not guest function, Status = Success
+2020-07-16 22:17:34,234 INFO C.G.C.HomeRepository [http-nio-8080-exec-8] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:17:34,235 INFO C.G.C.HomeService [http-nio-8080-exec-8] Operation = Get courses from banner id B00000000, Status = Success
+2020-07-16 22:17:34,389 INFO C.G.U.UserRepository [http-nio-8080-exec-8] Operation = check guest , Status = success
+2020-07-16 22:17:34,393 INFO C.G.C.HomeService [http-nio-8080-exec-8] Operation = Check if user B00000000 is a guest, Status = Success
+2020-07-16 22:17:40,353 INFO C.G.U.UserRepository [http-nio-8080-exec-3] Operation = user exists with bannerIdADMIN, Status = success
+2020-07-16 22:17:40,501 WARN o.s.s.c.b.BCryptPasswordEncoder [http-nio-8080-exec-3] Encoded password does not look like BCrypt
+2020-07-16 22:17:45,000 INFO C.G.U.UserRepository [http-nio-8080-exec-7] Operation = user exists with bannerIdadmin, Status = success
+2020-07-16 22:17:45,150 INFO C.G.U.UserRepository [http-nio-8080-exec-7] Operation = user set with bannerId:admin, Status = success
+2020-07-16 22:17:50,159 INFO C.G.U.UserRepository [http-nio-8080-exec-10] Operation = user exists with bannerIdadmin, Status = success
+2020-07-16 22:17:50,317 INFO C.G.U.UserRepository [http-nio-8080-exec-10] Operation = user set with bannerId:admin, Status = success
+2020-07-16 22:17:58,193 INFO C.G.U.UserRepository [http-nio-8080-exec-4] Operation = user exists with bannerIdadmin, Status = success
+2020-07-16 22:17:58,333 INFO C.G.U.UserRepository [http-nio-8080-exec-4] Operation = user set with bannerId:admin, Status = success
+2020-07-16 22:18:03,746 INFO C.G.U.UserRepository [http-nio-8080-exec-7] Operation = user exists with bannerIdADMIN, Status = success
+2020-07-16 22:18:03,895 WARN o.s.s.c.b.BCryptPasswordEncoder [http-nio-8080-exec-7] Encoded password does not look like BCrypt
+2020-07-16 22:18:38,474 INFO C.G.U.UserRepository [http-nio-8080-exec-2] Operation = user exists with bannerIdB00100100, Status = success
+2020-07-16 22:18:39,259 INFO C.G.U.UserRepository [http-nio-8080-exec-3] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 22:18:39,260 INFO C.G.U.UserService [http-nio-8080-exec-3] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:18:39,405 INFO C.G.U.UserRepository [http-nio-8080-exec-3] Operation = check guest , Status = success
+2020-07-16 22:18:41,636 INFO C.G.C.HomeRepository [http-nio-8080-exec-3] Operation = Get courses from banner id B00100100 when not guest function, Status = Success
+2020-07-16 22:18:41,639 INFO C.G.C.HomeRepository [http-nio-8080-exec-3] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:18:41,641 INFO C.G.C.HomeService [http-nio-8080-exec-3] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:18:41,788 INFO C.G.U.UserRepository [http-nio-8080-exec-3] Operation = check guest , Status = success
+2020-07-16 22:18:41,791 INFO C.G.C.HomeService [http-nio-8080-exec-3] Operation = Check if user B00100100 is a guest, Status = Success
+2020-07-16 22:18:47,592 INFO C.G.C.CourseService [http-nio-8080-exec-5] Operation = Instructor and TA user check, Status = true
+2020-07-16 22:18:47,755 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-5] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 22:18:47,928 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-5] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 22:19:03,989 INFO C.G.C.CourseService [http-nio-8080-exec-10] Operation = Instructor and TA user check, Status = true
+2020-07-16 22:19:04,190 INFO C.G.A.AnswerSurveyRepository [http-nio-8080-exec-10] Operation = checkSurveyAvailableForUser, Status = Success
+2020-07-16 22:19:04,346 INFO C.G.S.SurveyManagerRepository [http-nio-8080-exec-10] Operation = CheckPublish for CourseID:CSCI1 and userID:B00100100, Status = Success 
+2020-07-16 22:20:09,136 INFO C.G.U.UserRepository [http-nio-8080-exec-4] Operation = user set with bannerId:B00100100, Status = success
+2020-07-16 22:20:09,138 INFO C.G.U.UserService [http-nio-8080-exec-4] Operation = SetCurrentUser if not admin, Status = Success 
+2020-07-16 22:20:09,281 INFO C.G.U.UserRepository [http-nio-8080-exec-4] Operation = check guest , Status = success
+2020-07-16 22:20:10,060 INFO C.G.C.HomeRepository [http-nio-8080-exec-4] Operation = Get courses from banner id B00100100 when not guest function, Status = Success
+2020-07-16 22:20:10,063 INFO C.G.C.HomeRepository [http-nio-8080-exec-4] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:20:10,065 INFO C.G.C.HomeService [http-nio-8080-exec-4] Operation = Get courses from banner id B00100100, Status = Success
+2020-07-16 22:20:10,263 INFO C.G.U.UserRepository [http-nio-8080-exec-4] Operation = check guest , Status = success
+2020-07-16 22:20:10,269 INFO C.G.C.HomeService [http-nio-8080-exec-4] Operation = Check if user B00100100 is a guest, Status = Success
