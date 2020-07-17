@@ -34,7 +34,6 @@ public class UserServiceTest {
         userService = UserManagerAbstractFactory.instance().getUserService();
     }
 
-
     @Test
     public void creaUserCorrectDetails() throws Exception {
         IUser user = UserMockDB.setDefault();
