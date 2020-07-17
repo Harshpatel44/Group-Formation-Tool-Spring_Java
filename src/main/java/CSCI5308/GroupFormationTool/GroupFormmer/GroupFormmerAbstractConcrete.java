@@ -31,4 +31,9 @@ public class GroupFormmerAbstractConcrete extends GroupFormmerAbstractFactory {
         return groupFormmerService;
     }
 
+	@Override
+	public void setGroupFormerRepo(IGroupFormmerRepo formmerRepo) {
+		this.groupFormmerRepo = formmerRepo;	
+	}
+
 }

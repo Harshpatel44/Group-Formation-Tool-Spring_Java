@@ -16,5 +16,7 @@ public abstract class GroupFormmerAbstractFactory {
     public abstract IGroupFormmerRepo getGroupFormmerRepo();
 
     public abstract IGroupFilter getGroupFilter();
+    
+    public abstract void setGroupFormerRepo(IGroupFormmerRepo formmerRepo);
 
 }
