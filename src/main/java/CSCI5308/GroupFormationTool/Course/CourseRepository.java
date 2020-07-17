@@ -123,6 +123,7 @@ public class CourseRepository implements ICourseRepository {
         } catch (Exception e) {
             LOG.error("Operation = " + courseId + " course details for user " + iUser.getBannerId() + ", Status = Failed, Error Message=" + e.getMessage());
             e.printStackTrace();
+            return false;
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();
@@ -145,9 +146,11 @@ public class CourseRepository implements ICourseRepository {
         } catch (SQLException e) {
             LOG.error("Operation = enroll student with id " + user.getBannerId() + " for the course " + courseId + ", Status = Fail");
             e.printStackTrace();
+            return false;
         } catch (Exception e) {
             LOG.error("Operation = enroll student with id " + user.getBannerId() + " for the course " + courseId + ", Status = Fail");
             e.printStackTrace();
+            return false;
         } finally {
             if (storedProcedure != null) {
                 storedProcedure.cleanup();

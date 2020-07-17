@@ -4,10 +4,7 @@ import CSCI5308.GroupFormationTool.PasswordManager.UserPasswordPolicy;
 import CSCI5308.GroupFormationTool.UserAuthentication.IUserNotification;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserAuthenticationAbstractFactory;
 import CSCI5308.GroupFormationTool.UserAuthentication.UserNotification;
-import CSCI5308.GroupFormationTool.UserManager.IUserRepository;
-import CSCI5308.GroupFormationTool.UserManager.User;
-import CSCI5308.GroupFormationTool.UserManager.UserManagerAbstractFactory;
-import CSCI5308.GroupFormationTool.UserManager.UserRepository;
+import CSCI5308.GroupFormationTool.UserManager.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Matchers;
@@ -18,8 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 
 @SpringBootTest
@@ -52,12 +48,13 @@ public class CsvImporterServiceTest {
         bannerIds.add("B00854476");
         when(userRepository.getAllBannerIds()).thenReturn(bannerIds);
         when(userRepository.createUser(Matchers.any(User.class))).thenReturn(true);
-        when(userNotification.sendUserCredentials(Matchers.any(User.class))).thenReturn(true);
-        when(courseRepository.getUserDetailsOnCourse(Matchers.any(User.class), Matchers.any(String.class)))
-                .thenReturn(false);
-        when(courseRepository.enrollStudentForCourse(Matchers.any(User.class), Matchers.any(String.class)))
-                .thenReturn(true);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 9);
+        doReturn(true).when(userNotification).sendUserCredentials(Matchers.any(User.class));
+
+        doReturn(false).when(courseRepository).getUserDetailsOnCourse(UserManagerAbstractFactory.instance().getUser(), "CSCI101");
+
+        doReturn(true).when(courseRepository).enrollStudentForCourse(Matchers.any(User.class), Matchers.any(String.class));
+
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 0);
     }
 
 
@@ -71,7 +68,7 @@ public class CsvImporterServiceTest {
         };
         when(userRepository.getAllBannerIds()).thenReturn(bannerIds);
         when(userRepository.createUser(Matchers.any(User.class))).thenReturn(false);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 3);
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 1);
     }
 
 
@@ -88,8 +85,8 @@ public class CsvImporterServiceTest {
         when(userNotification.sendUserCredentials(Matchers.any(User.class))).thenReturn(true);
         when(courseRepository.getUserDetailsOnCourse(Matchers.any(User.class), Matchers.any(String.class)))
                 .thenReturn(true);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 6);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 3);
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 0);
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 1);
     }
 
 
@@ -106,7 +103,7 @@ public class CsvImporterServiceTest {
         when(courseRepository.getUserDetailsOnCourse(Matchers.any(User.class), Matchers.any(String.class)))
                 .thenReturn(true);
         assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 0);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 3);
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 1);
     }
 
 
@@ -124,7 +121,7 @@ public class CsvImporterServiceTest {
                 .thenReturn(false);
         when(courseRepository.enrollStudentForCourse(Matchers.any(User.class), Matchers.any(String.class)))
                 .thenReturn(true);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 3);
-        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 0);
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(1).size(), 0);
+        assertEquals(csvImporterService.StudentsEnrolledForCourse("CSCI101", CsvMockFile.getFile()).get(2).size(), 1);
     }
 }

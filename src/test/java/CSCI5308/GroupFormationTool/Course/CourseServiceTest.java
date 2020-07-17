@@ -10,6 +10,8 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.util.ArrayList;
+import java.util.Dictionary;
+import java.util.Hashtable;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -152,45 +154,45 @@ public class CourseServiceTest {
         assertEquals("Course name exists", createCourse.getCourseCreateMessage());
     }
 
-//	@Test
-//	void deleteCourseService() throws Exception {
-//		IDeleteCourse deleteCourse = new DeleteCourse();
-//		deleteCourse.setSelectedCourseId("testid");
-//		Dictionary allCoursesList = new Hashtable();
-//		allCoursesList.put("testid testname", "testid");
-//		deleteCourse.setAllCoursesList(allCoursesList);
-//		ArrayList<String> courseName = new ArrayList<>();
-//		ArrayList<String> courseId = new ArrayList<>();
-//		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
-//		courseId.add("testid");
-//		courseName.add("testname");
-//		allCoursesArray.add(courseId);
-//		allCoursesArray.add(courseName);
-//		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
-//		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(true);
-//		assertTrue(courseService.deleteCourse(deleteCourse));
-//		assertEquals("Course deleted", deleteCourse.getCourseDeleteMessage());
-//		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(false);
-//		assertFalse(courseService.deleteCourse(deleteCourse));
-//		assertEquals("Course does not exist", deleteCourse.getCourseDeleteMessage());
-//	}
+	@Test
+	void deleteCourseService() throws Exception {
+		IDeleteCourse deleteCourse = new DeleteCourse();
+		deleteCourse.setSelectedCourseId("testid");
+		Dictionary allCoursesList = new Hashtable();
+		allCoursesList.put("testid testname", "testid");
+		deleteCourse.setAllCoursesList(allCoursesList);
+		ArrayList<String> courseName = new ArrayList<>();
+		ArrayList<String> courseId = new ArrayList<>();
+		ArrayList<ArrayList<String>> allCoursesArray = new ArrayList<>();
+		courseId.add("testid");
+		courseName.add("testname");
+		allCoursesArray.add(courseId);
+		allCoursesArray.add(courseName);
+		when(courseRepository.getAllCourses()).thenReturn(allCoursesArray);
+		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(true);
+		assertTrue(courseService.deleteCourse(deleteCourse));
+		assertEquals("Course deleted", deleteCourse.getCourseDeleteMessage());
+		when(courseRepository.deleteCourseRepo(deleteCourse)).thenReturn(false);
+		assertFalse(courseService.deleteCourse(deleteCourse));
+		assertEquals("Course does not exist", deleteCourse.getCourseDeleteMessage());
+	}
 
-//	@Test
-//	void coursesWithIdForDropdown() throws Exception {
-//		Dictionary allCoursesList = new Hashtable();
-//		ArrayList<ArrayList<String>> mainList = new ArrayList<>();
-//		ArrayList<String> courseId = new ArrayList<>();
-//		ArrayList<String> courseName = new ArrayList<>();
-//		courseId.add("123");
-//		courseName.add("course123");
-//		mainList.add(courseId);
-//		mainList.add(courseName);
-//		when(courseRepository.getAllCourses()).thenReturn(mainList);
-//		for (int i = 0; i < mainList.get(0).size(); i++) {
-//			allCoursesList.put(mainList.get(0).get(i) + " " + mainList.get(1).get(i), mainList.get(0).get(i));
-//		}
-//		assertEquals(allCoursesList, courseService.coursesWithIdForDropdown());
-//	}
+	@Test
+	void coursesWithIdForDropdown() throws Exception {
+		Dictionary allCoursesList = new Hashtable();
+		ArrayList<ArrayList<String>> mainList = new ArrayList<>();
+		ArrayList<String> courseId = new ArrayList<>();
+		ArrayList<String> courseName = new ArrayList<>();
+		courseId.add("123");
+		courseName.add("course123");
+		mainList.add(courseId);
+		mainList.add(courseName);
+		when(courseRepository.getAllCourses()).thenReturn(mainList);
+		for (int i = 0; i < mainList.get(0).size(); i++) {
+			allCoursesList.put(mainList.get(0).get(i) + " " + mainList.get(1).get(i), mainList.get(0).get(i));
+		}
+		assertEquals(allCoursesList, courseService.coursesWithIdForDropdown());
+	}
 
 
 }
