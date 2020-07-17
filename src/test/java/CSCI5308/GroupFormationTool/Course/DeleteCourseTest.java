@@ -29,54 +29,54 @@ class DeleteCourseTest {
         IDeleteCourse deleteCourse = new DeleteCourse();
 
         Dictionary testCoursesList = new Hashtable();
-        testCoursesList.put("testid testname","testid");
+        testCoursesList.put("testid testname", "testid");
         when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
-        assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
+        assertEquals(testCoursesList, deleteCourse.getAllCoursesList());
     }
 
     @Test
     void setAllCoursesList() throws Exception {
         IDeleteCourse deleteCourse = new DeleteCourse();
         Dictionary testCoursesList = new Hashtable();
-        testCoursesList.put("testid testname","testid");
+        testCoursesList.put("testid testname", "testid");
         deleteCourse.setAllCoursesList(testCoursesList);
         when(courseService.coursesWithIdForDropdown()).thenReturn(testCoursesList);
-        assertEquals(testCoursesList,deleteCourse.getAllCoursesList());
+        assertEquals(testCoursesList, deleteCourse.getAllCoursesList());
     }
 
     @Test
     void getSelectedCourseId() throws Exception {
         IDeleteCourse deleteCourse = new DeleteCourse();
-        assertEquals(null,deleteCourse.getSelectedCourseId());
+        assertEquals(null, deleteCourse.getSelectedCourseId());
         deleteCourse.setSelectedCourseId("B00123456");
-        assertEquals("B00123456",deleteCourse.getSelectedCourseId());
+        assertEquals("B00123456", deleteCourse.getSelectedCourseId());
     }
 
     @Test
     void setSelectedCourseId() {
         IDeleteCourse deleteCourse = new DeleteCourse();
-        assertEquals(null,deleteCourse.getSelectedCourseId());
+        assertEquals(null, deleteCourse.getSelectedCourseId());
         deleteCourse.setSelectedCourseId("B00123456");
-        assertEquals("B00123456",deleteCourse.getSelectedCourseId());
+        assertEquals("B00123456", deleteCourse.getSelectedCourseId());
     }
 
     @Test
     void getCourseDeleteMessage() {
         IDeleteCourse deleteCourse = new DeleteCourse();
-        assertEquals("status here",deleteCourse.getCourseDeleteMessage());
+        assertEquals("status here", deleteCourse.getCourseDeleteMessage());
     }
 
     @Test
     void setCourseDeleteMessage() {
         IDeleteCourse deleteCourse = new DeleteCourse();
         deleteCourse.setCourseDeleteMessage("course deleted");
-        assertEquals("course deleted",deleteCourse.getCourseDeleteMessage());
+        assertEquals("course deleted", deleteCourse.getCourseDeleteMessage());
     }
 
     @Test
     void getAllCourseNames() {
         IDeleteCourse deleteCourse = new DeleteCourse();
-        assertEquals(null,deleteCourse.getAllCourseNames());
+        assertEquals(null, deleteCourse.getAllCourseNames());
     }
 
     @Test
@@ -85,13 +85,13 @@ class DeleteCourseTest {
         ArrayList<String> tempCourseNames = new ArrayList<>();
         tempCourseNames.add("tempcourse");
         deleteCourse.setAllCourseNames(tempCourseNames);
-        assertEquals(tempCourseNames,deleteCourse.getAllCourseNames());
+        assertEquals(tempCourseNames, deleteCourse.getAllCourseNames());
     }
 
     @Test
     void getAllCourseIds() {
         IDeleteCourse deleteCourse = new DeleteCourse();
-        assertEquals(null,deleteCourse.getSelectedCourseId());
+        assertEquals(null, deleteCourse.getSelectedCourseId());
         ArrayList<String> tempCourseId = new ArrayList<>();
     }
 
@@ -101,6 +101,6 @@ class DeleteCourseTest {
         ArrayList<String> tempCourseId = new ArrayList<>();
         tempCourseId.add("tempcourse1");
         deleteCourse.setAllCourseIds(tempCourseId);
-        assertEquals(tempCourseId,deleteCourse.getAllCourseIds());
+        assertEquals(tempCourseId, deleteCourse.getAllCourseIds());
     }
 }

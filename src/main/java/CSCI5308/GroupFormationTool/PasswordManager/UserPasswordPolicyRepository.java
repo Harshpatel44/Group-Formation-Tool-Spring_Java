@@ -5,12 +5,12 @@ import CSCI5308.GroupFormationTool.Database.StoredProcedure;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class UserPasswordPolicyRepository implements IUserPasswordPolicyRepository{
+public class UserPasswordPolicyRepository implements IUserPasswordPolicyRepository {
 
     @Override
-    public UserPasswordPolicy getUserPasswordPolicy(){
+    public IUserPasswordPolicy getUserPasswordPolicy() {
         StoredProcedure storedProcedure = null;
-        UserPasswordPolicy passwordPolicy = null;
+        IUserPasswordPolicy passwordPolicy = null;
         try {
             storedProcedure = new StoredProcedure("spGetPasswordPolicy()");
             ResultSet results = storedProcedure.executeWithResults();
@@ -22,22 +22,25 @@ public class UserPasswordPolicyRepository implements IUserPasswordPolicyReposito
                     Integer minLowerCaseLetter = results.getInt(4);
                     Integer minNoOfSymbols = results.getInt(5);
                     String notAllowedCharacters = results.getString(6);
-                    passwordPolicy = UserPasswordPolicy.setInstance(minLength, maxLength, minUpperCaseLetter, minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
+                    passwordPolicy = UserPasswordPolicy.setInstance(minLength, maxLength, minUpperCaseLetter,
+                            minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
                 }
             }
-        } catch (SQLException e) { }
-        finally {
-            if(storedProcedure!=null){
+        } catch (SQLException e) {
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            if (storedProcedure != null) {
                 storedProcedure.cleanup();
             }
-            return passwordPolicy;
         }
+        return passwordPolicy;
     }
 
     @Override
-    public UserPasswordPolicyStatus getUserPasswordPolicyStatus() {
+    public IUserPasswordPolicyStatus getUserPasswordPolicyStatus() {
         StoredProcedure proc = null;
-        UserPasswordPolicyStatus passwordPolicy = null;
+        IUserPasswordPolicyStatus passwordPolicy = null;
         try {
             proc = new StoredProcedure("spGetPasswordPolicyStatus()");
             ResultSet results = proc.executeWithResults();
@@ -49,14 +52,16 @@ public class UserPasswordPolicyRepository implements IUserPasswordPolicyReposito
                     Integer minLowerCaseLetter = results.getInt(5);
                     Integer minNoOfSymbols = results.getInt(6);
                     Integer notAllowedCharacters = results.getInt(7);
-                    passwordPolicy = UserPasswordPolicyStatus.setInstance(minLength, maxLength, minUpperCaseLetter, minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
+                    passwordPolicy = UserPasswordPolicyStatus.setInstance(minLength, maxLength, minUpperCaseLetter,
+                            minLowerCaseLetter, minNoOfSymbols, notAllowedCharacters);
 
                 }
             }
-        } catch (SQLException e) { } catch (Exception e) {
+        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-        }finally {
-            if(proc!=null){
+        } finally {
+            if (proc != null) {
                 proc.cleanup();
             }
         }

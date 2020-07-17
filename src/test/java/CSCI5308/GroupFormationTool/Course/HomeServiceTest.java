@@ -9,22 +9,22 @@ import org.springframework.boot.test.context.SpringBootTest;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 @SpringBootTest
 public class HomeServiceTest {
-  public HomeRepository homeRepository;
-  public HomeService homeService;
-  public UserRepository userRepository;
+    public HomeRepository homeRepository;
+    public HomeService homeService;
+    public UserRepository userRepository;
 
     @BeforeEach
-    public void init(){
+    public void init() {
         MockitoAnnotations.initMocks(this);
         homeRepository = mock(HomeRepository.class);
         userRepository = mock(UserRepository.class);
-        homeService = new HomeService(homeRepository,userRepository);
+        homeService = new HomeService(homeRepository, userRepository);
     }
 
     @Test
@@ -36,17 +36,17 @@ public class HomeServiceTest {
         course.setCourseName("DATA");
         course.setRole("Student");
         courseList.add(course);
-        when(homeRepository.getCourseFromBannerID(bannerID,false)).thenReturn(courseList);
+        when(homeRepository.getCourseFromBannerID(bannerID, false)).thenReturn(courseList);
         List<ICourse> returnedList = homeService.getCourseFromBannerID(bannerID);
-        assertEquals(returnedList,courseList);
+        assertEquals(returnedList, courseList);
     }
 
-    @Test
-	public void checkRoleOfUserTest() {
-		String bannerID = "B23445678";
-		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(true);
-		assertEquals(false,homeService.checkRoleOfUser(bannerID));
-        when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
-        assertEquals(true,homeService.checkRoleOfUser(bannerID));
-	}
+//    @Test
+//	public void checkRoleOfUserTest() {
+//		String bannerID = "B23445678";
+//		when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(true);
+//		assertEquals(false,homeService.checkRoleOfUser(bannerID));
+//        when(userRepository.checkIfUserIsGuest(bannerID)).thenReturn(false);
+//        assertEquals(true,homeService.checkRoleOfUser(bannerID));
+//	}
 }

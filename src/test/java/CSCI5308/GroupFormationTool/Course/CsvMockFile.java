@@ -1,17 +1,17 @@
 package CSCI5308.GroupFormationTool.Course;
 
 
+import org.springframework.http.MediaType;
+import org.springframework.web.multipart.MultipartFile;
+
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 
-import org.springframework.http.MediaType;
-import org.springframework.web.multipart.MultipartFile;
-
 public class CsvMockFile {
-	public static MultipartFile getFile() {
-		String data = "bannerId,firstName,lastName,email,contactnumber\n";
+    public static MultipartFile getFile() {
+        String data = "bannerId,firstName,lastName,email,contactnumber\n";
         data += "B00854462,arjun,kh,arjunstar14@gmail.com,9123456701\n";
         data += "B00854463,arjun1,kh,arjunstar14@gmail.com,9123456701\n";
         data += "B00854464,arjun2,kh,arjunstar14@gmail.com,9123456701\n";
@@ -56,9 +56,8 @@ public class CsvMockFile {
 
             @Override
             public void transferTo(File dest) throws IOException, IllegalStateException {
-                // not reqd
             }
         };
         return multipartFile;
-	}
+    }
 }

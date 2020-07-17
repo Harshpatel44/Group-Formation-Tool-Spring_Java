@@ -2,6 +2,7 @@ package CSCI5308.GroupFormationTool.Course;
 
 import CSCI5308.GroupFormationTool.UserManager.IInstructor;
 import CSCI5308.GroupFormationTool.UserManager.IUser;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
@@ -21,4 +22,5 @@ public interface ICourseRepository {
 
     boolean deleteCourseRepo(IDeleteCourse deleteCourse);
 
+    ArrayList<String> getCoursesOfSpecificUserRole(String userId, int roleId);
 }

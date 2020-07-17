@@ -18,4 +18,8 @@ public interface IQuestion {
     Date getDate();
 
     void setDate(Date date);
+
+    Integer getFlag();
+
+    void setFlag(int flag);
 }

@@ -1,6 +1,5 @@
 package CSCI5308.GroupFormationTool.PasswordManager;
 
-import CSCI5308.GroupFormationTool.Injector;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.ArrayList;
@@ -10,17 +9,18 @@ import java.util.Map;
 public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     private IUserPasswordPolicyRepository iUserPasswordPolicyRepository;
 
-    public UserPasswordPolicyService(){}
+    public UserPasswordPolicyService() {
+    }
 
-    public UserPasswordPolicyService(UserPasswordPolicyRepository userPasswordPolicyRepository){
-        Injector.instance().setUserPasswordPolicyRepository(userPasswordPolicyRepository);
+    public UserPasswordPolicyService(UserPasswordPolicyRepository userPasswordPolicyRepository) {
+        UserPasswordManagerAbstractFactory.instance().setPasswordPolicyRepository(userPasswordPolicyRepository);
     }
 
     @Override
     public List<String> checkPasswordValidation(String password, Map<String, String> errors) {
         List<String> policyErrors = new ArrayList<String>();
-        UserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
-        UserPasswordPolicyStatus passwordPolicyStatus = UserPasswordPolicyStatus.getInstance();
+        IUserPasswordPolicy passwordPolicy = UserPasswordPolicy.getInstance();
+        IUserPasswordPolicyStatus passwordPolicyStatus = UserPasswordPolicyStatus.getInstance();
         if (passwordPolicyStatus.getMinLength() == 1) {
             if (password.length() < passwordPolicy.getMinLength()) {
                 policyErrors.add("Password should have minimum " + +passwordPolicy.getMinLength() + " letters");
@@ -46,7 +46,7 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
             }
         }
         if (passwordPolicyStatus.getMinNoOfSymbols() == 1) {
-            if (password.split("[!_/-@#$%^&*()\\[\\]|;',./{}\\\\:\"<>?]", -1).length - 1 < passwordPolicy
+            if (password.split("[!_\\-@#$%^&*()\\[\\]|;',./{}\\\\:\"<>?]", -1).length - 1 < passwordPolicy
                     .getMinNoOfSymbols()) {
                 policyErrors.add("Password should have minimum " + +passwordPolicy.getMinNoOfSymbols() + " symbols");
             }
@@ -64,15 +64,15 @@ public class UserPasswordPolicyService implements IUserPasswordPolicyService {
     }
 
     @Override
-    public UserPasswordPolicy getUserPasswordPolicy(){
-        iUserPasswordPolicyRepository = Injector.instance().getUserPasswordPolicyRepository();
+    public IUserPasswordPolicy getUserPasswordPolicy() {
+        iUserPasswordPolicyRepository = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicy();
     }
 
 
     @Override
-    public UserPasswordPolicyStatus getUserPasswordPolicyStatus(){
-        iUserPasswordPolicyRepository =  Injector.instance().getUserPasswordPolicyRepository();;
+    public IUserPasswordPolicyStatus getUserPasswordPolicyStatus() {
+        iUserPasswordPolicyRepository = UserPasswordManagerAbstractFactory.instance().getPasswordPolicyRepository();
         return iUserPasswordPolicyRepository.getUserPasswordPolicyStatus();
     }
 }

@@ -1,13 +1,13 @@
 package CSCI5308.GroupFormationTool.Course;
 
-public class CurrentCourse{
+public class CurrentCourse {
     private static CurrentCourse instance = null;
     private String CurrentCourseId;
     private String CurrentCourseName;
     private String CurrentCourseUserRole;
 
-    public static CurrentCourse instance(){
-        if(instance==null){
+    public static CurrentCourse instance() {
+        if (instance == null) {
             instance = new CurrentCourse();
         }
         return instance;

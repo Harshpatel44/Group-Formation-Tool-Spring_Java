@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div>already published !!!!</div>
+<form class="nav-bar-element" th:action="@{/unpublishSurvey}" method="post">
+    <div class="entity">
+        <button type="submit" class="submit-button" value="unpublish" name="unpublish">unpublish</button>
+    </div>
+</form>
+</body>
+</html>
